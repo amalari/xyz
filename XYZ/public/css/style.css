@@ -1,0 +1,12 @@
+.x{
+	position: relative;
+	height: 645px;
+	width: 100%;
+}
+.center{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -256px;
+	margin-top: -256px;
+}
