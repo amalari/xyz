@@ -11,6 +11,15 @@ var User = bookshelf.Model.extend({
 	}),
 	check : Promise.method(function(email){
 		return new this({email : email}).fetch();
+	}),
+	list : Promise.method(function(){
+		return this.collection().fetch();
+	}),
+	single : Promise.method(function(userId){
+		return new this({id: userId}).fetch();
+	}),
+	update : Promise.method(function(data){
+		return new this({id: data.id}).fetch(data);
 	})
 })
 

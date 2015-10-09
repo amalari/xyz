@@ -6,6 +6,7 @@ AccountController = {
 		console.log("masuk ke account routing");
 		app.get('/login', this.loginPage);
 		app.post('/login', this.login);
+		app.get('/dashboard', this.dashboard);
 	},
 	loginPage : function(req, res){
 		console.log("render page login");
@@ -15,7 +16,10 @@ AccountController = {
 		successRedirect: '/dashboard',
 		failureRedirect: '/login',
 		failureFlash: true
-	})
+	}),
+	dashboard : function(req, res){
+		res.render('index', {layout: false});
+	}
 }
 
 module.exports = AccountController;

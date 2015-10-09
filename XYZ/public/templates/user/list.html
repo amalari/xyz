@@ -1,0 +1,50 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Daftar User
+	</h1>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">List Users</h3>					
+					<a class="btn btn-default pull-right btn-sm" ui-sref="user-create"><i class="fa fa-plus"></i>Add Admin</a>
+				</div><!-- /.box-header -->
+				<div class="box-body">
+					<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+						<thead>
+							<tr role="row">
+								<th class="sorting_asc">Email</th>								
+								<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Fullname</th>
+								<th>Title</th>
+								<th width="20px">Edit</th>
+								<th width="20px">Delete</th>
+							</tr>
+						</thead>
+						<tbody>							
+							<tr role="row" class="odd" ng-repeat="user in users">
+								<td class="sorting_1">{{user.email}}</td>
+								<td>{{user.fullname}}</td>
+								<td>{{user.title}}</td>
+								<td>
+									<a ui-sref="user-update({id: user.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>									
+								</td>
+								<td>
+									<button type="button"  ng-click="remove(item.id, item.username)" class="btn btn-default"><i class="fa fa-remove"></i></button>
+								</td>									
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section><!-- /.content -->
+
+
+
+
+

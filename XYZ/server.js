@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 //using library flash
 var flash = require('connect-flash');
 //using library index.js from folder views as var hbs
-var hbs = require('./views/index.js');
+var hbs = require('./views/script/index.js');
 //require index js in folder core and authentication
 var authentication = require('./core/authentication/index.js');
 var User = require('./controllers/user.js');
@@ -42,7 +42,6 @@ app.use(flash());
 authentication.init(app);
 
 Account.registerRoutes(app);
-console.log("menjalankan account");
 User.registerRoutes(app);
 
 app.listen(3003);

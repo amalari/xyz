@@ -11,7 +11,6 @@ var isValidPassword =  function(pass, passEncrypted){
 
 var exports2 = {
 	init : function(passport){
-		console.log(PassportLocal);
 		console.log("local strategy");
 		passport.use('local', new PassportLocal({
 			passReqToCallback : true,
