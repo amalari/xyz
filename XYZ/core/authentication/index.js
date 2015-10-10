@@ -25,4 +25,27 @@ Authentication.prototype.authenticate = function(password){
 	return bcrypt.hashSync(password, salt);
 }
 
+/*request = diisi req.xhr nya
+url = diisi dengan string url nya
+status = status yang akan diikirim sebagai http status
+msg = message yang akan dikirim jika user not authenticated*/
+Authentication.prototype.requestAjax = function(url, status, msg){
+	return function(req, res, next){
+		if(!req.xhr){
+			res.redirect(url);
+		} else if(!req.isAuthenticated()){
+			res.send(status, {message : msg})
+		} else {
+			next()
+		}
+	}
+};
+
+Authentication.prototype.required = function(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/login');
+};
+
 module.exports = new Authentication();

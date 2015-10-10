@@ -12,6 +12,7 @@ var flash = require('connect-flash');
 var hbs = require('./views/script/index.js');
 //require index js in folder core and authentication
 var authentication = require('./core/authentication/index.js');
+var authorization = require('./core/authorization/index.js');
 var User = require('./controllers/user.js');
 var Account = require('./controllers/account.js');
 var testAccount = require('./testAccount/account.js');
@@ -40,6 +41,10 @@ app.use(flash());
 // });
 //invoke authentication init with app parameter
 authentication.init(app);
+// app.use('/dashboard', authorization.required(['admin']));
+// app.use('/login', );
+app.use('/api', authentication.requestAjax('/login', 401, 'User not valid'));
+
 
 Account.registerRoutes(app);
 User.registerRoutes(app);
