@@ -4,8 +4,6 @@ var bcrypt = require('bcrypt-nodejs');
 //define local strategy
 
 var isValidPassword =  function(pass, passEncrypted){
-	console.log("password asli : " + pass);
-	console.log("password encrypted : " + passEncrypted);
 	return bcrypt.compareSync(pass, passEncrypted)
 };
 
@@ -28,7 +26,7 @@ var exports2 = {
 						intro: 'Validation error',
 						message: 'Incorect username'}));
 				} else{
-					console.log('model ke json');
+					// console.log('model ke json');
 					user = model.toJSON()
 				}
 				if(!isValidPassword(password, user.password)){
@@ -38,7 +36,7 @@ var exports2 = {
 						intro: 'Validation error',
 						message: 'Incorect password'}));
 				}
-				console.log(user);
+				// console.log(user);
 				return done(null, user);
 
 			})

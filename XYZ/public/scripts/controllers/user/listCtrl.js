@@ -21,16 +21,13 @@ angular.module('xyz.controllers')
 
 	});
 
-	$scope.remove = function(id, username){
-		console.log(User.get({id:id}));
-		if(confirm('Anda yakin akan menghapus user ' + username + '?')){
-			User.remove({id:id}, function(){
-				User.query({limit:$scope.pageSize, page:1}, function(data){
-					console.log(data);
-					$scope.users = data.data;
-					$scope.total = data.total;	
-				});	
-			});
+	$scope.remove = function(userId, fullname){
+		console.log(userId);
+		if(confirm('Anda yakin akan menghapus user ' + fullname + '?')){
+			console.log(userId);
+			User.remove({id:userId}, function(){
+				$scope.users = User.query()
+			})
 		}
 	};
 }]);

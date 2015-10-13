@@ -13,9 +13,10 @@ var hbs = require('./views/script/index.js');
 //require index js in folder core and authentication
 var authentication = require('./core/authentication/index.js');
 var authorization = require('./core/authorization/index.js');
-var User = require('./controllers/user.js');
+var User = require('./API_controllers/user.js');
+var Post = require('./API_controllers/post.js');
 var Account = require('./controllers/account.js');
-var testAccount = require('./testAccount/account.js');
+// var test = require('./tests/account.js');
 var UserModel = require('./models/user.js');
 
 //invoke hbs with 3 params ('extention name', 'name default layout that will used', var app )
@@ -36,7 +37,7 @@ app.use(cookieParser());
 //invoke flash to use middleware flash
 app.use(flash());
 // var user = {fullname : "achmad jamal", email : "achmad@gmail", password: "aa"};
-// testAccount.initialize(user, function(){
+// test.initialize(user, function(){
 // 	UserModel.save(data);
 // });
 //invoke authentication init with app parameter
@@ -45,8 +46,8 @@ authentication.init(app);
 // app.use('/login', );
 app.use('/api', authentication.requestAjax('/login', 401, 'User not valid'));
 
-
 Account.registerRoutes(app);
 User.registerRoutes(app);
+Post.registerRoutes(app);
 
 app.listen(3003);

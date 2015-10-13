@@ -25,8 +25,7 @@ Authentication.prototype.authenticate = function(password){
 	return bcrypt.hashSync(password, salt);
 }
 
-/*request = diisi req.xhr nya
-url = diisi dengan string url nya
+/*url = diisi dengan string url nya
 status = status yang akan diikirim sebagai http status
 msg = message yang akan dikirim jika user not authenticated*/
 Authentication.prototype.requestAjax = function(url, status, msg){

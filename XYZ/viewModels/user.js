@@ -3,7 +3,7 @@ var User = require('./../models/user.js');
 
 UserViewModel = {
 	save : function(user, save){
-		console.log(user);
+		// console.log(user);
 		User.check(user.email).then(function(model){
 			if(model !== null){
 				return function(req, res, next){
@@ -21,7 +21,7 @@ UserViewModel = {
 		})
 	},
 	list : function(listData){
-		console.log(listData);
+		// console.log(listData);
 		var result = listData.map(function(data){
 			var x = {};
 			x.id = data.id;
@@ -30,7 +30,7 @@ UserViewModel = {
 			x.title = data.title;
 			return x;
 		})
-		console.log(result)
+		// console.log(result)
 		return result
 
 	},
@@ -42,6 +42,11 @@ UserViewModel = {
 		result.title = singleData.title;
 		console.log(result);
 		return result;
+	},
+	delete : function(data){
+		console.log(data);
+		data.is_active = 0;
+		return data;
 	}
 };
 
