@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('xyz',['ui.router','ui.bootstrap','ngAnimate','ngResource','xyz.controllers','xyz.services', 'xyz.config'])
+angular.module('xyz',['ui.router','ui.bootstrap','ngAnimate','ngResource','xyz.controllers','xyz.services', 'xyz.config', 'ui.tinymce'])
 .config(['$httpProvider', function($httpProvider) {
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 	$httpProvider.interceptors.push([

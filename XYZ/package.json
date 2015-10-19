@@ -3,6 +3,7 @@
   "description": "third Express App",
   "version": "1.0.0",
   "dependencies": {
+    "angular-ui-tinymce": "0.0.5",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^2.10.1",
     "body-parser": "^1.14.0",
