@@ -11,13 +11,20 @@ UserController = {
 		app.delete('/api/user/:id', this.delete);
 	},
 	save : function(req, res){
-		UserViewModel.save(req.body, function(data){
-			User.save(data).then(function(){
-				res.send({success : true})
-			}).
-			catch(function(err){
-				res.send({success: false, message: err.message})
-			})
+		User.check(req.body.email).then(function(model){
+			if(model !== null){
+				req.flash('messageRegister', 'Email Already Exist');
+				res.redirect('/user/create', req.flash('messageRegister'));
+			} else {
+				var data = UserViewModel.save(req.body);
+				User.save(data)
+				.then(function(){
+					res.send({success : true})
+				})
+				.catch(function(err){
+					res.send({success : false, message : err.message})
+				})
+			}
 		})
 	},
 	list : function(req, res){

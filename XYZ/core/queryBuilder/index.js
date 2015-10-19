@@ -12,8 +12,11 @@ queryBuilder.prototype.setup = function(options){
 };
 
 queryBuilder.prototype.build = function(qb){
-	return qb.limit(this._limit).offset(this._offset).where(this._whereCondition)
+	return qb.limit(this._limit).offset(this._offset).where(this._whereCondition);
 };
-
+queryBuilder.prototype.buildConditionsOnly = function(qb){
+	console.log("build condition only");
+	return qb.where(this._whereCondition);
+};
 
 module.exports = queryBuilder;

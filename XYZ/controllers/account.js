@@ -22,8 +22,9 @@ AccountController = {
 		res.render('index', {layout: false});
 	},
 	signout : function(req, res){
+		console.log("hapus ");
+		console.log(req.user);
 		req.logout();
-		console.log("hapus " + req.user);
 		res.redirect('/login');
 	}
 }

@@ -2,23 +2,13 @@ var authentication = require('./../core/authentication/index.js');
 var User = require('./../models/user.js');
 
 UserViewModel = {
-	save : function(user, save){
-		// console.log(user);
-		User.check(user.email).then(function(model){
-			if(model !== null){
-				return function(req, res, next){
-					req.flash('messageRegister', 'Email Already Exist')
-					res.redirect('/user/create', req.flash('messageRegister'))
-				}
-			} else {
-				var result = {};
-				result.fullname = user.fullname;
-				result.email = user.email;
-				result.password = authentication.authenticate(user.password);
-				result.title = 'admin'
-				save(result);
-			}
-		})
+	save : function(user){
+		var result = {};
+		result.fullname = user.fullname;
+		result.email = user.email;
+		result.password = authentication.authenticate(user.password);
+		result.title = 'admin';
+		return result;
 	},
 	list : function(listData){
 		// console.log(listData);

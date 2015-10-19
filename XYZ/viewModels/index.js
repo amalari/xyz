@@ -8,4 +8,4 @@ viewModels.prototype.map = function(array, data){
 	return result;
 };
 
-module.exports = new viewModels();
+module.exports =  viewModels;

@@ -5,6 +5,8 @@ angular.module('xyz.services')
 	return $resource(ENV.apiEndpoint + '/api/post/:id', {id:'@id'}, {
 		update:{
 			method:"PUT"
+		}, query:{
+			method:"GET", isArray:false
 		}
 	});
 }])

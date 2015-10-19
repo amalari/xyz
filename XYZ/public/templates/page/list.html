@@ -1,0 +1,57 @@
+<section class="content-header">
+	<h1>
+		Daftar Page
+	</h1>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">Daftar Page</h3>					
+					<a class="btn btn-default pull-right btn-sm" ui-sref="page-create"><i class="fa fa-plus"></i>Add New Page</a>
+					<div class="nav-tabs-custom" style="cursor: move;">
+						<ul class="nav nav-tabs ui-sortable-handle">
+							<li class="active"><a style="padding-left:0px" ng-click="activeTab(1)" data-toggle="tab" aria-expanded="false">List Page</a></li>
+							<li class=""><a style="padding-left:0px" ng-click="activeTab(0)" data-toggle="tab" aria-expanded="true">List Draft</a></li>
+						</ul>
+					</div>
+				</div><!-- /.box-header -->
+				<div class="box-body">
+					<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+						<thead>
+							<tr role="row">
+								<th class="sorting_asc">Author</th>
+								<th>Title</th>							
+								<th>Created at</th>
+								<th>Update at</th>
+								<th width="20px">Edit</th>
+								<th width="20px">Delete</th>
+							</tr>
+						</thead>
+						<tbody>							
+							<tr role="row" class="odd" ng-repeat="page in pages">
+								<td class="sorting_1">{{page.author}}</td>
+								<td>{{page.title}}</td>
+								<td>{{page.created_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
+								<td>{{page.updated_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
+								<td>
+									<a ui-sref="page-update({id: page.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>									
+								</td>
+								<td>
+									<button type="button"  ng-click="remove(page.id, page.title)" class="btn btn-default"><i class="fa fa-remove"></i></button>
+								</td>									
+							</tr>
+						</tbody>
+						<tfoot>				
+							<div class="box-footer clearfix">
+								<pagination ng-change="pageChanged()" boundary-links="true" total-items="total" ng-model="currentPage" items-per-page="pageSize" max-size="maxSize" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+							</div>			
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section><!-- /.content -->

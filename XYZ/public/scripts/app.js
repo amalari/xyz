@@ -57,8 +57,38 @@ angular.module('xyz',['ui.router','ui.bootstrap','ngAnimate','ngResource','xyz.c
 	})
 	.state('user-update', {
 		url: '/user/update/:id',
-		templateUrl: 'templates/user/form.html',
+		templateUrl: 'templates/user/update-form.html',
 		controller: 'UserUpdateCtrl'
+	})
+	.state('post-create', {
+		url: '/post/create',
+		templateUrl: 'templates/post/form.html',
+		controller: 'PostCreateCtrl'
+	})
+	.state('post', {
+		url: '/post',
+		templateUrl: 'templates/post/list.html',
+		controller: 'PostListCtrl'
+	})
+	.state('post-update', {
+		url: '/post/update/:id',
+		templateUrl: 'templates/post/form.html',
+		controller: 'PostUpdateCtrl'
+	})
+	.state('page', {
+		url:'/page',
+		templateUrl: 'templates/page/list.html',
+		controller: 'PageListCtrl'
+	})
+	.state('page-create', {
+		url: '/page/create',
+		templateUrl: 'templates/page/form.html',
+		controller: 'PageCreateCtrl'
+	})
+	.state('page-update', {
+		url: '/page/update/:id',
+		templateUrl: 'templates/page/form.html',
+		controller: 'PageUpdateCtrl'
 	});
 	// .state('forbidden', {
 	// 	url: '/forbidden',
