@@ -1,20 +1,20 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PageCreateCtrl', ['$scope', 'Post', '$state', function($scope, Post, $state){
-	$scope.pageTitle= 'Create Page';
-	$scope.formTitle= 'Form Create Page';
+.controller('PortfolioCreateCtrl', ['$scope', 'Portfolio', '$state', 'ENV', function($scope, Portfolio, $state, ENV){
+	$scope.pageTitle= 'Create Portfolio';
+	$scope.formTitle= 'Form Create Portfolio';
 	$scope.model= {};
-	$scope.clickSave = function(is_active, type){
+	$scope.clickSave = function(is_active){
 		$scope.model.is_active = is_active;
-		$scope.model.type = type;
 	};
 	$scope.save= function(){
 		console.log($scope.model);
-		Post.save($scope.model, function(){
-			$state.go('page');	
+		Portfolio.save($scope.model, function(){
+			$state.go('portfolio');	
 		});
 	};
+
 	$scope.tinymceOptions = {
 		onChange: function(e) {
 		},
@@ -39,4 +39,5 @@ angular.module('xyz.controllers')
 			}
 		}
 	};
+
 }]);

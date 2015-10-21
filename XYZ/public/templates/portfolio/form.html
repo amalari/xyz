@@ -1,0 +1,56 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    {{pageTitle}}
+  </h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">{{formTitle}}</h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" ng-submit="save()">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="exampleInputTitle1">Title</label>
+              <input type="text" class="form-control" ng-model="model.title" placeholder="Enter Title" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputArchitect1">Architect</label>
+              <input type="text" class="form-control" ng-model="model.architect" placeholder="Enter Architect Name" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputLocation1">Location</label>
+              <input type="text" class="form-control" ng-model="model.location" placeholder="Enter Location" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputArea1">Area</label>
+              <input type="text" class="form-control" ng-model="model.area" placeholder="Enter Area" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputStatus1">Status</label>
+              <input type="text" class="form-control" ng-model="model.status" placeholder="Enter Status" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputYear1">Project Year</label>
+              <input type="number" class="form-control" ng-model="model.project_year" placeholder="Enter Year" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputContent1">Content</label>
+              <textarea ui-tinymce="tinymceOptions" class= "form-control" ng-model="model.content"></textarea> 
+            </div>
+          </div><!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" ng-click = "clickSave(1)" class="btn btn-primary">Save Page</button>
+            <button type="submit" ng-click = "clickSave(0)" class="btn btn-primary">Save as Draft</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+

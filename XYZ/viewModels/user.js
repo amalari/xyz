@@ -1,5 +1,4 @@
 var authentication = require('./../core/authentication/index.js');
-var User = require('./../models/user.js');
 
 UserViewModel = {
 	save : function(user){

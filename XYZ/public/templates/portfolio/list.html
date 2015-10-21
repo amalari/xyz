@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		Daftar Posting
+		Daftar Portfolio
 	</h1>
 </section>
 
@@ -9,11 +9,11 @@
 		<div class="col-sm-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Daftar Posting</h3>
-					<a class="btn btn-default pull-right btn-sm" ui-sref="post-create"><i class="fa fa-plus"></i>Add Posting</a>
+					<h3 class="box-title">Daftar Portfolio</h3>					
+					<a class="btn btn-default pull-right btn-sm" ui-sref="portfolio-create"><i class="fa fa-plus"></i>Add New Portfolio</a>
 					<div class="nav-tabs-custom" style="cursor: move;">
 						<ul class="nav nav-tabs ui-sortable-handle">
-							<li class="active"><a style="padding-left:0px" ng-click="activeTab(1)" data-toggle="tab" aria-expanded="false">List Posting</a></li>
+							<li class="active"><a style="padding-left:0px" ng-click="activeTab(1)" data-toggle="tab" aria-expanded="false">List Portfolio</a></li>
 							<li class=""><a style="padding-left:0px" ng-click="activeTab(0)" data-toggle="tab" aria-expanded="true">List Draft</a></li>
 						</ul>
 					</div>
@@ -22,27 +22,33 @@
 					<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 						<thead>
 							<tr role="row">
-								<th class="sorting_asc">Author</th>
+								<th class="sorting_asc">Architct</th>
 								<th>Title</th>							
-								<th>Created at</th>
-								<th>Update at</th>
-								<th>Category</th>
+								<th>Portofolio Created at</th>
+								<th>Portofolio Updated at</th>
+								<th>Status</th>
+								<th>Area</th>
+								<th>Location</th>
+								<th>Project Year</th>
 								<th width="20px">Edit</th>
 								<th width="20px">Delete</th>
 							</tr>
 						</thead>
 						<tbody>							
-							<tr role="row" class="odd" ng-repeat="post in posts">
-								<td class="sorting_1">{{post.author}}</td>
-								<td>{{post.title}}</td>
-								<td>{{post.created_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
-								<td>{{post.updated_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
-								<td>{{post.category.name}}</td>
+							<tr role="row" class="odd" ng-repeat="portfolio in portfolios">
+								<td class="sorting_1">{{portfolio.architect}}</td>
+								<td>{{portfolio.title}}</td>
+								<td>{{portfolio.created_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
+								<td>{{portfolio.updated_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
+								<td>{{portfolio.status}}</td>
+								<td>{{portfolio.area}}</td>
+								<td>{{portfolio.location}}</td>
+								<td>{{portfolio.project_year}}</td>
 								<td>
-									<a ui-sref="post-update({id: post.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>									
+									<a ui-sref="portfolio-update({id: portfolio.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>									
 								</td>
 								<td>
-									<button type="button"  ng-click="remove(post.id, post.title)" class="btn btn-default"><i class="fa fa-remove"></i></button>
+									<button type="button"  ng-click="remove(portfolio.id, portfolio.title)" class="btn btn-default"><i class="fa fa-remove"></i></button>
 								</td>									
 							</tr>
 						</tbody>

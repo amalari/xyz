@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PostCreateCtrl', ['$scope', 'Post', '$state', function($scope, Post, $state){
+.controller('PostCreateCtrl', ['$scope', 'Post', '$state', 'ENV', function($scope, Post, $state, ENV){
 	$scope.pageTitle= 'Create Post';
 	$scope.formTitle= 'Form Create Post';
 	$scope.model= {};
@@ -18,16 +18,27 @@ angular.module('xyz.controllers')
 
 	$scope.tinymceOptions = {
 		onChange: function(e) {
-			alert('as');
-      // put logic here for keypress and cut/paste changes
-  },
-  inline: false,
-  plugins: [
-  "advlist autolink lists link image charmap print preview anchor",
-  "searchreplace visualblocks code fullscreen",
-  "insertdatetime media table contextmenu paste"
-  ],
-  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-};
+		},
+		inline: false,
+		plugins : 'advlist autolink link image lists charmap print preview tinyvision',
+		skin: 'lightgray',
+		theme : 'modern',
+		external_plugins: {
+			'tinyvision': 'http://localhost:3003/scripts/dependencies/tinyvision/plugin.min.js'
+		},
+		height: '300',
+		menubar: false,
+		statusbar: false,
+		tinyvision: {
+			source: 'http://localhost:3003/scripts/testImageList.json',
+			upload: function () {
+				var message = 'While TinyVision purposely doesn\'t provide upload functionality to keep things simple, it does ' +
+				'provide the ability to hook in your own when the "Upload" button is pressed. Or you can disable ' +
+				'it completely.';
+
+				tinymce.activeEditor.windowManager.alert(message);
+			}
+		}
+	};
 
 }]);

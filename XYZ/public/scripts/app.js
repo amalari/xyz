@@ -89,6 +89,21 @@ angular.module('xyz',['ui.router','ui.bootstrap','ngAnimate','ngResource','xyz.c
 		url: '/page/update/:id',
 		templateUrl: 'templates/page/form.html',
 		controller: 'PageUpdateCtrl'
+	})
+	.state('portfolio', {
+		url: '/portfolio',
+		templateUrl: 'templates/portfolio/list.html',
+		controller: 'PortfolioListCtrl'
+	})
+	.state('portfolio-create', {
+		url: '/portfolio/create',
+		templateUrl: 'templates/portfolio/form.html',
+		controller: 'PortfolioCreateCtrl'
+	})
+	.state('portfolio-update', {
+		url: '/portfolio/update/:id',
+		templateUrl: 'templates/portfolio/form.html',
+		controller: 'PortfolioUpdateCtrl'
 	});
 	// .state('forbidden', {
 	// 	url: '/forbidden',

@@ -29,7 +29,7 @@ angular.module('xyz.controllers')
 	};
 
 	$scope.remove = function(pageId, titlePage){
-		if(confirm('Anda yakin akan menghapus poting ' + titlePage + '?')){
+		if(confirm('Anda yakin akan menghapus page ' + titlePage + '?')){
 			Post.remove({id:pageId}, function(){
 				refresh();
 			});

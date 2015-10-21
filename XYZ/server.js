@@ -15,6 +15,7 @@ var authentication = require('./core/authentication/index.js');
 var authorization = require('./core/authorization/index.js');
 var User = require('./API_controllers/user.js');
 var Post = require('./API_controllers/post.js');
+var Portfolio = require('./API_controllers/portfolio.js');
 var Account = require('./controllers/account.js');
 // var test = require('./tests/account.js');
 var UserModel = require('./models/user.js');
@@ -49,5 +50,6 @@ app.use('/api', authentication.requestAjax('/login', 401, 'User not valid'));
 Account.registerRoutes(app);
 User.registerRoutes(app);
 Post.registerRoutes(app);
+Portfolio.registerRoutes(app);
 
 app.listen(3003);
