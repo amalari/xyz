@@ -22,7 +22,7 @@
 					<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 						<thead>
 							<tr role="row">
-								<th class="sorting_asc">Architct</th>
+								<th class="sorting_asc">Architect</th>
 								<th>Title</th>							
 								<th>Portofolio Created at</th>
 								<th>Portofolio Updated at</th>
@@ -38,8 +38,8 @@
 							<tr role="row" class="odd" ng-repeat="portfolio in portfolios">
 								<td class="sorting_1">{{portfolio.architect}}</td>
 								<td>{{portfolio.title}}</td>
-								<td>{{portfolio.created_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
-								<td>{{portfolio.updated_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
+								<td>{{portfolio.created_date | date: 'dd-MMMM-yyyy'}}</td>
+								<td>{{portfolio.updated_date | date: 'dd-MMMM-yyyy'}}</td>
 								<td>{{portfolio.status}}</td>
 								<td>{{portfolio.area}}</td>
 								<td>{{portfolio.location}}</td>

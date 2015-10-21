@@ -104,6 +104,11 @@ angular.module('xyz',['ui.router','ui.bootstrap','ngAnimate','ngResource','xyz.c
 		url: '/portfolio/update/:id',
 		templateUrl: 'templates/portfolio/form.html',
 		controller: 'PortfolioUpdateCtrl'
+	})
+	.state('project-request', {
+		url: '/project-request',
+		templateUrl: 'templates/project-request/list.html',
+		controller: 'ProjectRequestListCtrl'
 	});
 	// .state('forbidden', {
 	// 	url: '/forbidden',

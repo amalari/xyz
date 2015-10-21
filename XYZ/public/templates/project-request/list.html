@@ -1,0 +1,44 @@
+<section class="content-header">
+	<h1>
+		Daftar Project Request
+	</h1>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">Daftar Project Request</h3>
+				</div><!-- /.box-header -->
+				<div class="box-body">
+					<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+						<thead>
+							<tr role="row">
+								<th class="sorting_asc">Name</th>
+								<th>Email</th>							
+								<th>Created at</th>
+								<th width="20px">Detail</th>
+							</tr>
+						</thead>
+						<tbody>							
+							<tr role="row" class="odd" ng-repeat="projectRequest in projectRequests">
+								<td class="sorting_1">{{projectRequest.client.name}}</td>
+								<td>{{projectRequest.client.email}}</td>
+								<td>{{projectRequest.created_date | date: 'dd-MMMM-yyyy HH:mm:ss'}}</td>
+								<td>
+									<a ui-sref="projectRequest-detail({id: projectRequest.id})" class="btn btn-default"><i class="fa fa-info-circle"></i></a>									
+								</td>									
+							</tr>
+						</tbody>
+						<tfoot>				
+							<div class="box-footer clearfix">
+								<pagination ng-change="pageChanged()" boundary-links="true" total-items="total" ng-model="currentPage" items-per-page="pageSize" max-size="maxSize" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+							</div>			
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section><!-- /.content -->

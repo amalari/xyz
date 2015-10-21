@@ -16,6 +16,7 @@ var authorization = require('./core/authorization/index.js');
 var User = require('./API_controllers/user.js');
 var Post = require('./API_controllers/post.js');
 var Portfolio = require('./API_controllers/portfolio.js');
+var ProjectRequest = require('./API_controllers/projectRequest.js');
 var Account = require('./controllers/account.js');
 // var test = require('./tests/account.js');
 var UserModel = require('./models/user.js');
@@ -51,5 +52,6 @@ Account.registerRoutes(app);
 User.registerRoutes(app);
 Post.registerRoutes(app);
 Portfolio.registerRoutes(app);
+ProjectRequest.registerRoutes(app);
 
 app.listen(3003);
