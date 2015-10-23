@@ -15,10 +15,17 @@ angular.module('xyz.controllers')
 
 	// };
 
-	User.query(function(list){
-		$scope.users = list;
-		console.log($scope.users);
+	var refresh = function(){
+		return User.query(function(list){
+			$scope.users = list.data;
+			console.log($scope.users);
 
+		})
+	};
+
+	User.query(function(list){
+		$scope.users = list.data;
+		console.log($scope.users);
 	});
 
 	$scope.remove = function(userId, fullname){
@@ -26,7 +33,7 @@ angular.module('xyz.controllers')
 		if(confirm('Anda yakin akan menghapus user ' + fullname + '?')){
 			console.log(userId);
 			User.remove({id:userId}, function(){
-				$scope.users = User.query()
+				refresh();
 			})
 		}
 	};

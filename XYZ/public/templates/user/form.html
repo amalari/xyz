@@ -16,18 +16,22 @@
         <form role="form" ng-submit="save()">
           <div class="box-body">
             <div class="form-group">
-              <label for="exampleInputFullname1">Fullname</label>
+              <label>Fullname</label>
               <input type="text" class="form-control" ng-model="model.fullname" placeholder="Enter Fullname" required>
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Email</label>
+              <label>Email</label>
               <input type="email" class="form-control" ng-model="model.email" placeholder="Enter Email" required>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label>Password</label>
               <input type="password" class="form-control" ng-model="model.password" placeholder="Enter Password" required>
             </div>
-          </div><!-- /.box-body -->
+          </div>
+          <div class="form-group">
+            <label>Profil</label>
+            <input type="file" class="form-control" files-model="model.image" ng-model="model.image">
+            <!-- /.box-body -->
 
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Submit</button>

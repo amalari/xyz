@@ -7,11 +7,13 @@ UserViewModel = {
 		result.email = user.email;
 		result.password = authentication.authenticate(user.password);
 		result.title = 'admin';
+		result.image = user.image;
 		return result;
 	},
-	list : function(listData){
+	list : function(list){
 		// console.log(listData);
-		var result = listData.map(function(data){
+		var result = {};
+		result.data = list.data.map(function(data){
 			var x = {};
 			x.id = data.id;
 			x.email = data.email;
@@ -19,7 +21,7 @@ UserViewModel = {
 			x.title = data.title;
 			return x;
 		})
-		// console.log(result)
+		result.total = list.total;
 		return result
 
 	},
@@ -29,7 +31,7 @@ UserViewModel = {
 		result.email = singleData.email;
 		result.fullname = singleData.fullname;
 		result.title = singleData.title;
-		console.log(result);
+		result.image = singleData.image;
 		return result;
 	},
 	delete : function(data){

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('xyz',['ui.router','ui.bootstrap','ngAnimate','ngResource','xyz.controllers','xyz.services', 'xyz.config', 'ui.tinymce'])
+angular.module('xyz',['ui.router','ui.bootstrap','ngAnimate','ngResource','xyz.controllers','xyz.services', 'xyz.directives', 'xyz.config', 'ui.tinymce'])
 .config(['$httpProvider', function($httpProvider) {
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 	$httpProvider.interceptors.push([
@@ -60,6 +60,11 @@ angular.module('xyz',['ui.router','ui.bootstrap','ngAnimate','ngResource','xyz.c
 		templateUrl: 'templates/user/update-form.html',
 		controller: 'UserUpdateCtrl'
 	})
+	.state('user-profile', {
+		url: '/user/profile/:id',
+		templateUrl: 'templates/user/profile.html',
+		controller: 'UserProfileCtrl'
+	})
 	.state('post-create', {
 		url: '/post/create',
 		templateUrl: 'templates/post/form.html',
@@ -109,6 +114,11 @@ angular.module('xyz',['ui.router','ui.bootstrap','ngAnimate','ngResource','xyz.c
 		url: '/project-request',
 		templateUrl: 'templates/project-request/list.html',
 		controller: 'ProjectRequestListCtrl'
+	})
+	.state('projectRequest-detail', {
+		url: '/project-request/detail/:id',
+		templateUrl: 'templates/project-request/detail.html',
+		controller: 'ProjectRequestDetailCtrl'
 	});
 	// .state('forbidden', {
 	// 	url: '/forbidden',

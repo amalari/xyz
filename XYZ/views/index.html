@@ -25,7 +25,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body class="hold-transition skin-blue sidebar-mini">
+    <body class="hold-transition skin-blue sidebar-mini" ng-controller = "MainCtrl">
     	<!-- Site wrapper -->
     	<div class="wrapper">
 
@@ -62,7 +62,7 @@
     										<li><!-- start message -->
     											<a href="#">
     												<div class="pull-left">
-    													<img src="images/glen.jpg" class="img-circle" alt="User Image">
+    													<img ng-src="\{{currentUser.image}}" class="img-circle" alt="User Image">
     												</div>
     												<h4>
     													Support Team
@@ -131,15 +131,15 @@
     						<!-- User Account: style can be found in dropdown.less -->
     						<li class="dropdown user user-menu">
     							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    								<img src="images/glen.jpg" class="user-image" alt="User Image">
-    								<span class="hidden-xs">Alexander Pierce</span>
+    								<img ng-src="\{{currentUser.image}}" class="user-image" alt="User Image">
+    								<span class="hidden-xs">\{{currentUser.fullname}}</span>
     							</a>
     							<ul class="dropdown-menu">
     								<!-- User image -->
     								<li class="user-header">
-    									<img src="images/glen-thumb.jpg" class="img-circle" alt="User Image">
+    									<img src="\{{currentUser.image}}" class="img-circle" alt="User Image">
     									<p>
-    										Alexander Pierce - Web Developer
+    										\{{currentUser.fullname}}
     										<small>Member since Nov. 2012</small>
     									</p>
     								</li>
@@ -158,7 +158,7 @@
     								<!-- Menu Footer-->
     								<li class="user-footer">
     									<div class="pull-left">
-    										<a href="#" class="btn btn-default btn-flat">Profile</a>
+    										<a ui-sref="user-profile({id:currentUser.id})" class="btn btn-default btn-flat">Profile</a>
     									</div>
     									<div class="pull-right">
     										<a href= "/signout" class="btn btn-default btn-flat">Sign out</a>
@@ -184,10 +184,10 @@
     				<!-- Sidebar user panel -->
     				<div class="user-panel">
     					<div class="pull-left image">
-    						<img src="images/glen.jpg" class="img-circle" alt="User Image">
+    						<img ng-src="\{{currentUser.image}}" class="img-circle" alt="User Image">
     					</div>
     					<div class="pull-left info">
-    						<p>Achmad Jamaludin</p>
+    						<p>\{{currentUser.fullname}}</p>
     						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
     					</div>
     				</div>
@@ -425,11 +425,18 @@
   <script src="scripts/config.js"></script>
   <script src="scripts/tinymce.js"></script>
 
+  <!-- Angular directives -->
+  <script src="scripts/directives/baseDirective.js"></script>
+  <script src="scripts/directives/filesModel.js"></script>
+
+
   <!-- Angular controllers -->
   <script src="scripts/controllers/baseCtrl.js"></script>
+  <script src="scripts/controllers/mainCtrl.js"></script>
   <script src="scripts/controllers/user/listCtrl.js"></script>
   <script src="scripts/controllers/user/createCtrl.js"></script>
   <script src="scripts/controllers/user/updateCtrl.js"></script>
+  <script src="scripts/controllers/user/profileCtrl.js"></script>
   <script src="scripts/controllers/post/createCtrl.js"></script>
   <script src="scripts/controllers/post/listCtrl.js"></script>
   <script src="scripts/controllers/post/updateCtrl.js"></script>
@@ -440,13 +447,17 @@
   <script src="scripts/controllers/portfolio/createCtrl.js"></script>
   <script src="scripts/controllers/portfolio/updateCtrl.js"></script>
   <script src="scripts/controllers/project-request/listCtrl.js"></script>
+  <script src="scripts/controllers/project-request/detailCtrl.js"></script>
+
 
   <!-- Angular services -->
   <script src="scripts/services/baseService.js"></script>
+  <script src="scripts/services/mainService.js"></script>
   <script src="scripts/services/user/userService.js"></script>
   <script src="scripts/services/post/postService.js"></script>
   <script src="scripts/services/portfolio/portfolioService.js"></script>
   <script src="scripts/services/project-request/projectRequestService.js"></script>
+  <script src="scripts/services/tinyvision/tinyvisionService.js"></script>
 
 
   <script type="text/javascript">

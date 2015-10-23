@@ -9,6 +9,7 @@ var User = bookshelf.Model.extend({
 	}
 }, {
 	save : Promise.method(function(data){
+		console.log('-------------------------------');
 		console.log(data !== null);
 		if(data !== null){
 			return new this(data).save()};
@@ -16,18 +17,36 @@ var User = bookshelf.Model.extend({
 	check : Promise.method(function(email){
 		return new this({email : email, is_active : 1}).fetch();
 	}),
-	list : Promise.method(function(){
+	list : Promise.method(function(queryBuilder){
+		var that = this;
+		var result = {};
 		return this.collection()
 		.query(function(qb){
-			qb.where({is_active : 1})
+			queryBuilder.build(qb)
 		})
-		.fetch();
+		.fetch()
+		.then(function(listModel){
+			result.data = listModel.toJSON();
+			var raw = 'count(distinct(users.id)) as total';
+			return that.collection()
+			.query(function(qb){
+				qb.select(bookshelf.knex.raw(raw));
+				queryBuilder.buildConditionsOnly(qb);
+			})
+			.fetchOne();
+		})
+		.then(function(model){
+			result.total = model.toJSON().total;
+			return Promise.resolve(result);
+		})
 	}),
 	single : Promise.method(function(userId){
 		return new this({id: userId}).fetch();
 	}),
 	update : Promise.method(function(data){
-		return new this({id: data.id}).fetch(data);
+		console.log("++++++++++++++++++++++++++");
+		console.log(data);
+		return new this({id: data.id}).save(data);
 	}),
 	delete : Promise.method(function(data){
 		console.log(data);

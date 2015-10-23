@@ -1,6 +1,19 @@
 var User = require('./../models/user.js');
 var UserViewModel = require('./../viewModels/user.js');
+var qb = require('./../core/queryBuilder/index.js');
+var Multipart = require('./../core/multipart/index.js');
+var FileManager = require('./../core/file-manager/index.js');
 // var testAccount = require('./../tests/account.js');
+
+var userMultipart = new Multipart({
+	uploadDir : __dirname + '/../public/uploads/user',
+	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif' ]
+});
+
+var userFileManager = new FileManager({
+	dir : __dirname + '/../public/uploads/user',
+	baseUrl : '/uploads/user'
+});
 
 UserController = {
 	registerRoutes : function(app){
@@ -9,29 +22,36 @@ UserController = {
 		app.get('/api/user', this.list);
 		app.get('/api/user/:id', this.single);
 		app.delete('/api/user/:id', this.delete);
+		app.put('/api/user/:id', this.update);
 	},
 	save : function(req, res){
-		User.check(req.body.email).then(function(model){
-			if(model !== null){
-				req.flash('messageRegister', 'Email Already Exist');
-				res.redirect('/user/create', req.flash('messageRegister'));
-			} else {
-				var data = UserViewModel.save(req.body);
-				User.save(data)
-				.then(function(){
-					res.send({success : true})
-				})
-				.catch(function(err){
-					res.send({success : false, message : err.message})
-				})
-			}
+		userMultipart.parseAndSaveFiles(req, function(data){
+			data.image = userFileManager.getUrl(data.image);
+			User.check(data.email).then(function(model){
+				if(model !== null){
+					req.flash('messageRegister', 'Email Already Exist');
+					res.redirect('/user/create', req.flash('messageRegister'));
+				} else {
+					var result = UserViewModel.save(data);
+					User.save(result)
+					.then(function(){
+						res.send({success : true})
+					})
+					.catch(function(err){
+						res.send({success : false, message : err.message})
+					})
+				}
+			})
 		})
 	},
 	list : function(req, res){
-		User.list().then(function(listData){
-			// console.log("controller list : " + listData);
-			var data = listData.toJSON();
-			res.send(UserViewModel.list(data))
+		var queryBuilder = new qb();
+		queryBuilder.setup({
+			whereCondition : {is_active : 1}
+		});
+		User.list(queryBuilder)
+		.then(function(list){
+			res.send(UserViewModel.list(list))
 		})
 		.catch(function(err){
 			res.send({success : false, message : err.message})
@@ -47,12 +67,31 @@ UserController = {
 		})
 	},
 	update : function(req, res){
-		User.update(req.body).then(function(){
-			res.send({success : true})
-		}).
-		catch(function(err){
-			res.send({success : false, message : err.message})
+		userMultipart.parseAndSaveFiles(req, function(data){
+			console.log("______________________________");
+			User.single(data.id).
+			then(function(model){
+				var user = model.toJSON();
+				if(data.image){
+					userFileManager.delete(user.image)
+					data.image = userFileManager.getUrl(data.image);
+				}
+				console.log(data);
+				return User.update(data);
+			})
+			.then(function(){
+				res.send({success : true})
+			})
+			.catch(function(err){
+				res.send({success : false, message : err.message})
+			})
 		})
+		// User.update(req.body).then(function(){
+		// 	res.send({success : true})
+		// }).
+		// catch(function(err){
+		// 	res.send({success : false, message : err.message})
+		// })
 	},
 	delete : function(req, res){
 		console.log('lewat delete');

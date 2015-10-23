@@ -28,6 +28,9 @@ var ProjectRequest = bookshelf.Model.extend({
 			result.total = model.toJSON().total;
 			return Promise.resolve(result);
 		})
+	}),
+	single : Promise.method(function(projectId){
+		return new this({id:projectId}).fetch({withRelated : ['client']})
 	})
 });
 

@@ -1,0 +1,19 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Project Request
+	</h1>
+</section>
+
+<section class="content">
+	<div class="box-header with-border">
+		<h3 class="box-title">Detail Project Request</h3><a ui-sref="user-update({id: currentUser.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>
+	</div>
+	<div class="box-body">
+		<p>Name : {{user.fullname}}</p>
+		<p>Email : {{user.email}}</p>
+		<img ng-src="{{user.image}}" alt="Profile Image">
+		<a ui-sref="user-update({id: user.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>
+	</div>
+</section>
+
