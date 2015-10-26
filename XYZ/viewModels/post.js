@@ -41,10 +41,11 @@ postViewModel.prototype.get = function(data){
 };
 
 postViewModel.prototype.update = function(data){
-	if(data.category_id){
+	if(data.category_id || data.header_image){
 		data.category_id = parseInt(data.category_id);
 	} else {
 		data.category_id = null;
+		data.header_image = null;
 	};
 	var post = this.map(this._allProperties, data);
 	post.id = data.id;

@@ -4,7 +4,12 @@ angular.module('xyz.controllers')
 .controller('PortfolioUpdateCtrl', ['$scope', '$state', '$stateParams', 'Portfolio', function($scope, $state, $stateParams, Portfolio){
 	$scope.pageTitle= 'Edit Portfolio';
 	$scope.formTitle= 'Form Edit Portfolio';
-	$scope.model= Portfolio.get({id:$stateParams.id});
+	$scope.model= Portfolio.get({id:$stateParams.id}, function(model){
+		var arr = model.header_image.split('/');
+		var i = arr.length-1;
+		$scope.model.nama_file_display =arr[i]; 
+		delete $scope.model.header_image;
+	});
 	$scope.clickSave = function(is_active){
 		$scope.model.is_active = is_active;
 	};

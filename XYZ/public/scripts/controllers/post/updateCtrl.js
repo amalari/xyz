@@ -4,7 +4,12 @@ angular.module('xyz.controllers')
 .controller('PostUpdateCtrl', ['$scope', '$state', '$stateParams', 'Post', function($scope, $state, $stateParams, Post){
 	$scope.pageTitle= 'Edit Posting';
 	$scope.formTitle= 'Form Edit Posting';
-	$scope.model= Post.get({id:$stateParams.id});
+	$scope.model= Post.get({id:$stateParams.id}, function(model){
+		var arr = model.header_image.split('/');
+		var i = arr.length-1;
+		$scope.model.nama_file_display =arr[i]; 
+		delete $scope.model.header_image;
+	});
 	$scope.clickSave = function(is_active, type){
 		$scope.model.is_active = is_active;
 		$scope.model.type = type;

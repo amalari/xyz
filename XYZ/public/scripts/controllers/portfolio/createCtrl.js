@@ -29,7 +29,7 @@ angular.module('xyz.controllers')
 		menubar: false,
 		statusbar: false,
 		tinyvision: {
-			source: 'http://localhost:3003/scripts/testImageList.json',
+			source: 'http://localhost:3003/list/image',
 			upload: function () {
 				var message = 'While TinyVision purposely doesn\'t provide upload functionality to keep things simple, it does ' +
 				'provide the ability to hook in your own when the "Upload" button is pressed. Or you can disable ' +

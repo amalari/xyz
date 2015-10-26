@@ -1,5 +1,6 @@
 var bookshelf = require('./../models').bookshelf;
 var Promise = require('bluebird');
+var Portfolio_Image = require('./portfolioImage');
 
 var Portfolio = bookshelf.Model.extend({
 	tableName : 'portfolios',
@@ -14,7 +15,7 @@ var Portfolio = bookshelf.Model.extend({
 		return this.collection().query(function(qb){
 			queryBuilder.build(qb)
 		})
-		.fetch()
+		.fetch({withRelated : ['portfolioImage']})
 		.then(function(listModel){
 			result.data = listModel.toJSON();
 			var raw = 'count(distinct(portfolios.id)) as total';
@@ -31,7 +32,8 @@ var Portfolio = bookshelf.Model.extend({
 		})
 	}),
 	single : Promise.method(function(portfolioId){
-		return new this({id: portfolioId}).fetch();
+		return new this({id: portfolioId})
+		.fetch({withRelated : ['portfolioImage']});
 	}),
 	save : Promise.method(function(portfolio){
 		return new this(portfolio).save();

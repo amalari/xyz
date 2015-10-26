@@ -1,6 +1,25 @@
 var Portfolio = require('./../models/portfolio.js');
+var PortfolioImage = require('./../models/portfolioImage.js');
 var qb = require('./../core/queryBuilder/index.js');
 var PortfolioViewModel = require('./../viewModels/portfolio.js');
+var Multipart = require('./../core/multipart/index.js');
+var FileManager = require('./../core/file-manager/index.js');
+
+var portfolioMultipart = new Multipart({
+	uploadDir : __dirname + '/../public/uploads/portfolio',
+	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif' ]
+});
+
+var portfolioFileManager = new FileManager({
+	dir : __dirname + '/../public/uploads/portfolio',
+	baseUrl : '/uploads/portfolio'
+});
+var image_maping = function(data, portfolioId, arr){
+	var y = {};
+	y.image = data;
+	y.portfolio_id = portfolioId;
+	arr.push(y);
+};
 
 PortfolioController = {
 	registerRoutes : function(app){
@@ -34,34 +53,94 @@ PortfolioController = {
 		})
 	},
 	save : function(req, res){
-		var data = PortfolioViewModel.save(req.body);
-		Portfolio.save(data)
-		.then(function(){
-			res.send({success : true})
-		})
-		.catch(function(err){
-			res.send({success : false, message : err.message})
+		portfolioMultipart.parseAndSaveFiles(req, function(data){
+			console.log(data);
+			var newData = {};
+			var arr = [];
+			for(var key in data){
+				if(key.indexOf("image") === -1){
+					if(key === "header"){
+						newData.header_image = portfolioFileManager.getUrl(data[key]);
+					}
+					newData[key] = data[key];
+				} 
+			};
+			var result = PortfolioViewModel.save(newData);
+			Portfolio.save(result)
+			.then(function(model){
+				var singleData = model.toJSON();
+				console.log(singleData);
+				for(var key in data){
+					if(key.indexOf("image") > -1){
+						var imageDir = portfolioFileManager.getUrl(data[key]);
+						image_maping(imageDir, singleData.id, arr);
+					}
+				};
+				return PortfolioImage.save(arr);
+			})
+			.then(function(){
+				res.send({success : true})
+			})
+			.catch(function(err){
+				res.send({success : false, message : err.message})
+			})
 		})
 	},
 	update : function(req, res){
-		var data = PortfolioViewModel.save(req.body);
-		Portfolio.update(data)
-		.then(function(){
-			res.send({success : true})
+		portfolioMultipart.parseAndSaveFiles(req, function(data){
+			Portfolio.single(data.id)
+			.then(function(model){
+				var singleData = model.toJSON();
+				if(singleData.header_image){
+					portfolioFileManager.delete(singleData.header_image);
+					data.header_image = portfolioFileManager.getUrl(data.header);
+				};
+				var result = PortfolioViewModel.update(data);
+				return Portfolio.update(result);
+			})
+			.then(function(){
+				queryBuilder = new qb();
+				queryBuilder.setup({
+					whereCondition : {portfolio_id : data.id}
+				});
+				return PortfolioImage.list(queryBuilder)
+			})
+			.then(function(listModel){
+				var arr = [];
+				if(listModel !== null){
+					var list_images = listModel.toJSON();
+					portfolio_id = list_images.id;
+					console.log(list_images);
+					for(var i in list_images){
+						portfolioFileManager.delete(list_images[i].image);
+					};
+				};
+				for(var key in data){
+					if(key.indexOf("image") > -1){
+						var imageDir = portfolioFileManager.getUrl(data[key]);
+						image_maping(imageDir, data.id, arr);
+					}
+				};
+				console.log(arr);
+				return PortfolioImage.save(arr);
+			})
+			.then(function(){
+				res.send({success : true})
+			})
+			.catch(function(err){
+				res.send({success : false, message : err.message})
+			})
 		})
-		.catch(function(err){
-			res.send({success : false, message : err.message})
-		})
-	},
-	delete : function(req, res){
-		Portfolio.delete(req.params.id)
-		.then(function(){
-			res.send({success : true})
-		})
-		.catch(function(err){
-			res.send({success : false, message : err.message})
-		})
-	}
+},
+delete : function(req, res){
+	Portfolio.delete(req.params.id)
+	.then(function(){
+		res.send({success : true})
+	})
+	.catch(function(err){
+		res.send({success : false, message : err.message})
+	})
+}
 }
 
 module.exports = PortfolioController;

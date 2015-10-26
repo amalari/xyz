@@ -20,7 +20,6 @@ angular.module('xyz.services')
 				fd.append(key, value);
 			}
 		});
-		console.log(fd);
 		return fd;
 	};
 	return $resource(ENV.apiEndpoint + '/api/post/:id', {id:'@id'}, {
