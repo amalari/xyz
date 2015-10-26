@@ -27,11 +27,12 @@
               <label>Password</label>
               <input type="password" class="form-control" ng-model="model.password" placeholder="Enter Password" required>
             </div>
+            <div class="form-group">
+              <label>Profil</label>
+              <input type="file" class="form-control" files-model="model.image" ng-model="model.image">
+            </div>
           </div>
-          <div class="form-group">
-            <label>Profil</label>
-            <input type="file" class="form-control" files-model="model.image" ng-model="model.image">
-            <!-- /.box-body -->
+          <!-- /.box-body -->
 
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Submit</button>

@@ -33,7 +33,6 @@ postViewModel.prototype.save = function(data, userId){
 	post.created_date = new Date();
 	post.updated_date = post.created_date;
 	post.user_id = userId;
-	post.header_image = "asdfasfasfsafsafas";
 	return post
 };
 
@@ -42,6 +41,11 @@ postViewModel.prototype.get = function(data){
 };
 
 postViewModel.prototype.update = function(data){
+	if(data.category_id){
+		data.category_id = parseInt(data.category_id);
+	} else {
+		data.category_id = null;
+	};
 	var post = this.map(this._allProperties, data);
 	post.id = data.id;
 	post.updated_date = new Date();

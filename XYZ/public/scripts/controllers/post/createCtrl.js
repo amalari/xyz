@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PostCreateCtrl', ['$scope', 'Post', 'TinyVision', '$state', function($scope, Post, $state, TinyVision){
+.controller('PostCreateCtrl', ['$scope', 'Post', 'TinyVision', '$state', function($scope, Post, TinyVision, $state){
 	$scope.pageTitle= 'Create Post';
 	$scope.formTitle= 'Form Create Post';
 	$scope.model= {};
@@ -15,7 +15,6 @@ angular.module('xyz.controllers')
 			$state.go('post');	
 		});
 	};
-
 	$scope.tinymceOptions = {
 		onChange: function(e) {
 		},

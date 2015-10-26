@@ -13,7 +13,7 @@ angular.module('xyz.controllers')
 	$scope.update= function(){
 		delete $scope.model.nama_file_display;
 		User.update($scope.model, function(){
-			console.log($scope.model.id);
+			console.log($scope.model);
 			$state.go('user-profile', {id: $scope.model.id});
 		});
 	};

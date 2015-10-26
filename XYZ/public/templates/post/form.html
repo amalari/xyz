@@ -20,6 +20,10 @@
               <input type="text" class="form-control" ng-model="model.title" placeholder="Enter Title" required>
             </div>
             <div class="form-group">
+            <label>Header Image</label>
+              <input type="file" class="form-control" files-model="model.header_image" ng-model="model.header_image">
+            </div>
+            <div class="form-group">
               <label for="exampleInputContent1">Content</label>
               <textarea ui-tinymce="tinymceOptions" class="form-control" ng-model="model.content"></textarea> 
             </div>

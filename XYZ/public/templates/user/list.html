@@ -20,7 +20,6 @@
 								<th class="sorting_asc">Email</th>								
 								<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Fullname</th>
 								<th>Title</th>
-								<th width="20px">Edit</th>
 								<th width="20px">Delete</th>
 							</tr>
 						</thead>
@@ -29,9 +28,6 @@
 								<td class="sorting_1">{{user.email}}</td>
 								<td>{{user.fullname}}</td>
 								<td>{{user.title}}</td>
-								<td>
-									<a ui-sref="user-update({id: user.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>									
-								</td>
 								<td>
 									<button type="button"  ng-click="remove(user.id, user.fullname)" class="btn btn-default"><i class="fa fa-remove"></i></button>
 								</td>									

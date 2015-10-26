@@ -1,6 +1,18 @@
 var Post = require('./../models/post.js');
 var qb = require('./../core/queryBuilder/index.js');
 var PostViewModel = require('./../viewModels/post.js');
+var Multipart = require('./../core/multipart/index.js');
+var FileManager = require('./../core/file-manager/index.js');
+
+var postMultipart = new Multipart({
+	uploadDir : __dirname + '/../public/uploads/posting',
+	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif' ]
+});
+
+var postFileManager = new FileManager({
+	dir : __dirname + '/../public/uploads/posting',
+	baseUrl : '/uploads/posting'
+});
 
 PostController = {
 	registerRoutes : function(app){
@@ -13,15 +25,17 @@ PostController = {
 	},
 	save : function(req, res){
 		console.log("save");
-		console.log(req.body);
-		var data = PostViewModel.save(req.body, req.user.id);
-		Post.save(data)
-		.then(function(){
-			res.send({success: true})
-		})
-		.catch(function(err){
-			console.log(err);
-			res.send({success: false, message: err.message})
+		postMultipart.parseAndSaveFiles(req, function(data){
+			data.header_image = postFileManager.getUrl(data.header_image);
+			var result = PostViewModel.save(data, req.user.id);
+			Post.save(result)
+			.then(function(){
+				res.send({success: true})
+			})
+			.catch(function(err){
+				console.log(err);
+				res.send({success: false, message: err.message})
+			})
 		})
 	},
 	list : function(req, res){
@@ -51,15 +65,24 @@ PostController = {
 		})
 	},
 	update : function(req, res){
-		console.log('back end : update controller');
-		var data = PostViewModel.update(req.body);
-		console.log(req.body);
-		Post.update(data)
-		.then(function(){
-			res.send({success : true})
-		})
-		.catch(function(err){
-			res.send({success : false, message : err.message})
+		postMultipart.parseAndSaveFiles(req, function(data){
+			Post.single(data.id)
+			.then(function(model){
+				var posting = model.toJSON();
+				if(posting.header_image){
+					postFileManager.delete(posting.header_image);
+					data.header_image = postFileManager.getUrl(data.header_image);
+				}
+				var result = PostViewModel.update(data);
+				console.log(result);
+				return Post.update(result);
+			})
+			.then(function(){
+				res.send({success : true})
+			})
+			.catch(function(err){
+				res.send({success : false, message : err.message})
+			})
 		})
 	},
 	delete : function(req, res){
