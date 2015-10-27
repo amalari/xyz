@@ -86,7 +86,12 @@ PostController = {
 		})
 	},
 	delete : function(req, res){
-		Post.delete(req.params.id)
+		Post.single(req.params.id)
+		.then(function(model){
+			var posting = model.toJSON();
+			postFileManager.delete(posting.header_image);
+			return Post.delete(req.params.id) 
+		})
 		.then(function(){
 			res.send({success : true})
 		})
@@ -95,6 +100,6 @@ PostController = {
 			res.send({success : false, message : err.message})
 		})
 	}
-}
+};
 
 module.exports = PostController;

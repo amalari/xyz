@@ -8,11 +8,11 @@ var Portfolio_Image = bookshelf.Model.extend({
 		return this.belongsTo('Portfolio', 'portfolio_id')
 	}
 }, {
-	save : Promise.method(function(images){
+	save : Promise.method(function(array){
 		var Images = bookshelf.Collection.extend({
 			model : this
 		});
-		var portfolio_images = Images.forge(images)
+		var portfolio_images = Images.forge(array)
 		return Promise.all(portfolio_images.invoke('save'))
 	}),
 	list : Promise.method(function(queryBuilder){
@@ -21,6 +21,13 @@ var Portfolio_Image = bookshelf.Model.extend({
 			queryBuilder.buildConditionsOnly(qb)
 		})
 		.fetch({withRelated : ['portfolio']})
+	}),
+	delete : Promise.method(function(array){
+		var Images = bookshelf.Collection.extend({
+			model : this
+		});
+		var portfolio_images = Images.forge(array)
+		return Promise.all(portfolio_images.invoke('destroy'))
 	})
 })
 

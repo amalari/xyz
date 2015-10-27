@@ -31,7 +31,7 @@ PortfolioController = {
 		app.delete('/api/portfolio/:id', this.delete);
 	},
 	list : function(req, res){
-		queryBuilder = new qb();
+		var queryBuilder = new qb();
 		queryBuilder.setup({
 			limit : req.query.limit,
 			page : req.query.page,
@@ -99,7 +99,7 @@ PortfolioController = {
 				return Portfolio.update(result);
 			})
 			.then(function(){
-				queryBuilder = new qb();
+				var queryBuilder = new qb();
 				queryBuilder.setup({
 					whereCondition : {portfolio_id : data.id}
 				});
@@ -131,16 +131,36 @@ PortfolioController = {
 				res.send({success : false, message : err.message})
 			})
 		})
-},
-delete : function(req, res){
-	Portfolio.delete(req.params.id)
-	.then(function(){
-		res.send({success : true})
-	})
-	.catch(function(err){
-		res.send({success : false, message : err.message})
-	})
-}
+	},
+	delete : function(req, res){
+		Portfolio.single(req.params.id)
+		.then(function(model){
+			var portfolio = model.toJSON();
+			portfolioFileManager.delete(portfolio.header_image);
+			return Portfolio.delete(req.params.id)
+		})
+		.then(function(){
+			console.log(portfolio);
+			var queryBuilder = new qb();
+			queryBuilder.setup({
+				whereCondition : {portfolio_id : req.params.id}
+			});
+			return PortfolioImage.list(queryBuilder)
+		})
+		.then(function(listModel){
+			var list_images = listModel.toJSON();
+			for(var i in list_images){
+				portfolioFileManager.delete(list_images[i].image)
+			}
+			return PortfolioImage.delete(list_images)
+		})
+		.then(function(){
+			res.send({success : true})
+		})
+		.catch(function(err){
+			res.send({success : false, message : err.message})
+		})
+	}
 }
 
 module.exports = PortfolioController;
