@@ -20,6 +20,7 @@ var ProjectRequest = require('./API_controllers/projectRequest.js');
 var CurrentUser = require('./API_controllers/currentUser.js');
 var Account = require('./controllers/account.js');
 var Tinyvision = require('./controllers/listImage.js');
+var FormProject = require('./controllers/form.js');
 // var test = require('./tests/account.js');
 var UserModel = require('./models/user.js');
 
@@ -57,6 +58,7 @@ Post.registerRoutes(app);
 Portfolio.registerRoutes(app);
 ProjectRequest.registerRoutes(app);
 Tinyvision.registerRoutes(app);
+FormProject.registerRoutes(app);
 
 
 app.listen(3003);
