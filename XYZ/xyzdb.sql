@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2015 at 11:21 AM
+-- Generation Time: Oct 28, 2015 at 09:50 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.5.28
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `birth` datetime NOT NULL,
   `gender` varchar(16) NOT NULL,
   `nationality` varchar(64) NOT NULL,
-  `image_id_card` text,
+  `verify` text,
   `is_active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `name`, `email`, `birth`, `gender`, `nationality`, `image_id_card`, `is_active`) VALUES
+INSERT INTO `clients` (`id`, `name`, `email`, `birth`, `gender`, `nationality`, `verify`, `is_active`) VALUES
 (1, 'suneo', 'suneo@a', '2015-10-08 00:00:00', 'L', 'indonesia', NULL, 1);
 
 -- --------------------------------------------------------
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
 --
 
 INSERT INTO `posts` (`id`, `category_id`, `type`, `title`, `content`, `header_image`, `created_date`, `updated_date`, `user_id`, `is_active`) VALUES
-(1, 1, 1, 'aku', '<p>aaaa</p><p><img src="/images/glen.jpg" alt="glen" width="300" height="402" data-mce-selected="1"><br data-mce-bogus="1"></p><div id="mceResizeHandlenw" data-mce-bogus="all" class="mce-resizehandle" unselectable="true" data-mce-style="cursor: nw-resize; margin: 0px; padding: 0px; left: 3.5px; top: 30.5px;" style="cursor: nw-resize; margin: 0px; padding: 0px; left: 3.5px; top: 30.5px;"></div><div id="mceResizeHandlene" data-mce-bogus="all" class="mce-resizehandle" unselectable="true" data-mce-style="cursor: ne-resize; margin: 0px; padding: 0px; left: 303.5px; top: 30.5px;" style="cursor: ne-resize; margin: 0px; padding: 0px; left: 303.5px; top: 30.5px;"></div><div id="mceResizeHandlese" data-mce-bogus="all" class="mce-resizehandle" unselectable="true" data-mce-style="cursor: se-resize; margin: 0px; padding: 0px; left: 303.5px; top: 432.5px;" style="cursor: se-resize; margin: 0px; padding: 0px; left: 303.5px; top: 432.5px;"></div><div id="mceResizeHandlesw" data-mce-bogus="all" class="mce-resizehandle" unselectable="true" data-mce-style="cursor: sw-resize; margin: 0px; padding: 0px; left: 3.5px; top: 432.5px;" style="cursor: sw-resize; margin: 0px; padding: 0px; left: 3.5px; top: 432.5px;"></div>', '/uploads/posting/1445833264725_CAM00031.jpg', '2015-10-16 13:42:14', '2015-10-26 11:21:05', 1, 1),
+(1, 2, 1, 'aku', '<p>aaaa</p><p><img src="/images/glen.jpg" alt="glen" width="300" height="402" data-mce-selected="1" data-mce-src="images/glen.jpg"></p>', '/uploads/posting/undefined', '2015-10-16 13:42:14', '2015-10-28 15:49:15', 1, 1),
 (2, NULL, 2, 'kkkkkaaaabbb', 'afasfasfafafsafmasklmfasklmfsakl', NULL, '2015-10-08 00:00:00', '2015-10-19 13:41:09', 1, 1),
 (3, 1, 1, 'fdasfsafasfasfafasfasfwetrfa', 'gfnjfghjsfgfadgadcvxz', 'asdfasfasfsafsafas', '2015-10-19 08:48:19', '2015-10-19 08:48:19', 1, 0),
 (4, 1, 1, 'asfsadfsaf', 'asfsafsafsa', 'asdfasfasfsafsafas', '2015-10-19 08:52:36', '2015-10-19 08:52:36', 1, 1),
