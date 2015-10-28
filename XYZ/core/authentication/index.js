@@ -7,7 +7,13 @@ function Authentication(){};
 
 Authentication.prototype.init = function(app){
 	console.log("authentication init");
-	app.use(session({ secret : 'xyzpr0j3ct'}));
+	app.use(session({ secret : 'xyzpr0j3ct',
+		saveUninitialized: true,
+		resave: true,
+		cookie : {
+		    maxAge : 28800000, // 8 hours
+		}
+	}));
 	app.use(passport.initialize());
 	app.use(passport.session());
 	passport.serializeUser(function(user, done){
