@@ -27,7 +27,7 @@ clientViewModel.prototype.save = function(data){
 	console.log("form view model");
 	var that = this;
 	var birthday = new Date();
-	birthday.setFullYear(parseInt(data.year), parseInt(data.month), parseInt(data.date));
+	birthday.setFullYear(parseInt(data.year), parseInt(data.month)-1, parseInt(data.date));
 	data.birth = birthday;
 	data.verify = that.generateToken();
 	return this.map(this._allProperties, data);

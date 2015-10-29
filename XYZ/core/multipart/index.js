@@ -7,20 +7,12 @@ util = require('util');
 
 function Multipart(options){
 	this._uploadDir = options.uploadDir;
-	this._allowedMimeTypes  = options.allowedMimeTypes;
+	this._allowedMimeTypes  = options.allowedMimeTypes || 'all';
 	this._maxFileSize = options.maxFileSize || null;
 }
 
-Multipart.prototype._createDir = function(dir){
-	fs.exists(dir, function(exists){
-		if(!exists){
-			fs.mkdirSync(dir)
-		}
-	});
-}
-
 Multipart.prototype._validateFile = function(mimetype) {
-	return this._allowedMimeTypes.indexOf(mimetype) > -1;
+	return this._allowedMimeTypes == 'all' || this._allowedMimeTypes.indexOf(mimetype) > -1;
 }
 
 Multipart.prototype._saveFile = function(file, filename){
@@ -35,9 +27,9 @@ Multipart.prototype.parseAndSaveFiles = function(req, callback) {
 	var _this = this;
 	var busboy = new Busboy({headers:req.headers});
 	var result = {};
-	_this._createDir(_this._uploadDir);
 
 	busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+		console.log(filename);
 		if (_this._validateFile(mimetype)){
 			var newFilename = _this._saveFile(file, filename);
 			file.on('end', function(){

@@ -1,0 +1,49 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Step 1</h3>
+  </div>
+  <!-- /.box-header -->
+  <!-- form start -->
+  <form role="form" action="/project-form?code={{code}}" method="post" enctype="multipart/form-data">
+    <div class="box-body">
+      <div class="form-group">
+        <label>Site Area</label>
+        <input type="number" name="site_area" class="form-control" id="exampleInputEmail1" >
+      </div>
+      <div class="form-group">
+        <label>Width</label>
+        <input type="number" name="width" class="form-control" id="exampleInputEmail1" >
+      </div>
+      <div class="form-group">
+        <label>Length</label>
+        <input type="number" name="length" class="form-control" id="exampleInputEmail1">
+      </div>
+      <div class="form-group">
+        <label>Site Address</label>
+        <input type="text" name="site_address" class="form-control" id="exampleInputEmail1">
+      </div>
+      <div class="form-group">
+        <label>Google Earth Coordinate</label>
+        <input type="text" name="coordinate" class="form-control" id="exampleInputEmail1">
+      </div>
+      <div class="form-group">
+        <label>Google Earth Screenshot</label>
+        <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1">
+      </div>
+      <div class="form-group">
+        <label>Design Reference</label>
+        <input type="file" multiple name="design_reference_file" class="form-control" id="exampleInputEmail1">
+      </div>
+      <div class="form-group">
+        <label>Tell Us Your Will</label>
+        <br/>
+        <textarea name="content" class="form-control"></textarea>
+      </div>
+    </div>
+    <!-- /.box-body -->
+
+    <div class="box-footer">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>

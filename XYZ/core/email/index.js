@@ -1,5 +1,6 @@
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
+var hbs = require('nodemailer-express-handlebars');
 
 function Email(transporter){
 	this._transporter = nodemailer.createTransport(smtpTransport(transporter));
@@ -12,7 +13,10 @@ Email.prototype.send = function(mail, callback){
 		from: mail.from,
 		to: mail.to,
 		subject: mail.subject,
-		html: mail.html
+		template: mail.template, 
+		context : {
+			body : mail.html
+		}
 	}, function(err, info){
 		if(err){
 			return console.log(err);
@@ -22,14 +26,8 @@ Email.prototype.send = function(mail, callback){
 	})
 }
 
-Email.prototype.verify = function(code, listClient){
-	for(var i in listClient){
-		if(listClient[i].verify === code){
-			return true;
-		} else {
-			return false;
-		}
-	}
-}
+// Email.prototype.setupHbs = function(options){
+// 	this._transporter.use('compile', hbs(options));
+// }
 
 module.exports = Email;

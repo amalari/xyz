@@ -16,6 +16,11 @@ var Client = bookshelf.Model.extend({
 	}),
 	get : Promise.method(function(varificationCode){
 		return new this({verify : varificationCode}).fetch()
+	}),
+	list : Promise.method(function(queryBuilder){
+		return this.collection().query(function(qb){
+			queryBuilder.buildConditionsOnly(qb);
+		}).fetch()
 	})
 });
 
