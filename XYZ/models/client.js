@@ -15,7 +15,7 @@ var Client = bookshelf.Model.extend({
 		return new this({id : client.id}).save(client)
 	}),
 	get : Promise.method(function(varificationCode){
-		return new this({veify : varificationCode}).fetch()
+		return new this({verify : varificationCode}).fetch()
 	})
 });
 

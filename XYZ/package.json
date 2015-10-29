@@ -20,8 +20,10 @@
     "lodash": "^3.10.1",
     "mysql": "^2.9.0",
     "nodemailer": "^1.8.0",
+    "nodemailer-smtp-transport": "^1.0.3",
     "passport": "^0.3.0",
     "passport-local": "^1.0.0",
+    "rand-token": "^0.2.1",
     "sanitize-filename": "^1.4.5",
     "util": "^0.10.3"
   },

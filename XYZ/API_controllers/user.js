@@ -45,6 +45,14 @@ UserController = {
 		})
 	},
 	list : function(req, res){
+		console.log("req.route :");
+		console.log(req.route);
+		console.log("req.baseUrl :");
+		console.log(req.url);
+		console.log("req.originalUrl :");
+		console.log(req.originalUrl);
+		console.log("req.hostname :");
+		console.log(req.hostname);
 		var queryBuilder = new qb();
 		queryBuilder.setup({
 			whereCondition : {is_active : 1}

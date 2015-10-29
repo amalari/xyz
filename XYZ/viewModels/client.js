@@ -1,10 +1,10 @@
 var util = require('util');
 var viewModels = require('./index.js');
-var Hashids = require('hashids');
+var randtoken = require('rand-token');
 
 function clientViewModel(){
 	viewModels.call(this, viewModels);
-	this._allProperties = ["name", "email", "birth", "gender", "nationality", "image_id_card"];
+	this._allProperties = ["name", "email", "birth", "gender", "nationality", "verify"];
 	this._viewProperties = ["id", "title", "category", "created_date", "updated_date", "author"];
 	this._viewPropertiesLite = ["id", "title", "category", "content", "header_image"];
 };
@@ -23,17 +23,19 @@ util.inherits(clientViewModel, viewModels);
 // 	return result;
 // }
 
-postViewModel.prototype.save = function(data, userId){
+clientViewModel.prototype.save = function(data){
 	console.log("form view model");
+	var that = this;
+	var birthday = new Date();
+	birthday.setFullYear(parseInt(data.year), parseInt(data.month), parseInt(data.date));
+	data.birth = birthday;
+	data.verify = that.generateToken();
 	return this.map(this._allProperties, data);
 };
 
-postViewModel.prototype.hash = function(data){
-	var hashids = new Hashids(data.name);
-	data.verify = hashids.encode(data.id);
-	return data;
+clientViewModel.prototype.generateToken = function(){
+	return randtoken.generate(20);
 };
-
 // postViewModel.prototype.get = function(data){
 // 	return this.map(this._viewPropertiesLite, data);
 // };
