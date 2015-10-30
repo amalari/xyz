@@ -1,6 +1,6 @@
 var ProjectRequest = require('./../models/projectRequest.js');
 var qb = require('./../core/queryBuilder/index.js');
-// var ProjectRequestViewModel = require('./../viewModels/projectRequest.js');
+var ProjectRequestViewModel = require('./../viewModels/projectRequest.js');
 
 ProjectRequestController = {
 	registerRoutes : function(app){
@@ -11,11 +11,12 @@ ProjectRequestController = {
 	list : function(req, res){
 		queryBuilder = new qb();
 		queryBuilder.setup({
-			imit : req.query.limit,
+			limit : req.query.limit,
 			page : req.query.page,
 		});
 		ProjectRequest.list(queryBuilder)
 		.then(function(list){
+			list.data = ProjectRequestViewModel.getList(list.data);
 			res.send(list)
 		})
 		.catch(function(err){
@@ -23,10 +24,11 @@ ProjectRequestController = {
 		})
 	},
 	single : function(req, res){
-		console.log("lewat sini kan?");
 		ProjectRequest.single(req.params.id)
 		.then(function(model){
 			var data = model.toJSON();
+			var design_reference_file = data.design_reference_file.split(",");
+			data.design_reference_file = design_reference_file;
 			console.log(data);
 			res.send(data);
 		})

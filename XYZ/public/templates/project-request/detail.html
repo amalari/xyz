@@ -23,7 +23,9 @@
 		<h4>Request :</h4>
 		<p>{{projectRequest.content}}</p>
 		<img ng-src="{{projectRequest.google_earth_file}}" alt="Screenshot location">
-		<img ng-src="{{projectRequest.design_reference_file}}" alt="Refence Picture">
+		<div ng-repeat="design_reference_file in projectRequest.design_reference_file">
+			<img ng-src="{{design_reference_file}}" alt="Refence Picture">
+		</div>
 	</div>
 </section>
 

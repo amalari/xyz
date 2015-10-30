@@ -50,7 +50,7 @@ PostController = {
 		console.log(queryBuilder);
 		Post.list(queryBuilder)
 		.then(function(list){
-			res.send(PostViewModel.getList(list));
+			res.send(PostViewModel.getList(list, req.xhr));
 		})
 		.catch(function(err){
 			console.log(err);
@@ -58,7 +58,7 @@ PostController = {
 		})
 	},
 	single : function(req, res){
-		Post.single(req.params.id)
+		Post.single(req.params.id, null, req.xhr)
 		.then(function(model){
 			var data = model.toJSON();
 			res.send(PostViewModel.get(data))

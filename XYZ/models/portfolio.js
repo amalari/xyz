@@ -6,6 +6,9 @@ var Portfolio = bookshelf.Model.extend({
 	tableName : 'portfolios',
 	portfolioImage : function(){
 		return this.hasMany('Portfolio_Image')
+	},
+	comments : function(){
+		return this.hasMany('Comment')
 	}
 }, {
 	list : Promise.method(function(queryBuilder){
@@ -15,7 +18,7 @@ var Portfolio = bookshelf.Model.extend({
 		return this.collection().query(function(qb){
 			queryBuilder.build(qb)
 		})
-		.fetch({withRelated : ['portfolioImage']})
+		.fetch({withRelated : ['portfolioImage', 'comments']})
 		.then(function(listModel){
 			result.data = listModel.toJSON();
 			var raw = 'count(distinct(portfolios.id)) as total';
@@ -33,7 +36,7 @@ var Portfolio = bookshelf.Model.extend({
 	}),
 	single : Promise.method(function(portfolioId){
 		return new this({id: portfolioId})
-		.fetch({withRelated : ['portfolioImage']});
+		.fetch({withRelated : ['portfolioImage', 'comments']});
 	}),
 	save : Promise.method(function(portfolio){
 		return new this(portfolio).save();

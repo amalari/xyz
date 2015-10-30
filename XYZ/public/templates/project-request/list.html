@@ -23,8 +23,8 @@
 						</thead>
 						<tbody>							
 							<tr role="row" class="odd" ng-repeat="projectRequest in projectRequests">
-								<td class="sorting_1">{{projectRequest.client.name}}</td>
-								<td>{{projectRequest.client.email}}</td>
+								<td class="sorting_1">{{projectRequest.clientName}}</td>
+								<td>{{projectRequest.clientEmail}}</td>
 								<td>{{projectRequest.created_date | date: 'dd-MMMM-yyyy HH:mm:ss'}}</td>
 								<td>
 									<a ui-sref="projectRequest-detail({id: projectRequest.id})" class="btn btn-default"><i class="fa fa-info-circle"></i></a>									

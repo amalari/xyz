@@ -1,20 +1,12 @@
 var Client = require('./../models/client.js');
 var ClientViewModel = require('./../viewModels/client.js');
-var ProjectRequest = require('./../models/projectRequest');
+var ProjectRequest = require('./../models/projectRequest.js');
+var ProjectRequestViewModel = require('./../viewModels/projectRequest.js');
 var qb = require('./../core/queryBuilder/index.js');
 var Multipart = require('./../core/multipart/index.js');
 var FileManager = require('./../core/file-manager/index.js');
 var Email = require('./../core/email/index.js');
 
-var formMultipart = new Multipart({
-	uploadDir : __dirname + '/../public/uploads/projects/9',
-	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif' ]
-});
-
-var formFileManager = new FileManager({
-	dir : __dirname + '/../public/uploads/projects',
-	baseUrl : '/uploads/projects'
-});
 
 FormController = {
 	registerRoutes : function(app){
@@ -42,21 +34,41 @@ FormController = {
 		})
 	},
 	saveProject: function(req, res){
-		console.log(req.query.code);
+		var formMultipart = new Multipart({
+			uploadDir : __dirname + '/../public/uploads/projects/'+ req.query.code,
+			allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif' ]
+		});
+		var formFileManager = new FileManager({
+			dir : __dirname + '/../public/uploads/projects/'+ req.query.code,
+			baseUrl : '/uploads/projects/'+ req.query.code
+		});
 		formMultipart.parseAndSaveFiles(req, function(data){
-			console.log("xxx==============================");
-			console.log(data)
+			var newData = {};
+			newData.client_id = req.query.clientId;
+			for(var key in data){
+				if(key.indexOf("file") > -1){
+					newData[key] = formFileManager.getUrl(data[key])
+				} else {
+					newData[key] = data[key];
+				}
+			};
+			var result = ProjectRequestViewModel.save(newData);
+			ProjectRequest.save(result)
+			.then(function(){
+				res.render("finish-form")
+			})
 		})
 	},
 	update : function(req, res){
 		Client.get(req.query.code)
-		// .then(function(model){
-		// 	var client = model.toJSON();
-		// 	client.is_active = 1;
-		// 	return Client.update(client);
-		// })
-		.then(function(){
-			res.render("project-form", {code : req.query.code})
+		.then(function(model){
+			var client = model.toJSON();
+			client.is_active = 1;
+			return Client.update(client);
+		})
+		.then(function(model){
+			var client = model.toJSON();
+			res.render("project-form", {code : req.query.code, clientId : client.id})
 		})
 	},
 	sendMail : function(req, res){
@@ -99,13 +111,13 @@ FormController = {
 			for(var i in data){
 				if(data[i].verify === req.query.code){
 					code = 	data[i].verify			}
-			}
-			if(code){
-				return next()
-			} else {
-				res.send(404, {message : "form not found"})
-			}
-		})
+				}
+				if(code){
+					return next()
+				} else {
+					res.send(404, {message : "form not found"})
+				}
+			})
 	}
 }
 

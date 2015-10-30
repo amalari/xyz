@@ -21,6 +21,9 @@ var CurrentUser = require('./API_controllers/currentUser.js');
 var Account = require('./controllers/account.js');
 var Tinyvision = require('./controllers/listImage.js');
 var FormProject = require('./controllers/form.js');
+var Homepage = require('./controllers/homepage.js');
+var About = require('./controllers/about.js');
+var Blog = require('./controllers/blog.js');
 // var test = require('./tests/account.js');
 var UserModel = require('./models/user.js');
 
@@ -59,6 +62,9 @@ Portfolio.registerRoutes(app);
 ProjectRequest.registerRoutes(app);
 Tinyvision.registerRoutes(app);
 FormProject.registerRoutes(app);
+Homepage.registerRoutes(app);
+About.registerRoutes(app);
+Blog.registerRoutes(app);
 
 
 app.listen(3003);
