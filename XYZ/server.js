@@ -24,6 +24,7 @@ var FormProject = require('./controllers/form.js');
 var Homepage = require('./controllers/homepage.js');
 var About = require('./controllers/about.js');
 var Blog = require('./controllers/blog.js');
+var Work = require('./controllers/work.js');
 // var test = require('./tests/account.js');
 var UserModel = require('./models/user.js');
 
@@ -65,6 +66,6 @@ FormProject.registerRoutes(app);
 Homepage.registerRoutes(app);
 About.registerRoutes(app);
 Blog.registerRoutes(app);
-
+Work.registerRoutes(app);
 
 app.listen(3003);
