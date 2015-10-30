@@ -1,4 +1,5 @@
 var Post = require('./../models/post.js');
+var Comment = require('./../models/comment.js');
 var PostViewModel = require('./../viewModels/post.js');
 var qb = require('./../core/queryBuilder/index.js');
 
@@ -6,6 +7,8 @@ BlogController = {
 	registerRoutes : function(app){
 		app.get('/blog', this.getList);
 		app.get('/blog/:id', this.get);
+		app.post('/blog', this.save);
+		app.delete('/blog/:id', this.delete);
 	},
 	getList : function(req, res){
 		var queryBuilder = new qb();
@@ -27,6 +30,29 @@ BlogController = {
 			var data = model.toJSON();
 			console.log(data);
 			console.log("render blog detail");
+		})
+	},
+	save : function(req, res){
+		Comment.save(req.body)
+		.then(function(){
+			console.log("reload page")
+		})
+		.catch(function(err){
+			console.log(err.message);
+		})
+	},
+	delete : function(req, res){
+		Comment.get(req.params.id)
+		.then(function(model){
+			var data = model.toJSON();
+			data.is_active = 0;
+			return Comment.delete(data)
+		})
+		.then(function(){
+			console.log("comment ini telah dihapus")
+		})
+		.catch(function(err){
+			console.log(err.message);
 		})
 	}
 }
