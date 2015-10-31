@@ -1,0 +1,81 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600italic,600,700,700italic,800,800italic);
+
+html,body {
+	height:100%;
+}
+
+.home-header {
+	height: 100%;
+	width: 100%;
+	background-image: url(/css/images/IMG-20150820-WA0005.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+@media (min-width: @screen-md-min){
+	.container {
+		width: 1020px;
+	}
+}
+
+.porto-thumb{
+	width: 100%;
+}
+
+.home > .row > .col-md-4 {
+	padding-right: 23px;
+    padding-left: 23px;
+    padding-top: 23px;
+    padding-bottom: 23px;
+    text-align: right;
+}
+
+.home > .row {
+	margin-right: -23px;
+	margin-left: -23px;
+}
+
+.general-header {
+	position: absolute;
+	top: 40px;
+	left: 40px;
+}
+
+#la {
+	color: red;
+}
+.general-header > h1 > a:hover {
+	color: #000;
+	
+}
+.general-header a.la{
+	color: #000 !important;
+}
+.general-header > h1.logo > a{
+	font-weight: bold;
+	color: blue;
+}
+
+
+.general-header a:hover{
+	color: #00bfa5;
+	text-decoration: none;
+}
+
+.main-nav {
+	font-size: 16px;
+	font-family: Open Sans;
+}
+
+.main-nav > li {
+	padding-top: 20px;
+}
+
+.pagination-wrapper {
+	text-align: center;
+}
+
+.pagination>li>a, .pagination>li>span {
+	border : none;
+}
