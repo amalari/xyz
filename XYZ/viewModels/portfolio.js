@@ -4,14 +4,23 @@ var viewModels = require('./index.js');
 function portfolioViewModel(){
 	viewModels.call(this, viewModels);
 	this._allProperties = ["title", "architect", "location", "area", "status", "project_year", "content", "is_active", "header_image"];
-	this._viewProperties = ["id", "title", "category", "content", "header_image", "created_date", "updated_date", "author"];
-	this._viewPropertiesLite = ["id", "title", "architect", "location", "area", "status", "project_year", "content", "header_image", "portfolioImage"];
+	this._viewPropertiesLite = ["id", "title", "header_image", "status"];
+	this._viewProperties = ["id", "title", "architect", "location", "area", "status", "project_year", "content", "header_image", "portfolioImage"];
+	this._
 };
 
 util.inherits(portfolioViewModel, viewModels);
 
 portfolioViewModel.prototype.get = function(singleData){
-	return this.map(this._viewPropertiesLite, singleData);
+	return this.map(this._viewProperties, singleData);
+};
+
+portfolioViewModel.prototype.list = function(listData){
+	var that = this;
+	listData = listData.map(function(data){
+		return that.map(that._viewPropertiesLite, data)
+	});
+	return listData;
 };
 
 portfolioViewModel.prototype.save = function(data){

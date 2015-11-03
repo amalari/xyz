@@ -1,11 +1,32 @@
 var Portfolio = require('./../models/portfolio.js');
 var PortfolioViewModel = require('./../viewModels/portfolio.js');
+var qb = require('./../core/queryBuilder/index.js');
 
 WorkController = {
 	registerRoutes : function(app){
+		app.get('/portfolio', this.list);
 		app.get('/portfolio/:id', this.get);
 		app.post('/portfolio', this.save);
 		app.delete('/portfolio/:id', this.delete);
+	},
+	list : function(req, res){
+		var queryBuilder = new qb();
+		queryBuilder.setup({
+			limit : 9,
+			page : req.query.page,
+			whereCondition : {is_active : 1}
+		});
+		Portfolio.list(queryBuilder)
+		.then(function(list){
+			var result = {};
+			result.data = PortfolioViewModel.list(list.data);
+			result.total = list.total;
+			console.log(result);
+			res.render('homepage', result);
+		})
+		.catch(function(err){
+			res.send(err.message)
+		})
 	},
 	get : function(req, res){
 		Portfolio.single(req.params.id)

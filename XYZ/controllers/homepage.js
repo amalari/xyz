@@ -1,22 +1,28 @@
-var ProjectRequest = require('./../models/projectRequest.js');
+var Portfolio = require('./../models/portfolio.js');
+var PortfolioViewModel = require('./../viewModels/portfolio.js');
 var qb = require('./../core/queryBuilder/index.js');
 
 HomepageController = {
 	registerRoutes : function(app){
-		app.get('/homepage', this.list);
+		app.get('/', this.list);
 	},
 	list : function(req, res){
 		var queryBuilder = new qb();
 		queryBuilder.setup({
-			limit : req.query.limit,
+			limit : 9,
 			page : req.query.page,
+			whereCondition : {is_active : 1}
 		});
-		ProjectRequest.list(queryBuilder)
+		Portfolio.list(queryBuilder)
 		.then(function(list){
-			res.render("homepage");
+			var result = {};
+			result.data = PortfolioViewModel.list(list.data);
+			result.total = list.total;
+			console.log(result);
+			res.render('homepage', result);
 		})
 		.catch(function(err){
-			res.send({message : err.message})
+			res.send(err.message)
 		})
 	}
 }

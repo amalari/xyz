@@ -11,7 +11,7 @@ AccountController = {
 	},
 	loginPage : function(req, res){
 		console.log("render page login");
-		res.render('login', req.flash('message'));
+		res.render('login', {layout: false});
 	},
 	login : passport.authenticate('local', {
 		successRedirect: '/dashboard',

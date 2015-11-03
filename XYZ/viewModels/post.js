@@ -29,8 +29,9 @@ postViewModel.prototype.getList = function(listData, ajaxRequest){
 					arr.push(data.comments[i]);
 				}
 			};
+			data.comments = arr;
 			data.totalComment = arr.length;
-			data.content = that.summary(data.content);
+			data.content = that.summary(data.content, data.id);
 			data.author = data.user.fullname;
 			return that.map(that._viewProperties, data)
 		});
@@ -70,12 +71,12 @@ postViewModel.prototype.update = function(data){
 	return post;
 };
 
-postViewModel.prototype.summary = function(content){
+postViewModel.prototype.summary = function(content, id){
 	var newContent="";
 	if(content.length > 300 && content.indexOf("</p>") === -1){
 		newContent = content.substr(0, 300) + ". . . .</p>";
 	} else {
-		newContent = content.replace("</p>","") + ". . . .</p>"
+		newContent = content.replace("</p>"," . . .</p>");
 	};
 	return newContent;
 };

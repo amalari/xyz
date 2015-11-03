@@ -7,9 +7,8 @@ AboutController = {
 	get : function(req, res){
 		Post.single(null, 2, req.xhr)
 		.then(function(data){
-			console.log(data.toJSON());
-			console.log("render page about");
-			res.render("about");
+			var result = data.toJSON();
+			res.render("about", result);
 		})
 	}
 }

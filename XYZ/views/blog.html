@@ -1,7 +1,23 @@
 <div class="blog container">
 	<div class="row">
 		<div class="col-sm-12">
+		{{#each data}}
 			<article>
+			<img class="post-thumb" src="{{header_image}}" />
+			<ul class="post-meta">
+				<li>{{category.name}}</li>
+				<li>132 Reads</li>
+				<li>12 Likes</li>
+				<li>{{totalComment}} Comments</li>
+			</ul>
+			<h3 class="post-title">{{title}}</h3>
+			{{{content}}}
+			<p class="author"><span class="prefix">By </span>{{author}}</p>
+			</article>
+			{{/each}}
+				<!-- <article>
+			}
+			}
 			<img class="post-thumb" src="/css/images/about.png" />
 			<ul class="post-meta">
 				<li>Nature</li>
@@ -14,21 +30,7 @@
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</p>
 			<p class="author"><span class="prefix">By </span>Cobian Wae</p>
-			</article>
-				<article>
-			<img class="post-thumb" src="/css/images/about.png" />
-			<ul class="post-meta">
-				<li>Nature</li>
-				<li>132 Reads</li>
-				<li>12 Likes</li>
-				<li>4 Comments</li>
-			</ul>
-			<h3 class="post-title">My Preparation Before Going to Work on Location</h3>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
-			<p class="author"><span class="prefix">By </span>Cobian Wae</p>
-			</article>
+			</article> -->
 		</div>
 	</div>
 </div>

@@ -13,7 +13,7 @@ BlogController = {
 	getList : function(req, res){
 		var queryBuilder = new qb();
 		queryBuilder.setup({
-			limit : req.query.limit,
+			limit : 2,
 			page : req.query.page,
 			whereCondition : {is_active : 1, type : 1}
 		});
@@ -21,8 +21,7 @@ BlogController = {
 		.then(function(list){
 			var data = PostViewModel.getList(list, req.xhr);
 			console.log(data);
-			console.log("render page blog list")
-			res.render('blog');
+			res.render('blog', data);
 		})
 	},
 	get : function(req, res){
@@ -30,7 +29,6 @@ BlogController = {
 		.then(function(model){
 			var data = model.toJSON();
 			console.log(data);
-			console.log("render blog detail");
 			res.render('single');
 		})
 	},
