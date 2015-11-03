@@ -22,6 +22,7 @@ BlogController = {
 			var data = PostViewModel.getList(list, req.xhr);
 			console.log(data);
 			console.log("render page blog list")
+			res.render('blog');
 		})
 	},
 	get : function(req, res){
@@ -30,6 +31,7 @@ BlogController = {
 			var data = model.toJSON();
 			console.log(data);
 			console.log("render blog detail");
+			res.render('single');
 		})
 	},
 	save : function(req, res){

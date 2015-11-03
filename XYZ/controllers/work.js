@@ -8,11 +8,12 @@ WorkController = {
 		app.delete('/portfolio/:id', this.delete);
 	},
 	get : function(req, res){
-		Post.single(req.params.id)
+		Portfolio.single(req.params.id)
 		.then(function(model){
 			var data = model.toJSON();
 			console.log(data);
 			console.log("render blog detail");
+			res.render('work');
 		})
 	},
 	save : function(req, res){
