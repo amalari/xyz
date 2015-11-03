@@ -170,7 +170,8 @@ h6{
 .page.container,
 .blog.container,
 .single.container,
-.req-form.container{
+.req-form.container,
+.archive.container{
 	width: 700px;
 }
 .req-intro.container{
@@ -502,4 +503,39 @@ button.req-form-button:hover{
 }
 .project-form textarea.form-control{
 	height: 200px;
+}
+.archive h3.post-title{
+	margin-bottom:5px;
+}
+.archive h3.post-title:after{
+	display: none;
+}
+.archive article{
+	padding-left: 209px;
+	position: relative;
+	padding-top:20px;
+	padding-bottom: 40px;
+	border-bottom: 1px solid #bdbdbd;
+}
+.archive .header{
+	margin-bottom:0;
+	border-bottom: 1px solid #bdbdbd;
+	text-align: center;
+}
+.archive .header h4{
+	font-family: Montserrat
+}
+.archive .header h6{
+	margin-bottom: 40px;
+	font-family: Open Sans;
+	font-size: 400;
+}
+.archive .small-post-thumb{
+	display: block;
+	position: absolute;
+	left: 0;
+	top:40px;
+	width: 169px;
+	min-height: 154px;
+	background-color: #bdbdbd;
 }

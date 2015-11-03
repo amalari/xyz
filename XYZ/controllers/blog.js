@@ -6,9 +6,13 @@ var qb = require('./../core/queryBuilder/index.js');
 BlogController = {
 	registerRoutes : function(app){
 		app.get('/blog', this.getList);
+		app.get('/blog/archive', this.getArchive);
 		app.get('/blog/:id', this.get);
 		app.post('/blog', this.save);
 		app.delete('/blog/:id', this.delete);
+	},
+	getArchive : function(req, res){
+		res.render('archive')
 	},
 	getList : function(req, res){
 		var queryBuilder = new qb();
