@@ -1,49 +1,62 @@
-<div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title">Step 1</h3>
-  </div>
-  <!-- /.box-header -->
-  <!-- form start -->
-  <form role="form" action="/project-form?code={{code}}&clientId={{clientId}}" method="post" enctype="multipart/form-data">
-    <div class="box-body">
-      <div class="form-group">
-        <label>Site Area</label>
-        <input type="number" name="site_area" class="form-control" id="exampleInputEmail1" >
-      </div>
-      <div class="form-group">
-        <label>Width</label>
-        <input type="number" name="width" class="form-control" id="exampleInputEmail1" >
-      </div>
-      <div class="form-group">
-        <label>Length</label>
-        <input type="number" name="length" class="form-control" id="exampleInputEmail1">
-      </div>
-      <div class="form-group">
-        <label>Site Address</label>
-        <input type="text" name="site_address" class="form-control" id="exampleInputEmail1">
-      </div>
-      <div class="form-group">
-        <label>Google Earth Coordinate</label>
-        <input type="text" name="coordinate" class="form-control" id="exampleInputEmail1">
-      </div>
-      <div class="form-group">
-        <label>Google Earth Screenshot</label>
-        <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1">
-      </div>
-      <div class="form-group">
-        <label>Design Reference</label>
-        <input type="file" multiple name="design_reference_file" class="form-control" id="exampleInputEmail1">
-      </div>
-      <div class="form-group">
-        <label>Tell Us Your Will</label>
-        <br/>
-        <textarea name="content" class="form-control"></textarea>
-      </div>
-    </div>
-    <!-- /.box-body -->
+<div class="req-form project-form container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Step 2</h2>
+      <form role="form" action="/project-form?code={{code}}&clientId={{clientId}}" method="post" enctype="multipart/form-data">
+        <div class="form-group first-row-group">
+          <div class="row">
+            <div class="col-sm-6">
+              <label>Site Area*</label>
+              <input type="number" name="site_area" class="form-control" id="exampleInputEmail1" required>
+            </div>
+            <div class="col-sm-3">
+              <label>Width*</label>
+              <input type="number" name="width" class="form-control" id="exampleInputEmail1" required >
+            </div>
+            <div class="col-sm-3">
+              <label>Length*</label>
+              <input type="number" name="length" class="form-control" id="exampleInputEmail1" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
 
-    <div class="box-footer">
-      <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="form-group">
+
+        </div>
+        <div class="form-group">
+          <label>Site Address*</label>
+          <input type="text" name="site_address" class="form-control" id="exampleInputEmail1">
+        </div>
+        <div class="form-group">
+          <label>Google Earth Coordinate*</label>
+          <input type="text" name="coordinate" class="form-control" id="exampleInputEmail1">
+        </div>
+        <div class="form-group">
+        <label>Google Earth Screenshot*</label><br />
+          <span class="btn btn-file">
+            upload  <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1">
+          </span>
+
+        </div>
+        <div class="form-group">
+          <label>Design Reference*</label><br />
+          <span class="btn btn-file">
+            upload   <input type="file" multiple name="design_reference_file" class="form-control" id="exampleInputEmail1">
+          </span>
+
+        </div>
+        <div class="form-group">
+          <label>Tell Us Your Will*</label>
+          <br/>
+          <textarea name="content" class="form-control"></textarea>
+        </div>
+
+        <p class="button-wrapper">
+          <button type="submit" class="btn btn-primary req-form-button">Submit</button>
+        </p>
+      </form>
     </div>
-  </form>
-</divd
+  </div>
+</div>
