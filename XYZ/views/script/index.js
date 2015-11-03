@@ -18,6 +18,11 @@ hbs.prototype.init = function(){
 				this._sections[name] = options.fn(this);
 				return null;
 			}
+			// avatar: function(comments){
+			// 	for(var i in comments){
+			// 		gravatar.url(comments[i].email, {s: '100', r: 'pg', d: '404'})
+			// 	}
+			// }
 		} 
 	});
 };

@@ -11,6 +11,13 @@ var Comment = bookshelf.Model.extend({
 	},
 	portfolio : function(){
 		return this.belongsTo('Portfolio', 'portfolio_id')
+	},
+	
+	comments : function(){
+		return this.hasMany('Comment', 'parrent_id')
+	},
+	parrent_comment: function(){
+		return this.belongsTo('Comment', 'parrent_id')
 	}
 }, {
 	save : Promise.method(function(comment){
@@ -22,7 +29,7 @@ var Comment = bookshelf.Model.extend({
 		return this.collection().query(function(qb){
 			queryBuilder.build(qb)
 		})
-		.fetch({withRelated : ['post', 'portfolio']})
+		.fetch({withRelated : ['post', 'portfolio', 'comments', 'parrent_comment']})
 		.then(function(listModel){
 			result.data = listModel.toJSON();
 			var raw = 'count(distinct(comments.id)) as total';

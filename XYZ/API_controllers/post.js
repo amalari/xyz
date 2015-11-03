@@ -61,7 +61,7 @@ PostController = {
 		Post.single(req.params.id, null, req.xhr)
 		.then(function(model){
 			var data = model.toJSON();
-			res.send(PostViewModel.get(data))
+			res.send(PostViewModel.get(data, req.xhr))
 		})
 	},
 	update : function(req, res){

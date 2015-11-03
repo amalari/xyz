@@ -1,10 +1,12 @@
 var util = require('util');
 var viewModels = require('./index.js');
+var gravatar= require('gravatar');
 
 function postViewModel(){
 	viewModels.call(this, viewModels);
 	this._allProperties = ["title", "type", "category_id", "content", "header_image", "is_active"];
 	this._viewProperties = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "totalComment"];
+	this._viewPropertiesVisitor = ["id", "header_image", "category", "totalComment", "author", "content", "rootComments", "title"];
 	this._viewPropertiesLite = ["id", "title", "category", "content", "header_image"];
 };
 
@@ -54,8 +56,37 @@ postViewModel.prototype.save = function(data, userId){
 	return post
 };
 
-postViewModel.prototype.get = function(data){
-	return this.map(this._viewPropertiesLite, data);
+postViewModel.prototype.get = function(data, ajaxRequest){
+	if(ajaxRequest){
+		return this.map(this._viewPropertiesLite, data);
+	} else {
+		var arr = [];
+		data.rootComments = [];
+		for(var i in data.comments){
+			if(data.comments[i].is_active == 1){
+				arr.push(data.comments[i]);
+			}
+		};
+		for(var a in data.comments){
+			if(data.comments[a].parrent_id === null){
+				data.rootComments.push(data.comments[a]);
+			} else {
+				for(var b in data.rootComments){
+					if(data.comments[a].parrent_id === data.rootComments[b].id){
+						data.rootComments[b].comments =[];
+						data.rootComments[b].comments.push(data.comments[a]);
+					}
+				}
+			}
+		}
+		data.totalComment = arr.length;
+		data.author = data.user.fullname;
+		data.comments = data.comments.map(function(obj){
+			obj.avatar = gravatar.url(obj.email, {s: '100', r: 'pg', d: '404'});
+			return obj
+		});
+	};
+	return this.map(this._viewPropertiesVisitor, data);
 };
 
 postViewModel.prototype.update = function(data){

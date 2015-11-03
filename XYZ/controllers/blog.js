@@ -31,15 +31,15 @@ BlogController = {
 	get : function(req, res){
 		Post.single(req.params.id, 1, req.xhr)
 		.then(function(model){
-			var data = model.toJSON();
+			var data = PostViewModel.get(model.toJSON(), req.xhr);
 			console.log(data);
-			res.render('single');
+			res.render('single', data);
 		})
 	},
 	save : function(req, res){
 		Comment.save(req.body)
 		.then(function(){
-			console.log("reload page")
+			res.redirect(req.get('referer'));
 		})
 		.catch(function(err){
 			console.log(err.message);

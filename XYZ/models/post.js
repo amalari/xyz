@@ -15,7 +15,10 @@ var Post = bookshelf.Model.extend({
 	},
 	comments : function(){
 		return this.hasMany('Comment')
-	}
+	},
+	rootComments : function(){
+        return this.comments().query('where', 'parrent_id', null);
+	},
 }, {
 	save : Promise.method(function(posting){
 		return new this(posting).save();
@@ -48,7 +51,7 @@ var Post = bookshelf.Model.extend({
 		if(reqAjax || params === 1){
 			return new this({id: postingId}).fetch({withRelated : ['user', 'category', 'comments']});
 		} else { 
-			return new this({type : params}).fetch({withRelated : ['user', 'category', 'comments']})
+			return new this({type : params}).fetch({withRelated : ['user', 'category', 'comments']});
 		}
 	}),
 	update : Promise.method(function(posting){
