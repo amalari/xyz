@@ -10,11 +10,15 @@ var Email = require('./../core/email/index.js');
 
 FormController = {
 	registerRoutes : function(app){
+		app.get('/request-intro', this.getRequestIntro);
 		app.get('/client-form', this.getFormClient);
 		app.post('/client-form', this.saveClient);
 		app.get('/client-form/verification', this.sendMail);
 		app.get('/project-form', this.verification, this.update);
 		app.post('/project-form', this.saveProject);
+	},
+	getRequestIntro : function(req, res){
+		res.render('request-intro');
 	},
 	getFormClient : function(req, res){
 		res.render('client-form');
@@ -112,11 +116,13 @@ FormController = {
 				if(data[i].verify === req.query.code){
 					code = 	data[i].verify			}
 				}
-				if(code){
-					return next()
-				} else {
-					res.send(404, {message : "form not found"})
-				}
+				// if(code){
+				// 	return next()
+				// } else {
+				// 	res.send(404, {message : "form not found"})
+				// }
+				//temporaray
+				res.render('project-form');
 			})
 	}
 }
