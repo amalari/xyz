@@ -30,12 +30,14 @@ projectViewModel.prototype.save = function(data){
 		}
 	};
 	var post = this.map(this._allProperties, data);
-	console.log(post);
 	for(var i in post){
+		result[i] = post[i];
 		for(var x in multiple){
 			if(x.indexOf(i) > -1){
+				console.log("lewat sini");
 				result[i] = post[i] + "," + multiple[x];
 			} else {
+				cosnoe.log("kesini");
 				result[i] = post[i];
 			}
 		}

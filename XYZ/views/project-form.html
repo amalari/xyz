@@ -5,6 +5,7 @@
       <form role="form" action="/project-form?code={{code}}&clientId={{clientId}}" method="post" enctype="multipart/form-data">
         <div class="form-group first-row-group">
           <div class="row">
+            <input type="hidden" name="client_id" value="{{clientId}}">
             <div class="col-sm-6">
               <label>Site Area*</label>
               <input type="number" name="site_area" class="form-control" id="exampleInputEmail1" required>
@@ -34,7 +35,7 @@
           <input type="text" name="coordinate" class="form-control" id="exampleInputEmail1">
         </div>
         <div class="form-group">
-        <label>Google Earth Screenshot*</label><br />
+          <label>Google Earth Screenshot*</label><br />
           <span class="btn btn-file">
             upload  <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1">
           </span>

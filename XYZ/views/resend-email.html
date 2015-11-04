@@ -1,0 +1,23 @@
+<div class="single container">
+	<div class="row">
+		<div class="col-sm-12">
+			<p> Kami telah mengirimkan email verifikasi ke email anda silahkan verifikasi terlebih dahulu untuk melanjutkan proses ini</p>
+			<br />
+			<p> Jika anda belum menerima email verifikasi dari saya, click tombol dibawah ini untuk mengirim ulang email verifikasi</p>
+			<form class="comment-form" action="/resend-email" method="POST">
+				<div class="form-group">
+					<input type="hidden" class="form-control" name="clientId" id="clientId" value="{{id}}">
+				</div>
+				<div class="form-group">
+					<input type="hidden" class="form-control" name="email" id="email" value="{{email}}">
+				</div>
+				<div class="form-group">
+					<input type="hidden" class="form-control" name="verify" id="verify" value="{{verify}}">
+				</div>
+				<p class="form-submit">
+					<button type="submit" class="btn btn-default">Resend Email</button>
+				</p>
+			</form>
+		</div>
+	</div>
+</div> 

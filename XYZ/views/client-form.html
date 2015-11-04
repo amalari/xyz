@@ -39,3 +39,14 @@
     </div>
   </div>
 </div>
+
+{{#section 'jquery'}}
+
+<script type="text/javascript">
+  $('.form-group span input').on('click', function(){
+    $('.form-group span').removeClass('active');
+    $('input:checked').parent().addClass('active');
+  })
+</script>
+
+{{/section}}

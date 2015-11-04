@@ -197,7 +197,7 @@ a.req-intro-lang.active,
 a.req-intro-lang:hover{
 	color:#212121;
 }
-button.req-intro-button,
+.req-intro-content > a.req-intro-button,
 button.req-form-button{
 	margin-top: 102px;
 	margin-bottom: 20px;

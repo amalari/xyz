@@ -10,6 +10,7 @@ var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
 //using library index.js from folder views as var hbs
 var hbs = require('./views/script/index.js');
+var email = require('./core/email');
 //require index js in folder core and authentication
 var authentication = require('./core/authentication/index.js');
 var authorization = require('./core/authorization/index.js');
@@ -30,6 +31,8 @@ var UserModel = require('./models/user.js');
 
 //invoke hbs with 3 params ('extention name', 'name default layout that will used', var app )
 var handlebars = new hbs('.html', 'main', app);
+email.setup(handlebars._handlebars);
+
 //invoke method init from hbs
 handlebars.init();
 //invoke method set from hbs

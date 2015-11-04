@@ -92,6 +92,7 @@
 		$('#parentId').val(null);
 		$('.reply').click(function(e){
 			$(".btn-back").css("display", "inline");
+			$('form').find("input[type=text], input[type=email], textarea").val("");
 			e.preventDefault();
 			var that = $(this);
 			var parentId = that.attr('data-parent-id');
@@ -100,6 +101,7 @@
 		});
 		$('.btn-back').click(function(e){
 			$(".btn-back").css("display", "none");
+			$(this).closest('form').find("input[type=text], input[type=email], textarea").val("");
 			$('#parentId').val(null);
 			$('.comment-deffault').html($('.comment-form'));
 		})

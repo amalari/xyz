@@ -5,15 +5,24 @@ var ProjectRequestViewModel = require('./../viewModels/projectRequest.js');
 var qb = require('./../core/queryBuilder/index.js');
 var Multipart = require('./../core/multipart/index.js');
 var FileManager = require('./../core/file-manager/index.js');
-var Email = require('./../core/email/index.js');
+var email = require('./../core/email/index.js');
 
+sendMail = function(client){
+	email.send({
+		form: 'achmadjamaludin14@gmail.com',
+		to: client.email,
+		subject: 'verification',
+		html: '<a class="btn btn-default" href="localhost:3003/project-form?code=' + client.verify + ' + &clientId=' + client.clientId + '">Click Here</a>'
+	});
+};
 
 FormController = {
 	registerRoutes : function(app){
 		app.get('/request-intro', this.getRequestIntro);
 		app.get('/client-form', this.getFormClient);
 		app.post('/client-form', this.saveClient);
-		app.get('/client-form/verification', this.sendMail);
+		app.get('/resend-email', this.formResendEmail);
+		app.post('/resend-email', this.resendEmail);
 		app.get('/project-form', this.verification, this.update);
 		app.post('/project-form', this.saveProject);
 	},
@@ -24,17 +33,24 @@ FormController = {
 		res.render('client-form');
 	},
 	saveClient : function(req, res){
+		console.log("------------------");
 		var data = ClientViewModel.save(req.body);
-		Client.get(data.verify)
-		.then(function(model){
-			if(model !== null){
-				data.verify = ClientViewModel.generateToken()
-			};
-			return Client.save(data);
-		})
+		var compare;
+		do{
+			console.log("lewat sini ga?");
+			console.log(data.verify);
+			Client.get(data.verify)
+			.then(function(model){
+				compare = model;
+			})
+		}
+		while(compare === null);
+		Client.save(data)
 		.then(function(model){
 			var client = model.toJSON();
-			res.redirect('/client-form/verification?code=' + client.verify)
+			req.session.registeredUser = client;
+			sendMail(client);
+			res.redirect('/resend-email');
 		})
 	},
 	saveProject: function(req, res){
@@ -64,44 +80,27 @@ FormController = {
 		})
 	},
 	update : function(req, res){
+		console.log(req.query.code);
 		Client.get(req.query.code)
+		// .then(function(model){
+		// 	var client = model.toJSON();
+		// 	client.is_active = 1;
+		// 	return Client.update(client);
+		// })
 		.then(function(model){
 			var client = model.toJSON();
-			client.is_active = 1;
-			return Client.update(client);
-		})
-		.then(function(model){
-			var client = model.toJSON();
+			console.log(client);
 			res.render("project-form", {code : req.query.code, clientId : client.id})
 		})
 	},
-	sendMail : function(req, res){
-		Client.get(req.query.code)
-		.then(function(model){
-			var client = model.toJSON();
-			var email = new Email({
-				host: 'smtp.gmail.com',
-				port: 587,
-				service : 'Gmail',
-				auth:{
-					user: 'achmadjamaludin14@gmail.com',
-					pass: 'astafista'
-				},
-				rejectUnauthorized: true,
-				secure : false
-			});
-			email.send({
-				form: 'achmadjamaludin14@gmail.com',
-				to: client.email,
-				subject: 'verification',
-				html: '<a href="/project-form?code="' + client.verify
-			}, function(){
-				res.redirect('/project-form')
-			});
-		})
-		.catch(function(err){
-			res.send({success : false, message : err.message})
-		})
+	formResendEmail: function(req, res){
+		var client = JSON.parse(JSON.stringify(req.session.registeredUser));
+		delete req.session.registeredUser;
+		res.render('resend-email', client);
+	},
+	resendEmail: function(req, res){
+		sendMail(req.body);
+		res.render('resend-email', req.body);
 	},
 	verification : function(req, res, next){
 		var code;
@@ -112,17 +111,22 @@ FormController = {
 		Client.list(queryBuilder)
 		.then(function(listModel){
 			var data = listModel.toJSON();
+			console.log(data);
 			for(var i in data){
 				if(data[i].verify === req.query.code){
 					code = 	data[i].verify			}
 				}
-				// if(code){
+				if(code !== 'undefined'){
+					console.log("_________FNSOFKNSDOFNSOKFNSOFNOS");
+					return next();
+				} else {
+					res.send(404, {message : "form not found"})
+				}
 				// 	return next()
 				// } else {
 				// 	res.send(404, {message : "form not found"})
 				// }
 				//temporaray
-				res.render('project-form');
 			})
 	}
 }
