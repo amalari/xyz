@@ -1,18 +1,47 @@
 var util = require('util');
 var viewModels = require('./index.js');
+var gravatar= require('gravatar');
 
 function portfolioViewModel(){
 	viewModels.call(this, viewModels);
-	this._allProperties = ["title", "architect", "location", "area", "status", "project_year", "content", "is_active", "header_image"];
+	this._allProperties = ["title", "architect", "location", "area", "status", "project_year", "content", "is_active", "header_image", "category_id"];
 	this._viewPropertiesLite = ["id", "title", "header_image", "status"];
-	this._viewProperties = ["id", "title", "architect", "location", "area", "status", "project_year", "content", "header_image", "portfolioImage"];
-	this._
+	this._viewProperties = ["id", "title", "architect", "location", "area", "status", "project_year", "content", "header_image", "portfolioImages"];
+	this._viewPropertiesVisitor = ["id", "architect", "status", "totalComment", "area", "location", "title", "content", "project_year", "rootComments", "header_image", "portfolioImage", "category"];
 };
 
 util.inherits(portfolioViewModel, viewModels);
 
-portfolioViewModel.prototype.get = function(singleData){
-	return this.map(this._viewProperties, singleData);
+portfolioViewModel.prototype.get = function(data, ajaxRequest){
+	if(ajaxRequest){
+		return this.map(this._viewProperties, data);
+	} else {
+		var arr = [];
+		data.rootComments = [];
+		for(var i in data.comments){
+			if(data.comments[i].is_active == 1){
+				arr.push(data.comments[i]);
+			}
+		};
+		for(var a in data.comments){
+			if(data.comments[a].parrent_id === null){
+				data.rootComments.push(data.comments[a]);
+			} else {
+				for(var b in data.rootComments){
+					if(data.comments[a].parrent_id === data.rootComments[b].id){
+						data.rootComments[b].comments =[];
+						data.rootComments[b].comments.push(data.comments[a]);
+					}
+				}
+			}
+		}
+		data.totalComment = arr.length;
+		data.comments = data.comments.map(function(obj){
+			obj.avatar = gravatar.url(obj.email, {s: '100', r: 'G', d: 'retro'});
+			return obj
+		});
+	};
+	return this.map(this._viewPropertiesVisitor, data);
 };
 
 portfolioViewModel.prototype.list = function(listData){
@@ -25,6 +54,7 @@ portfolioViewModel.prototype.list = function(listData){
 
 portfolioViewModel.prototype.save = function(data){
 	var post = this.map(this._allProperties, data);
+	post.category_id = parseInt(post.category_id);
 	post.created_date = new Date();
 	post.updated_date = post.created_date;
 	return post;

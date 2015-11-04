@@ -1,4 +1,5 @@
 var Portfolio = require('./../models/portfolio.js');
+var Comment = require('./../models/comment.js');
 var PortfolioViewModel = require('./../viewModels/portfolio.js');
 var qb = require('./../core/queryBuilder/index.js');
 
@@ -6,7 +7,7 @@ WorkController = {
 	registerRoutes : function(app){
 		app.get('/portfolio', this.list);
 		app.get('/portfolio/:id', this.get);
-		app.post('/portfolio', this.save);
+		app.post('/portfolio/:id', this.save);
 		app.delete('/portfolio/:id', this.delete);
 	},
 	list : function(req, res){
@@ -32,15 +33,23 @@ WorkController = {
 		Portfolio.single(req.params.id)
 		.then(function(model){
 			var data = model.toJSON();
-			console.log(data);
-			console.log("render blog detail");
-			res.render('work');
+			var result = PortfolioViewModel.get(data, req.xhr);
+			res.render('work', result);
+		})
+		.catch(function(err){
+			res.send(err.message)
 		})
 	},
 	save : function(req, res){
-		Comment.save(req.body)
+		var result = req.body;
+		if(result.parrent_id === ''){
+			result.parrent_id = null;
+		};
+		result.portfolio_id = req.params.id;
+		result.date = new Date();
+		Comment.save(result)
 		.then(function(){
-			console.log("reload page")
+			res.redirect(req.get('referer'));
 		})
 		.catch(function(err){
 			console.log(err.message);

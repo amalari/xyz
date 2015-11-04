@@ -82,7 +82,7 @@ postViewModel.prototype.get = function(data, ajaxRequest){
 		data.totalComment = arr.length;
 		data.author = data.user.fullname;
 		data.comments = data.comments.map(function(obj){
-			obj.avatar = gravatar.url(obj.email, {s: '100', r: 'pg', d: '404'});
+			obj.avatar = gravatar.url(obj.email, {s: '100', r: 'G', d: 'retro'});
 			return obj
 		});
 	};

@@ -49,7 +49,7 @@ PortfolioController = {
 		Portfolio.single(req.params.id)
 		.then(function(model){
 			var data = model.toJSON();
-			res.send(PortfolioViewModel.get(data))
+			res.send(PortfolioViewModel.get(data, req.xhr))
 		})
 	},
 	save : function(req, res){

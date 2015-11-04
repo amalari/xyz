@@ -8,7 +8,7 @@ BlogController = {
 		app.get('/blog', this.getList);
 		app.get('/blog/archive', this.getArchive);
 		app.get('/blog/:id', this.get);
-		app.post('/blog', this.save);
+		app.post('/blog/:id', this.save);
 		app.delete('/blog/:id', this.delete);
 	},
 	getArchive : function(req, res){
@@ -37,7 +37,13 @@ BlogController = {
 		})
 	},
 	save : function(req, res){
-		Comment.save(req.body)
+		var result = req.body;
+		if(result.parrent_id === ''){
+			result.parrent_id = null;
+		};
+		result.post_id = req.params.id;
+		result.date = new Date();
+		Comment.save(result)
 		.then(function(){
 			res.redirect(req.get('referer'));
 		})

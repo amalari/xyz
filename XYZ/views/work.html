@@ -2,33 +2,38 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<article>
-				<img class="post-thumb" src="/css/images/about.png" />
+				<img class="post-thumb" src="{{header_image}}" />
 				<ul class="post-meta">
-					<li>Nature</li>
+					<li>{{category.name}}</li>
 					<li>132 Reads</li>
 					<li>12 Likes</li>
-					<li>4 Comments</li>
+					<li>{{totalComment}} Comments</li>
 				</ul>
-				<h2 class="post-title">Smart House</h2>
+				<h2 class="post-title">{{title}}</h2>
 				<ul class="porto-details list-unstyled">
 					<li>
-						<label>Location:</label> Jl. Batik Jogja 27
+						<label>Location:</label> {{location}}
 					</li>
 					<li>
-						<label>Location:</label> Jl. Batik Jogja 27
+						<label>Area (site/building):</label> {{area}}
 					</li>
 					<li>
-						<label>Location:</label> Jl. Batik Jogja 27
+						<label>Year:</label> {{project_year}}
 					</li>
 					<li>
-						<label>Location:</label> Jl. Batik Jogja 27
+						<label>Status:</label> {{status}}
 					</li>
 					<li>
-						<label>Location:</label> Jl. Batik Jogja 27
+						<label>Architect:</label> {{architect}}
 					</li>
 				</ul>
 				<div class="row porto-thumbs-wrapper" >
+					{{#each portfolioImage}}
 					<div class="col-sm-3">
+						<img src="{{.}}" />
+					</div>
+					{{/each}}
+					<!-- <div class="col-sm-3">
 						<img src="/css/images/porto-details-thumb.png" />
 					</div>
 					<div class="col-sm-3">
@@ -36,14 +41,9 @@
 					</div>
 					<div class="col-sm-3">
 						<img src="/css/images/porto-details-thumb.png" />
-					</div>
-					<div class="col-sm-3">
-						<img src="/css/images/porto-details-thumb.png" />
-					</div>
+					</div> -->
 				</div>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
+				{{{content}}}
 			</article>
 			<ul class="social-media">
 				<li><a href="a"><i class="fa fa-twitter"></i></a></li>
@@ -51,29 +51,31 @@
 				<li><a href="a"><i class="fa fa-pinterest"></i></a></li>
 				<li><a href="a"><i class="fa fa-heart"></i></a></li>
 			</ul>
-			<h3 class="comments-header">3 Comments | Leave a Comment</h3>
+			<h3 class="comments-header">{{totalComment}} Comments | Leave a Comment</h3>
+			{{#each rootComments}}
 			<ul class="comments">
 				<li>
-					<img class="avatar" src="/css/images/avatar.png" />
-					<a class="reply" href="#" >Reply</a>
-					<cite class="author">Cindi Karamoy</cite>
-					<p class="meta"><a href="#comment-224401" title="">Oct 28th at 4:26 pm</a></p>
+					<img class="avatar" src="{{avatar}}" />
+					<a class="reply" href="javascript:;" data-parent-id="{{id}}" >Reply</a>
+					<cite class="author">{{name}}</cite>
+					<p class="meta"><a href="#comment-224401" title="">{{date}}</a></p>
 					<p>
-						For me the impetus was simple: My position was eliminated and launching the PRDude blog was a way to chronicle my job search, stay relevant and comment on public relations and communications.
+						{{message}}
 					</p>
+					{{#each comments}}
 					<ul class="comments">
 						<li>
-							<img class="avatar" src="/css/images/avatar.png" />
-							<a class="reply" href="#" >Reply</a>
-							<cite class="author">Cindi Karamoy</cite>
-							<p class="meta"><a href="#comment-224401" title="">Oct 28th at 4:26 pm</a></p>
+							<img class="avatar" src="{{avatar}}" />
+							<cite class="author">{{name}}</cite>
+							<p class="meta"><a href="#comment-224401" title="">{{date}}</a></p>
 							<p>
-								For me the impetus was simple: My position was eliminated and launching the PRDude blog was a way to chronicle my job search, stay relevant and comment on public relations and communications.
+								{{message}}
 							</p>
 						</li>
 					</ul>
+					{{/each}}
 				</li>
-				<li>
+				<!-- <li>
 					<img class="avatar" src="/css/images/avatar.png" />
 					<a class="reply" href="#" >Reply</a>
 					<cite class="author">Cindi Karamoy</cite>
@@ -82,30 +84,59 @@
 						For me the impetus was simple: My position was eliminated and launching the PRDude blog was a way to chronicle my job search, stay relevant and comment on public relations and communications.
 					</p>
 
-				</li>
+				</li> -->
 			</ul>
+			{{/each}}
 			<h3 class="comments-header">Leave a Comment</h3>
-			<form class="comment-form">
+			<div class="comment-deffault"></div>
+			<form class="comment-form" action="/portfolio/{{id}}" method="POST">
+				<div class="form-group">
+					<input type="hidden" name="parrent_id" class="form-control" id="parentId">
+				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Name*</label>
-					<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name" required>
+					<input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Email*</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" required>
+					<input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Subject*</label>
-					<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Subject" required>
+					<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">Your Message*</label>
-					<textarea class="form-control" required rows="10"></textarea>
+					<textarea class="form-control" name="message" required rows="10"></textarea>
 				</div>
 				<p class="form-submit">
 					<button type="submit" class="btn btn-default">Submit</button>
+					<button type="button" class="btn btn-default btn-back" style="display:none;">Cancel</button>
 				</p>
 			</form>
 		</div>
 	</div>
 </div>
+
+{{#section 'jquery'}}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#parentId').val(null);
+		$('.reply').click(function(e){
+			$(".btn-back").css("display", "inline");
+			e.preventDefault();
+			var that = $(this);
+			var parentId = that.attr('data-parent-id');
+			$('#parentId').val(parentId);
+			that.parent().append($('.comment-form'));	
+		});
+		$('.btn-back').click(function(e){
+			$(".btn-back").css("display", "none");
+			$('#parentId').val(null);
+			$('.comment-deffault').html($('.comment-form'));
+		})
+	})
+</script>
+
+{{/section}}
