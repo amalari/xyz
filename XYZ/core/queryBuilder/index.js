@@ -12,11 +12,28 @@ queryBuilder.prototype.setup = function(options){
 };
 
 queryBuilder.prototype.build = function(qb){
-	return qb.limit(this._limit).offset(this._offset).where(this._whereCondition);
+	var modifiedQb = qb.limit(this._limit).offset(this._offset);
+	if(!this._isEmpty(this._whereCondition)){
+		modifiedQb = modifiedQb.where(this._whereCondition);
+	}
+	return modifiedQb;
+	// return .where(this._whereCondition);
 };
 queryBuilder.prototype.buildConditionsOnly = function(qb){
 	console.log("build condition only");
-	return qb.where(this._whereCondition);
+	if(!this._isEmpty(this._whereCondition)){
+		return qb.where(this._whereCondition);		
+	}
+	return qb;
 };
+
+queryBuilder.prototype._isEmpty = function (map) {
+	for(var key in map) {
+		if (map.hasOwnProperty(key)) {
+			return false;
+		}
+	}
+	return true;
+}
 
 module.exports = queryBuilder;

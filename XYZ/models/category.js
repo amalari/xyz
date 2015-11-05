@@ -7,6 +7,10 @@ var Category = bookshelf.Model.extend({
 	post : function(){
 		return this.hasMany('Post');
 	}
+},{
+	save : Promise.method(function(data){
+		return new this(data).save()
+	})
 });
 
 module.exports = bookshelf.model('Category', Category);

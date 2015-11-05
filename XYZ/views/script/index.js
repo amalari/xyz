@@ -1,4 +1,5 @@
-var handlebars = require('express-handlebars')
+var handlebars = require('express-handlebars');
+var paginateHelper = require('express-handlebars-paginate');
 
 //set what type of file that will use in handlebars
 function hbs(extFormat, layoutName, app){
@@ -18,13 +19,12 @@ hbs.prototype.init = function(){
 				this._sections[name] = options.fn(this);
 				return null;
 			}
-			// avatar: function(comments){
-			// 	for(var i in comments){
-			// 		gravatar.url(comments[i].email, {s: '100', r: 'pg', d: '404'})
-			// 	}
-			// }
 		} 
 	});
+};
+
+hbs.prototype.pagination = function(){
+	return this._handlebars.handlebars.registerHelper('paginateHelper', paginateHelper.createPagination);
 };
 
 hbs.prototype.set = function(){

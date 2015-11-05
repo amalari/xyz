@@ -3,74 +3,96 @@
 		<div class="col-sm-12">
 			<div class="header">
 				<h2>Result for</h2>
-				<h6>Tamara Anisa</h6>
+				<h6>{{q}}</h6>
 			</div>
-			<article>
-				<div class="small-post-thumb">
+			<ul id = "myTab" class = "nav nav-tabs">
+				<li class = "active">
+					<a href = "#blog" data-toggle = "tab">
+						Blog
+					</a>
+				</li>
+
+				<li><a href = "#portfolio" data-toggle = "tab">Portfolio</a></li>
+			</ul>
+
+			<div id = "myTabContent" class = "tab-content">
+				<div class = "tab-pane fade in active" id = "blog">
+					{{#each blog.data}}
+					<article>
+						<a href="/blog/{{id}}">
+							<div class="small-post-thumb">
+								<img src="{{header_image}}" />
+							</div>
+						</a>
+						<ul class="post-meta">
+							<li>{{category.name}}</li>
+							<li>132 Reads</li>
+							<li>12 Likes</li>
+							<li>{{totalComment}} Comments</li>
+						</ul>
+						<a href="/blog/{{id}}">
+							<h3 class="post-title">{{title}}</h3>
+						</a>
+						{{{content}}}
+						<p class="author"><span class="prefix">By </span>{{author}}</p>
+					</article>
+					{{/each}}
+
+					<div class="pagination-wrapper">
+						<nav>
+							<ul class="pagination">
+								{{{paginateHelper pagination}}}
+							</ul>
+						</nav>
+					</div>
 				</div>
-				<ul class="post-meta">
-					<li>Nature</li>
-					<li>132 Reads</li>
-					<li>12 Likes</li>
-					<li>4 Comments</li>
-				</ul>
-				<h3 class="post-title">My Preparation Before Going to Work on Location</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-				</p>
-				<p class="author"><span class="prefix">By </span>Cobian Wae</p>
-			</article>
-			<article>
-				<div class="small-post-thumb">
+
+				<div class = "tab-pane fade" id = "portfolio">
+					{{#each portfolio.data}}
+					<article>
+						<a href="/portfolio/{{id}}">
+							<div class="small-post-thumb">
+								<img src="{{header_image}}" />
+							</div>
+						</a>
+						<ul class="post-meta">
+							<li>{{category.name}}</li>
+							<li>132 Reads</li>
+							<li>12 Likes</li>
+							<li>{{totalComment}} Comments</li>
+						</ul>
+						<a href="/portfolio/{{id}}">
+							<h3 class="post-title">{{title}}</h3>
+						</a>
+						{{{content}}}
+						<p class="author"><span class="prefix">By </span>{{architect}}</p>
+					</article>
+					{{/each}}
+
+					<div class="pagination-wrapper">
+						<nav>
+							<ul class="pagination">
+								{{{paginateHelper pagination}}}
+							</ul>
+						</nav>
+					</div>
 				</div>
-				<ul class="post-meta">
-					<li>Nature</li>
-					<li>132 Reads</li>
-					<li>12 Likes</li>
-					<li>4 Comments</li>
-				</ul>
-				<h3 class="post-title">My Preparation Before Going to Work on Location</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-				</p>
-				<p class="author"><span class="prefix">By </span>Cobian Wae</p>
-			</article>
-			<article>
-				<div class="small-post-thumb">
-				</div>
-				<ul class="post-meta">
-					<li>Nature</li>
-					<li>132 Reads</li>
-					<li>12 Likes</li>
-					<li>4 Comments</li>
-				</ul>
-				<h3 class="post-title">My Preparation Before Going to Work on Location</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-				</p>
-				<p class="author"><span class="prefix">By </span>Cobian Wae</p>
-			</article>
+				<!-- <article>
+					<div class="small-post-thumb">
+					</div>
+					<ul class="post-meta">
+						<li>Nature</li>
+						<li>132 Reads</li>
+						<li>12 Likes</li>
+						<li>4 Comments</li>
+					</ul>
+					<h3 class="post-title">My Preparation Before Going to Work on Location</h3>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+					</p>
+					<p class="author"><span class="prefix">By </span>Cobian Wae</p>
+				</article> -->
+			</div>
 		</div>
 	</div>
-</div>
-<div class="pagination-wrapper">
-	<nav>
-		<ul class="pagination">
-			<li>
-				<a href="#" aria-label="Previous">
-					<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-				</a>
-			</li>
-			<li class="active"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li>
-				<a href="#" aria-label="Next">
-					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-				</a>
-			</li>
-		</ul>
-	</nav>
 </div>

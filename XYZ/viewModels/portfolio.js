@@ -6,6 +6,7 @@ function portfolioViewModel(){
 	viewModels.call(this, viewModels);
 	this._allProperties = ["title", "architect", "location", "area", "status", "project_year", "content", "is_active", "header_image", "category_id"];
 	this._viewPropertiesLite = ["id", "title", "header_image", "status"];
+	this._viewPropertiesList = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "totalComment", "architect"];
 	this._viewProperties = ["id", "title", "architect", "location", "area", "status", "project_year", "content", "header_image", "portfolioImages"];
 	this._viewPropertiesVisitor = ["id", "architect", "status", "totalComment", "area", "location", "title", "content", "project_year", "rootComments", "header_image", "portfolioImage", "category"];
 };
@@ -47,7 +48,15 @@ portfolioViewModel.prototype.get = function(data, ajaxRequest){
 portfolioViewModel.prototype.list = function(listData){
 	var that = this;
 	listData = listData.map(function(data){
-		return that.map(that._viewPropertiesLite, data)
+		var arr = [];
+		for(var i in data.comments){
+			if(data.comments[i].is_active == 1){
+				arr.push(data.comments[i]);
+			}
+		};
+		data.comments = arr;
+		data.totalComment = arr.length;
+		return that.map(that._viewPropertiesList, data)
 	});
 	return listData;
 };

@@ -7,6 +7,10 @@ HomepageController = {
 		app.get('/', this.list);
 	},
 	list : function(req, res){
+		var currentPage = 1;
+		if(req.query.page){
+			currentPage = req.query.page
+		};
 		var queryBuilder = new qb();
 		queryBuilder.setup({
 			limit : 9,
@@ -18,7 +22,10 @@ HomepageController = {
 			var result = {};
 			result.data = PortfolioViewModel.list(list.data);
 			result.total = list.total;
-			console.log(result);
+			result.pagination = 
+			{ 
+				page:currentPage, limit:9, totalRows: 7
+			};
 			res.render('homepage', result);
 		})
 		.catch(function(err){
