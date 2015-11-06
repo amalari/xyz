@@ -1,0 +1,117 @@
+<div class="archive container">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="header">
+				<h2>Result for</h2>
+				<h6>{{q}}</h6>
+			</div>
+			{{#if blog}}
+			{{#each blog.data}}
+			<article>
+				<a href="/blog/{{id}}">
+					<div class="small-post-thumb">
+						<img src="{{header_image}}" />
+					</div>
+				</a>
+				<ul class="post-meta">
+					<li>{{category.name}}</li>
+					<li>132 Reads</li>
+					<li>12 Likes</li>
+					<li>{{totalComment}} Comments</li>
+				</ul>
+				<a href="/blog/{{id}}">
+					<h3 class="post-title">{{title}}</h3>
+				</a>
+				{{{content}}}
+				<p class="author"><span class="prefix">By </span>{{author}}</p>
+			</article>
+			{{/each}}
+			<div class="pagination-wrapper">
+				<nav>
+					<ul class="pagination">
+						{{{paginateHelper pagination}}}
+					</ul>
+				</nav>
+			</div>
+			{{/if}}
+
+			{{#if portfolio}}
+			{{#each portfolio.data}}
+			<article>
+				<a href="/portfolio/{{id}}">
+					<div class="small-post-thumb">
+						<img src="{{header_image}}" />
+					</div>
+				</a>
+				<ul class="post-meta">
+					<li>{{category.name}}</li>
+					<li>132 Reads</li>
+					<li>12 Likes</li>
+					<li>{{totalComment}} Comments</li>
+				</ul>
+				<a href="/portfolio/{{id}}">
+					<h3 class="post-title">{{title}}</h3>
+				</a>
+				{{{content}}}
+				<p class="author"><span class="prefix">By </span>{{author}}</p>
+			</article>
+			{{/each}}
+			<div class="pagination-wrapper">
+				<nav>
+					<ul class="pagination">
+						{{{paginateHelper pagination}}}
+					</ul>
+				</nav>
+			</div>
+			{{/if}}
+
+			
+<!-- 		</div>
+		{{#each portfolio.data}}
+		<article>
+			<a href="/portfolio/{{id}}">
+				<div class="small-post-thumb">
+					<img src="{{header_image}}" />
+				</div>
+			</a>
+			<ul class="post-meta">
+				<li>{{category.name}}</li>
+				<li>132 Reads</li>
+				<li>12 Likes</li>
+				<li>{{totalComment}} Comments</li>
+			</ul>
+			<a href="/portfolio/{{id}}">
+				<h3 class="post-title">{{title}}</h3>
+			</a>
+			{{{content}}}
+			<p class="author"><span class="prefix">By </span>{{architect}}</p>
+		</article>
+		{{/each}}
+
+		<div class="pagination-wrapper">
+			<nav>
+				<ul class="pagination">
+					{{{paginateHelper pagination}}}
+				</ul>
+			</nav>
+		</div>
+	</div>
+				<!-- <article>
+					<div class="small-post-thumb">
+					</div>
+					<ul class="post-meta">
+						<li>Nature</li>
+						<li>132 Reads</li>
+						<li>12 Likes</li>
+						<li>4 Comments</li>
+					</ul>
+					<h3 class="post-title">My Preparation Before Going to Work on Location</h3>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+					</p>
+					<p class="author"><span class="prefix">By </span>Cobian Wae</p>
+				</article> -->
+<!-- 			</div>
+</div> --> 
+</div>
+</div>

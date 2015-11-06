@@ -67,7 +67,7 @@
           </form>
         </div>
       </div>
-      
+
       <div class="col-sm-3">
         <div class="box box-primary" style="
         margin-left: -5px;
@@ -97,7 +97,7 @@
             </thead>
             <tbody>
               <tr role="row" ng-repeat= "category in model2">
-                <td><a href="/category?category={{category.name}}&type=post">{{category.name}}</a></td>
+                <td><a href="/category/search?q={{category.name}}&type=portfolio">{{category.name}}</a></td>
                 <td>
                   <button type="button"  ng-click="updateCategory(category.id)" class="btn btn-default"><i class="fa fa-edit"></i></button>                  
                 </td>

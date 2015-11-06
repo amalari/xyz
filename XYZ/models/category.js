@@ -40,6 +40,9 @@ var Category = bookshelf.Model.extend({
 	}),
 	get: Promise.method(function(categoryId){
 		return new this({id : categoryId}).fetch()
+	}),
+	getSearch : Promise.method(function(categoryName){
+		return new this({name : categoryName}).fetch();
 	})
 });
 
