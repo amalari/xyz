@@ -48,8 +48,11 @@ angular.module('xyz.controllers')
 	};
 	$scope.removeCategory = function(categoryId){
 		Category.get({id: categoryId}, function(data){
-			$scope.model3 = data
-			$scope.saveCategory(categoryId, 0)
+			data.categoryId = categoryId;
+			data.is_active = 0;
+			Category.update(data, function(){
+				$state.go('post-create', {}, {reload: true})
+			})
 		})
 	};
 	$scope.tinymceOptions = {
