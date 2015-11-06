@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PostCreateCtrl', ['$scope', 'Post', 'TinyVision', '$state', function($scope, Post, TinyVision, $state){
+.controller('PostCreateCtrl', ['$scope', 'Post', 'Category', 'TinyVision', '$state', function($scope, Post, Category, TinyVision, $state){
 	$scope.pageTitle= 'Create Post';
 	$scope.formTitle= 'Form Create Post';
 	$scope.model= {};
+	$scope.model3={};
+	$scope.hiddenButton = false;
+	Category.query(function(list){
+		$scope.model2 = list.data
+	});
 	$scope.clickSave = function(is_active, type){
 		$scope.model.is_active = is_active;
 		$scope.model.type = type;
@@ -14,6 +19,38 @@ angular.module('xyz.controllers')
 		Post.save($scope.model, function(){
 			$state.go('post');	
 		});
+	};
+	$scope.updateCategory = function(categoryId){
+		$scope.hiddenButton = true;
+		Category.get({id: categoryId}, function(data){
+			$scope.model3 = data
+		})
+	};
+	$scope.cancelUpdate = function(){
+		delete $scope.model3;
+		$scope.hiddenButton = false
+		console.log($scope.model3);
+	};
+	$scope.saveCategory = function(categoryId, is_active){
+		$scope.model3.categoryId = categoryId;
+		$scope.model3.is_active = is_active;
+		console.log($scope.model3);
+		if($scope.model3.categoryId === undefined){
+			console.log("jika category id undifined");
+			Category.save($scope.model3, function(){
+				$state.go('post-create', {}, {reload: true})
+			})
+		} else {
+			Category.update($scope.model3, function(){
+				$state.go('post-create', {}, {reload: true})
+			})
+		};
+	};
+	$scope.removeCategory = function(categoryId){
+		Category.get({id: categoryId}, function(data){
+			$scope.model3 = data
+			$scope.saveCategory(categoryId, 0)
+		})
 	};
 	$scope.tinymceOptions = {
 		onChange: function(e) {

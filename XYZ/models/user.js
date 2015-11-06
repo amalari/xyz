@@ -4,7 +4,7 @@ var Post = require('./post.js');
 
 var User = bookshelf.Model.extend({
 	tableName : 'users',
-	post : function(){
+	posts : function(){
 		return this.hasMany('Post');
 	}
 }, {
@@ -24,7 +24,7 @@ var User = bookshelf.Model.extend({
 		.query(function(qb){
 			queryBuilder.build(qb)
 		})
-		.fetch()
+		.fetch({withRelated : ['posts']})
 		.then(function(listModel){
 			result.data = listModel.toJSON();
 			var raw = 'count(distinct(users.id)) as total';

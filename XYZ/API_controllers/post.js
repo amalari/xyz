@@ -16,7 +16,7 @@ var postFileManager = new FileManager({
 
 PostController = {
 	registerRoutes : function(app){
-		console.log("controller post")
+		console.log("controller post");
 		app.post('/api/post', this.save);
 		app.get('/api/post', this.list);
 		app.get('/api/post/:id', this.single);
@@ -41,13 +41,12 @@ PostController = {
 	list : function(req, res){
 		console.log('post list controller');
 		console.log(req.query.is_active);
-		queryBuilder = new qb();
+		var queryBuilder = new qb();
 		queryBuilder.setup({
 			limit : req.query.limit,
 			page : req.query.page,
 			whereCondition : {is_active : req.query.is_active, type : req.query.type}
 		});
-		console.log(queryBuilder);
 		Post.list(queryBuilder)
 		.then(function(list){
 			res.send(PostViewModel.getList(list, req.xhr));

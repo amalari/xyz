@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PortfolioCreateCtrl', ['$scope', 'Portfolio', '$state', 'ENV', function($scope, Portfolio, $state, ENV){
+.controller('PortfolioCreateCtrl', ['$scope', 'Portfolio', 'Category', '$state', 'ENV', function($scope, Portfolio, Category, $state, ENV){
 	$scope.pageTitle= 'Create Portfolio';
 	$scope.formTitle= 'Form Create Portfolio';
 	$scope.model= {};
+	$scope.model3={};
+	$scope.hiddenButton = false;
+	Category.query(function(list){
+		$scope.model2 = list.data
+	});
 	$scope.clickSave = function(is_active){
 		$scope.model.is_active = is_active;
 	};
@@ -13,6 +18,38 @@ angular.module('xyz.controllers')
 		Portfolio.save($scope.model, function(){
 			$state.go('portfolio');	
 		});
+	};
+	$scope.updateCategory = function(categoryId){
+		$scope.hiddenButton = true;
+		Category.get({id: categoryId}, function(data){
+			$scope.model3 = data
+		})
+	};
+	$scope.cancelUpdate = function(){
+		delete $scope.model3;
+		$scope.hiddenButton = false
+		console.log($scope.model3);
+	};
+	$scope.saveCategory = function(categoryId, is_active){
+		$scope.model3.categoryId = categoryId;
+		$scope.model3.is_active = is_active;
+		console.log($scope.model3);
+		if($scope.model3.categoryId === undefined){
+			console.log("jika category id undifined");
+			Category.save($scope.model3, function(){
+				$state.go('portfolio-create', {}, {reload: true})
+			})
+		} else {
+			Category.update($scope.model3, function(){
+				$state.go('portfolio-create', {}, {reload: true})
+			})
+		};
+	};
+	$scope.removeCategory = function(categoryId){
+		Category.get({id: categoryId}, function(data){
+			$scope.model3 = data
+			$scope.saveCategory(categoryId, 0)
+		})
 	};
 
 	$scope.tinymceOptions = {

@@ -7,7 +7,7 @@
 
 <section class="content">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-9">
       <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">{{formTitle}}</h3>
@@ -27,45 +27,100 @@
               <label for="exampleInputCategory1">Category</label>
               <select class="form-control" ng-model="model.category_id" required>
                 <option selected disabled hidden value=''></option>
-                <option class="form-control" value= "1" >House</option>
-                <option class="form-control" value= "2" >Office</option>
+                <option  ng-repeat= "category in model2" class="form-control" value= "{{category.id}}" >{{category.name}}</option>
               </select>
             </div>
             <div class="form-group">
               <label>Header Image</label>
               <input type="file" class="form-control" files-model="model.header" ng-model="model.header_image">
               <p class="help-block">{{model.nama_file_display}}
+              </div>
+              <div class="form-group">
+                <label>Project Images</label>
+                <input multiple type="file" class="form-control" files-model="model.image" ng-model="model.image">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputLocation1">Location</label>
+                <input type="text" class="form-control" ng-model="model.location" placeholder="Enter Location" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputArea1">Area</label>
+                <input type="text" class="form-control" ng-model="model.area" placeholder="Enter Area" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputStatus1">Status</label>
+                <input type="text" class="form-control" ng-model="model.status" placeholder="Enter Status" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputYear1">Project Year</label>
+                <input type="number" class="form-control" ng-model="model.project_year" placeholder="Enter Year" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputContent1">Content</label>
+                <textarea ui-tinymce="tinymceOptions" class= "form-control" ng-model="model.content"></textarea> 
+              </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+              <button type="submit" ng-click = "clickSave(1)" class="btn btn-primary">Save Page</button>
+              <button type="submit" ng-click = "clickSave(0)" class="btn btn-primary">Save as Draft</button>
             </div>
-            <div class="form-group">
-              <label>Project Images</label>
-              <input multiple type="file" class="form-control" files-model="model.image" ng-model="model.image">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputLocation1">Location</label>
-              <input type="text" class="form-control" ng-model="model.location" placeholder="Enter Location" required>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputArea1">Area</label>
-              <input type="text" class="form-control" ng-model="model.area" placeholder="Enter Area" required>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputStatus1">Status</label>
-              <input type="text" class="form-control" ng-model="model.status" placeholder="Enter Status" required>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputYear1">Project Year</label>
-              <input type="number" class="form-control" ng-model="model.project_year" placeholder="Enter Year" required>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputContent1">Content</label>
-              <textarea ui-tinymce="tinymceOptions" class= "form-control" ng-model="model.content"></textarea> 
-            </div>
-          </div><!-- /.box-body -->
-          <div class="box-footer">
-            <button type="submit" ng-click = "clickSave(1)" class="btn btn-primary">Save Page</button>
-            <button type="submit" ng-click = "clickSave(0)" class="btn btn-primary">Save as Draft</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="col-sm-3">
+        <div class="box box-primary" style="
+        margin-left: -5px;
+        ">
+        <div class="box-header with-border">
+          <h3 class="box-title">Category</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
           </div>
-        </form>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" style="display: block;">
+          <!-- <ul class="products-list product-list-in-box">
+            <li ng-repeat= "category in model" class="item">
+            <a href="javascript::;" class="category-title" style=" font-size : initial">{{category.name}}</a>
+          </li> -->
+          <!-- /.item -->
+          <!--  </ul> -->
+          <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+            <thead>
+              <tr role="row">
+                <th>Name</th>
+                <th width="20px">Edit</th>
+                <th width="20px">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" ng-repeat= "category in model2">
+                <td><a href="/category?category={{category.name}}&type=post">{{category.name}}</a></td>
+                <td>
+                  <button type="button"  ng-click="updateCategory(category.id)" class="btn btn-default"><i class="fa fa-edit"></i></button>                  
+                </td>
+                <td>
+                  <button type="button"  ng-click="removeCategory(category.id, 0)" class="btn btn-default"><i class="fa fa-remove"></i></button>
+                </td> 
+              </tr>             
+              <!-- end ngRepeat: post in posts -->
+            </tbody>
+          </table>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <form ng-submit="saveCategory(model3.id, 1)" method="post">
+            <div class="input-group">
+              <input type="text" name="category" ng-model="model3.name" class="form-control">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">+ Add</button>
+                <button type="button" ng-click="cancelUpdate()" ng-show="hiddenButton" class="btn btn-primary" style="margin-left : 5px">Cancel</button>
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
