@@ -34,7 +34,7 @@ postViewModel.prototype.getList = function(listData, ajaxRequest){
 			};
 			data.comments = arr;
 			data.totalComment = arr.length;
-			data.content = that.summary(data.content, data.id);
+			data.content = that.summary(data.content);
 			data.author = data.user.fullname;
 			return that.map(that._viewProperties, data)
 		});
@@ -103,9 +103,9 @@ postViewModel.prototype.update = function(data){
 	return post;
 };
 
-postViewModel.prototype.summary = function(content, id){
+postViewModel.prototype.summary = function(content){
 	var newContent="";
-	if(content.length > 300 && content.indexOf("</p>") === -1){
+	if(content.length > 300){
 		newContent = content.substr(0, 300) + ". . . .</p>";
 	} else {
 		newContent = content.replace("</p>"," . . .</p>");

@@ -50,7 +50,11 @@ BlogController = {
 			result.portfolio.total = data2.total;
 			result.pagination = 
 			{ 
-				page:currentPage, limit:10, totalRows: 7
+				page:currentPage, limit:10, totalRows: result.blog.total
+			};
+			result.pagination1 = 
+			{ 
+				page:currentPage, limit:10, totalRows: result.portfolio.total
 			};
 			result.q = req.query.q;
 			console.log(result);
@@ -74,7 +78,7 @@ BlogController = {
 			var data = PostViewModel.getList(list, req.xhr);
 			data.pagination = 
 			{ 
-				page:currentPage, limit:2, totalRows: 7
+				page:currentPage, limit:2, totalRows: data.total
 			};
 			res.render('blog', data);
 		})
@@ -88,7 +92,6 @@ BlogController = {
 		}
 	}));
 		return function(req, res, next){
-			var id = 1;
 			var today = new Date();
 			var dd = today.getDate();
 			var mm = today.getMonth() + 1;
@@ -108,11 +111,9 @@ BlogController = {
 			if(req.session.accessLog === undefined){
 				req.session.accessLog = [];
 				req.session.accessLog.push({
-					visitor_id : id,
 					post_id : req.params.id,
 					read_date : today
 				});
-				id++;
 				Post.getCheck(req.params.id)
 				.then(function(model){
 					var data = model.toJSON();
@@ -144,16 +145,15 @@ BlogController = {
 					req.session.accessLog.splice(i, 0, obj);
 					return next()
 				} else {
-					var visitorId;
-					_.each(req.session.accessLog, function(n, key){
-						_.forIn(req.session.accessLog[key], function(value, key){
-							if(key == "visitor_id"){
-								visitorId = value
-							}
-						})
-					});
+					// var visitorId;
+					// _.each(req.session.accessLog, function(n, key){
+					// 	_.forIn(req.session.accessLog[key], function(value, key){
+					// 		if(key == "visitor_id"){
+					// 			visitorId = value
+					// 		}
+					// 	})
+					// });
 					req.session.accessLog.push({
-						visitor_id : visitorId,
 						post_id : req.params.id,
 						read_date : today
 					});
