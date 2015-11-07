@@ -42,6 +42,9 @@ var Portfolio = bookshelf.Model.extend({
 		return new this({id: portfolioId})
 		.fetch({withRelated : ['portfolioImages', 'comments', 'category']});
 	}),
+	getCheck : Promise.method(function(postingId){
+		return new this({id : postingId}).fetch({columns : 'visitor'})
+	}),
 	save : Promise.method(function(portfolio){
 		return new this(portfolio).save();
 	}),

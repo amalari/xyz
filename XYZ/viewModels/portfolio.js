@@ -6,9 +6,9 @@ function portfolioViewModel(){
 	viewModels.call(this, viewModels);
 	this._allProperties = ["title", "architect", "location", "area", "status", "project_year", "content", "is_active", "header_image", "category_id"];
 	this._viewPropertiesLite = ["id", "title", "header_image", "status"];
-	this._viewPropertiesList = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "totalComment", "architect"];
+	this._viewPropertiesList = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "totalComment", "architect", "visitor"];
 	this._viewProperties = ["id", "title", "architect", "location", "area", "status", "project_year", "content", "header_image", "portfolioImages"];
-	this._viewPropertiesVisitor = ["id", "architect", "status", "totalComment", "area", "location", "title", "content", "project_year", "rootComments", "header_image", "portfolioImage", "category"];
+	this._viewPropertiesVisitor = ["id", "architect", "status", "totalComment", "area", "location", "title", "content", "project_year", "rootComments", "header_image", "portfolioImage", "category", "visitor"];
 };
 
 util.inherits(portfolioViewModel, viewModels);
