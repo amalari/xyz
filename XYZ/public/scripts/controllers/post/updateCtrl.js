@@ -10,6 +10,7 @@ angular.module('xyz.controllers')
 		var i = arr.length-1;
 		$scope.model.nama_file_display =arr[i]; 
 		delete $scope.model.header_image;
+		console.log($scope.model);
 	});
 	Category.query(function(list){
 		var category = list.data.map(function(data){

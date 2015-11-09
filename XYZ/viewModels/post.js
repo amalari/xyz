@@ -7,7 +7,7 @@ function postViewModel(){
 	this._allProperties = ["title", "type", "category_id", "content", "header_image", "is_active"];
 	this._viewProperties = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "totalComment", "visitor", "liker"];
 	this._viewPropertiesVisitor = ["id", "header_image", "category", "totalComment", "author", "content", "rootComments", "title", "visitor", "liker"];
-	this._viewPropertiesLite = ["id", "title", "category", "content", "header_image"];
+	this._viewPropertiesLite = ["id", "title", "category", "content", "header_image", "category_id"];
 };
 
 util.inherits(postViewModel, viewModels);
