@@ -1,3 +1,6 @@
+{{#section 'head'}}
+<title>XYZ - Blog</title>
+{{/section}}
 <div class="single container">
 	<div class="row">
 		<div class="col-sm-12">
@@ -6,7 +9,7 @@
 				<ul class="post-meta">
 					<li><a href="/category/search?q={{category.name}}&type=post">{{category.name}}</a></li>
 					<li>{{visitor}} Reads</li>
-					<li>12 Likes</li>
+					<li>{{liker}} Likes</li>
 					<li>{{totalComment}} Comments</li>
 				</ul>
 				<h2 class="post-title">{{title}}</h2>
@@ -16,7 +19,11 @@
 				<li><a href="a"><i class="fa fa-twitter"></i></a></li>
 				<li><a href="a"><i class="fa fa-facebook"></i></a></li>
 				<li><a href="a"><i class="fa fa-pinterest"></i></a></li>
-				<li><a href="a"><i class="fa fa-heart"></i></a></li>
+				{{#if preferredPage}}
+				<li><i class="fa fa-heart not-active" style="color : #00bfa5"></i></li>
+				{{else}}
+				<li><a href="/blog/like/{{id}}"><i class="fa fa-heart"></i></a></li>
+				{{/if}}
 			</ul>
 			<h3 class="comments-header">{{totalComment}} Comments | Leave a Comment</h3>
 			{{#each rootComments}}
@@ -104,7 +111,7 @@
 			$(this).closest('form').find("input[type=text], input[type=email], textarea").val("");
 			$('#parentId').val(null);
 			$('.comment-deffault').html($('.comment-form'));
-		})
+		});
 	})
 </script>
 

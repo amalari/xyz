@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2015 at 04:33 AM
+-- Generation Time: Nov 09, 2015 at 06:01 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.5.28
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `categories`
@@ -46,7 +46,8 @@ INSERT INTO `categories` (`id`, `name`, `is_active`) VALUES
 (13, 'itu', 0),
 (14, 'hasem sekali', 0),
 (15, 'afasfdsa', 0),
-(16, 'afasfdsa', 0);
+(16, 'afasfdsa', 0),
+(17, 'special', 1);
 
 -- --------------------------------------------------------
 
@@ -128,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `portfolios` (
   `updated_date` datetime NOT NULL,
   `header_image` text,
   `visitor` int(11) NOT NULL DEFAULT '0',
+  `liker` int(11) NOT NULL DEFAULT '0',
   `is_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
@@ -135,13 +137,13 @@ CREATE TABLE IF NOT EXISTS `portfolios` (
 -- Dumping data for table `portfolios`
 --
 
-INSERT INTO `portfolios` (`id`, `architect`, `status`, `category_id`, `area`, `location`, `title`, `content`, `project_year`, `created_date`, `updated_date`, `header_image`, `visitor`, `is_active`) VALUES
-(1, 'aku', 'building was destroy', 1, '10m', 'asfdasfasfsafafs', 'fasfafasfasfafafasfasfafa', 'sfdsadfsfasfsfdsafasklnfkaslnfklsnfklsanfklsanlkfnaflkasnklfnsklnfdklasnklfnsaklnfasklfklkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkllllllllllllllllll', 2015, '2015-10-01 00:00:00', '2015-10-01 00:00:00', 'fnalksfnsaklfnaskfa', 0, 0),
-(20, 'afafa', 'aaa', 1, 'aaa', 'afafa', 'afasfasfsa', '<p>afdasa</p>', 2001, '2015-10-21 14:01:31', '2015-10-26 17:00:24', '/uploads/portfolio/1445853623829_CAM00004.jpg', 0, 1),
-(22, 'adfaf', 'afasdfsa', 1, 'aaa', 'asf', 'asfas', '<p>sadfdsafsafsdadfsa</p>', 2020, '2015-10-21 14:37:54', '2015-10-21 14:37:54', 'adfafadsfdasnfasklfalsfa', 0, 0),
-(23, 'a', 'a', 1, 'a', 'a', 'a', '<p>a</p>', 2001, '2015-10-26 14:03:18', '2015-10-26 14:03:18', '/uploads/portfolio/1445842997063_CAM00031.jpg', 0, 1),
-(24, 'a', 'a', 1, 'a', 'a', 'a', '<p>a</p>', 2001, '2015-10-26 14:05:19', '2015-10-26 14:05:19', '/uploads/portfolio/1445843117988_CAM00031.jpg', 0, 1),
-(26, 'aa', 'a', 1, 'a', 'a', 'aa', '<p>aa</p>', 2013, '2015-10-26 16:32:56', '2015-10-26 16:32:56', '/uploads/portfolio/1445851974989_CAM00003.jpg', 0, 1);
+INSERT INTO `portfolios` (`id`, `architect`, `status`, `category_id`, `area`, `location`, `title`, `content`, `project_year`, `created_date`, `updated_date`, `header_image`, `visitor`, `liker`, `is_active`) VALUES
+(1, 'aku', 'building was destroy', 1, '10m', 'asfdasfasfsafafs', 'fasfafasfasfafafasfasfafa', 'sfdsadfsfasfsfdsafasklnfkaslnfklsnfklsanfklsanlkfnaflkasnklfnsklnfdklasnklfnsaklnfasklfklkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkllllllllllllllllll', 2015, '2015-10-01 00:00:00', '2015-10-01 00:00:00', 'fnalksfnsaklfnaskfa', 0, 0, 0),
+(20, 'afafa', 'aaa', 1, 'aaa', 'afafa', 'afasfasfsa', '<p>afdasa</p>', 2001, '2015-10-21 14:01:31', '2015-10-26 17:00:24', '/uploads/portfolio/1445853623829_CAM00004.jpg', 6, 3, 1),
+(22, 'adfaf', 'afasdfsa', 1, 'aaa', 'asf', 'asfas', '<p>sadfdsafsafsdadfsa</p>', 2020, '2015-10-21 14:37:54', '2015-10-21 14:37:54', 'adfafadsfdasnfasklfalsfa', 0, 0, 0),
+(23, 'a', 'a', 1, 'a', 'a', 'a', '<p>a</p>', 2001, '2015-10-26 14:03:18', '2015-10-26 14:03:18', '/uploads/portfolio/1445842997063_CAM00031.jpg', 1, 0, 1),
+(24, 'a', 'a', 1, 'a', 'a', 'a', '<p>a</p>', 2001, '2015-10-26 14:05:19', '2015-10-26 14:05:19', '/uploads/portfolio/1445843117988_CAM00031.jpg', 0, 0, 1),
+(26, 'aa', 'a', 1, 'a', 'a', 'aa', '<p>aa</p>', 2013, '2015-10-26 16:32:56', '2015-10-26 16:32:56', '/uploads/portfolio/1445851974989_CAM00003.jpg', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -181,6 +183,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `updated_date` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   `visitor` int(11) NOT NULL DEFAULT '0',
+  `liker` int(11) NOT NULL DEFAULT '0',
   `is_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
@@ -188,16 +191,16 @@ CREATE TABLE IF NOT EXISTS `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `category_id`, `type`, `title`, `content`, `header_image`, `created_date`, `updated_date`, `user_id`, `visitor`, `is_active`) VALUES
-(1, 2, 1, 'aku', '<p>aaaa</p><p><img src="/images/glen.jpg" alt="glen" width="300" height="402" data-mce-selected="1" data-mce-src="images/glen.jpg"></p>', '/uploads/posting/undefined', '2015-10-16 13:42:14', '2015-10-28 15:49:15', 1, 1, 1),
-(2, NULL, 2, 'kkkkkaaaabbb', 'afasfasfafafsafmasklmfasklmfsakl', NULL, '2015-10-08 00:00:00', '2015-10-19 13:41:09', 1, 0, 1),
-(3, 1, 1, 'fdasfsafasfasfafasfasfwetrfa', 'gfnjfghjsfgfadgadcvxz', 'asdfasfasfsafsafas', '2015-10-19 08:48:19', '2015-10-19 08:48:19', 1, 0, 0),
-(4, 1, 1, 'asfsadfsaf', '<p>asfsafsafsakaa</p>', '/uploads/posting/undefined', '2015-10-19 08:52:36', '2015-10-28 15:59:20', 1, 1, 1),
-(5, 2, 1, 'asfsafasfas', 'asfsafasfas', 'asdfasfasfsafsafas', '2015-10-19 08:54:53', '2015-10-19 08:54:53', 1, 0, 0),
-(6, 2, 1, 'kalkasgkl;asfj;klasjfaslk', 'ajbfjkasfasnfkjsa', 'asdfasfasfsafsafas', '2015-10-19 08:55:04', '2015-10-19 08:55:04', 1, 0, 0),
-(11, 1, 1, 'fsafddsafasfas', '<p>asfasfasfas<span id="_mce_caret" data-mce-bogus="1"><strong>?asfsafasfasfasfafasf<span id="_mce_caret" data-mce-bogus="1"><em>?asfasfasfasfas</em></span></strong></span></p>', 'asdfasfasfsafsafas', '2015-10-19 16:29:08', '2015-10-19 16:29:08', 1, 0, 0),
-(12, 2, 1, 'fasfsa', '<p>asfsaf</p>', 'asdfasfasfsafsafas', '2015-10-21 15:17:05', '2015-10-21 15:17:05', 1, 0, 0),
-(13, 1, 1, 'saya saya saya', '<p>klasjfkla;sjmflaksmnfklashfklas</p>', '/uploads/posting/1445831176910_CAM00003.jpg', '2015-10-26 10:46:17', '2015-10-26 10:46:17', 1, 0, 1);
+INSERT INTO `posts` (`id`, `category_id`, `type`, `title`, `content`, `header_image`, `created_date`, `updated_date`, `user_id`, `visitor`, `liker`, `is_active`) VALUES
+(1, 2, 1, 'aku', '<p>aaaa</p><p><img src="/images/glen.jpg" alt="glen" width="300" height="402" data-mce-selected="1" data-mce-src="images/glen.jpg"></p>', '/uploads/posting/undefined', '2015-10-16 13:42:14', '2015-10-28 15:49:15', 1, 12, 12, 1),
+(2, NULL, 2, 'kkkkkaaaabbb', 'afasfasfafafsafmasklmfasklmfsakl', NULL, '2015-10-08 00:00:00', '2015-10-19 13:41:09', 1, 0, 0, 1),
+(3, 1, 1, 'fdasfsafasfasfafasfasfwetrfa', 'gfnjfghjsfgfadgadcvxz', 'asdfasfasfsafsafas', '2015-10-19 08:48:19', '2015-10-19 08:48:19', 1, 0, 0, 0),
+(4, 1, 1, 'asfsadfsaf', '<p>asfsafsafsakaa</p>', '/uploads/posting/undefined', '2015-10-19 08:52:36', '2015-10-28 15:59:20', 1, 1, 0, 1),
+(5, 2, 1, 'asfsafasfas', 'asfsafasfas', 'asdfasfasfsafsafas', '2015-10-19 08:54:53', '2015-10-19 08:54:53', 1, 0, 0, 0),
+(6, 2, 1, 'kalkasgkl;asfj;klasjfaslk', 'ajbfjkasfasnfkjsa', 'asdfasfasfsafsafas', '2015-10-19 08:55:04', '2015-10-19 08:55:04', 1, 0, 0, 0),
+(11, 1, 1, 'fsafddsafasfas', '<p>asfasfasfas<span id="_mce_caret" data-mce-bogus="1"><strong>?asfsafasfasfasfafasf<span id="_mce_caret" data-mce-bogus="1"><em>?asfasfasfasfas</em></span></strong></span></p>', 'asdfasfasfsafsafas', '2015-10-19 16:29:08', '2015-10-19 16:29:08', 1, 0, 0, 0),
+(12, 2, 1, 'fasfsa', '<p>asfsaf</p>', 'asdfasfasfsafsafas', '2015-10-21 15:17:05', '2015-10-21 15:17:05', 1, 0, 0, 0),
+(13, 1, 1, 'saya saya saya', '<p>klasjfkla;sjmflaksmnfklashfklas</p>', '/uploads/posting/1445831176910_CAM00003.jpg', '2015-10-26 10:46:17', '2015-10-26 10:46:17', 1, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -329,7 +332,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `clients`
 --

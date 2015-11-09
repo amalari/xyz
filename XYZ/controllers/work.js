@@ -9,6 +9,7 @@ WorkController = {
 	registerRoutes : function(app){
 		app.get('/portfolio', this.list);
 		app.get('/portfolio/:id',this.checkVisitor(app), this.get);
+		app.get('/portfolio/like/:id', this.likePage(app));
 		app.post('/portfolio/:id', this.save);
 		app.delete('/portfolio/:id', this.delete);
 	},
@@ -37,6 +38,74 @@ WorkController = {
 		.catch(function(err){
 			res.send(err.message)
 		})
+	},
+	likePage : function(app){
+		app.use(session({ secret : 'v151t0r',
+			saveUninitialized: true,
+			resave: true,
+			cookie : {
+		    maxAge : 86400000, // 1 day
+		}
+	}));
+		return function(req, res){
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth() + 1;
+			var yyyy = today.getFullYear();
+			var h = today.getHours();
+			var m = today.getMinutes()
+			if(dd < 10){
+				dd = "0" + dd;
+			};
+			if(mm < 10){
+				mm = "0" + mm;
+			};
+			if(h < 10){
+				h = "0" + h;
+			}
+			today = dd + '/' + mm + '/' + yyyy + " " + h + ":" + m;
+			if(req.session.preferredPage === undefined){
+				req.session.preferredPage = [];
+				req.session.preferredPage.push({
+					portfolio_id : req.params.id,
+					read_date : today
+				});
+				Portfolio.getCheck(req.params.id)
+				.then(function(model){
+					console.log(model);
+					var data = model.toJSON();
+					data.liker = data.liker + 1;
+					return Portfolio.update(data)
+				})
+				.then(function(){
+					res.redirect('/portfolio/' + req.params.id);
+				})
+			} else {
+				console.log(req.session.preferredPage);
+				var find = _.findIndex(req.session.preferredPage, function(preferredPage){
+					return preferredPage.portfolio_id == req.params.id
+				});
+				if(find === -1){
+					req.session.preferredPage.push({
+						portfolio_id : req.params.id,
+						read_date : today
+					});
+					Portfolio.getCheck(req.params.id)
+					.then(function(model){
+						console.log(model);
+						var data = model.toJSON();
+						data.liker = data.liker + 1;
+						return Portfolio.update(data)
+					})
+					.then(function(){
+						res.redirect('/portfolio/' + req.params.id);
+					})
+				} else {
+					console.log("jika req session sudah ada dan mau like page ini lagi")
+					res.redirect('/portfolio/' + req.params.id);
+				}
+			}
+		}
 	},
 	checkVisitor : function(app){
 		app.use(session({ secret : 'v151t0r',
@@ -100,14 +169,6 @@ WorkController = {
 					req.session.accessLog.splice(i, 0, obj);
 					return next()
 				} else {
-					// var visitorId;
-					// _.each(req.session.accessLog, function(n, key){
-					// 	_.forIn(req.session.accessLog[key], function(value, key){
-					// 		if(key == "visitor_id"){
-					// 			visitorId = value
-					// 		}
-					// 	})
-					// });
 					req.session.accessLog.push({
 						portfolio_id : req.params.id,
 						read_date : today
@@ -131,6 +192,14 @@ WorkController = {
 		.then(function(model){
 			var data = model.toJSON();
 			var result = PortfolioViewModel.get(data, req.xhr);
+			var find = _.findIndex(req.session.preferredPage, function(preferredPage){
+				return preferredPage.portfolio_id == req.params.id
+			});
+			if(find > -1){
+				result.preferredPage = true;
+			} else {
+				result.preferredPage = false;
+			};
 			res.render('work', result);
 		})
 		.catch(function(err){

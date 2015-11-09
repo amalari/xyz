@@ -9,13 +9,63 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <style>
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #eee;
+    }
+
+    .form-signin {
+      max-width: 330px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    .form-signin .form-signin-heading,
+    .form-signin .checkbox {
+      margin-bottom: 10px;
+    }
+    .form-signin .checkbox {
+      font-weight: normal;
+    }
+    .form-signin .form-control {
+      position: relative;
+      height: auto;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+      z-index: 2;
+    }
+    .form-signin input[type="email"] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    .footer{
+      text-align: center;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 100px;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="login-box">
+  <!-- <div class="login-box">
     <div class="login-box-body">
       <p class="login-box-msg">Sign in to start your session</p>
-      <form action="/login" method="POST">
+      <form class="form-signin" action="/login" method="POST">
         <div class="form-group has-feedback">
           <input type="text" name="email" required="true" class="form-control" placeholder="Email"/>
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -27,11 +77,28 @@
         <div class="row">
           <div class="col-xs-4">
             <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-          </div><!-- /.col -->
+          </div>
         </div>
       </form>
-    </div><!-- /.login-box-body -->
-  </div><!-- /.login-box -->
+    </div>
+  </div>-->
+  <div class="container">
+
+    <form class="form-signin" action="/login" method="POST">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+  </div>
 </body>
 
 <footer class="footer">
