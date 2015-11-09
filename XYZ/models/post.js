@@ -55,7 +55,7 @@ var Post = bookshelf.Model.extend({
 		}
 	}),
 	getCheck : Promise.method(function(postingId){
-		return new this({id : postingId}).fetch({columns : 'visitor'})
+		return new this({id : postingId}).fetch({columns : ['visitor', 'liker']})
 	}),
 	update : Promise.method(function(posting){
 		return new this({id: posting.id}).save(posting);

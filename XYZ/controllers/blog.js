@@ -14,6 +14,7 @@ BlogController = {
 		app.get('/blog', this.getList);
 		app.get('/search', this.search);
 		app.get('/blog/:id', this.checkVisitor(app), this.get);
+		app.get('/blog/like/:id', this.likePage(app));
 		app.post('/blog/:id', this.save);
 		app.delete('/blog/:id', this.delete);
 	},
@@ -83,6 +84,74 @@ BlogController = {
 			res.render('blog', data);
 		})
 	},
+	likePage : function(app){
+		app.use(session({ secret : 'v151t0r',
+			saveUninitialized: true,
+			resave: true,
+			cookie : {
+		    maxAge : 86400000, // 1 day
+		}
+	}));
+		return function(req, res){
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth() + 1;
+			var yyyy = today.getFullYear();
+			var h = today.getHours();
+			var m = today.getMinutes()
+			if(dd < 10){
+				dd = "0" + dd;
+			};
+			if(mm < 10){
+				mm = "0" + mm;
+			};
+			if(h < 10){
+				h = "0" + h;
+			}
+			today = dd + '/' + mm + '/' + yyyy + " " + h + ":" + m;
+			if(req.session.preferredPage === undefined){
+				req.session.preferredPage = [];
+				req.session.preferredPage.push({
+					post_id : req.params.id,
+					read_date : today
+				});
+				Post.getCheck(req.params.id)
+				.then(function(model){
+					console.log(model);
+					var data = model.toJSON();
+					data.liker = data.liker + 1;
+					return Post.update(data)
+				})
+				.then(function(){
+					res.redirect('/blog/' + req.params.id);
+				})
+			} else {
+				console.log(req.session.preferredPage);
+				var find = _.findIndex(req.session.preferredPage, function(preferredPage){
+					return preferredPage.post_id == req.params.id
+				});
+				if(find === -1){
+					req.session.preferredPage.push({
+						post_id : req.params.id,
+						read_date : today
+					});
+					Post.getCheck(req.params.id)
+					.then(function(model){
+						console.log(model);
+						var data = model.toJSON();
+						data.liker = data.liker + 1;
+						return Post.update(data)
+					})
+					.then(function(){
+						res.redirect('/blog/' + req.params.id);
+					})
+				} else {
+					console.log("jika req session sudah ada dan mau like page ini lagi")
+					res.redirect('/blog/' + req.params.id);
+				}
+			}
+		}
+	},
 	checkVisitor : function(app){
 		app.use(session({ secret : 'v151t0r',
 			saveUninitialized: true,
@@ -145,14 +214,6 @@ BlogController = {
 					req.session.accessLog.splice(i, 0, obj);
 					return next()
 				} else {
-					// var visitorId;
-					// _.each(req.session.accessLog, function(n, key){
-					// 	_.forIn(req.session.accessLog[key], function(value, key){
-					// 		if(key == "visitor_id"){
-					// 			visitorId = value
-					// 		}
-					// 	})
-					// });
 					req.session.accessLog.push({
 						post_id : req.params.id,
 						read_date : today
@@ -175,6 +236,14 @@ BlogController = {
 		Post.single(req.params.id, 1, req.xhr)
 		.then(function(model){
 			var data = PostViewModel.get(model.toJSON(), req.xhr);
+			var find = _.findIndex(req.session.preferredPage, function(preferredPage){
+				return preferredPage.post_id == req.params.id
+			});
+			if(find > -1){
+				data.preferredPage = true;
+			} else {
+				data.preferredPage = false;
+			};
 			console.log(data);
 			res.render('single', data);
 		})
