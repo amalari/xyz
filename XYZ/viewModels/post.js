@@ -104,6 +104,7 @@ postViewModel.prototype.update = function(data){
 };
 
 postViewModel.prototype.summary = function(content){
+	content = content.replace(/<img[^>]*>/g, '');
 	var newContent="";
 	if(content.length > 300){
 		newContent = content.substr(0, 300) + ". . . .</p>";
