@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PortfolioUpdateCtrl', ['$scope', '$state', '$stateParams', 'Portfolio', function($scope, $state, $stateParams, Portfolio){
+.controller('PortfolioUpdateCtrl', ['$scope', '$state', '$stateParams', 'Portfolio', 'Category', function($scope, $state, $stateParams, Portfolio, Category){
 	$scope.pageTitle= 'Edit Portfolio';
 	$scope.formTitle= 'Form Edit Portfolio';
+	Category.query(function(list){
+		$scope.model2 = list.data
+	});
 	$scope.model= Portfolio.get({id:$stateParams.id}, function(model){
 		var arr = model.header_image.split('/');
 		var i = arr.length-1;

@@ -7,9 +7,12 @@ angular.module('xyz.controllers')
 	$scope.model= {};
 	$scope.model3={};
 	$scope.hiddenButton = false;
+	$scope.defaultCategory = true;
+	$scope.selectedCategory = false;
 	Category.query(function(list){
 		$scope.model2 = list.data
 	});
+	$scope.selectedCategory = false;
 	$scope.clickSave = function(is_active, type){
 		$scope.model.is_active = is_active;
 		$scope.model.type = type;

@@ -40,7 +40,6 @@ PostController = {
 	},
 	list : function(req, res){
 		console.log('post list controller');
-		console.log(req.query.is_active);
 		var queryBuilder = new qb();
 		queryBuilder.setup({
 			limit : req.query.limit,
@@ -65,15 +64,18 @@ PostController = {
 	},
 	update : function(req, res){
 		postMultipart.parseAndSaveFiles(req, function(data){
-			Post.single(data.id)
+			console.log("ihasofjdsaikfsnafklasbfjkanbaskjnfakjnfakjnfaj");
+			console.log(data);
+			Post.single(data.id, 1, req.xhr)
 			.then(function(model){
 				var posting = model.toJSON();
+				console.log("=----------------------------====");
+				console.log(posting);
 				if(posting.header_image){
 					postFileManager.delete(posting.header_image);
 					data.header_image = postFileManager.getUrl(data.header_image);
 				}
 				var result = PostViewModel.update(data);
-				console.log(result);
 				return Post.update(result);
 			})
 			.then(function(){

@@ -41,6 +41,7 @@ Multipart.prototype.parseAndSaveFiles = function(req, callback) {
 		var key = 1;
 
 		busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+			console.log("saya saya saya saya saya");
 			console.log(fieldname);
 			if(arr.indexOf(fieldname) > -1){
 				fieldname = fieldname + "_" + key;
@@ -60,6 +61,8 @@ Multipart.prototype.parseAndSaveFiles = function(req, callback) {
 			}
 		});
 		busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
+			console.log("saya saya saya saya saya");
+			console.log(fieldname);
 			result[fieldname] = val
 		});
 		busboy.on('finish', function() {

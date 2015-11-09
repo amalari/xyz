@@ -24,7 +24,6 @@ postViewModel.prototype.getList = function(listData, ajaxRequest){
 			return that.map(that._viewProperties, data)
 		});
 	} else {
-		// console.log(listData);
 		result.data = listData.data.map(function(data){
 			var arr = [];
 			for(var i in data.comments){

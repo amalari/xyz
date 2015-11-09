@@ -1,20 +1,33 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PostUpdateCtrl', ['$scope', '$state', '$stateParams', 'Post', function($scope, $state, $stateParams, Post){
+.controller('PostUpdateCtrl', ['$scope', '$state', '$stateParams', 'Post', 'Category', function($scope, $state, $stateParams, Post, Category){
 	$scope.pageTitle= 'Edit Posting';
 	$scope.formTitle= 'Form Edit Posting';
+	$scope.selectedCategory = false;
 	$scope.model= Post.get({id:$stateParams.id}, function(model){
 		var arr = model.header_image.split('/');
 		var i = arr.length-1;
 		$scope.model.nama_file_display =arr[i]; 
 		delete $scope.model.header_image;
 	});
+	Category.query(function(list){
+		var category = list.data.map(function(data){
+			if(data.name == $scope.model.category.name){
+				data.selected = true;
+			} else {
+				data.selected = false;
+			};
+			return data;
+		})
+		$scope.model2 = category;
+	});
 	$scope.clickSave = function(is_active, type){
 		$scope.model.is_active = is_active;
 		$scope.model.type = type;
 	};
 	$scope.save = function(){
+		console.log($scope.model);
 		Post.update($scope.model, function(){
 			$state.go('post');
 		});
