@@ -87,7 +87,7 @@ PostController = {
 		})
 	},
 	delete : function(req, res){
-		Post.single(req.params.id)
+		Post.single(req.params.id, 1, req.xhr)
 		.then(function(model){
 			var posting = model.toJSON();
 			postFileManager.delete(posting.header_image);

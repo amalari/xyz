@@ -30,6 +30,7 @@ var Work = require('./controllers/work.js');
 // var test = require('./tests/account.js');
 // var UserModel = require('./models/user.js');
 var CategoryPublic = require('./controllers/category.js')
+var Contact = require('./controllers/contact.js');
 
 //invoke hbs with 3 params ('extention name', 'name default layout that will used', var app )
 var handlebars = new hbs('.html', 'main', app);
@@ -75,5 +76,6 @@ About.registerRoutes(app);
 Blog.registerRoutes(app);
 Work.registerRoutes(app);
 CategoryPublic.registerRoutes(app);
+Contact.registerRoutes(app);
 
 app.listen(3003);
