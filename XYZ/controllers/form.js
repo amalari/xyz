@@ -82,11 +82,11 @@ FormController = {
 	update : function(req, res){
 		console.log(req.query.code);
 		Client.get(req.query.code)
-		// .then(function(model){
-		// 	var client = model.toJSON();
-		// 	client.is_active = 1;
-		// 	return Client.update(client);
-		// })
+		.then(function(model){
+			var client = model.toJSON();
+			client.is_active = 1;
+			return Client.update(client);
+		})
 		.then(function(model){
 			var client = model.toJSON();
 			console.log(client);
@@ -122,11 +122,6 @@ FormController = {
 				} else {
 					res.send(404, {message : "form not found"})
 				}
-				// 	return next()
-				// } else {
-				// 	res.send(404, {message : "form not found"})
-				// }
-				//temporaray
 			})
 	}
 }

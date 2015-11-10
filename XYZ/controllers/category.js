@@ -1,11 +1,8 @@
 var Category = require('./../models/category.js');
 var Post = require('./../models/post.js');
 var Portfolio = require('./../models/portfolio.js');
-// var Comment = require('./../models/comment.js');
 var PostViewModel = require('./../viewModels/post.js');
 var PortfolioViewModel = require('./../viewModels/portfolio.js');
-var qb = require('./../core/queryBuilder/index.js');
-// var hbs = require('./../views/script/index.js');
 var SearchQb = require('./../core/queryBuilder/search-query-builder.js');
 
 

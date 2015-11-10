@@ -1,66 +1,17 @@
 var Post = require('./../models/post.js');
-var Portfolio = require('./../models/portfolio.js');
 var Comment = require('./../models/comment.js');
 var PostViewModel = require('./../viewModels/post.js');
-var PortfolioViewModel = require('./../viewModels/portfolio.js');
 var qb = require('./../core/queryBuilder/index.js');
 var session = require('express-session');
 var _ = require('lodash');
-// var hbs = require('./../views/script/index.js');
-var SearchQb = require('./../core/queryBuilder/search-query-builder.js');
 
 BlogController = {
 	registerRoutes : function(app){
 		app.get('/blog', this.getList);
-		app.get('/search', this.search);
 		app.get('/blog/:id', this.checkVisitor(app), this.get);
 		app.get('/blog/like/:id', this.likePage(app));
 		app.post('/blog/:id', this.save);
 		app.delete('/blog/:id', this.delete);
-	},
-	search : function(req, res){
-		var result = {};
-		var currentPage = 1;
-		if(req.query.page){
-			currentPage = req.query.page
-		};
-		var queryBuilder = new SearchQb();
-		queryBuilder.setup({
-			limit : 10,
-			page : req.query.page,
-			whereCondition : {is_active : 1, type : 1}
-		});
-		queryBuilder.search(['title', 'LIKE', '%' + req.query.q + '%']);
-		queryBuilder.search(['content', 'LIKE', '%' + req.query.q + '%']);
-		Post.list(queryBuilder)
-		.then(function(data){
-			console.log(data);
-			result.blog = PostViewModel.getList(data, req.xhr);
-			queryBuilder.setup({
-				limit : 10,
-				page : req.query.page,
-				whereCondition : {is_active : 1}
-			});
-			queryBuilder.search(['title', 'LIKE', '%' + req.query.q + '%']);
-			queryBuilder.search(['content', 'LIKE', '%' + req.query.q + '%']);
-			return Portfolio.list(queryBuilder)
-		})
-		.then(function(data2){
-			result.portfolio = {};
-			result.portfolio.data = PortfolioViewModel.list(data2.data);
-			result.portfolio.total = data2.total;
-			result.pagination = 
-			{ 
-				page:currentPage, limit:10, totalRows: result.blog.total
-			};
-			result.pagination1 = 
-			{ 
-				page:currentPage, limit:10, totalRows: result.portfolio.total
-			};
-			result.q = req.query.q;
-			console.log(result);
-			res.render('archive', result);
-		})
 	},
 	getList : function(req, res){
 		var currentPage = 1;

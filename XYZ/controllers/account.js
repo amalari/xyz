@@ -11,7 +11,13 @@ AccountController = {
 	},
 	loginPage : function(req, res){
 		console.log("render page login");
-		res.render('login', {layout: false});
+		var message = req.flash('message');
+		if(Array.isArray(message)){
+			message = message[0];
+		};
+		console.log(message);
+		res.render('login', {layout: false,
+			message : message});
 	},
 	login : passport.authenticate('local', {
 		successRedirect: '/dashboard',
@@ -19,7 +25,7 @@ AccountController = {
 		failureFlash: true
 	}),
 	dashboard : function(req, res){
-		res.render('index', {layout: false});
+		res.render('index', {layout: false,});
 	},
 	signout : function(req, res){
 		console.log("hapus ");

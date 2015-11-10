@@ -2,13 +2,12 @@
 
 angular.module('xyz.controllers')
 .controller('PostCreateCtrl', ['$scope', 'Post', 'Category', 'TinyVision', '$state', 'Image', function($scope, Post, Category, TinyVision, $state, Image){
-	$scope.pageTitle= 'Create Post';
-	$scope.formTitle= 'Form Create Post';
+	$scope.pageTitle= 'Add New';
 	$scope.model= {};
-	$scope.model3={};
+	$scope.singleCategory={};
 	$scope.hiddenButton = false;
 	Category.query(function(list){
-		$scope.model2 = list.data
+		$scope.categories = list.data
 	});
 	$scope.clickSave = function(is_active, type){
 		$scope.model.is_active = is_active;
@@ -23,25 +22,25 @@ angular.module('xyz.controllers')
 	$scope.updateCategory = function(categoryId){
 		$scope.hiddenButton = true;
 		Category.get({id: categoryId}, function(data){
-			$scope.model3 = data
+			$scope.singleCategory = data
 		})
 	};
 	$scope.cancelUpdate = function(){
-		delete $scope.model3;
+		delete $scope.singleCategory;
 		$scope.hiddenButton = false
-		console.log($scope.model3);
+		console.log($scope.singleCategory);
 	};
 	$scope.saveCategory = function(categoryId, is_active){
-		$scope.model3.categoryId = categoryId;
-		$scope.model3.is_active = is_active;
-		console.log($scope.model3);
-		if($scope.model3.categoryId === undefined){
+		$scope.singleCategory.categoryId = categoryId;
+		$scope.singleCategory.is_active = is_active;
+		console.log($scope.singleCategory);
+		if($scope.singleCategory.categoryId === undefined){
 			console.log("jika category id undifined");
-			Category.save($scope.model3, function(){
+			Category.save($scope.singleCategory, function(){
 				$state.go('post-create', {}, {reload: true})
 			})
 		} else {
-			Category.update($scope.model3, function(){
+			Category.update($scope.singleCategory, function(){
 				$state.go('post-create', {}, {reload: true})
 			})
 		};

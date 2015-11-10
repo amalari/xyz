@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 //using library flash
 var flash = require('connect-flash');
 //using library index.js from folder views as var hbs
-var hbs = require('./views/script/index.js');
+var hbs = require('./core/handlebar/index.js');
 var email = require('./core/email');
 //require index js in folder core and authentication
 var authentication = require('./core/authentication/index.js');

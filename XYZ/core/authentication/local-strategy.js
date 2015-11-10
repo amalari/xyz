@@ -22,9 +22,8 @@ var exports2 = {
 				if(model === null){
 					console.log("gagal login");
 					return done(null, false, req.flash('message',{
-						type: 'Notice',
-						intro: 'Validation error',
-						message: 'Incorect username'}));
+						type: 'Notification',
+						message: 'Incorect Username'}));
 				} else{
 					// console.log('model ke json');
 					user = model.toJSON()
@@ -32,9 +31,8 @@ var exports2 = {
 				if(!isValidPassword(password, user.password)){
 					console.log('password gagal');
 					return done(null, false, req.flash('message',{
-						type: 'Notice',
-						intro: 'Validation error',
-						message: 'Incorect password'}));
+						type: 'Notification',
+						message: 'Incorect Password'}));
 				}
 				// console.log(user);
 				return done(null, user);
