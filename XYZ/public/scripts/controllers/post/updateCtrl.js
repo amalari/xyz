@@ -13,15 +13,7 @@ angular.module('xyz.controllers')
 		console.log($scope.model);
 	});
 	Category.query(function(list){
-		var category = list.data.map(function(data){
-			if(data.name == $scope.model.category.name){
-				data.selected = true;
-			} else {
-				data.selected = false;
-			};
-			return data;
-		})
-		$scope.model2 = category;
+		$scope.categories = list.data;
 	});
 	$scope.clickSave = function(is_active, type){
 		$scope.model.is_active = is_active;

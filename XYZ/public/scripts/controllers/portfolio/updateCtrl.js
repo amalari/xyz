@@ -5,7 +5,7 @@ angular.module('xyz.controllers')
 	$scope.pageTitle= 'Edit Portfolio';
 	$scope.formTitle= 'Form Edit Portfolio';
 	Category.query(function(list){
-		$scope.model2 = list.data
+		$scope.categories = list.data
 	});
 	$scope.model= Portfolio.get({id:$stateParams.id}, function(model){
 		var arr = model.header_image.split('/');
