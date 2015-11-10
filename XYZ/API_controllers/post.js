@@ -26,7 +26,9 @@ PostController = {
 	save : function(req, res){
 		console.log("save");
 		postMultipart.parseAndSaveFiles(req, function(data){
-			data.header_image = postFileManager.getUrl(data.header_image);
+			if(data.header_image){
+				data.header_image = postFileManager.getUrl(data.header_image);
+			}
 			var result = PostViewModel.save(data, req.user.id);
 			Post.save(result)
 			.then(function(){
@@ -64,17 +66,25 @@ PostController = {
 	},
 	update : function(req, res){
 		postMultipart.parseAndSaveFiles(req, function(data){
-			console.log("ihasofjdsaikfsnafklasbfjkanbaskjnfakjnfakjnfaj");
+			console.log('data ---------------------------');
 			console.log(data);
 			Post.single(data.id, 1, req.xhr)
 			.then(function(model){
 				var posting = model.toJSON();
 				console.log("=----------------------------====");
 				console.log(posting);
-				if(posting.header_image){
+				console.log(posting.header_image);
+				console.log(data.header_image);
+				if(posting.header_image && data.header_image){
 					postFileManager.delete(posting.header_image);
 					data.header_image = postFileManager.getUrl(data.header_image);
 				}
+				else if(posting.header_image && !data.header_image){
+					data.header_image = posting.header_image;
+				}else{
+					data.header_image = '';
+				}
+
 				var result = PostViewModel.update(data);
 				return Post.update(result);
 			})
