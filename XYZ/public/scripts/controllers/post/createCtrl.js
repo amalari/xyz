@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PostCreateCtrl', ['$scope', 'Post', 'Category', 'TinyVision', '$state', function($scope, Post, Category, TinyVision, $state){
-	$scope.pageTitle= 'Create Post';
-	$scope.formTitle= 'Form Create Post';
+.controller('PostCreateCtrl', ['$scope', 'Post', 'Category', 'TinyVision', '$state', 'Image', function($scope, Post, Category, TinyVision, $state, Image){
+	$scope.pageTitle= 'Add New';
 	$scope.model= {};
 	$scope.singleCategory={};
 	$scope.hiddenButton = false;
@@ -71,11 +70,22 @@ angular.module('xyz.controllers')
 		tinyvision: {
 			source: 'http://localhost:3003/list/image',
 			upload: function () {
-				var message = 'While TinyVision purposely doesn\'t provide upload functionality to keep things simple, it does ' +
-				'provide the ability to hook in your own when the "Upload" button is pressed. Or you can disable ' +
-				'it completely.';
-
-				tinymce.activeEditor.windowManager.alert(message);
+				var fileUploader = $('#tinyvision-file-input');
+				if(!fileUploader.length){
+					fileUploader = $('<input />');
+					fileUploader.attr({
+						id : 'tinyvision-file-input',
+						type : 'file'
+					});
+					fileUploader.change(function(){
+						Image.save({files : $(this)[0].files}, function(){
+							var iframe = $('iframe'); // or some other selector to get the iframe
+							$('#refresh', iframe.contents()).click();
+						});
+					})
+					fileUploader.appendTo('body');					
+				}
+				fileUploader.click();
 			}
 		}
 	};
