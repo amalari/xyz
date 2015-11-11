@@ -54,6 +54,7 @@ PortfolioController = {
 	},
 	save : function(req, res){
 		portfolioMultipart.parseAndSaveFiles(req, function(data){
+			console.log("nfkjanfkjldsanfkjasnfskladf");
 			console.log(data);
 			var newData = {};
 			var arr = [];

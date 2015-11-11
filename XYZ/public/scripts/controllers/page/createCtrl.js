@@ -5,9 +5,9 @@ angular.module('xyz.controllers')
 	$scope.pageTitle= 'Create Page';
 	$scope.formTitle= 'Form Create Page';
 	$scope.model= {};
-	$scope.clickSave = function(is_active, type){
+	$scope.types = [{id : 2, name : "About"}, {id: 3, name: "Contact"}];
+	$scope.clickSave = function(is_active){
 		$scope.model.is_active = is_active;
-		$scope.model.type = type;
 	};
 	$scope.save= function(){
 		console.log($scope.model);

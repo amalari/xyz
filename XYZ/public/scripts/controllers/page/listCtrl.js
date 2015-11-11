@@ -20,7 +20,6 @@ angular.module('xyz.controllers')
 
 	$scope.pageChanged = function() {
 		refresh()
-
 	};
 
 	$scope.activeTab = function(is_active){

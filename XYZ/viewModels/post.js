@@ -5,9 +5,9 @@ var gravatar= require('gravatar');
 function postViewModel(){
 	viewModels.call(this, viewModels);
 	this._allProperties = ["title", "type", "category_id", "content", "header_image", "is_active"];
-	this._viewProperties = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "totalComment", "visitor", "liker"];
+	this._viewProperties = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "totalComment", "visitor", "liker", "typeName"];
 	this._viewPropertiesVisitor = ["id", "header_image", "category", "totalComment", "author", "content", "rootComments", "title", "visitor", "liker"];
-	this._viewPropertiesLite = ["id", "title", "category", "content", "header_image", "category_id"];
+	this._viewPropertiesLite = ["id", "title", "category", "content", "header_image", "category_id", "type"];
 };
 
 util.inherits(postViewModel, viewModels);
@@ -18,6 +18,13 @@ postViewModel.prototype.getList = function(listData, ajaxRequest){
 	var result = {};
 	if(ajaxRequest){
 		result.data = listData.data.map(function(data){
+			if(data.type == 2){
+				data.typeName = "about";
+			} else {
+				if(data.type == 3){
+					data.typeName = "contact"
+				}
+			};
 			delete data.header_image;
 			delete content;
 			data.author = data.user.fullname;
@@ -90,7 +97,9 @@ postViewModel.prototype.get = function(data, ajaxRequest){
 };
 
 postViewModel.prototype.update = function(data){
-	if(data.category_id || data.header_image){
+	if(data.category_id != 'null' || data.header_image != 'null'){
+		console.log("masuk sini ya masuk sini ya?");
+		console.log(data.category_id);
 		data.category_id = parseInt(data.category_id);
 	} else {
 		data.category_id = null;

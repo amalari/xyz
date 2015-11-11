@@ -23,10 +23,14 @@
               <label for="exampleInputContent1">Content</label>
               <textarea ui-tinymce="tinymceOptions" class= "form-control" ng-model="model.content"></textarea> 
             </div>
+            <div class="form-group">
+              <label for="exampleInputType1">Type</label>
+              <select class="form-control" ng-model="model.type" ng-options="type.id as type.name for type in types"></select>
+            </div>
           </div><!-- /.box-body -->
           <div class="box-footer">
-            <button type="submit" ng-click = "clickSave(1,2)" class="btn btn-primary">Save Page</button>
-            <button type="submit" ng-click = "clickSave(0,2)" class="btn btn-primary">Save as Draft</button>
+            <button type="submit" ng-click = "clickSave(1)" class="btn btn-primary">Save Page</button>
+            <button type="submit" ng-click = "clickSave(0)" class="btn btn-primary">Save as Draft</button>
           </div>
         </form>
       </div>

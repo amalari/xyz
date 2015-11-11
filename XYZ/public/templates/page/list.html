@@ -26,6 +26,7 @@
 								<th>Title</th>							
 								<th>Created at</th>
 								<th>Update at</th>
+								<th>Type</th>
 								<th width="20px">Edit</th>
 								<th width="20px">Delete</th>
 							</tr>
@@ -36,6 +37,7 @@
 								<td>{{page.title}}</td>
 								<td>{{page.created_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
 								<td>{{page.updated_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
+								<td>{{page.typeName}}</td>
 								<td>
 									<a ui-sref="page-update({id: page.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>									
 								</td>

@@ -1,5 +1,6 @@
 var Post = require('./../models/post.js');
 var qb = require('./../core/queryBuilder/index.js');
+var SearchQb = require('./../core/queryBuilder/search-query-builder.js');
 var PostViewModel = require('./../viewModels/post.js');
 var Multipart = require('./../core/multipart/index.js');
 var FileManager = require('./../core/file-manager/index.js');
@@ -26,7 +27,9 @@ PostController = {
 	save : function(req, res){
 		console.log("save");
 		postMultipart.parseAndSaveFiles(req, function(data){
-			data.header_image = postFileManager.getUrl(data.header_image);
+			if(data.header_image){
+				data.header_image = postFileManager.getUrl(data.header_image);
+			};
 			var result = PostViewModel.save(data, req.user.id);
 			Post.save(result)
 			.then(function(){
@@ -40,12 +43,17 @@ PostController = {
 	},
 	list : function(req, res){
 		console.log('post list controller');
-		var queryBuilder = new qb();
+		var queryBuilder = new SearchQb();
 		queryBuilder.setup({
 			limit : req.query.limit,
 			page : req.query.page,
-			whereCondition : {is_active : req.query.is_active, type : req.query.type}
+			whereCondition : {is_active : req.query.is_active, type: req.query.type}
 		});
+		if(req.query.type == 2){
+			console.log("lewat sini dulu harusnya");
+			queryBuilder.search([{is_active: req.query.is_active, type: '2'}]);
+			queryBuilder.search([{is_active: req.query.is_active, type: '3'}]);
+		};
 		Post.list(queryBuilder)
 		.then(function(list){
 			res.send(PostViewModel.getList(list, req.xhr));
@@ -63,19 +71,19 @@ PostController = {
 		})
 	},
 	update : function(req, res){
+		if(req.body.type != 2 || req.body.type != 3){
+			console.log("ini bukan untuk type about dan contact");
+		};
 		postMultipart.parseAndSaveFiles(req, function(data){
-			console.log("ihasofjdsaikfsnafklasbfjkanbaskjnfakjnfakjnfaj");
-			console.log(data);
-			Post.single(data.id, 1, req.xhr)
+			Post.single(data.id, req.body.type, req.xhr)
 			.then(function(model){
 				var posting = model.toJSON();
-				console.log("=----------------------------====");
-				console.log(posting);
 				if(posting.header_image){
 					postFileManager.delete(posting.header_image);
 					data.header_image = postFileManager.getUrl(data.header_image);
 				}
 				var result = PostViewModel.update(data);
+				console.log(result);
 				return Post.update(result);
 			})
 			.then(function(){
@@ -87,10 +95,14 @@ PostController = {
 		})
 	},
 	delete : function(req, res){
-		Post.single(req.params.id)
+		Post.single(req.params.id, 1, req.xhr)
 		.then(function(model){
 			var posting = model.toJSON();
-			postFileManager.delete(posting.header_image);
+			console.log(posting);
+			if(posting.header_image != null){
+				console.log("destroynya lewat sini ga?")
+				postFileManager.delete(posting.header_image);
+			};
 			return Post.delete(req.params.id) 
 		})
 		.then(function(){
