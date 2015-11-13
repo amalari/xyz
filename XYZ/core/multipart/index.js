@@ -4,11 +4,13 @@ path = require('path'),
 fs = require('fs'),
 sanitize = require('sanitize-filename'),
 util = require('util');
+var gm = require('gm');
 
 function Multipart(options){
 	this._uploadDir = options.uploadDir;
 	this._allowedMimeTypes  = options.allowedMimeTypes || 'all';
 	this._maxFileSize = options.maxFileSize || null;
+	// this._createThumbnail = false || options.thumbnail;
 }
 
 Multipart.prototype._createDir = function(dir, callback){
@@ -41,9 +43,6 @@ Multipart.prototype.parseAndSaveFiles = function(req, callback) {
 		var key = 1;
 
 		busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-			console.log(fieldname);
-			console.log('------------------------------');
-			console.log(filename);
 			if(arr.indexOf(fieldname) > -1){
 				fieldname = fieldname + "_" + key;
 				arr.push(fieldname);
@@ -52,6 +51,18 @@ Multipart.prototype.parseAndSaveFiles = function(req, callback) {
 				arr.push(fieldname);
 				fieldname = fieldname;
 			}
+			// if(_this._createThumbnail){
+			// 	gm(file).thumb(100, 100, _this._uploadDir, 70, function(err, stdout, stderr, command){
+			// 		if(err){
+			// 			console.log("ererererererererer");
+			// 			console.log(err);
+			// 		};
+			// 		console.log("thumbnail skjfdaskjfklsfjsadkjfsadklfjasklfjasklfs");
+			// 		console.log(stdout);
+			// 		console.log(stderr);
+			// 		console.log(command);
+			// 	})
+			// }
 			if (_this._validateFile(mimetype) && filename != null && filename != ""){
 				var newFilename = _this._saveFile(file, filename);
 				file.on('end', function(){
@@ -62,8 +73,6 @@ Multipart.prototype.parseAndSaveFiles = function(req, callback) {
 			}
 		});
 		busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
-			console.log("saya saya saya saya saya");
-			console.log(fieldname);
 			result[fieldname] = val
 		});
 		busboy.on('finish', function() {

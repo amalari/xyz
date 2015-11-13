@@ -3,7 +3,7 @@ var UserViewModel = require('./../viewModels/user.js');
 var qb = require('./../core/queryBuilder/index.js');
 var Multipart = require('./../core/multipart/index.js');
 var FileManager = require('./../core/file-manager/index.js');
-// var testAccount = require('./../tests/account.js');
+var authentication = require('./../core/authentication/index.js');
 
 var userMultipart = new Multipart({
 	uploadDir : __dirname + '/../public/uploads/user',
@@ -17,7 +17,6 @@ var userFileManager = new FileManager({
 
 UserController = {
 	registerRoutes : function(app){
-		console.log("register route user");
 		app.post('/api/user', this.save);
 		app.get('/api/user', this.list);
 		app.get('/api/user/:id', this.single);
@@ -68,16 +67,24 @@ UserController = {
 	},
 	update : function(req, res){
 		userMultipart.parseAndSaveFiles(req, function(data){
-			console.log("______________________________");
 			User.single(data.id).
 			then(function(model){
 				var user = model.toJSON();
-				if(data.image){
-					userFileManager.delete(user.image)
-					data.image = userFileManager.getUrl(data.image);
+				if(data.oldPass && data.newPass){
+					if(!authentication.isValidPassword(data.oldPass, user.password)){
+						res.send({success :false, message: "Password cannot replace because old password is not match with your current password"})
+					} else {
+						user.password = authentication.authenticate(data.newPass)
+						return User.update(user);
+					}
+				} else {
+					if(data.image){
+						userFileManager.delete(user.image)
+						data.image = userFileManager.getUrl(data.image);
+					}
+					delete req.cookies;
+					return User.update(data);
 				}
-				console.log(data);
-				return User.update(data);
 			})
 			.then(function(){
 				res.send({success : true})
@@ -86,17 +93,9 @@ UserController = {
 				res.send({success : false, message : err.message})
 			})
 		})
-		// User.update(req.body).then(function(){
-		// 	res.send({success : true})
-		// }).
-		// catch(function(err){
-		// 	res.send({success : false, message : err.message})
-		// })
 	},
 	delete : function(req, res){
-		console.log('lewat delete');
 		var data = UserViewModel.delete(req.params);
-		console.log(data);
 		User.delete(data).then(function(){
 			res.send({success : true})
 		})

@@ -3,14 +3,12 @@ var authentication = require('./../core/authentication/index.js');
 
 AccountController = {
 	registerRoutes : function(app){
-		console.log("masuk ke account routing");
 		app.get('/login', this.loginPage);
 		app.post('/login', this.login);
 		app.get('/dashboard',authentication.required, this.dashboard);
 		app.get('/signout', this.signout);
 	},
 	loginPage : function(req, res){
-		console.log("render page login");
 		var message = req.flash('message');
 		if(Array.isArray(message)){
 			message = message[0];
@@ -28,8 +26,6 @@ AccountController = {
 		res.render('index', {layout: false,});
 	},
 	signout : function(req, res){
-		console.log("hapus ");
-		console.log(req.user);
 		req.logout();
 		res.redirect('/login');
 	}

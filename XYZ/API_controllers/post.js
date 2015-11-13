@@ -29,11 +29,11 @@ PostController = {
 		postMultipart.parseAndSaveFiles(req, function(data){
 			if(data.header_image){
 				data.header_image = postFileManager.getUrl(data.header_image);
-<<<<<<< HEAD
+// <<<<<<< HEAD
 			};
-=======
-			}
->>>>>>> e2cfb7de9c40a04fe1319b5b29ca11d27ce94cb2
+// =======
+			// }
+// >>>>>>> e2cfb7de9c40a04fe1319b5b29ca11d27ce94cb2
 			var result = PostViewModel.save(data, req.user.id);
 			Post.save(result)
 			.then(function(){
@@ -79,15 +79,15 @@ PostController = {
 			console.log("ini bukan untuk type about dan contact");
 		};
 		postMultipart.parseAndSaveFiles(req, function(data){
-<<<<<<< HEAD
+// <<<<<<< HEAD
 			Post.single(data.id, req.body.type, req.xhr)
-			.then(function(model){
-				var posting = model.toJSON();
-				if(posting.header_image){
-=======
-			console.log('data ---------------------------');
-			console.log(data);
-			Post.single(data.id, 1, req.xhr)
+			// .then(function(model){
+// 				var posting = model.toJSON();
+// 				if(posting.header_image){
+// // =======
+// 			console.log('data ---------------------------');
+// 			console.log(data);
+// 			Post.single(data.id, 1, req.xhr)
 			.then(function(model){
 				var posting = model.toJSON();
 				console.log("=----------------------------====");
@@ -95,7 +95,7 @@ PostController = {
 				console.log(posting.header_image);
 				console.log(data.header_image);
 				if(posting.header_image && data.header_image){
->>>>>>> e2cfb7de9c40a04fe1319b5b29ca11d27ce94cb2
+// >>>>>>> e2cfb7de9c40a04fe1319b5b29ca11d27ce94cb2
 					postFileManager.delete(posting.header_image);
 					data.header_image = postFileManager.getUrl(data.header_image);
 				}

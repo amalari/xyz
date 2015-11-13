@@ -20,7 +20,6 @@ var exports2 = {
 			.then(function(model){
 				var user;
 				if(model === null){
-					console.log("gagal login");
 					return done(null, false, req.flash('message',{
 						type: 'Notification',
 						message: 'Incorect Username'}));
@@ -29,7 +28,6 @@ var exports2 = {
 					user = model.toJSON()
 				}
 				if(!isValidPassword(password, user.password)){
-					console.log('password gagal');
 					return done(null, false, req.flash('message',{
 						type: 'Notification',
 						message: 'Incorect Password'}));

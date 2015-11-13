@@ -5,7 +5,6 @@ var qb = require('./../core/queryBuilder/index.js');
 
 CategoryController = {
 	registerRoutes : function(app){
-		console.log("category route");
 		app.get('/api/category', this.list);
 		app.get('/api/category/:id', this.get);
 		app.post('/api/category', this.save);

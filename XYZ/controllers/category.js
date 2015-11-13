@@ -8,7 +8,6 @@ var SearchQb = require('./../core/queryBuilder/search-query-builder.js');
 
 CategoryVisitorController = {
 	registerRoutes : function(app){
-		console.log("category route");
 		app.get('/category/search', this.search);
 	},
 	search : function(req, res){

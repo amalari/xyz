@@ -1,7 +1,43 @@
 <section class="content-header">
-  <h1>
+  <h1 style=" left: 0; top: 0">
     {{pageTitle}}
   </h1>
+  <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-sm"><span class="fa fa-edit"></span>Edit Password</button>
+  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <form role="form" name="registrationForm" ng-submit="updatePassword()">
+                 <div class="box-body">
+                   <h3 class="box-title">Change Password</h3>
+                   <br />
+                   <div class="form-group">
+                    <label for="currentPass">Old Password</label>
+                    <input type="password" class="form-control" ng-model="password.oldPass" placeholder="Enter Old" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="newPass">New Password</label>
+                    <input type="password" pattern=".{6,}" class="form-control" ng-model="password.newPass" placeholder="Enter New Password" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="newPass">Confirm Password</label>
+                    <input type="password" class="form-control" name="confirmPassword" placeholder="Retype New Password"  required>
+                  </div>
+                </div>
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 
 <section class="content">
@@ -23,17 +59,17 @@
               <input type="email" class="form-control" ng-model="model.email" placeholder="Enter Email" required>
             </div>
             <div class="form-group">
-            <label>Profil</label>
+              <label>Profil</label>
               <input type="file" class="form-control" files-model="model.image" ng-model="model.image">
-              <p class="help-block">{{model.nama_file_display}}
-            </div>
-          </div><!-- /.box-body -->
+              <p ng-hide="hiddenNameImage" class="help-block">{{model.nama_file_display}}
+              </div>
+            </div><!-- /.box-body -->
 
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
