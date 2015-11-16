@@ -33,10 +33,6 @@
                 <select class="form-control" ng-model="model.category_id" ng-options="category.id as category.name for category in categories">
                   <option value="">Select Category</option>
                 </select>
-             <!--    <select class="form-control" ng-model="model.category_id" required>
-                  <option selected disabled hidden value=''></option>
-                  <option ng-repeat= "category in categories" class="form-control" value= "{{category.id}}" >{{category.name}}</option>
-                </select> -->
               </div>
             </div><!-- /.box-body -->
             <div class="box-footer">
@@ -60,12 +56,6 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body" style="display: block;">
-          <!-- <ul class="products-list product-list-in-box">
-            <li ng-repeat= "category in model" class="item">
-            <a href="javascript::;" class="category-title" style=" font-size : initial">{{category.name}}</a>
-          </li> -->
-          <!-- /.item -->
-          <!--  </ul> -->
           <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
             <thead>
               <tr role="row">

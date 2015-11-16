@@ -7,8 +7,8 @@ var gm = require('gm');
 TinyvisonController = {
 	registerRoutes : function(app){
 		console.log('masuk tinyvison');
-		app.get('/list/image', this.list);
-		app.post('/list/image', this.post);
+		app.get('/image', this.list);
+		app.post('/image', this.post);
 	},
 	list : function(req, res){
 		var result = {};

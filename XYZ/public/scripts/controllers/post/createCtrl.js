@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PostCreateCtrl', ['$scope', 'Post', 'Category', 'TinyVision', '$state', 'Image', function($scope, Post, Category, TinyVision, $state, Image){
+.controller('PostCreateCtrl', ['$scope', 'Post', 'Category', '$state', 'Image', 'ENV', function($scope, Post, Category, $state, Image, ENV){
 	$scope.pageTitle= 'Add New';
 	$scope.model= {};
 	$scope.singleCategory={};
@@ -14,7 +14,6 @@ angular.module('xyz.controllers')
 		$scope.model.type = type;
 	};
 	$scope.save= function(){
-		console.log($scope.model);
 		Post.save($scope.model, function(){
 			$state.go('post');	
 		});
@@ -28,14 +27,11 @@ angular.module('xyz.controllers')
 	$scope.cancelUpdate = function(){
 		delete $scope.singleCategory;
 		$scope.hiddenButton = false
-		console.log($scope.singleCategory);
 	};
 	$scope.saveCategory = function(categoryId, is_active){
 		$scope.singleCategory.categoryId = categoryId;
 		$scope.singleCategory.is_active = is_active;
-		console.log($scope.singleCategory);
 		if($scope.singleCategory.categoryId === undefined){
-			console.log("jika category id undifined");
 			Category.save($scope.singleCategory, function(){
 				$state.go('post-create', {}, {reload: true})
 			})
@@ -62,13 +58,13 @@ angular.module('xyz.controllers')
 		skin: 'lightgray',
 		theme : 'modern',
 		external_plugins: {
-			'tinyvision': 'http://localhost:3003/scripts/dependencies/tinyvision/plugin.min.js'
+			'tinyvision':ENV.apiEndpoint + '/scripts/dependencies/tinyvision/plugin.min.js'
 		},
 		height: '300',
 		menubar: false,
 		statusbar: false,
 		tinyvision: {
-			source: 'http://localhost:3003/list/image',
+			source: ENV.apiEndpoint + '/image',
 			upload: function () {
 				var fileUploader = $('#tinyvision-file-input');
 				if(!fileUploader.length){

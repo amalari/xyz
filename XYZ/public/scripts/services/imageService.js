@@ -27,7 +27,7 @@ angular.module('xyz.services')
 		});
 		return fd;
 	};
-	return $resource(ENV.apiEndpoint + '/list/image/:id', {id:'@id'}, {
+	return $resource(ENV.apiEndpoint + '/image/:id', {id:'@id'}, {
 		update:{
 			method:"PUT",
 			transformRequest : formDataObject,

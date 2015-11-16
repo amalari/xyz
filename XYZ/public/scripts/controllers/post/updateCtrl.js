@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PostUpdateCtrl', ['$scope', '$state', '$stateParams', 'Post', 'Category', 'Image', function($scope, $state, $stateParams, Post, Category, Image){
+.controller('PostUpdateCtrl', ['$scope', '$state', '$stateParams', 'Post', 'Category', 'Image', 'ENV', function($scope, $state, $stateParams, Post, Category, Image, ENV){
 	$scope.pageTitle= 'Edit Posting';
 	$scope.formTitle= 'Form Edit Posting';
 	$scope.selectedCategory = false;
@@ -10,7 +10,6 @@ angular.module('xyz.controllers')
 		var i = arr.length-1;
 		$scope.model.nama_file_display =arr[i]; 
 		delete $scope.model.header_image;
-		console.log($scope.model);
 	});
 	Category.query(function(list){
 		$scope.categories = list.data;
@@ -20,7 +19,6 @@ angular.module('xyz.controllers')
 		$scope.model.type = type;
 	};
 	$scope.save = function(){
-		console.log($scope.model);
 		Post.update($scope.model, function(){
 			$state.go('post');
 		});

@@ -537,5 +537,6 @@ button.req-form-button:hover{
 	top:40px;
 	width: 169px;
 	min-height: 154px;
+	max-height: 350px;
 	background-color: #bdbdbd;
 }

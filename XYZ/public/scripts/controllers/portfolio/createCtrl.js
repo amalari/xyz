@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xyz.controllers')
-.controller('PortfolioCreateCtrl', ['$scope', 'Portfolio', 'Category', '$state', 'ENV', function($scope, Portfolio, Category, $state, ENV){
+.controller('PortfolioCreateCtrl', ['$scope', 'Portfolio', 'Category', '$state', 'Image', 'ENV', function($scope, Portfolio, Category, $state, Image, ENV){
 	$scope.pageTitle= 'Create Portfolio';
 	$scope.formTitle= 'Form Create Portfolio';
 	$scope.model= {};
@@ -14,7 +14,6 @@ angular.module('xyz.controllers')
 		$scope.model.is_active = is_active;
 	};
 	$scope.save= function(){
-		console.log($scope.model);
 		Portfolio.save($scope.model, function(){
 			$state.go('portfolio');	
 		});
@@ -28,14 +27,11 @@ angular.module('xyz.controllers')
 	$scope.cancelUpdate = function(){
 		delete $scope.singleCategory;
 		$scope.hiddenButton = false
-		console.log($scope.singleCategory);
 	};
 	$scope.saveCategory = function(categoryId, is_active){
 		$scope.singleCategory.categoryId = categoryId;
 		$scope.singleCategory.is_active = is_active;
-		console.log($scope.singleCategory);
 		if($scope.singleCategory.categoryId === undefined){
-			console.log("jika category id undifined");
 			Category.save($scope.singleCategory, function(){
 				$state.go('portfolio-create', {}, {reload: true})
 			})
@@ -54,7 +50,6 @@ angular.module('xyz.controllers')
 			})
 		})
 	};
-
 	$scope.tinymceOptions = {
 		onChange: function(e) {
 		},
@@ -63,19 +58,30 @@ angular.module('xyz.controllers')
 		skin: 'lightgray',
 		theme : 'modern',
 		external_plugins: {
-			'tinyvision': 'http://localhost:3003/scripts/dependencies/tinyvision/plugin.min.js'
+			'tinyvision':ENV.apiEndpoint + '/scripts/dependencies/tinyvision/plugin.min.js'
 		},
 		height: '300',
 		menubar: false,
 		statusbar: false,
 		tinyvision: {
-			source: 'http://localhost:3003/list/image',
+			source: ENV.apiEndpoint + '/image',
 			upload: function () {
-				var message = 'While TinyVision purposely doesn\'t provide upload functionality to keep things simple, it does ' +
-				'provide the ability to hook in your own when the "Upload" button is pressed. Or you can disable ' +
-				'it completely.';
-
-				tinymce.activeEditor.windowManager.alert(message);
+				var fileUploader = $('#tinyvision-file-input');
+				if(!fileUploader.length){
+					fileUploader = $('<input />');
+					fileUploader.attr({
+						id : 'tinyvision-file-input',
+						type : 'file'
+					});
+					fileUploader.change(function(){
+						Image.save({files : $(this)[0].files}, function(){
+							var iframe = $('iframe'); // or some other selector to get the iframe
+							$('#refresh', iframe.contents()).click();
+						});
+					})
+					fileUploader.appendTo('body');					
+				}
+				fileUploader.click();
 			}
 		}
 	};

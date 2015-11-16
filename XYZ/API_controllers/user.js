@@ -67,6 +67,7 @@ UserController = {
 	},
 	update : function(req, res){
 		userMultipart.parseAndSaveFiles(req, function(data){
+			var message = "";
 			User.single(data.id).
 			then(function(model){
 				var user = model.toJSON();
@@ -75,6 +76,7 @@ UserController = {
 						res.send({success :false, message: "Password cannot replace because old password is not match with your current password"})
 					} else {
 						user.password = authentication.authenticate(data.newPass)
+						message = "Password has been changed, click following link to try your new password"
 						return User.update(user);
 					}
 				} else {
@@ -82,12 +84,12 @@ UserController = {
 						userFileManager.delete(user.image)
 						data.image = userFileManager.getUrl(data.image);
 					}
-					delete req.cookies;
 					return User.update(data);
 				}
 			})
 			.then(function(){
-				res.send({success : true})
+				req.logout();
+				res.send({success : true, message: message})
 			})
 			.catch(function(err){
 				res.send({success : false, message : err.message})
