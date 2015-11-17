@@ -8,6 +8,7 @@ UserViewModel = {
 		result.password = authentication.authenticate(user.password);
 		result.title = 'admin';
 		result.image = user.image;
+		result.description = user.description;
 		return result;
 	},
 	list : function(list){

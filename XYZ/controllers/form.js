@@ -12,7 +12,7 @@ sendMail = function(client){
 		form: 'achmadjamaludin14@gmail.com',
 		to: client.email,
 		subject: 'verification',
-		html: '<a class="btn btn-default" href="localhost:3003/project-form?code=' + client.verify + ' + &clientId=' + client.clientId + '">Click Here</a>'
+		html: '<a href="localhost:3003/project-form?code=' + client.verify + ' + &clientId=' + client.clientId + '">Click Here</a>'
 	});
 };
 
@@ -30,10 +30,17 @@ FormController = {
 		res.render('request-intro');
 	},
 	getFormClient : function(req, res){
-		res.render('client-form');
+		if(req.query.lang === "eng"){
+			req.session.language = "eng";
+			res.render('client-form-eng');
+		} else {
+			req.session.language = "ind"
+			res.render('client-form-ind');
+		};
 	},
 	saveClient : function(req, res){
 		console.log("------------------");
+		console.log(req.session.language);
 		var data = ClientViewModel.save(req.body);
 		var compare;
 		do{

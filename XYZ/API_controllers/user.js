@@ -88,7 +88,9 @@ UserController = {
 				}
 			})
 			.then(function(){
-				req.logout();
+				if(message){
+					req.logout();
+				};
 				res.send({success : true, message: message})
 			})
 			.catch(function(err){
