@@ -33,6 +33,7 @@ UserViewModel = {
 		result.fullname = singleData.fullname;
 		result.title = singleData.title;
 		result.image = singleData.image;
+		result.description = singleData.description;
 		return result;
 	},
 	delete : function(data){

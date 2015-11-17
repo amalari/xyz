@@ -12,13 +12,15 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Profile Detail</h3>
 					<a ui-sref="user-update({id: user.id})" class="btn btn-default btn-sm pull-right">
-					<span class="fa fa-edit"></span> Edit
+						<span class="fa fa-edit"></span> Edit
 					</a>
 				</div>
 				<div class="box-body">
 					<p>Name : {{user.fullname}}</p>
 					<p>Email : {{user.email}}</p>
 					<img ng-src="{{user.image}}" alt="Profile Image">
+					<p>Description:</p>
+					<div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>
 				</div>
 			</div>
 		</div>

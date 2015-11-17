@@ -27,12 +27,18 @@ Email.prototype.setup = function(handlebars){
 
 Email.prototype.send = function(mail){
 	console.log(mail.html);
+	var templateEmail = "";
+	if(mail.lang === "eng"){
+		templateEmail = "email-english"
+	} else {
+		templateEmail = "email-indonesia"
+	}
 	this._transporter.sendMail(
 	{
 		from: mail.from,
 		to: mail.to,
 		subject: mail.subject,
-		template: 'email', 
+		template: templateEmail, 
 		context : {
 			body : mail.html
 		}

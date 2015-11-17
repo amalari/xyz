@@ -4,13 +4,31 @@
 <div class="single container">
 	<div class="row">
 		<div class="col-sm-12">
-			<h2> Email Verification</h2>
-			<p> Kami telah mengirimkan email verifikasi ke email anda silahkan verifikasi terlebih dahulu untuk melanjutkan proses ini</p>
+			{{#if ind}}
+			<h2>Verifikasi Email</h2>
+			<p> Kami telah mengirimkan email verifikasi ke email anda, silahkan verifikasi terlebih dahulu untuk melanjutkan proses ini</p>
 			<br />
-			<p> Jika anda belum menerima email verifikasi dari saya, click tombol dibawah ini untuk mengirim ulang email verifikasi</p>
+			<p> Jika anda belum menerima email verifikasi dari kami, click tombol dibawah ini untuk mengirim ulang verifikasi email</p>
+			{{/if}}
+			{{#if eng}}
+			<h2>Email Verification</h2>
+			<p> We have been sent email verification to your email, please verify that email before you continue this process</p>
+			<br />
+			<p> if you don't get my our email verification, click button below and then we will send email verification to your email again</p>
+			{{/if}}
 			<form class="comment-form" action="/resend-email" method="POST">
+				{{#if ind}}
 				<div class="form-group">
-					<input type="hidden" class="form-control" name="clientId" id="clientId" value="{{id}}">
+					<input type="hidden" class="form-control" name="lang" id="clientId" value="ind">
+				</div>
+				{{/if}}
+				{{#if eng}}
+				<div class="form-group">
+					<input type="hidden" class="form-control" name="lang" id="clientId" value="eng">
+				</div>
+				{{/if}}
+				<div class="form-group">
+					<input type="hidden" class="form-control" name="id" id="clientId" value="{{id}}">
 				</div>
 				<div class="form-group">
 					<input type="hidden" class="form-control" name="email" id="email" value="{{email}}">
@@ -18,9 +36,16 @@
 				<div class="form-group">
 					<input type="hidden" class="form-control" name="verify" id="verify" value="{{verify}}">
 				</div>
+				{{#if ind}}
 				<p class="form-submit">
-					<button type="submit" class="btn btn-default">Resend Email</button>
+					<button type="submit" class="btn btn-default">Kirim Email</button>
 				</p>
+				{{/if}}
+				{{#if eng}}
+				<p class="form-submit">
+					<button type="submit" class="btn btn-default">Kirim Email</button>
+				</p>
+				{{/if}}
 			</form>
 		</div>
 	</div>

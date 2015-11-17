@@ -4,6 +4,7 @@
 <div class="req-form project-form container">
   <div class="row">
     <div class="col-sm-12">
+      {{#if eng}}
       <h2>Step 2</h2>
       <form role="form" action="/project-form?code={{code}}&clientId={{clientId}}" method="post" enctype="multipart/form-data">
         <div class="form-group first-row-group">
@@ -61,6 +62,62 @@
           <button type="submit" class="btn btn-primary req-form-button">Submit</button>
         </p>
       </form>
+      {{/if}}
+
+      {{#if ind}}
+      <h2>Langkah 2</h2>
+      <form role="form" action="/project-form?code={{code}}&clientId={{clientId}}" method="post" enctype="multipart/form-data">
+        <div class="form-group first-row-group">
+          <div class="row">
+            <input type="hidden" name="client_id" value="{{clientId}}">
+            <div class="col-sm-6">
+              <label>Area*</label>
+              <input type="number" name="site_area" class="form-control" id="exampleInputEmail1" required>
+            </div>
+            <div class="col-sm-3">
+              <label>Lebar*</label>
+              <input type="number" name="width" class="form-control" id="exampleInputEmail1" required >
+            </div>
+            <div class="col-sm-3">
+              <label>Panjang*</label>
+              <input type="number" name="length" class="form-control" id="exampleInputEmail1" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+        </div>
+        <div class="form-group">
+        </div>
+        <div class="form-group">
+          <label>Alamat Site</label>
+          <input type="text" name="site_address" class="form-control" id="exampleInputEmail1">
+        </div>
+        <div class="form-group">
+          <label>Koordinat Google Earth*</label>
+          <input type="text" name="coordinate" class="form-control" id="exampleInputEmail1">
+        </div>
+        <div class="form-group">
+          <label>Screenshot Google Earth*</label><br />
+          <span class="btn btn-file">
+            upload  <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1">
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Desain Referensi*</label><br />
+          <span class="btn btn-file">
+            upload   <input type="file" multiple name="design_reference_file" class="form-control" id="exampleInputEmail1">
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Apa yang Anda Inginkan</label>
+          <br/>
+          <textarea name="content" class="form-control"></textarea>
+        </div>
+        <p class="button-wrapper">
+          <button type="submit" class="btn btn-primary req-form-button">Submit</button>
+        </p>
+      </form>
+      {{/if}}
     </div>
   </div>
 </div>

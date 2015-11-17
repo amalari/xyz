@@ -10,9 +10,11 @@ angular.module('xyz.controllers')
 	$scope.alertForConfirmPassword = true;
 	$scope.model= User.get({id:$stateParams.id}, function(model){
 		$scope.password.id = model.id
-		var arr = model.image.split('/');
-		var i = arr.length-1;
-		$scope.model.nama_file_display =arr[i];
+		if(model.image){
+			var arr = model.image.split('/');
+			var i = arr.length-1;
+			$scope.model.nama_file_display =arr[i];
+		};
 		if($scope.model.nama_file_display !== "undefined"){
 			$scope.hiddenNameImage = false;
 		};

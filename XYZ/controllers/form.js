@@ -12,7 +12,8 @@ sendMail = function(client){
 		form: 'achmadjamaludin14@gmail.com',
 		to: client.email,
 		subject: 'verification',
-		html: '<a href="localhost:3003/project-form?code=' + client.verify + ' + &clientId=' + client.clientId + '">Click Here</a>'
+		html: '<a href="http://localhost:3003/project-form?code=' + client.verify  + '&clientId=' + client.id + '">Click Here</a>',
+		lang: client.lang
 	});
 };
 
@@ -39,13 +40,9 @@ FormController = {
 		};
 	},
 	saveClient : function(req, res){
-		console.log("------------------");
-		console.log(req.session.language);
 		var data = ClientViewModel.save(req.body);
 		var compare;
 		do{
-			console.log("lewat sini ga?");
-			console.log(data.verify);
 			Client.get(data.verify)
 			.then(function(model){
 				compare = model;
@@ -56,6 +53,7 @@ FormController = {
 		.then(function(model){
 			var client = model.toJSON();
 			req.session.registeredUser = client;
+			client.lang = req.session.language;
 			sendMail(client);
 			res.redirect('/resend-email');
 		})
@@ -82,12 +80,18 @@ FormController = {
 			var result = ProjectRequestViewModel.save(newData);
 			ProjectRequest.save(result)
 			.then(function(){
-				res.render("finish-form")
+				var lang={};
+				if(req.session.language === "ind"){
+					lang.ind = true;
+				} else {
+					lang.eng = true;
+				}
+				delete req.session.language;
+				res.render("finish-form", {eng : lang.eng, ind : lang.ind})
 			})
 		})
 	},
 	update : function(req, res){
-		console.log(req.query.code);
 		Client.get(req.query.code)
 		.then(function(model){
 			var client = model.toJSON();
@@ -96,17 +100,31 @@ FormController = {
 		})
 		.then(function(model){
 			var client = model.toJSON();
-			console.log(client);
-			res.render("project-form", {code : req.query.code, clientId : client.id})
+			if(req.session.language === "ind"){
+				client.ind = true
+			} else {
+				client.eng = true;
+			};
+			res.render("project-form", {code : req.query.code, clientId : client.id, ind:client.ind, eng: client.eng})
 		})
 	},
 	formResendEmail: function(req, res){
 		var client = JSON.parse(JSON.stringify(req.session.registeredUser));
+		if(req.session.language === "ind"){
+			client.ind = true
+		} else {
+			client.eng = true;
+		};
 		delete req.session.registeredUser;
 		res.render('resend-email', client);
 	},
 	resendEmail: function(req, res){
 		sendMail(req.body);
+		if(req.body.lang === "ind"){
+			req.body.ind = true
+		} else {
+			req.body.eng = true;
+		};
 		res.render('resend-email', req.body);
 	},
 	verification : function(req, res, next){
@@ -118,7 +136,6 @@ FormController = {
 		Client.list(queryBuilder)
 		.then(function(listModel){
 			var data = listModel.toJSON();
-			console.log(data);
 			for(var i in data){
 				if(data[i].verify === req.query.code){
 					code = 	data[i].verify			}
