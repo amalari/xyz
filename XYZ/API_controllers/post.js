@@ -27,13 +27,9 @@ PostController = {
 	save : function(req, res){
 		console.log("save");
 		postMultipart.parseAndSaveFiles(req, function(data){
-			if(data.header_image){
+			if(data.header_image != undefined){
 				data.header_image = postFileManager.getUrl(data.header_image);
-// <<<<<<< HEAD
 			};
-// =======
-			// }
-// >>>>>>> e2cfb7de9c40a04fe1319b5b29ca11d27ce94cb2
 			var result = PostViewModel.save(data, req.user.id);
 			Post.save(result)
 			.then(function(){
@@ -79,7 +75,6 @@ PostController = {
 			console.log("ini bukan untuk type about dan contact");
 		};
 		postMultipart.parseAndSaveFiles(req, function(data){
-// <<<<<<< HEAD
 			Post.single(data.id, req.body.type, req.xhr)
 			// .then(function(model){
 // 				var posting = model.toJSON();
@@ -88,34 +83,29 @@ PostController = {
 // 			console.log('data ---------------------------');
 // 			console.log(data);
 // 			Post.single(data.id, 1, req.xhr)
-			.then(function(model){
-				var posting = model.toJSON();
-				console.log("=----------------------------====");
-				console.log(posting);
-				console.log(posting.header_image);
-				console.log(data.header_image);
-				if(posting.header_image && data.header_image){
-// >>>>>>> e2cfb7de9c40a04fe1319b5b29ca11d27ce94cb2
-					postFileManager.delete(posting.header_image);
-					data.header_image = postFileManager.getUrl(data.header_image);
-				}
-				else if(posting.header_image && !data.header_image){
-					data.header_image = posting.header_image;
-				}else{
-					data.header_image = '';
-				}
-
-				var result = PostViewModel.update(data);
-				console.log(result);
-				return Post.update(result);
-			})
-			.then(function(){
-				res.send({success : true})
-			})
-			.catch(function(err){
-				res.send({success : false, message : err.message})
-			})
-		})
+.then(function(model){
+	var posting = model.toJSON();
+	console.log("=----------------------------====");
+	console.log(posting);
+	console.log(posting.header_image);
+	console.log(data.header_image);
+	if(posting.header_image && data.header_image){
+		postFileManager.delete(posting.header_image);
+		data.header_image = postFileManager.getUrl(data.header_image);
+	} else {
+		data.header_image = posting.header_image;
+	};
+	var result = PostViewModel.update(data);
+	console.log(result);
+	return Post.update(result);
+})
+.then(function(){
+	res.send({success : true})
+})
+.catch(function(err){
+	res.send({success : false, message : err.message})
+})
+})
 	},
 	delete : function(req, res){
 		Post.single(req.params.id, 1, req.xhr)
