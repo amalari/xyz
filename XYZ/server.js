@@ -11,6 +11,7 @@ var flash = require('connect-flash');
 //using library index.js from folder views as var hbs
 var hbs = require('./core/handlebar/index.js');
 var email = require('./core/email');
+var config = require('./config');
 //require index js in folder core and authentication
 var authentication = require('./core/authentication/index.js');
 var authorization = require('./core/authorization/index.js');
@@ -78,4 +79,6 @@ Work.registerRoutes(app);
 CategoryPublic.registerRoutes(app);
 Contact.registerRoutes(app);
 
-app.listen(3003);
+app.listen(config.port, function(){
+	console.log("Listening on %s, server_port %s", config.ipAddress, config.port);
+});

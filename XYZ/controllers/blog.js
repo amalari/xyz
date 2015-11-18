@@ -195,7 +195,7 @@ BlogController = {
 			} else {
 				data.preferredPage = false;
 			};
-			console.log(data);
+			data.fullUrl = req.protocol + "://" + req.subdomains + req.hostname + ":3000" + req.originalUrl;
 			res.render('single', data);
 		})
 	},

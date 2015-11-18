@@ -200,6 +200,7 @@ WorkController = {
 			} else {
 				result.preferredPage = false;
 			};
+			result.fullUrl = req.protocol + "://" + req.subdomains + req.hostname + ":3000" + req.originalUrl;
 			res.render('work', result);
 		})
 		.catch(function(err){
