@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.4.12
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2015 at 06:01 AM
--- Server version: 5.6.26
--- PHP Version: 5.5.28
+-- Generation Time: Nov 18, 2015 at 12:30 PM
+-- Server version: 5.6.25
+-- PHP Version: 5.5.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `categories`
@@ -47,7 +47,8 @@ INSERT INTO `categories` (`id`, `name`, `is_active`) VALUES
 (14, 'hasem sekali', 0),
 (15, 'afasfdsa', 0),
 (16, 'afasfdsa', 0),
-(17, 'special', 1);
+(17, 'special', 1),
+(18, 'kitchen', 1);
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `nationality` varchar(64) NOT NULL,
   `verify` text,
   `is_active` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `clients`
@@ -73,7 +74,11 @@ CREATE TABLE IF NOT EXISTS `clients` (
 INSERT INTO `clients` (`id`, `name`, `email`, `birth`, `gender`, `nationality`, `verify`, `is_active`) VALUES
 (9, 'achmad', 'student.achmad@gmail.com', '1996-11-01', 'male', 'fdasfas', 't6vk5Vjt528gwKfmBYYX', 1),
 (21, 'achmad', 'student.achmad@gmail.com', '1121-01-03', 'Male', 'indonesia', 'HaNsNvJRI7nleToN6m21', 0),
-(22, 'achmad', 'student.achmad@gmail.com', '1121-01-03', 'Male', 'indonesia', 'AhM4OCSaYwx7Xh1MX4IU', 1);
+(22, 'achmad', 'student.achmad@gmail.com', '1121-01-03', 'Male', 'indonesia', 'AhM4OCSaYwx7Xh1MX4IU', 1),
+(23, 'fazar', 'mochamad.fazar@gmail.com', '1988-01-05', 'Male', 'Indonesia', 'suCgTxjnpNNjtuXJa8HW', 0),
+(24, 'fazar', 'mochamad.fazar@gmail.com', '1988-01-05', 'Male', 'Indonesia', 'OkrPeWyjhcUfkmYGv0op', 0),
+(25, 'fazar', 'mochamad.fazar@gmail.com', '1988-01-05', 'Male', 'Indonesia', 'VwSTeCqlp9PESRk3lb47', 0),
+(26, 'MUST DIKDIK', 'putu.nitya.n@gmail.com', '1988-01-09', 'Perempuan', 'ZIMbabwe', 'UnEBeCpumSmgZyfiSGuW', 0);
 
 -- --------------------------------------------------------
 
@@ -92,22 +97,16 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `post_id` int(11) DEFAULT NULL,
   `parrent_id` int(11) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `message`, `subject`, `name`, `email`, `date`, `portfolio_id`, `post_id`, `parrent_id`, `is_active`) VALUES
-(1, 'afsfsfasfafafasfsafffffff', 'asfsafasfaf', 'asfasfas', 'afsfasfasfasf', '2015-10-01 00:00:00', NULL, 1, NULL, 1),
-(2, 'sfsafsfasfsdsafasf', 'sadfsafsafsafcvbcves', 'asfdasfasf', 'asfasfasfasf', '2015-10-02 00:00:00', NULL, 1, 1, 1),
-(4, 'adsa', 'adsa', 'achmad', 'student.achmad@gmail.com', '2015-11-04 09:43:38', NULL, 1, NULL, 1),
-(5, 'lasfmsalf', 'asfmsakld', 'achmad', 'achmadjamaludin41@gmail.com', '2015-11-04 09:51:03', NULL, 1, NULL, 1),
-(6, 'afnks fnaskfnask', 'SMFSAKFMASKL', 'ADSKANSDKAN', 'ASKFNASK@A', '2015-11-04 10:18:00', NULL, 1, 5, 1),
-(7, 'jangan sampai error yah', 'coba', 'achmad', 'student.achmad@gmail.com', '2015-11-04 11:58:07', NULL, 1, NULL, 1),
-(8, 'nfkosnfskafn', 'achmad', 'andfsajkfnakj', 'student.achmad@gmail.com', '2015-11-04 12:03:04', 20, NULL, NULL, 1),
-(9, 'kanfkanfk', 'askf askf ', 'ksnfskad', 'knaskfnsakfnskna@a', '2015-11-04 12:05:33', 20, NULL, 8, 1),
-(10, ',fmansm,fns,afnasfas', 'fs,amnfasm', 'asjfklasj', 'lfsaklmfsl@a', '2015-11-04 13:12:32', 1, NULL, NULL, 1);
+(10, ',fmansm,fns,afnasfas', 'fs,amnfasm', 'asjfklasj', 'lfsaklmfsl@a', '2015-11-04 13:12:32', 1, NULL, NULL, 1),
+(11, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Fucking Cool', 'Mochamad Fazar', 'hallofazar@gmail.com', '2015-11-18 14:36:37', NULL, 23, NULL, 1),
+(12, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Test', 'Putu Nitya', 'putu.nitya.n@gmail.com', '2015-11-18 14:37:13', NULL, 23, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -131,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `portfolios` (
   `visitor` int(11) NOT NULL DEFAULT '0',
   `liker` int(11) NOT NULL DEFAULT '0',
   `is_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `portfolios`
@@ -139,11 +138,9 @@ CREATE TABLE IF NOT EXISTS `portfolios` (
 
 INSERT INTO `portfolios` (`id`, `architect`, `status`, `category_id`, `area`, `location`, `title`, `content`, `project_year`, `created_date`, `updated_date`, `header_image`, `visitor`, `liker`, `is_active`) VALUES
 (1, 'aku', 'building was destroy', 1, '10m', 'asfdasfasfsafafs', 'fasfafasfasfafafasfasfafa', 'sfdsadfsfasfsfdsafasklnfkaslnfklsnfklsanfklsanlkfnaflkasnklfnsklnfdklasnklfnsaklnfasklfklkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkllllllllllllllllll', 2015, '2015-10-01 00:00:00', '2015-10-01 00:00:00', 'fnalksfnsaklfnaskfa', 0, 0, 0),
-(20, 'afafa', 'aaa', 1, 'aaa', 'afafa', 'afasfasfsa', '<p>afdasa</p>', 2001, '2015-10-21 14:01:31', '2015-10-26 17:00:24', '/uploads/portfolio/1445853623829_CAM00004.jpg', 6, 3, 1),
 (22, 'adfaf', 'afasdfsa', 1, 'aaa', 'asf', 'asfas', '<p>sadfdsafsafsdadfsa</p>', 2020, '2015-10-21 14:37:54', '2015-10-21 14:37:54', 'adfafadsfdasnfasklfalsfa', 0, 0, 0),
-(23, 'a', 'a', 1, 'a', 'a', 'a', '<p>a</p>', 2001, '2015-10-26 14:03:18', '2015-10-26 14:03:18', '/uploads/portfolio/1445842997063_CAM00031.jpg', 1, 0, 1),
-(24, 'a', 'a', 1, 'a', 'a', 'a', '<p>a</p>', 2001, '2015-10-26 14:05:19', '2015-10-26 14:05:19', '/uploads/portfolio/1445843117988_CAM00031.jpg', 0, 0, 1),
-(26, 'aa', 'a', 1, 'a', 'a', 'aa', '<p>aa</p>', 2013, '2015-10-26 16:32:56', '2015-10-26 16:32:56', '/uploads/portfolio/1445851974989_CAM00003.jpg', 0, 0, 1);
+(27, 'Putu Nitya', 'Finished', 1, 'Sukaluty', 'Bandung', 'Rumah Kaca', '<p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;" data-mce-style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span></p><p>&nbsp;<br></p><p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;" data-mce-style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span></p><p>&nbsp;<br></p><p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;" data-mce-style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span></p>', 2015, '2015-11-18 10:53:01', '2015-11-18 14:32:32', '/uploads/portfolio/1447831927921_2.jpg', 1, 0, 1),
+(28, 'Putu Nitya', 'Finished', 18, 'Sukaluyu', 'Bandung', 'Kitchen', '<p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span><br data-mce-bogus="1"></p><p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;"><br data-mce-bogus="1"></span></p><p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;"><br data-mce-bogus="1"></span></p>', 1988, '2015-11-18 10:57:04', '2015-11-18 10:57:04', '/uploads/portfolio/1447819023803_6.jpg', 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -155,16 +152,35 @@ CREATE TABLE IF NOT EXISTS `portfolio_image` (
   `id` int(11) NOT NULL,
   `image` text,
   `portfolio_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `portfolio_image`
 --
 
 INSERT INTO `portfolio_image` (`id`, `image`, `portfolio_id`) VALUES
-(8, '/uploads/portfolio/1445853624084_CAM00008.jpg', 20),
-(9, '/uploads/portfolio/1445853624213_CAM00030.jpg', 20),
-(10, '/uploads/portfolio/1445853623829_CAM00004.jpg', 20);
+(16, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(17, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(18, '/uploads/portfolio/1447819024204_4.jpg', 28),
+(19, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(20, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(21, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(22, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(23, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(24, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(25, '/uploads/portfolio/1447831927935_3.jpg', 27),
+(26, '/uploads/portfolio//uploads/portfolio/1447831927921_2.jpg', 27),
+(27, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(28, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(29, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(30, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(31, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(32, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(33, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(34, '/uploads/portfolio//uploads/portfolio/undefined', 27),
+(35, '/uploads/portfolio/1447831927935_3.jpg', 27),
+(36, '/uploads/portfolio//uploads/portfolio/1447831927921_2.jpg', 27),
+(37, '/uploads/portfolio//uploads/portfolio/1447831927921_2.jpg', 27);
 
 -- --------------------------------------------------------
 
@@ -185,22 +201,20 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `visitor` int(11) NOT NULL DEFAULT '0',
   `liker` int(11) NOT NULL DEFAULT '0',
   `is_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `category_id`, `type`, `title`, `content`, `header_image`, `created_date`, `updated_date`, `user_id`, `visitor`, `liker`, `is_active`) VALUES
-(1, 2, 1, 'aku', '<p>aaaa</p><p><img src="/images/glen.jpg" alt="glen" width="300" height="402" data-mce-selected="1" data-mce-src="images/glen.jpg"></p>', '/uploads/posting/undefined', '2015-10-16 13:42:14', '2015-10-28 15:49:15', 1, 12, 12, 1),
-(2, NULL, 2, 'kkkkkaaaabbb', 'afasfasfafafsafmasklmfasklmfsakl', NULL, '2015-10-08 00:00:00', '2015-10-19 13:41:09', 1, 0, 0, 1),
-(3, 1, 1, 'fdasfsafasfasfafasfasfwetrfa', 'gfnjfghjsfgfadgadcvxz', 'asdfasfasfsafsafas', '2015-10-19 08:48:19', '2015-10-19 08:48:19', 1, 0, 0, 0),
-(4, 1, 1, 'asfsadfsaf', '<p>asfsafsafsakaa</p>', '/uploads/posting/undefined', '2015-10-19 08:52:36', '2015-10-28 15:59:20', 1, 1, 0, 1),
 (5, 2, 1, 'asfsafasfas', 'asfsafasfas', 'asdfasfasfsafsafas', '2015-10-19 08:54:53', '2015-10-19 08:54:53', 1, 0, 0, 0),
 (6, 2, 1, 'kalkasgkl;asfj;klasjfaslk', 'ajbfjkasfasnfkjsa', 'asdfasfasfsafsafas', '2015-10-19 08:55:04', '2015-10-19 08:55:04', 1, 0, 0, 0),
 (11, 1, 1, 'fsafddsafasfas', '<p>asfasfasfas<span id="_mce_caret" data-mce-bogus="1"><strong>?asfsafasfasfasfafasf<span id="_mce_caret" data-mce-bogus="1"><em>?asfasfasfasfas</em></span></strong></span></p>', 'asdfasfasfsafsafas', '2015-10-19 16:29:08', '2015-10-19 16:29:08', 1, 0, 0, 0),
 (12, 2, 1, 'fasfsa', '<p>asfsaf</p>', 'asdfasfasfsafsafas', '2015-10-21 15:17:05', '2015-10-21 15:17:05', 1, 0, 0, 0),
-(13, 1, 1, 'saya saya saya', '<p>klasjfkla;sjmflaksmnfklashfklas</p>', '/uploads/posting/1445831176910_CAM00003.jpg', '2015-10-26 10:46:17', '2015-10-26 10:46:17', 1, 0, 0, 1);
+(15, 2, 1, 'Test', '<p>Testestse</p>', '/uploads/posting/undefined', '2015-11-10 19:02:11', '2015-11-10 19:02:20', 1, 0, 0, 0),
+(22, NULL, 2, 'About', '<p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><br data-mce-bogus="1"></p><p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;"><br data-mce-bogus="1"></span></p><p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;"><br data-mce-bogus="1"></span></p><p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;"><br data-mce-bogus="1"></span></p><p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;"><br data-mce-bogus="1"></span></p><p><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><span style="font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;"><br data-mce-bogus="1"></span></p>', NULL, '2015-11-18 14:34:08', '2015-11-18 14:34:08', 1, 0, 0, 1),
+(23, 1, 1, 'My Daily Life', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, Helvetica, sans; font-size: 18px; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><br data-mce-bogus="1"></p><p><span style="color: rgb(51, 51, 51); font-family: Arial, Helvetica, sans; font-size: 18px; line-height: 14px; text-align: justify;"><br data-mce-bogus="1"></span></p><p><span style="color: rgb(51, 51, 51); font-family: Arial, Helvetica, sans; font-size: 18px; line-height: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><span style="color: rgb(51, 51, 51); font-family: Arial, Helvetica, sans; font-size: 18px; line-height: 14px; text-align: justify;"><br data-mce-bogus="1"></span></p>', '/uploads/posting/1447832128003_7.jpg', '2015-11-18 14:35:28', '2015-11-18 14:35:28', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -242,25 +256,26 @@ CREATE TABLE IF NOT EXISTS `users` (
   `fullname` varchar(256) NOT NULL,
   `title` varchar(32) NOT NULL,
   `image` text NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1'
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `description` text
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `fullname`, `title`, `image`, `is_active`) VALUES
-(1, 'achmad@gmail', '$2a$05$9k4qJLJFdZMwIeQaUBxJd.HmyBxJ16yJ5DO8Q6gFli8llpHORXzYS', 'Achmad Jamalaludin', 'admin', '/uploads/user/1445597397869_CAM00005.jpg', 1),
-(16, 'jamal@achmad', '$2a$05$bli/.Z/TjVOhdYp7D9p6l.h0uDfY/5lpjlyJm7UiJAcpAAdmEUbYu', 'jamaludin', 'admin', '', 0),
-(17, 'jamal@jamal', '$2a$05$9uK5Mi9l7SVZKjFTr0j//uFIxVib9KlgQAqaFL5.X0DWpmMfCiNQO', 'jamal', 'admin', '', 1),
-(18, 'jamal@achmad', '$2a$05$9.Zy0uMk6SEsHYG3EAjlPeljobcFtt9WbFl9HMS2VjuFhlwcv.wUO', 'achamd', 'admin', '', 0),
-(19, 'a@a', '$2a$05$fIUHKj4chJ/jAA7r3fxmzeSEnD5Dxv30SX5QmKJQYly6EXBigKLRe', 'a', 'admin', '', 0),
-(20, 'aba@a', '$2a$05$Jpjjc4Bf06QQwUhkM2bOv.0yEXCRzY78FByeKpdJoxAbt9OGs.MKu', 'aaaa', 'admin', '/public/uploads/user/1445570311495_3zI0AlQ.png', 0),
-(21, 'ab@cd', '$2a$05$r0/UQDg/kMFrKBRhCyRRYuHA9UHEK5BYU43j8SubxNWw3Ah90TxU2', 'acak', 'admin', '/uploads/user/1445571080015_CAM00005.jpg', 0),
-(22, 'a1@a', '$2a$05$mZcwSZxo465eYbTcvy6tyurTtEWCxAT0TKcJqp/jMRCBdVsBpO5FG', 'amal', 'admin', '/uploads/user/undefined', 0),
-(23, 'a2@a', '$2a$05$N/A7g9j67ykQH3AM93oJrOsjknWz/.6zTnH4jAS7bP25yOrl50iEi', 'amal', 'admin', '/uploads/user/1445590618339_CAM00005.jpg', 1),
-(24, 'a3@a', '$2a$05$yRKD8ooZfc7DmCOCvTcy.e1yqx1gfDL6TfF/lsUA/p7T/xzJsw/bu', 'aaa', 'admin', '/uploads/user/1445592938611_CAM00031.jpg', 1),
-(25, 'a4@a', '$2a$05$5bqL.Im6l5UqfUJmrt1SkuNYW/z3yQYBeH1LpNf4BLrItnlP3zYki', 'aaa', 'admin', '/uploads/user/1445593182694_CAM00003.jpg', 1);
+INSERT INTO `users` (`id`, `email`, `password`, `fullname`, `title`, `image`, `is_active`, `description`) VALUES
+(1, 'achmad@gmail', '$2a$05$9k4qJLJFdZMwIeQaUBxJd.HmyBxJ16yJ5DO8Q6gFli8llpHORXzYS', 'Achmad Jamalaludin', 'admin', '/uploads/user/1445597397869_CAM00005.jpg', 1, NULL),
+(16, 'jamal@achmad', '$2a$05$bli/.Z/TjVOhdYp7D9p6l.h0uDfY/5lpjlyJm7UiJAcpAAdmEUbYu', 'jamaludin', 'admin', '', 0, NULL),
+(17, 'jamal@jamal', '$2a$05$9uK5Mi9l7SVZKjFTr0j//uFIxVib9KlgQAqaFL5.X0DWpmMfCiNQO', 'jamal', 'admin', '', 1, NULL),
+(18, 'jamal@achmad', '$2a$05$9.Zy0uMk6SEsHYG3EAjlPeljobcFtt9WbFl9HMS2VjuFhlwcv.wUO', 'achamd', 'admin', '', 0, NULL),
+(19, 'a@a', '$2a$05$fIUHKj4chJ/jAA7r3fxmzeSEnD5Dxv30SX5QmKJQYly6EXBigKLRe', 'a', 'admin', '', 0, NULL),
+(20, 'aba@a', '$2a$05$Jpjjc4Bf06QQwUhkM2bOv.0yEXCRzY78FByeKpdJoxAbt9OGs.MKu', 'aaaa', 'admin', '/public/uploads/user/1445570311495_3zI0AlQ.png', 0, NULL),
+(21, 'ab@cd', '$2a$05$r0/UQDg/kMFrKBRhCyRRYuHA9UHEK5BYU43j8SubxNWw3Ah90TxU2', 'acak', 'admin', '/uploads/user/1445571080015_CAM00005.jpg', 0, NULL),
+(22, 'a1@a', '$2a$05$mZcwSZxo465eYbTcvy6tyurTtEWCxAT0TKcJqp/jMRCBdVsBpO5FG', 'amal', 'admin', '/uploads/user/undefined', 0, NULL),
+(23, 'a2@a', '$2a$05$N/A7g9j67ykQH3AM93oJrOsjknWz/.6zTnH4jAS7bP25yOrl50iEi', 'amal', 'admin', '/uploads/user/1445590618339_CAM00005.jpg', 1, NULL),
+(24, 'a3@a', '$2a$05$yRKD8ooZfc7DmCOCvTcy.e1yqx1gfDL6TfF/lsUA/p7T/xzJsw/bu', 'aaa', 'admin', '/uploads/user/1445592938611_CAM00031.jpg', 1, NULL),
+(25, 'a4@a', '$2a$05$5bqL.Im6l5UqfUJmrt1SkuNYW/z3yQYBeH1LpNf4BLrItnlP3zYki', 'aaa', 'admin', '/uploads/user/1445593182694_CAM00003.jpg', 0, NULL);
 
 --
 -- Indexes for dumped tables
@@ -332,32 +347,32 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `portfolios`
 --
 ALTER TABLE `portfolios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `portfolio_image`
 --
 ALTER TABLE `portfolio_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `projects`
 --
@@ -378,7 +393,7 @@ ALTER TABLE `users`
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`portfolio_id`) REFERENCES `portfolios` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`parrent_id`) REFERENCES `comments` (`id`);
+  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`parrent_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `portfolios`

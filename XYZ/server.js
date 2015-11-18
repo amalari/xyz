@@ -32,6 +32,7 @@ var Work = require('./controllers/work.js');
 // var UserModel = require('./models/user.js');
 var CategoryPublic = require('./controllers/category.js')
 var Contact = require('./controllers/contact.js');
+var env = process.env.NODE_ENV || 'development';
 
 //invoke hbs with 3 params ('extention name', 'name default layout that will used', var app )
 var handlebars = new hbs('.html', 'main', app);
@@ -44,6 +45,9 @@ handlebars.set();
 handlebars.pagination();
 //define folder public as static content/file
 app.use(express.static(__dirname + '/public'));
+if(env == 'production'){
+	app.use('/public/uploads', express.static(__dirname + '/../data'));
+}
 //use middleware body parser
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({
