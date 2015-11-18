@@ -61,7 +61,10 @@ PortfolioController = {
 			for(var key in data){
 				if(key.indexOf("image") === -1){
 					if(key === "header"){
-						newData.header_image = portfolioFileManager.getUrl(data[key]);
+						if(data[key] != undefined){
+							console.log("kalau undifined harusnya jangan lewat sini");
+							newData.header_image = portfolioFileManager.getUrl(data[key]);
+						}
 					}
 					newData[key] = data[key];
 				} 
@@ -73,8 +76,11 @@ PortfolioController = {
 				console.log(singleData);
 				for(var key in data){
 					if(key.indexOf("image") > -1){
-						var imageDir = portfolioFileManager.getUrl(data[key]);
-						image_maping(imageDir, singleData.id, arr);
+						if(data[key] != undefined){
+							console.log("kalau undifined harusnya jangan lewat sini");
+							var imageDir = portfolioFileManager.getUrl(data[key]);
+							image_maping(imageDir, singleData.id, arr);
+						}
 					}
 				};
 				return PortfolioImage.save(arr);
@@ -86,74 +92,55 @@ PortfolioController = {
 				res.send({success : false, message : err.message})
 			})
 		})
-	},
-	update : function(req, res){
-		portfolioMultipart.parseAndSaveFiles(req, function(data){
-			Portfolio.single(data.id)
-			.then(function(model){
-				var singleData = model.toJSON();
-				if(singleData.header_image){
-					portfolioFileManager.delete(singleData.header_image);
-					data.header_image = portfolioFileManager.getUrl(data.header);
-				};
-				var result = PortfolioViewModel.update(data);
-				return Portfolio.update(result);
-			})
-			.then(function(){
-				var queryBuilder = new qb();
-				queryBuilder.setup({
-					whereCondition : {portfolio_id : data.id}
-				});
-				return PortfolioImage.list(queryBuilder)
-			})
-			.then(function(listModel){
-				var arr = [];
-				if(listModel !== null){
-					var list_images = listModel.toJSON();
-					portfolio_id = list_images.id;
-					console.log(list_images);
-					for(var i in list_images){
-						portfolioFileManager.delete(list_images[i].image);
-					};
-				};
-				for(var key in data){
-					if(key.indexOf("image") > -1){
-						var imageDir = portfolioFileManager.getUrl(data[key]);
-						image_maping(imageDir, data.id, arr);
-					}
-				};
-				console.log(arr);
-				return PortfolioImage.save(arr);
-			})
-			.then(function(){
-				res.send({success : true})
-			})
-			.catch(function(err){
-				res.send({success : false, message : err.message})
-			})
-		})
-	},
-	delete : function(req, res){
-		Portfolio.single(req.params.id)
+},
+update : function(req, res){
+	portfolioMultipart.parseAndSaveFiles(req, function(data){
+		Portfolio.single(data.id)
 		.then(function(model){
-			var portfolio = model.toJSON();
-			portfolioFileManager.delete(portfolio.header_image);
-			return Portfolio.delete(req.params.id)
+			var singleData = model.toJSON();
+			if(singleData.header_image && data.header != undefined){
+				portfolioFileManager.delete(singleData.header_image);
+			};
+			if(data.header != undefined){
+				data.header_image = portfolioFileManager.getUrl(data.header);
+			} else {
+				data.header_image = singleData.header_image;
+			};
+			var result = PortfolioViewModel.update(data);
+			return Portfolio.update(result);
 		})
 		.then(function(){
-			console.log(portfolio);
 			var queryBuilder = new qb();
 			queryBuilder.setup({
-				whereCondition : {portfolio_id : req.params.id}
+				whereCondition : {portfolio_id : data.id}
 			});
 			return PortfolioImage.list(queryBuilder)
 		})
 		.then(function(listModel){
-			var list_images = listModel.toJSON();
-			for(var i in list_images){
-				portfolioFileManager.delete(list_images[i].image)
-			}
-			return PortfolioImage.delete(list_images)
+			var arr = [];
+			if(listModel !== null){
+				var list_images = listModel.toJSON();
+				console.log(list_images);
+				console.log("harusnya ga lewat sini kalau image ga diisi")
+				for(var i in list_images){
+					if(data.image != undefined){
+						portfolioFileManager.delete(list_images[i].image);
+					} else {
+						image_maping(list_images[i].image, data.id, arr);
+					}
+
+				};
+			};
+			for(var key in data){
+				if(key.indexOf("image") > -1){
+					if(data[key] != undefined){
+						var imageDir = portfolioFileManager.getUrl(data[key]);
+						image_maping(imageDir, data.id, arr);
+					}
+				}
+			};
+			console.log(arr);
+			return PortfolioImage.save(arr);
 		})
 		.then(function(){
 			res.send({success : true})
@@ -161,7 +148,41 @@ PortfolioController = {
 		.catch(function(err){
 			res.send({success : false, message : err.message})
 		})
-	}
+	})
+},
+delete : function(req, res){
+	Portfolio.single(req.params.id)
+	.then(function(model){
+		var portfolio = model.toJSON();
+		if(portfolio.header_image != null){
+			portfolioFileManager.delete(portfolio.header_image);
+		};
+		return Portfolio.delete(req.params.id)
+	})
+	.then(function(){
+		console.log(portfolio);
+		var queryBuilder = new qb();
+		queryBuilder.setup({
+			whereCondition : {portfolio_id : req.params.id}
+		});
+		return PortfolioImage.list(queryBuilder)
+	})
+	.then(function(listModel){
+		var list_images = listModel.toJSON();
+		for(var i in list_images){
+			if(list_images[i].image != null){
+				portfolioFileManager.delete(list_images[i].image);
+			}
+		};
+		return PortfolioImage.delete(list_images)
+	})
+	.then(function(){
+		res.send({success : true})
+	})
+	.catch(function(err){
+		res.send({success : false, message : err.message})
+	})
+}
 }
 
 module.exports = PortfolioController;
