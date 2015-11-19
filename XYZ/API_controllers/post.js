@@ -4,6 +4,7 @@ var SearchQb = require('./../core/queryBuilder/search-query-builder.js');
 var PostViewModel = require('./../viewModels/post.js');
 var Multipart = require('./../core/multipart/index.js');
 var FileManager = require('./../core/file-manager/index.js');
+var im = require('imagemagick');
 
 var postMultipart = new Multipart({
 	uploadDir : __dirname + '/../public/uploads/posting',
@@ -27,6 +28,20 @@ PostController = {
 		postMultipart.parseAndSaveFiles(req, function(data){
 			if(data.header_image != undefined){
 				data.header_image = postFileManager.getUrl(data.header_image);
+				var deleteExt = data.header_image.split('.');
+				deleteExt.splice(deleteExt.length - 1, 1);
+				var newFilename = deleteExt.toString() + "_300x300.JPG";
+				im.resize({
+					srcPath: __dirname + '/../public' + data.header_image,
+					dstPath: __dirname + '/../public' + newFilename,
+					width:   300,
+					height: 300,
+					quality: 1,
+					format: 'jpg'
+				}, function(err, stdout, stderr){
+					if (err) throw err;
+					console.log('resized to fit within 300x300px');
+				});
 			};
 			var result = PostViewModel.save(data, req.user.id);
 			Post.save(result)
@@ -72,38 +87,60 @@ PostController = {
 			.then(function(model){
 				var posting = model.toJSON();
 				if(posting.header_image && data.header_image){
+					var deleteExt = posting.header_image.split('.');
+					deleteExt.splice(deleteExt.length - 1, 1);
+					var newFilename = deleteExt.toString() + "_300x300.JPG";
 					postFileManager.delete(posting.header_image);
+					postFileManager.delete(newFilename);
 					data.header_image = postFileManager.getUrl(data.header_image);
+					var deleteExtNew = data.header_image.split('.');
+					deleteExtNew.splice(deleteExtNew.length - 1, 1);
+					var newFilenameWillSave = deleteExtNew.toString() + "_300x300.JPG";
+					im.resize({
+						srcPath: __dirname + '/../public' + data.header_image,
+						dstPath: __dirname + '/../public' + newFilenameWillSave,
+						width:   300,
+						height: 300,
+						quality: 1,
+						format: 'jpg'
+					}, function(err, stdout, stderr){
+						if (err) throw err;
+						console.log('resized to fit within 300x300px');
+					});
 				} else {
 					data.header_image = posting.header_image;
 				};
 				var result = PostViewModel.update(data);
 				return Post.update(result);
 			})
-			.then(function(){
-				res.send({success : true})
-			})
-			.catch(function(err){
-				res.send({success : false, message : err.message})
-			})
-		})
-	},
-	delete : function(req, res){
-		Post.single(req.params.id, 1, req.xhr)
-		.then(function(model){
-			var posting = model.toJSON();
-			if(posting.header_image != null){
-				postFileManager.delete(posting.header_image);
-			};
-			return Post.delete(req.params.id) 
-		})
-		.then(function(){
-			res.send({success : true})
-		})
-		.catch(function(err){
-			res.send({success : false, message : err.message})
-		})
-	}
+.then(function(){
+	res.send({success : true})
+})
+.catch(function(err){
+	res.send({success : false, message : err.message})
+})
+})
+},
+delete : function(req, res){
+	Post.single(req.params.id, 1, req.xhr)
+	.then(function(model){
+		var posting = model.toJSON();
+		if(posting.header_image != null){
+			var deleteExt = posting.header_image.split('.');
+			deleteExt.splice(deleteExt.length - 1, 1);
+			var newFilename = deleteExt.toString() + "_300x300.JPG";
+			postFileManager.delete(posting.header_image);
+			postFileManager.delete(newFilename);
+		};
+		return Post.delete(req.params.id) 
+	})
+	.then(function(){
+		res.send({success : true})
+	})
+	.catch(function(err){
+		res.send({success : false, message : err.message})
+	})
+}
 };
 
 module.exports = PostController;

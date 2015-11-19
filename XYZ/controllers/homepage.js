@@ -52,7 +52,7 @@ HomepageController = {
 		queryBuilder.search(['content', 'LIKE', '%' + req.query.q + '%']);
 		Post.list(queryBuilder)
 		.then(function(data){
-			result.blog = PostViewModel.getList(data, req.xhr);
+			result.blog = PostViewModel.getList(data, req.xhr, req.path);
 			queryBuilder.setup({
 				limit : 10,
 				page : req.query.page,

@@ -1,26 +1,42 @@
 //using library express
 var express = require('express');
+
 //add express to variable app
 var app = express();
+
 //using library body parser
 var bodyParser = require('body-parser');
+
 //using library cookie parser
 var cookieParser = require('cookie-parser');
+
 //using library flash
 var flash = require('connect-flash');
+
 //using library index.js from folder views as var hbs
 var hbs = require('./core/handlebar/index.js');
+
+//using labrary email
 var email = require('./core/email');
+
+//using config for development and production
 var config = require('./config');
+
 //require index js in folder core and authentication
 var authentication = require('./core/authentication/index.js');
+
+//require index js in folder core and authorization
 var authorization = require('./core/authorization/index.js');
+
+//require controller API for Admin
 var User = require('./API_controllers/user.js');
 var Post = require('./API_controllers/post.js');
 var Category = require('./API_controllers/category.js');
 var Portfolio = require('./API_controllers/portfolio.js');
 var ProjectRequest = require('./API_controllers/projectRequest.js');
 var CurrentUser = require('./API_controllers/currentUser.js');
+
+//require 
 var Account = require('./controllers/account.js');
 var Tinyvision = require('./controllers/listImage.js');
 var FormProject = require('./controllers/form.js');

@@ -542,3 +542,7 @@ button.req-form-button:hover{
 	max-height: 350px;
 	background-color: #bdbdbd;
 }
+
+.small-post-thumb > img{
+	width: 100%
+}

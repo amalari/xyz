@@ -13,7 +13,7 @@ function postViewModel(){
 
 util.inherits(postViewModel, viewModels);
 
-postViewModel.prototype.getList = function(listData, ajaxRequest){
+postViewModel.prototype.getList = function(listData, ajaxRequest, fromUrl){
 	var that = this;
 	var result = {};
 	if(ajaxRequest){
@@ -42,6 +42,12 @@ postViewModel.prototype.getList = function(listData, ajaxRequest){
 			data.totalComment = arr.length;
 			data.content = that.summary(data.content, '16px');
 			data.author = data.user.fullname;
+			if(fromUrl == '/search'){
+				var deleteExt = data.header_image.split('.');
+				deleteExt.splice(deleteExt.length - 1, 1);
+				var newFilename = deleteExt.toString() + "_300x300.JPG";
+				data.header_image = newFilename;
+			};
 			return that.map(that._viewProperties, data)
 		});
 	}
@@ -114,9 +120,11 @@ postViewModel.prototype.summary = function(content, size){
 	});
 	var newContent="";
 	if(content.length > 300){
-		newContent = content.substr(0, 300) + ". . . .</p>";
+		newContent = content.substr(0, 300) + " . . . .</p>";
 	} else {
-		newContent = content.replace("</p>"," . . .</p>");
+		var lastIndex = content.lastIndexOf("</p>");
+		newContent = content.substr(0, lastIndex);
+		newContent = newContent + " . . . .</p>"
 	};
 	return newContent;
 };
