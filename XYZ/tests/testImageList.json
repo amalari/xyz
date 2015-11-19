@@ -1,9 +1,0 @@
-{
-  "data": [
-    {
-      "imageUrl": "http://localhost:3003/images/glen-thumb.jpg",
-      "name": "Austin guitar",
-      "value": "http://localhost:3003/images/glen.jpg"
-    }
-  ]
-}

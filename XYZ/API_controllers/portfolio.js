@@ -23,7 +23,6 @@ var image_maping = function(data, portfolioId, arr){
 
 PortfolioController = {
 	registerRoutes : function(app){
-		console.log("controller portfolio")
 		app.get('/api/portfolio', this.list);
 		app.get('/api/portfolio/:id', this.single);
 		app.post('/api/portfolio', this.save);
@@ -54,15 +53,12 @@ PortfolioController = {
 	},
 	save : function(req, res){
 		portfolioMultipart.parseAndSaveFiles(req, function(data){
-			console.log("nfkjanfkjldsanfkjasnfskladf");
-			console.log(data);
 			var newData = {};
 			var arr = [];
 			for(var key in data){
 				if(key.indexOf("image") === -1){
 					if(key === "header"){
 						if(data[key] != undefined){
-							console.log("kalau undifined harusnya jangan lewat sini");
 							newData.header_image = portfolioFileManager.getUrl(data[key]);
 						}
 					}
@@ -73,11 +69,9 @@ PortfolioController = {
 			Portfolio.save(result)
 			.then(function(model){
 				var singleData = model.toJSON();
-				console.log(singleData);
 				for(var key in data){
 					if(key.indexOf("image") > -1){
 						if(data[key] != undefined){
-							console.log("kalau undifined harusnya jangan lewat sini");
 							var imageDir = portfolioFileManager.getUrl(data[key]);
 							image_maping(imageDir, singleData.id, arr);
 						}
@@ -120,8 +114,6 @@ update : function(req, res){
 			var arr = [];
 			if(listModel !== null){
 				var list_images = listModel.toJSON();
-				console.log(list_images);
-				console.log("harusnya ga lewat sini kalau image ga diisi")
 				for(var i in list_images){
 					if(data.image != undefined){
 						portfolioFileManager.delete(list_images[i].image);
@@ -139,7 +131,6 @@ update : function(req, res){
 					}
 				}
 			};
-			console.log(arr);
 			return PortfolioImage.save(arr);
 		})
 		.then(function(){
@@ -160,7 +151,6 @@ delete : function(req, res){
 		return Portfolio.delete(req.params.id)
 	})
 	.then(function(){
-		console.log(portfolio);
 		var queryBuilder = new qb();
 		queryBuilder.setup({
 			whereCondition : {portfolio_id : req.params.id}

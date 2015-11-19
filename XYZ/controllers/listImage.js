@@ -6,7 +6,6 @@ var gm = require('gm');
 
 TinyvisonController = {
 	registerRoutes : function(app){
-		console.log('masuk tinyvison');
 		app.get('/image', this.list);
 		app.post('/image', this.post);
 	},
@@ -35,32 +34,6 @@ TinyvisonController = {
 			baseUrl : '/images'
 		});
 		formMultipart.parseAndSaveFiles(req, function(data){
-			// var uploadDir =  __dirname + '/../public/images/';
-		// 	gm(data.files).thumb(100, 100, './', 70, function(err, stdout, stderr, command){
-		// 		if(err){
-		// 			console.log("ererererererererer");
-		// 			console.log(err);
-		// 		};
-		// 		console.log("thumbnail skjfdaskjfklsfjsadkjfsadklfjasklfjasklfs");
-		// 		console.log(stdout);
-		// 		console.log(stderr);
-		// 		console.log(command);
-		// 		var newData = {};
-		// 		newData.client_id = req.query.clientId;
-		// 		for(var key in data){
-		// 			if(key.indexOf("file") > -1){
-		// 				newData[key] = formFileManager.getUrl(data[key])
-		// 			} else {
-		// 				newData[key] = data[key];
-		// 			}
-		// 		};
-		// 		// var result = ProjectRequestViewModel.save(newData);
-		// 		// ProjectRequest.save(result)
-		// 		// .then(function(){
-		// 		// 	res.render("finish-form")
-		// 		// })
-		// 	res.send({success:true});
-		// });
 			var newData = {};
 			newData.client_id = req.query.clientId;
 			for(var key in data){
@@ -72,7 +45,7 @@ TinyvisonController = {
 			};
 			res.send({success:true});
 		})
-}
+	}
 };
 
 module.exports = TinyvisonController;

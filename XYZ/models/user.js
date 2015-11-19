@@ -9,8 +9,6 @@ var User = bookshelf.Model.extend({
 	}
 }, {
 	save : Promise.method(function(data){
-		console.log('-------------------------------');
-		console.log(data !== null);
 		if(data !== null){
 			return new this(data).save()};
 		}),
@@ -44,12 +42,9 @@ var User = bookshelf.Model.extend({
 		return new this({id: userId}).fetch();
 	}),
 	update : Promise.method(function(data){
-		console.log("++++++++++++++++++++++++++");
-		console.log(data);
 		return new this({id: data.id}).save(data);
 	}),
 	delete : Promise.method(function(data){
-		console.log(data);
 		return new this({id:data.id}).save(data)
 	})
 })

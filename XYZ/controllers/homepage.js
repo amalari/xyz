@@ -52,7 +52,6 @@ HomepageController = {
 		queryBuilder.search(['content', 'LIKE', '%' + req.query.q + '%']);
 		Post.list(queryBuilder)
 		.then(function(data){
-			console.log(data);
 			result.blog = PostViewModel.getList(data, req.xhr);
 			queryBuilder.setup({
 				limit : 10,
@@ -76,7 +75,6 @@ HomepageController = {
 				page:currentPage, limit:10, totalRows: result.portfolio.total
 			};
 			result.q = req.query.q;
-			console.log(result);
 			res.render('archive', result);
 		})
 	}

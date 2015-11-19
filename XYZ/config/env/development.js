@@ -1,7 +1,7 @@
 var path = require('path');
 var roothPath = path.normalize(__dirname + '/../..');
 var config = {
-	port:3000,
+	port:3003,
 	ipAddress :'192.168.1.2',
 	database : {
 		client: 'mysql',

@@ -4,7 +4,6 @@ var ProjectRequestViewModel = require('./../viewModels/projectRequest.js');
 
 ProjectRequestController = {
 	registerRoutes : function(app){
-		console.log("controller request")
 		app.get('/api/project-request', this.list);
 		app.get('/api/project-request/:id', this.single);
 	},
@@ -29,7 +28,6 @@ ProjectRequestController = {
 			var data = model.toJSON();
 			var design_reference_file = data.design_reference_file.split(",");
 			data.design_reference_file = design_reference_file;
-			console.log(data);
 			res.send(data);
 		})
 		.catch(function(err){

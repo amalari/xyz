@@ -21,7 +21,6 @@ projectViewModel.prototype.getList = function(listData){
 }
 
 projectViewModel.prototype.save = function(data){
-	console.log("form view model");
 	var multiple = {};
 	var result = {};
 	for(var key in data){
@@ -34,7 +33,6 @@ projectViewModel.prototype.save = function(data){
 		result[i] = post[i];
 		for(var x in multiple){
 			if(x.indexOf(i) > -1){
-				console.log("lewat sini");
 				result[i] = post[i] + "," + multiple[x];
 			} else {
 				cosnoe.log("kesini");

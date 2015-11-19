@@ -17,10 +17,8 @@ queryBuilder.prototype.build = function(qb){
 		modifiedQb = modifiedQb.where(this._whereCondition);
 	}
 	return modifiedQb;
-	// return .where(this._whereCondition);
 };
 queryBuilder.prototype.buildConditionsOnly = function(qb){
-	console.log("build condition only");
 	if(!this._isEmpty(this._whereCondition)){
 		return qb.where(this._whereCondition);		
 	}

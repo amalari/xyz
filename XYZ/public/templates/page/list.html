@@ -35,8 +35,8 @@
 							<tr role="row" class="odd" ng-repeat="page in pages">
 								<td class="sorting_1">{{page.author}}</td>
 								<td>{{page.title}}</td>
-								<td>{{page.created_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
-								<td>{{page.updated_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
+								<td>{{page.created_date | date: 'dd-MMMM-yyyy'}}</td>
+								<td>{{page.updated_date | date: 'dd-MMMM-yyyy'}}</td>
 								<td>{{page.typeName}}</td>
 								<td>
 									<a ui-sref="page-update({id: page.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>									

@@ -1,6 +1,5 @@
 CurrentUserController = {
 	registerRoutes : function(app){
-		console.log("current user");
 		app.get('/api/current-user/', this.get);
 	},
 	get : function(req, res){

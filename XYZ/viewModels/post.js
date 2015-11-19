@@ -1,6 +1,7 @@
 var util = require('util');
 var viewModels = require('./index.js');
 var gravatar= require('gravatar');
+var sanitizeHtml = require('sanitize-html');
 
 function postViewModel(){
 	viewModels.call(this, viewModels);
@@ -13,7 +14,6 @@ function postViewModel(){
 util.inherits(postViewModel, viewModels);
 
 postViewModel.prototype.getList = function(listData, ajaxRequest){
-	console.log("post view model get list");
 	var that = this;
 	var result = {};
 	if(ajaxRequest){
@@ -40,7 +40,7 @@ postViewModel.prototype.getList = function(listData, ajaxRequest){
 			};
 			data.comments = arr;
 			data.totalComment = arr.length;
-			data.content = that.summary(data.content);
+			data.content = that.summary(data.content, '16px');
 			data.author = data.user.fullname;
 			return that.map(that._viewProperties, data)
 		});
@@ -50,7 +50,6 @@ postViewModel.prototype.getList = function(listData, ajaxRequest){
 };
 
 postViewModel.prototype.save = function(data, userId){
-	console.log("post view model");
 	if(data.category_id){
 		data.category_id = parseInt(data.category_id);
 	} else {
@@ -98,8 +97,6 @@ postViewModel.prototype.get = function(data, ajaxRequest){
 
 postViewModel.prototype.update = function(data){
 	if(data.category_id != 'null' || data.header_image != 'null'){
-		console.log("masuk sini ya masuk sini ya?");
-		console.log(data.category_id);
 		data.category_id = parseInt(data.category_id);
 	} else {
 		data.category_id = null;
@@ -111,8 +108,10 @@ postViewModel.prototype.update = function(data){
 	return post;
 };
 
-postViewModel.prototype.summary = function(content){
-	content = content.replace(/<img[^>]*>/g, '');
+postViewModel.prototype.summary = function(content, size){
+	var content = sanitizeHtml(content, {
+		allowedTags : ['blockquote', 'p','b', 'i', 'strong', 'em', 'br', 'caption', 'pre']
+	});
 	var newContent="";
 	if(content.length > 300){
 		newContent = content.substr(0, 300) + ". . . .</p>";

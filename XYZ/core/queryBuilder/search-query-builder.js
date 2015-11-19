@@ -8,10 +8,7 @@ function SearchQueryBuilder(){
 util.inherits(SearchQueryBuilder, QueryBuilder);
 
 SearchQueryBuilder.prototype.build = function(qb){
-	console.log('--------------------------------------------------------------');
-	console.log(this);
 	var modifiedQb = SearchQueryBuilder.super_.prototype.build.call(this,qb);
-	// console.log(modifiedQb);
 	return this._extractSearchCondition(modifiedQb);
 };
 SearchQueryBuilder.prototype.buildConditionsOnly = function(qb){
@@ -33,19 +30,13 @@ SearchQueryBuilder.prototype._extractSearchCondition = function(modifiedQb){
 					looping++
 				}
 			};
-			console.log(this._whereCondition);
 			if(looping >= 2 && this._whereCondition.type == 2){
-				console.log("masuk sini kan ini teh");
 				for(var a in this._searchCondition[i]){
-					console.log(this._searchCondition[i][a])
 					for(var b in this._searchCondition[i][a]){
 						x.id = {};
-						console.log(x);
-						console.log(id);
 						x.id[b] = this._searchCondition[i][a][b];
 						condition.push(x.id);
 						id++
-						console.log(condition)
 					}
 				}
 				modifiedQb = modifiedQb.orWhere(condition[0]).andWhere(condition[1], condition[2]);

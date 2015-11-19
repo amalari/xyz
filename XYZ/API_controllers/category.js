@@ -15,7 +15,6 @@ CategoryController = {
 		data.name = req.body.name;
 		data.id = req.body.categoryId;
 		data.is_active = req.body.is_active;
-		console.log(data);
 		Category.save(data)
 		.then(function(){
 			res.send({success: true})

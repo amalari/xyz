@@ -68,7 +68,6 @@ BlogController = {
 				});
 				Post.getCheck(req.params.id)
 				.then(function(model){
-					console.log(model);
 					var data = model.toJSON();
 					data.liker = data.liker + 1;
 					return Post.update(data)
@@ -77,7 +76,6 @@ BlogController = {
 					res.redirect('/blog/' + req.params.id);
 				})
 			} else {
-				console.log(req.session.preferredPage);
 				var find = _.findIndex(req.session.preferredPage, function(preferredPage){
 					return preferredPage.post_id == req.params.id
 				});
@@ -88,7 +86,6 @@ BlogController = {
 					});
 					Post.getCheck(req.params.id)
 					.then(function(model){
-						console.log(model);
 						var data = model.toJSON();
 						data.liker = data.liker + 1;
 						return Post.update(data)
@@ -97,7 +94,6 @@ BlogController = {
 						res.redirect('/blog/' + req.params.id);
 					})
 				} else {
-					console.log("jika req session sudah ada dan mau like page ini lagi")
 					res.redirect('/blog/' + req.params.id);
 				}
 			}
@@ -169,7 +165,6 @@ BlogController = {
 						post_id : req.params.id,
 						read_date : today
 					});
-					console.log(req.session.accessLog);
 					Post.getCheck(req.params.id)
 					.then(function(model){
 						var data = model.toJSON()
@@ -211,7 +206,6 @@ BlogController = {
 			res.redirect(req.get('referer'));
 		})
 		.catch(function(err){
-			console.log(err.message);
 		})
 	},
 	delete : function(req, res){
@@ -222,10 +216,8 @@ BlogController = {
 			return Comment.delete(data)
 		})
 		.then(function(){
-			console.log("comment ini telah dihapus")
 		})
 		.catch(function(err){
-			console.log(err.message);
 		})
 	}
 }

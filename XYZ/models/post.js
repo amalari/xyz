@@ -24,7 +24,6 @@ var Post = bookshelf.Model.extend({
 		return new this(posting).save();
 	}),
 	list : Promise.method(function(queryBuilder){
-		console.log("post list model");
 		var that = this;
 		var result = {};
 		return this.collection().query(function(qb){
@@ -32,7 +31,6 @@ var Post = bookshelf.Model.extend({
 		})
 		.fetch({withRelated : ['user', 'category', 'comments']})
 		.then(function(listModel){
-			console.log("list Model :");
 			result.data = listModel.toJSON();
 			var raw = 'count(distinct(posts.id)) as total';
 			return that.collection()

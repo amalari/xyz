@@ -22,8 +22,8 @@
 									<th width="150px" class="sorting_asc">Author</th>
 									<th>Title</th>
 									<th width="50px">Category</th>							
-									<th width="100px">Created at</th>
-									<th width="100px">Update at</th>
+									<th width="135px">Created at</th>
+									<th width="135px">Update at</th>
 									<th width="20px">Edit</th>
 									<th width="20px">Delete</th>
 								</tr>
@@ -33,8 +33,8 @@
 									<td class="sorting_1">{{post.author}}</td>
 									<td>{{post.title}}</td>
 									<td>{{post.category.name}}</td>
-									<td>{{post.created_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
-									<td>{{post.updated_date | date: 'dd-MMMM-yyyy HH:mm:ss Z'}}</td>
+									<td>{{post.created_date | date: 'dd-MMMM-yyyy'}}</td>
+									<td>{{post.updated_date | date: 'dd-MMMM-yyyy'}}</td>
 									<td>
 										<a ui-sref="post-update({id: post.id})" class="btn btn-default"><i class="fa fa-edit"></i></a>									
 									</td>

@@ -16,7 +16,6 @@ var Portfolio = bookshelf.Model.extend({
 	}
 }, {
 	list : Promise.method(function(queryBuilder){
-		console.log("masuk ke list portfolio");
 		var that = this;
 		var result = {};
 		return this.collection().query(function(qb){

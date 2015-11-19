@@ -13,7 +13,6 @@ AccountController = {
 		if(Array.isArray(message)){
 			message = message[0];
 		};
-		console.log(message);
 		res.render('login', {layout: false,
 			message : message});
 	},

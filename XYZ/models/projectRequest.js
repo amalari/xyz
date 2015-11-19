@@ -33,7 +33,6 @@ var ProjectRequest = bookshelf.Model.extend({
 		return new this({id:projectId}).fetch({withRelated : ['client']});
 	}),
 	save : Promise.method(function(project){
-		console.log(project);
 		return new this(project).save();
 	})
 });

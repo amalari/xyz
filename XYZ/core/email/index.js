@@ -26,7 +26,6 @@ Email.prototype.setup = function(handlebars){
 };
 
 Email.prototype.send = function(mail){
-	console.log(mail.html);
 	var templateEmail = "";
 	if(mail.lang === "eng"){
 		templateEmail = "email-english"
@@ -49,9 +48,5 @@ Email.prototype.send = function(mail){
 		console.log("message sent: " + info.response)
 	})
 }
-
-// Email.prototype.setupHbs = function(options){
-// 	this._transporter.use('compile', hbs(options));
-// }
 
 module.exports = new Email();

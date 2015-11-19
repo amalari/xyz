@@ -9,13 +9,11 @@ var isValidPassword =  function(pass, passEncrypted){
 
 var exports2 = {
 	init : function(passport){
-		console.log("local strategy");
 		passport.use('local', new PassportLocal({
 			passReqToCallback : true,
 			usernameField: 'email',
 			passwordField: 'password'
 		}, function(req, email, password, done) {
-			console.log(password);
 			User.check(email)
 			.then(function(model){
 				var user;
@@ -24,7 +22,6 @@ var exports2 = {
 						type: 'Notification',
 						message: 'Incorect Username'}));
 				} else{
-					// console.log('model ke json');
 					user = model.toJSON()
 				}
 				if(!isValidPassword(password, user.password)){
@@ -32,12 +29,10 @@ var exports2 = {
 						type: 'Notification',
 						message: 'Incorect Password'}));
 				}
-				// console.log(user);
 				return done(null, user);
 
 			})
 			.catch(function(err){
-				console.log(err);
 				return done(err, null);
 			})
 		}));

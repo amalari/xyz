@@ -40,7 +40,6 @@ CategoryVisitorController = {
 						};
 						result.q = req.query.q;
 						result.type = req.query.type;
-						console.log(result);
 						res.render('archive2', result);
 					})
 				} else {
@@ -61,7 +60,6 @@ CategoryVisitorController = {
 						};
 						result.q = req.query.q;
 						result.type = req.query.type;
-						console.log(result);
 						res.render('archive2', result);
 					})
 				};

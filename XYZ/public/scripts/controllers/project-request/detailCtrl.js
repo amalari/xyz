@@ -5,6 +5,5 @@ angular.module('xyz.controllers')
 
 	ProjectRequest.get({id:$stateParams.id}, function(data){
 		$scope.projectRequest = data;
-		console.log(data);
 	});
 }]);

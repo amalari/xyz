@@ -140,8 +140,7 @@ FormController = {
 				if(data[i].verify === req.query.code){
 					code = 	data[i].verify			}
 				}
-				if(code !== 'undefined'){
-					console.log("_________FNSOFKNSDOFNSOKFNSOFNOS");
+				if(code != undefined){
 					return next();
 				} else {
 					res.send(404, {message : "form not found"})

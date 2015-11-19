@@ -31,13 +31,13 @@ angular.module('xyz.controllers')
 		skin: 'lightgray',
 		theme : 'modern',
 		external_plugins: {
-			'tinyvision': 'http://localhost:3003/scripts/dependencies/tinyvision/plugin.min.js'
+			'tinyvision':ENV.apiEndpoint + '/scripts/dependencies/tinyvision/plugin.min.js'
 		},
 		height: '300',
 		menubar: false,
 		statusbar: false,
 		tinyvision: {
-			source: 'http://localhost:3003/list/image',
+			source: ENV.apiEndpoint + '/image',
 			upload: function () {
 				var fileUploader = $('#tinyvision-file-input');
 				if(!fileUploader.length){

@@ -34,6 +34,7 @@
     "passport-local": "^1.0.0",
     "rand-token": "^0.2.1",
     "sanitize-filename": "^1.4.5",
+    "sanitize-html": "^1.11.1",
     "util": "^0.10.3"
   },
   "devDependencies": {}

@@ -28,8 +28,6 @@ var Homepage = require('./controllers/homepage.js');
 var About = require('./controllers/about.js');
 var Blog = require('./controllers/blog.js');
 var Work = require('./controllers/work.js');
-// var test = require('./tests/account.js');
-// var UserModel = require('./models/user.js');
 var CategoryPublic = require('./controllers/category.js')
 var Contact = require('./controllers/contact.js');
 
