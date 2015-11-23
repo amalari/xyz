@@ -46,6 +46,7 @@ var Comment = bookshelf.Model.extend({
 		})
 	}),
 	delete : Promise.method(function(commentId){
+		//ttttttt
 		return new this({id: commentId}).destroy();
 	})
 })
