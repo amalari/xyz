@@ -22,4 +22,11 @@ angular.module('xyz.controllers')
 		refresh()
 	};
 
+	$scope.remove = function(requestId, clientName){
+		if(confirm('Anda yakin akan menghapus request from ' + clientName + '?')){
+			ProjectRequest.remove({id:requestId}, function(){
+				refresh();
+			});
+		}
+	};
 }]);

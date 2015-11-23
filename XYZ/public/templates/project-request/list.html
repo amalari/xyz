@@ -19,6 +19,7 @@
 								<th>Email</th>							
 								<th>Created at</th>
 								<th width="20px">Detail</th>
+								<th width="20px">Delete</th>
 							</tr>
 						</thead>
 						<tbody>							
@@ -28,7 +29,10 @@
 								<td>{{projectRequest.created_date | date: 'dd-MMMM-yyyy HH:mm'}}</td>
 								<td>
 									<a ui-sref="projectRequest-detail({id: projectRequest.id})" class="btn btn-default"><i class="fa fa-info-circle"></i></a>									
-								</td>									
+								</td>
+								<td>
+									<button type="button"  ng-click="remove(projectRequest.id, projectRequest.clientName)" class="btn btn-default"><i class="fa fa-remove"></i></button>
+								</td>										
 							</tr>
 						</tbody>
 						<tfoot>				

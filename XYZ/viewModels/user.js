@@ -12,7 +12,6 @@ UserViewModel = {
 		return result;
 	},
 	list : function(list){
-		// console.log(listData);
 		var result = {};
 		result.data = list.data.map(function(data){
 			var x = {};

@@ -35,7 +35,6 @@ projectViewModel.prototype.save = function(data){
 			if(x.indexOf(i) > -1){
 				result[i] = post[i] + "," + multiple[x];
 			} else {
-				cosnoe.log("kesini");
 				result[i] = post[i];
 			}
 		}

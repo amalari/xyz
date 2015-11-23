@@ -11,7 +11,7 @@ BlogController = {
 		app.get('/blog/:id', this.checkVisitor(app), this.get);
 		app.get('/blog/like/:id', this.likePage(app));
 		app.post('/blog/:id', this.save);
-		app.delete('/blog/:id', this.delete);
+		app.delete('/blog/comment/:id', this.delete);
 	},
 	getList : function(req, res){
 		var currentPage = 1;
@@ -181,6 +181,7 @@ BlogController = {
 	get : function(req, res){
 		Post.single(req.params.id, 1, req.xhr)
 		.then(function(model){
+			console.log(model.toJSON());
 			var data = PostViewModel.get(model.toJSON(), req.xhr);
 			var find = _.findIndex(req.session.preferredPage, function(preferredPage){
 				return preferredPage.post_id == req.params.id
@@ -209,17 +210,15 @@ BlogController = {
 		})
 	},
 	delete : function(req, res){
-		Comment.get(req.params.id)
-		.then(function(model){
-			var data = model.toJSON();
-			data.is_active = 0;
-			return Comment.delete(data)
-		})
+		Comment.delete(req.params.id)
 		.then(function(){
+			res.send({success : true})
 		})
 		.catch(function(err){
+			res.send({success: false, message : err.message})
 		})
 	}
-}
+};
+
 
 module.exports = BlogController;

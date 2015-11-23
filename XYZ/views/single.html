@@ -1,5 +1,6 @@
 {{#section 'head'}}
 <title>XYZ - Blog</title>
+<meta property="og:image" content="{{fullUrl}}"/>
 {{/section}}
 <div class="single container">
 	<div class="row">
@@ -29,6 +30,9 @@
 			{{#each rootComments}}
 			<ul class="comments">
 				<li>
+					<form class="comment-delete" action="/blog/comment/{{id}}">
+						<button type="button" class="close" aria-hidden="true">x</button>
+					</form>
 					<img class="avatar" src="{{avatar}}" />
 					<a class="reply" href="javascript:;" data-parent-id="{{id}}" >Reply</a>
 					<cite class="author">{{name}}</cite>
@@ -39,6 +43,9 @@
 					{{#each comments}}
 					<ul class="comments">
 						<li>
+							<form class="comment-delete" action="/blog/comment/{{id}}">
+								<button type="button" class="close" aria-hidden="true">x</button>
+							</form>
 							<img class="avatar" src="{{avatar}}" />
 							<cite class="author">{{name}}</cite>
 							<p class="meta"><a href="#comment-224401" title="">{{date}}</a></p>
@@ -102,6 +109,25 @@
 			$('#parentId').val(null);
 			$('.comment-deffault').html($('.comment-form'));
 		});
+		$('.close').click(function(e){
+			$.confirm({
+				title: 'Confirm!',
+				content: 'Are you sure want to delete this comment?',
+				confirm: function(){
+					$.ajax({
+						url : $('.comment-delete').attr('action'),
+						type : 'DELETE',
+						complete : function(){
+							location.reload();
+						}
+					})
+				},
+				cancel: function(){
+					return;
+				}
+			});
+		})
+		
 	})
 </script>
 

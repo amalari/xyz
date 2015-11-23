@@ -11,7 +11,7 @@ WorkController = {
 		app.get('/portfolio/:id',this.checkVisitor(app), this.get);
 		app.get('/portfolio/like/:id', this.likePage(app));
 		app.post('/portfolio/:id', this.save);
-		app.delete('/portfolio/:id', this.delete);
+		app.delete('/portfolio/comment/:id', this.delete);
 	},
 	list : function(req, res){
 		var currentPage = 1;
@@ -217,15 +217,12 @@ WorkController = {
 		})
 	},
 	delete : function(req, res){
-		Comment.get(req.params.id)
-		.then(function(model){
-			var data = model.toJSON();
-			data.is_active = 0;
-			return Comment.delete(data)
-		})
+		Comment.delete(req.params.id)
 		.then(function(){
+			res.send({success : true})
 		})
 		.catch(function(err){
+			res.send({success: false, message : err.message})
 		})
 	}
 }

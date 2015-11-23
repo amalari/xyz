@@ -15,10 +15,7 @@ var Post = bookshelf.Model.extend({
 	},
 	comments : function(){
 		return this.hasMany('Comment')
-	},
-	rootComments : function(){
-        return this.comments().query('where', 'parrent_id', null);
-	},
+	}
 }, {
 	save : Promise.method(function(posting){
 		return new this(posting).save();

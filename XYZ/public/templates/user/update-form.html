@@ -50,12 +50,12 @@
           <div ng-hide="hiddenAlertFailed" class="alert alert-warning alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <h4><i class="icon fa fa-warning"></i> Failed!</h4>
-            {{message}}
+            {{message.message}}
           </div>
           <div ng-hide="hiddenAlertSuccess" class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <h4><i class="icon fa fa-check-circle"></i> Success!</h4>
-            {{message}}<a href="/login"> Link</a>
+            {{message.message}}<a href="/login"> Link</a>
           </div>
           <h3 class="box-title">{{formTitle}}</h3>
         </div><!-- /.box-header -->

@@ -34,6 +34,9 @@ var ProjectRequest = bookshelf.Model.extend({
 	}),
 	save : Promise.method(function(project){
 		return new this(project).save();
+	}),
+	delete : Promise.method(function(projectId){
+		return new this({id : projectId}).destroy()
 	})
 });
 

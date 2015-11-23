@@ -45,8 +45,8 @@ var Comment = bookshelf.Model.extend({
 			return Promise.resolve(result);
 		})
 	}),
-	delete : Promise.method(function(comment){
-		return new this({id: comment.id}).save(comment);
+	delete : Promise.method(function(commentId){
+		return new this({id: commentId}).destroy();
 	})
 })
 

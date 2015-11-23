@@ -1,5 +1,6 @@
 {{#section 'head'}}
 <title>XYZ - Work</title>
+<meta property="og:image" content="{{fullUrl}}"/>
 {{/section}}
 <div class="single porto container">
 	<div class="row">
@@ -53,6 +54,9 @@
 			{{#each rootComments}}
 			<ul class="comments">
 				<li>
+					<form class="comment-delete" action="/portfolio/comment/{{id}}">
+						<button type="button" class="close" aria-hidden="true">x</button>
+					</form>
 					<img class="avatar" src="{{avatar}}" />
 					<a class="reply" href="javascript:;" data-parent-id="{{id}}" >Reply</a>
 					<cite class="author">{{name}}</cite>
@@ -125,6 +129,24 @@
 			$(this).closest('form').find("input[type=text], input[type=email], textarea").val("");
 			$('#parentId').val(null);
 			$('.comment-deffault').html($('.comment-form'));
+		});
+		$('.close').click(function(e){
+			$.confirm({
+				title: 'Confirm!',
+				content: 'Are you sure want to delete this comment?',
+				confirm: function(){
+					$.ajax({
+						url : $('.comment-delete').attr('action'),
+						type : 'DELETE',
+						complete : function(){
+							location.reload();
+						}
+					})
+				},
+				cancel: function(){
+					return;
+				}
+			});
 		})
 	})
 </script>

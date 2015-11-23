@@ -85,12 +85,14 @@ postViewModel.prototype.get = function(data, ajaxRequest){
 			} else {
 				for(var b in data.rootComments){
 					if(data.comments[a].parrent_id === data.rootComments[b].id){
-						data.rootComments[b].comments =[];
+						if(data.rootComments[b].comments == undefined){
+							data.rootComments[b].comments =[];
+						};
 						data.rootComments[b].comments.push(data.comments[a]);
 					}
 				}
 			}
-		}
+		};
 		data.totalComment = arr.length;
 		data.author = data.user.fullname;
 		data.comments = data.comments.map(function(obj){

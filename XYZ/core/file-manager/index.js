@@ -25,6 +25,22 @@ FileManager.prototype.delete = function(fileUrl){
 */
 FileManager.prototype.getUrl = function(filename){	
 	return util.format('%s/%s', this._baseUrl, filename);
-}
+};
+
+FileManager.prototype.deleteFolder = function(){
+	var path = this._dir;
+	if( fs.existsSync(path) ) {
+		fs.readdirSync(path).forEach(function(file,index){
+			console.log(file);
+			var curPath = path + "/" + file;
+      if(fs.lstatSync(curPath).isDirectory()) { // recurse
+      	deleteFolderRecursive(curPath);
+      } else { // delete file
+      	fs.unlinkSync(curPath);
+      }
+  });
+		fs.rmdirSync(path);
+	}
+};
 
 module.exports = FileManager;

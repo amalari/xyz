@@ -26,15 +26,13 @@ angular.module('xyz.controllers')
 			$state.go('user-profile', {id: $scope.model.id});
 		});
 	};
-	$scope.cancel  =function(){
-		$('.bs-example-modal-sm').modal('hide');
-	};
 	$scope.password = {};
+	$scope.oriPerson = angular.copy($scope.password);
 	$scope.updatePassword= function(){
 		if($scope.password.newPass === $scope.password.confirmPass){
 			User.update($scope.password, function(data){
 				$scope.message = data.message;
-				if(data.success){
+				if($scope.message.status){
 					$scope.hiddenAlertSuccess = false;
 				} else {
 					$scope.hiddenAlertFailed = false;
@@ -49,6 +47,10 @@ angular.module('xyz.controllers')
 			$scope.password.id = id;
 			return $scope.alertForConfirmPassword = false;
 		}
+	};
+	$scope.cancel  =function(){
+		$scope.password = angular.copy($scope.oriPerson);
+		$('.bs-example-modal-sm').modal('hide');
 	};
 	$scope.tinymceOptions = {
 		onChange: function(e) {
