@@ -60,8 +60,14 @@ BlogController = {
 				h = "0" + h;
 			}
 			today = dd + '/' + mm + '/' + yyyy + " " + h + ":" + m;
+			console.log(req.session.preferredPage);
 			if(req.session.preferredPage === undefined){
 				req.session.preferredPage = [];
+			};
+			var find = _.findIndex(req.session.preferredPage, function(preferredPage){
+				return preferredPage.post_id == req.params.id
+			});
+			if(find === -1){
 				req.session.preferredPage.push({
 					post_id : req.params.id,
 					read_date : today
@@ -72,30 +78,22 @@ BlogController = {
 					data.liker = data.liker + 1;
 					return Post.update(data)
 				})
-				.then(function(){
-					res.redirect('/blog/' + req.params.id);
+				.then(function(data){
+					data = data.toJSON();
+					res.send({success : true, likers: data.liker});
 				})
 			} else {
-				var find = _.findIndex(req.session.preferredPage, function(preferredPage){
-					return preferredPage.post_id == req.params.id
-				});
-				if(find === -1){
-					req.session.preferredPage.push({
-						post_id : req.params.id,
-						read_date : today
-					});
-					Post.getCheck(req.params.id)
-					.then(function(model){
-						var data = model.toJSON();
-						data.liker = data.liker + 1;
-						return Post.update(data)
-					})
-					.then(function(){
-						res.redirect('/blog/' + req.params.id);
-					})
-				} else {
-					res.redirect('/blog/' + req.params.id);
-				}
+				req.session.preferredPage.splice(0,1);
+				Post.getCheck(req.params.id)
+				.then(function(model){
+					var data = model.toJSON();
+					data.liker = data.liker - 1;
+					return Post.update(data)
+				})
+				.then(function(data){
+					data = data.toJSON();
+					res.send({success : true, likers: data.liker});
+				})
 			}
 		}
 	},
@@ -181,8 +179,8 @@ BlogController = {
 	get : function(req, res){
 		Post.single(req.params.id, 1, req.xhr)
 		.then(function(model){
-			console.log(model.toJSON());
 			var data = PostViewModel.get(model.toJSON(), req.xhr);
+			data.deleteComment = false;
 			var find = _.findIndex(req.session.preferredPage, function(preferredPage){
 				return preferredPage.post_id == req.params.id
 			});
@@ -190,6 +188,9 @@ BlogController = {
 				data.preferredPage = true;
 			} else {
 				data.preferredPage = false;
+			};
+			if(req.user != undefined){
+				data.deleteComment = true;
 			};
 			data.fullUrl = req.protocol + "://" + req.subdomains + req.hostname + ":3000" + req.originalUrl;
 			res.render('single', data);
