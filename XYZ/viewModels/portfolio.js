@@ -1,6 +1,7 @@
 var util = require('util');
 var viewModels = require('./index.js');
 var gravatar= require('gravatar');
+var sanitizeHtml = require('sanitize-html');
 
 function portfolioViewModel(){
 	viewModels.call(this, viewModels);
@@ -56,6 +57,7 @@ portfolioViewModel.prototype.list = function(listData){
 		};
 		data.comments = arr;
 		data.totalComment = arr.length;
+		data.content = that.summary(data.content, '16px');
 		return that.map(that._viewPropertiesList, data)
 	});
 	return listData;
@@ -74,6 +76,20 @@ portfolioViewModel.prototype.update = function(data){
 	post.id = data.id;
 	post.updated_date = new Date();
 	return post;
+};
+portfolioViewModel.prototype.summary = function(content, size){
+	var content = sanitizeHtml(content, {
+		allowedTags : ['p']
+	});
+	var newContent="";
+	if(content.length > 300){
+		newContent = content.substr(0, 300) + " . . . .</p>";
+	} else {
+		var lastIndex = content.lastIndexOf("</p>");
+		newContent = content.substr(0, lastIndex);
+		newContent = newContent + " . . . .</p>"
+	};
+	return newContent;
 };
 
 module.exports = new portfolioViewModel();

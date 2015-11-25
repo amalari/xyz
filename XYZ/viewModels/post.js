@@ -42,7 +42,7 @@ postViewModel.prototype.getList = function(listData, ajaxRequest, fromUrl){
 			data.totalComment = arr.length;
 			data.content = that.summary(data.content, '16px');
 			data.author = data.user.fullname;
-			if(fromUrl == '/search'){
+			if(fromUrl == '/search' && data.header_image != null){
 				var deleteExt = data.header_image.split('.');
 				deleteExt.splice(deleteExt.length - 1, 1);
 				var newFilename = deleteExt.toString() + "_300x300.JPG";
@@ -118,7 +118,7 @@ postViewModel.prototype.update = function(data){
 
 postViewModel.prototype.summary = function(content, size){
 	var content = sanitizeHtml(content, {
-		allowedTags : ['blockquote', 'p','b', 'i', 'strong', 'em', 'br', 'caption', 'pre']
+		allowedTags : ['p']
 	});
 	var newContent="";
 	if(content.length > 300){

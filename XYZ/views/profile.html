@@ -11,7 +11,7 @@
 					<li><a href="/category/search?q={{category.name}}&type=post">{{category.name}}</a></li>
 					<li>{{visitor}} Reads</li>
 					<li class="total-likers">{{liker}} Likes</li>
-					<li class="total-comments1">{{totalComment}} Comments</li>
+					<li>{{totalComment}} Comments</li>
 				</ul>
 				<h2 class="post-title">{{title}}</h2>
 				{{{content}}}
@@ -26,7 +26,7 @@
 				<li><a href="javascript:;" class="like-post" data-id = "{{id}}"><i class="fa fa-heart"></i></a></li>
 				{{/if}}
 			</ul>
-			<h3 class="comments-header total-comments2" data-total-comments = "{{totalComment}}">{{totalComment}} Comments | Leave a Comment</h3>
+			<h3 class="comments-header total-comments" data-total-comments = "{{totalComment}}">{{totalComment}} Comments | Leave a Comment</h3>
 			{{#each rootComments}}
 			<ul class="comments">
 				<li>
@@ -45,9 +45,8 @@
 					{{#each comments}}
 					<ul class="comments">
 						<li>
-							<div class="child-comments" data-id-child-comments="{{id}}"></div>
-							{{#if ../../deleteComment}}
-							<form id="child-rootComments" class="comment-delete" action="javascript:;">
+							{{#if ../deleteComment}}
+							<form class="comment-delete" action="/blog/comment/{{id}}">
 								<button type="button" class="close" aria-hidden="true">x</button>
 							</form>
 							{{/if}}
@@ -93,87 +92,3 @@
 		</div>
 	</div>
 </div>
-
-{{#section 'jquery'}}
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		var idClidComments = $(".child-comments").attr("data-id-child-comments");
-		$("#child-rootComments").attr("action", "/blog/comment/" + idClidComments);
-		$('#parentId').val(null);
-		$('.reply').click(function(e){
-			$(".btn-back").css("display", "inline");
-			$('form').find("input[type=text], input[type=email], textarea").val("");
-			e.preventDefault();
-			var that = $(this);
-			var parentId = that.attr('data-parent-id');
-			$('#parentId').val(parentId);
-			that.parent().append($('.comment-form'));	
-		});
-		$('.btn-back').click(function(e){
-			$(".btn-back").css("display", "none");
-			$(this).closest('form').find("input[type=text], input[type=email], textarea").val("");
-			$('#parentId').val(null);
-			$('.comment-deffault').html($('.comment-form'));
-		});
-		$('body').on('click', '.close', function(e){
-			var that = $(this);
-			$.confirm({
-				title: 'Confirm!',
-				content: 'Are you sure want to delete this comment?',
-				confirm: function(){
-					$.ajax({
-						url : that.parent().attr('action'),
-						type : 'DELETE',
-						complete : function(){
-							var totalComments = $('.total-comments2').attr("data-total-comments");
-							totalComments = parseInt(totalComments)-1;
-							var result1 = totalComments + " Comments";
-							var result2 = totalComments + " Comments | Leave a Comment";
-							that.closest("li").remove();
-							$('.total-comments1').text(result1);
-							$('.total-comments2').text(result2);
-						}
-					})
-				},
-				cancel: function(){
-					return;
-				}
-			});
-		})
-		$('body').on('click', '.like-post', function(e){
-			var that = $(this);
-			var id = that.attr("data-id");
-			$.ajax({
-				url : '/blog/like/' + id,
-				type : 'GET',
-				complete : function(data){
-					var totalLikers = data.responseJSON.likers;
-					var result = totalLikers + " Likes";
-					$(".fa-heart").css("color", "#00bfa5");
-					that.removeClass("like-post");
-					that.addClass('unlike-post');
-					$('.total-likers').text(result);
-				}
-			})
-		})
-		$('body').on('click', '.unlike-post', function(e){
-			var that = $(this);
-			var id = that.attr("data-id");
-			$.ajax({
-				url : '/blog/like/' + id,
-				type : 'GET',
-				complete : function(data){
-					var totalLikers = data.responseJSON.likers;
-					var result = totalLikers + " Likes";
-					$(".fa-heart").css("color", "#bdbdbd");
-					that.addClass("like-post");
-					that.removeClass('unlike-post');
-					$('.total-likers').text(result);
-				}
-			})
-		})
-	})
-</script>
-
-{{/section}}

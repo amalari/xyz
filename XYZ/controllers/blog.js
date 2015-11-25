@@ -193,6 +193,7 @@ BlogController = {
 				data.deleteComment = true;
 			};
 			data.fullUrl = req.protocol + "://" + req.subdomains + req.hostname + ":3000" + req.originalUrl;
+			console.log(data);
 			res.render('single', data);
 		})
 	},

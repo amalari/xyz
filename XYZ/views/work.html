@@ -11,7 +11,7 @@
 					<li><a href="/category/search?q={{category.name}}&type=portfolio">{{category.name}}</a></li>
 					<li>{{visitor}} Reads</li>
 					<li class="total-likers">{{liker}} Likes</li>
-					<li>{{totalComment}} Comments</li>
+					<li class="total-comments1">{{totalComment}} Comments</li>
 				</ul>
 				<h2 class="post-title">{{title}}</h2>
 				<ul class="porto-details list-unstyled">
@@ -50,7 +50,7 @@
 				<li><a href="javascript:;" class="like-post" data-id = "{{id}}"><i class="fa fa-heart"></i></a></li>
 				{{/if}}
 			</ul>
-			<h3 class="comments-header" data-total-comments = "{{totalComment}}">{{totalComment}} Comments | Leave a Comment</h3>
+			<h3 class="comments-header total-comments2" data-total-comments = "{{totalComment}}">{{totalComment}} Comments | Leave a Comment</h3>
 			{{#each rootComments}}
 			<ul class="comments">
 				<li>
@@ -69,9 +69,13 @@
 					{{#each comments}}
 					<ul class="comments">
 						<li>
-							{{#if ../deleteComment}}
-							<img class="avatar" src="{{avatar}}" />
+							<div class="child-comments" data-id-child-comments="{{id}}"></div>
+							{{#if ../../deleteComment}}
+							<form id="child-rootComments" class="comment-delete" action="/portfolio/comment/{{id}}">
+								<button type="button" class="close" aria-hidden="true">x</button>
+							</form>	
 							{{/if}}
+							<img class="avatar" src="{{avatar}}" />
 							<cite class="author">{{name}}</cite>
 							<p class="meta"><a href="#comment-224401" title="">{{date}}</a></p>
 							<p>
@@ -134,21 +138,23 @@
 			$('#parentId').val(null);
 			$('.comment-deffault').html($('.comment-form'));
 		});
-		$('.close').click(function(e){
+		$('body').on('click', '.close', function(e){
 			var that = $(this);
 			$.confirm({
 				title: 'Confirm!',
 				content: 'Are you sure want to delete this comment?',
 				confirm: function(){
 					$.ajax({
-						url : $('.comment-delete').attr('action'),
+						url : that.parent().attr('action'),
 						type : 'DELETE',
 						complete : function(){
-							var totalComments = $('.total-comments').attr("data-total-comments");
-							totalComments = totalComments-1;
-							var result = totalComments + " Comments | Leave a Comment";
+							var totalComments = $('.total-comments2').attr("data-total-comments");
+							totalComments = parseInt(totalComments)-1;
+							var result1 = totalComments + " Comments";
+							var result2 = totalComments + " Comments | Leave a Comment";
 							that.closest("li").remove();
-							$('.total-comments').text(result);
+							$('.total-comments1').text(result1);
+							$('.total-comments2').text(result2);
 						}
 					})
 				},
@@ -156,7 +162,7 @@
 					return;
 				}
 			});
-		});
+		})
 		$('body').on('click', '.like-post', function(e){
 			var that = $(this);
 			var id = that.attr("data-id");

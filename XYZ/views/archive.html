@@ -20,7 +20,8 @@
 
 			<div id = "myTabContent" class = "tab-content">
 				<div class = "tab-pane fade in active" id = "blog">
-					{{#each blog.data}}
+					{{#if blog.total}}
+					{{#each ../blog.data}}
 					<article>
 						<a href="/blog/{{id}}">
 							<div class="small-post-thumb">
@@ -40,6 +41,11 @@
 						<p class="author"><span class="prefix">By </span>{{author}}</p>
 					</article>
 					{{/each}}
+					{{else}}
+					<article>
+						<h3> Blog Not Found </h3>
+					</article>
+					{{/if}}
 
 					<div class="pagination-wrapper">
 						<nav>
@@ -51,6 +57,7 @@
 				</div>
 
 				<div class = "tab-pane fade" id = "portfolio">
+					{{#if portfolio.total}}
 					{{#each portfolio.data}}
 					<article>
 						<a href="/portfolio/{{id}}">
@@ -71,6 +78,11 @@
 						<p class="author"><span class="prefix">By </span>{{architect}}</p>
 					</article>
 					{{/each}}
+					{{else}}
+					<article>
+						<h3> Portfolio Not Found </h3>
+					</article>
+					{{/if}}
 
 					<div class="pagination-wrapper">
 						<nav>

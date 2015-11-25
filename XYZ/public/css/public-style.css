@@ -62,10 +62,10 @@ html,body {
 
 .home > .row > .col-md-4 {
 	padding-right: 23px;
-    padding-left: 23px;
-    padding-top: 23px;
-    padding-bottom: 23px;
-    text-align: right;
+	padding-left: 23px;
+	padding-top: 23px;
+	padding-bottom: 23px;
+	text-align: right;
 }
 
 .home > .row {
@@ -73,10 +73,33 @@ html,body {
 	margin-left: -23px;
 }
 
-.general-header {
+.general-header{
 	position: absolute;
 	top: 40px;
 	left: 40px;
+}
+
+.general-search{
+	position: absolute;
+	top: 25px;
+	right: 130px;
+	font-family: Roboto;
+	font-size: 22px;
+}
+
+.general-search > a {
+	color: black;
+}
+
+.general-search > form > #q{
+	display: none;
+	background: transparent;
+	border: none;
+	width: 300px;
+}
+
+#q:focus{
+	outline: 0
 }
 
 #la {
@@ -92,7 +115,6 @@ html,body {
 .general-header > h1.logo > a{
 	font-weight: bold;
 }
-
 
 .general-header a:hover{
 	color: #00bfa5;
@@ -120,8 +142,8 @@ html,body {
 	color:#9e9e9e;
 	font-family: Roboto;
 	padding: 3px 4px;
-    line-height: 1;
-    margin:0 12.5px;
+	line-height: 1;
+	margin:0 12.5px;
 }
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
 	background-color: #212121;
@@ -186,6 +208,7 @@ h6{
 }	
 h2.req-intro-title{
 	margin-bottom: 142px;
+	text-align: center;
 }
 a.req-intro-lang{
 	margin-bottom: 40px;
@@ -202,8 +225,9 @@ a.req-intro-lang:hover{
 }
 .req-intro-content > a.req-intro-button,
 button.req-form-button{
+	padding: 12px 12px;
 	margin-top: 102px;
-	margin-bottom: 20px;
+	margin-bottom: 100px;
 	background-color: #212121;
 	color:#fff !important;
 	width:136px;
@@ -211,6 +235,7 @@ button.req-form-button{
 	font-size: 22px;
 	font-family: Roboto;
 }
+
 p img{
 	width: 100%;
 	margin-top:10px;
@@ -240,6 +265,12 @@ p img{
 	font-family: Open Sans;
 	color:#bdbdbd;
 }
+.post-meta > li > a{
+	font-style: 16px;
+	font-family: Open Sans;
+	color:#bdbdbd;
+}
+
 .post-meta:after{
 	content: '';
 	display: table;
@@ -328,11 +359,12 @@ h3.comments-header{
 	font-family: Open Sans;
 	font-weight: normal;
 	margin-top:0;
-		margin-bottom: 40px;
+	margin-bottom: 40px;
 }
 .comments{
 	list-style: none;
 	padding: 0;
+	padding-bottom: 50px;
 }
 .comments .author{
 	text-transform: none;
@@ -355,7 +387,7 @@ h3.comments-header{
 	left: 0;
 }
 .comments .meta{
-		margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 .comments .meta a{
 	font-size: 14px;
@@ -369,12 +401,12 @@ h3.comments-header{
 	font-weight: 300;
 }
 .comments .reply{
-	    position: absolute;
-    left: 33px;
-    top: 125px;
-    font-family: Open Sans;
-    font-size: 18px;
-    color:#bdbdbd;
+	position: absolute;
+	left: 33px;
+	top: 125px;
+	font-family: Open Sans;
+	font-size: 18px;
+	color:#bdbdbd;
 }
 .comments .reply:hover{
 	color:#00bfa5;
@@ -389,9 +421,9 @@ a:hover{
 }
 .comment-form .form-control{
 	box-shadow: none;
-    border-radius: 0;
-    height: 42px;
-    border: 2px solid #bdbdbd;
+	border-radius: 0;
+	height: 42px;
+	border: 2px solid #bdbdbd;
 }
 .comment-form textarea.form-control{
 	height: 200px;

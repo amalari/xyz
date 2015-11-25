@@ -1,0 +1,35 @@
+{{#section 'head'}}
+<title>XYZ - Search</title>
+{{/section}}
+<div class="home-header">
+	<div class="general-search">
+		<a class="intro" href="#">Type Your Word Here</a>
+		<form action="/search" method="get">
+			<input type="text" name="q" id="q"></input>
+			<a class="close-button" title="Search" style="display: none;"><i class="fa fa-times"></i></a>
+		</form>
+	</div>
+</div>
+{{#section 'jquery'}}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("body").on('click', '.general-search .intro', function(){
+			$(".general-search .intro").css("display", "none");
+			$('#q').slideDown(200 , function(){
+				$(this).css({
+					"display" : "inline-block",
+					"border-bottom": "1.7px solid #000000"
+				});
+				$('.close-button').css("display", "inline-block")
+			})
+		});
+		$('body').on('click', '.close-button', function(){
+			$('#q').val("");
+			$(".general-search .intro").css("display", "block");
+			$('#q').css("display", "none");
+			$(this).css("display", "none")
+		})
+	})
+</script>
+{{/section}}
+
