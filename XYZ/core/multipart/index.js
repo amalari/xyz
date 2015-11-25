@@ -4,7 +4,6 @@ path = require('path'),
 fs = require('fs'),
 sanitize = require('sanitize-filename'),
 util = require('util');
-var gm = require('gm');
 
 function Multipart(options){
 	this._uploadDir = options.uploadDir;
