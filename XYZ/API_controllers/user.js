@@ -59,7 +59,7 @@ UserController = {
 	single : function(req, res){
 		User.single(req.params.id).then(function(singleData){
 			var data = singleData.toJSON();
-			res.send(UserViewModel.single(data))
+			res.send(UserViewModel.single(data, req.xhr))
 		})
 		.catch(function(err){
 			res.send({success : false, message : err.message})

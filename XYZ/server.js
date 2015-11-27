@@ -44,7 +44,8 @@ var Homepage = require('./controllers/homepage.js');
 var About = require('./controllers/about.js');
 var Blog = require('./controllers/blog.js');
 var Work = require('./controllers/work.js');
-var CategoryPublic = require('./controllers/category.js')
+var CategoryPublic = require('./controllers/category.js');
+var Profile = require('./controllers/profile.js');
 var Contact = require('./controllers/contact.js');
 var env = process.env.NODE_ENV || 'development';
 
@@ -96,6 +97,7 @@ Blog.registerRoutes(app);
 Work.registerRoutes(app);
 CategoryPublic.registerRoutes(app);
 Contact.registerRoutes(app);
+Profile.registerRoutes(app);
 
 app.listen(config.port, function(){
 	console.log("Listening on %s, server_port %s", config.ipAddress, config.port);

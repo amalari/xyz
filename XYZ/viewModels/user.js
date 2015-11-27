@@ -1,4 +1,5 @@
 var authentication = require('./../core/authentication/index.js');
+var PostViewModel = require('./post.js');
 
 UserViewModel = {
 	save : function(user){
@@ -9,6 +10,10 @@ UserViewModel = {
 		result.title = 'admin';
 		result.image = user.image;
 		result.description = user.description;
+		result.facebook = user.facebook;
+		result.tumblr = user.tumblr;
+		result.twitter = user.twitter;
+		result.google_plus = user.google_plus;
 		return result;
 	},
 	list : function(list){
@@ -25,7 +30,7 @@ UserViewModel = {
 		return result
 
 	},
-	single : function(singleData){
+	single : function(singleData, ajaxRequest){
 		var result = {};
 		result.id = singleData.id;
 		result.email = singleData.email;
@@ -33,10 +38,36 @@ UserViewModel = {
 		result.title = singleData.title;
 		result.image = singleData.image;
 		result.description = singleData.description;
+		result.facebook = singleData.facebook;
+		result.tumblr = singleData.tumblr;
+		result.twitter = singleData.twitter;
+		result.google_plus = singleData.google_plus;
+		result.oldPosts = [];
+		if(!ajaxRequest){
+			arr = singleData.posts.map(function(data){
+				var obj={};
+				if(data.is_active == 1 && data.type == 1){
+					if(data.content){
+						data.content = PostViewModel.summary(data.content, '16px')
+					}
+					for(i in data){
+						obj[i] = data[i]
+					}
+					return obj;
+				}
+
+			});
+			for(var i in arr){
+				if(arr[i] !== undefined){
+					console.log(i);
+					result.oldPosts.unshift(arr[i])
+				}
+			};
+			result.totalPosts = result.oldPosts.length;
+		};
 		return result;
 	},
 	delete : function(data){
-		console.log(data);
 		data.is_active = 0;
 		return data;
 	}

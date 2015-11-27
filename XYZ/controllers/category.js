@@ -36,7 +36,7 @@ CategoryVisitorController = {
 						result.blog = PostViewModel.getList(data, req.xhr);
 						result.pagination = 
 						{ 
-							page:currentPage, limit:10, totalRows: 7
+							page:currentPage, limit:10, totalRows: result.blog.total
 						};
 						result.q = req.query.q;
 						result.type = req.query.type;
@@ -56,7 +56,7 @@ CategoryVisitorController = {
 						result.portfolio.total = data.total;
 						result.pagination = 
 						{ 
-							page:currentPage, limit:10, totalRows: 7
+							page:currentPage, limit:10, totalRows: result.portfolio.total
 						};
 						result.q = req.query.q;
 						result.type = req.query.type;

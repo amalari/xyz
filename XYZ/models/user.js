@@ -39,7 +39,7 @@ var User = bookshelf.Model.extend({
 		})
 	}),
 	single : Promise.method(function(userId){
-		return new this({id: userId}).fetch();
+		return new this({id: userId}).fetch({withRelated : ['posts']});
 	}),
 	update : Promise.method(function(data){
 		return new this({id: data.id}).save(data);

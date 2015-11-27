@@ -6,7 +6,7 @@ var sanitizeHtml = require('sanitize-html');
 function postViewModel(){
 	viewModels.call(this, viewModels);
 	this._allProperties = ["title", "type", "category_id", "content", "header_image", "is_active"];
-	this._viewProperties = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "totalComment", "visitor", "liker", "typeName"];
+	this._viewProperties = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "authorId" , "totalComment", "visitor", "liker", "typeName"];
 	this._viewPropertiesVisitor = ["id", "header_image", "category", "totalComment", "author", "content", "rootComments", "title", "visitor", "liker"];
 	this._viewPropertiesLite = ["id", "title", "category", "content", "header_image", "category_id", "type"];
 };
@@ -42,6 +42,7 @@ postViewModel.prototype.getList = function(listData, ajaxRequest, fromUrl){
 			data.totalComment = arr.length;
 			data.content = that.summary(data.content, '16px');
 			data.author = data.user.fullname;
+			data.authorId = data.user.id;
 			if(fromUrl == '/search' && data.header_image != null){
 				var deleteExt = data.header_image.split('.');
 				deleteExt.splice(deleteExt.length - 1, 1);

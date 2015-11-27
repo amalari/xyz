@@ -366,6 +366,9 @@ h3.comments-header{
 	padding: 0;
 	padding-bottom: 50px;
 }
+.comments .child{
+	padding-bottom: 0px;
+}
 .comments .author{
 	text-transform: none;
 	font-size: 22px;
@@ -577,4 +580,64 @@ button.req-form-button:hover{
 
 .small-post-thumb > img{
 	width: 100%
+}
+
+.proifile-name {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.profile {
+	margin-bottom: 40px;
+}
+
+.profile > hr {
+	margin-top: 40px;
+	display: block;
+	border: 0;
+	border-top: 1px solid #ccc;
+	padding: 0; 
+	border-color: #BDBDBD;
+}
+.small-side-bar-top {
+	width: 100px;
+	position: absolute;
+	right: -120px;
+	top: 0px;
+}
+.small-side-bar-top > .small-hr {
+	margin-top:  40px;
+	margin-left: 0px;
+}
+
+.small-side-bar-top > p {
+	font-family: Open Sans;
+	font-size: 14px;
+	color: #bdbdbd;
+}
+
+.small-side-bar-social-media {
+	width: 100px;
+	position: absolute;
+	bottom: 0px;
+	right: -120px;
+	vertical-align: middle;
+}
+
+.small-side-bar-social-media > a {
+	display: inline-block;
+	text-align: center;
+	width: 45px;
+	height: 45px;
+	font-size: 24px;
+	line-height: 45px;
+	background-color: #F5F5F5;
+	color: #bcbcbc;
+	margin: 10px 0;
+}
+
+.small-side-bar-social-media > a:hover {
+	background-color: black;
+	border-color: black;
+	color: white;
 }

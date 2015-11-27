@@ -32,6 +32,7 @@ BlogController = {
 			{ 
 				page:currentPage, limit:2, totalRows: data.total
 			};
+			console.log(data);
 			res.render('blog', data);
 		})
 	},
