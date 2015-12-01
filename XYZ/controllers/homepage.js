@@ -76,7 +76,6 @@ HomepageController = {
 				page:currentPage, limit:10, totalRows: result.portfolio.total
 			};
 			result.q = req.query.q;
-			console.log(result.portfolio.data);
 			res.render('archive', result);
 		})
 	},

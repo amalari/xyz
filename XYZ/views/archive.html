@@ -47,7 +47,7 @@
 					</article>
 					{{/if}}
 
-					<div class="pagination-wrapper">
+					<div class="pagination-wrapper blog">
 						<nav>
 							<ul class="pagination">
 								{{{paginateHelper pagination}}}
@@ -58,7 +58,7 @@
 
 				<div class = "tab-pane fade" id = "portfolio">
 					{{#if portfolio.total}}
-					{{#each portfolio.data}}
+					{{#each ../portfolio.data}}
 					<article>
 						<a href="/portfolio/{{id}}">
 							<div class="small-post-thumb">
@@ -84,7 +84,7 @@
 					</article>
 					{{/if}}
 
-					<div class="pagination-wrapper">
+					<div class="pagination-wrapper portfolio">
 						<nav>
 							<ul class="pagination">
 								{{{paginateHelper pagination1}}}
@@ -96,3 +96,18 @@
 		</div>
 	</div>
 </div>
+
+{{#section 'jquery'}}
+<script type="text/javascript">
+$(document).ready(function(){
+	var totalPageBlog = {{blog.total}};
+	var totalPagePortfolio = {{portfolio.total}};
+	if(totalPageBlog == 0){
+		$(".blog").css('display', 'none');
+	};
+	if(totalPagePortfolio == 0){
+		$(".portfolio").css('display', 'none');
+	};	
+})
+</script>
+{{/section}}
