@@ -32,7 +32,6 @@ BlogController = {
 			{ 
 				page:currentPage, limit:2, totalRows: data.total
 			};
-			console.log(data);
 			res.render('blog', data);
 		})
 	},
@@ -61,7 +60,6 @@ BlogController = {
 				h = "0" + h;
 			}
 			today = dd + '/' + mm + '/' + yyyy + " " + h + ":" + m;
-			console.log(req.session.preferredPage);
 			if(req.session.preferredPage === undefined){
 				req.session.preferredPage = [];
 			};
@@ -194,7 +192,6 @@ BlogController = {
 				data.deleteComment = true;
 			};
 			data.fullUrl = req.protocol + "://" + req.subdomains + req.hostname + ":3000" + req.originalUrl;
-			console.log(data);
 			res.render('single', data);
 		})
 	},

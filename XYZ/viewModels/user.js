@@ -59,7 +59,6 @@ UserViewModel = {
 			});
 			for(var i in arr){
 				if(arr[i] !== undefined){
-					console.log(i);
 					result.oldPosts.unshift(arr[i])
 				}
 			};

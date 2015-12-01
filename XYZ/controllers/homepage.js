@@ -9,7 +9,6 @@ HomepageController = {
 	registerRoutes : function(app){
 		app.get('/', this.list);
 		app.get('/search', this.search);
-		app.get('/search-intro', this.searchIntro);
 	},
 	list : function(req, res){
 		var currentPage = 1;
@@ -78,9 +77,6 @@ HomepageController = {
 			result.q = req.query.q;
 			res.render('archive', result);
 		})
-	},
-	searchIntro : function(req, res){
-		res.render("search")
 	}
 }
 

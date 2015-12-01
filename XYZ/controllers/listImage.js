@@ -26,7 +26,6 @@ TinyvisonController = {
 				if(val.indexOf("300x300") === -1){
 					result.data.push(obj);
 				};
-				console.log(result.data);
 			})
 			res.json(result);
 		})

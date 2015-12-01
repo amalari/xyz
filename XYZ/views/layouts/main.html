@@ -32,17 +32,62 @@
          <li><a href="/blog">blog</a></li>
          <li><a href="/contact">contact</a></li>
          <li><a href="/request-intro">create project</a></li>
-         <li><a href="/search-intro">search</a></li>
+         <li><a href="javascript:;">search</a></li>
        </ul>
      </div>
-     {{{body}}}
-     <footer class="footer">
+     <div class="general-search">
+      <form action="/search" method="get">
+        <input type="text" name="q" id="q" placeholder="Type Your Word Here"></input>
+        <a class="close-button" href="javascript:;"><i class="fa fa-times"></i></a>
+      </form>
+    </div>
+    {{{body}}}
+    <footer class="footer">
       <p>&copy; XYZ-ARCHITECTS . 2015 . Theme Design by <span class="brand">XYZ</span> . Developed by <span class="brand">ARKA CREATIVE</span></p>
     </footer>
     <script src="/scripts/dependencies/jQuery-2.1.4.min.js"></script>
     <script src="/scripts/dependencies/bootstrap.min.js"></script>
     <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
     <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
-    {{{_sections.jquery}}}
-  </body>
-  </html>
+    {{#section 'jquery'}}
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var slideDown = function(){
+          $('.general-search').slideDown(500 , function(){
+            $(this).css({
+              "display" : "block",
+            });
+          });
+          $('.general-header').animate({
+            top : "+=66px"
+          }, 500, function(){});
+        };
+        var slideUp = function(){
+          $('.general-search').slideUp(500 , function(){
+            $(this).css({
+              "display" : "none",
+            });
+            $('#q').val("");
+          });
+          $('.general-header').animate({
+            top : "-=66px"
+          }, 500, function(){});
+        };
+        $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function(){
+          var genSearch = $('.general-search').css('display');
+          if(genSearch == "none"){
+            slideDown()
+          } else {
+            slideUp()
+          }
+        });
+        $('body').on('click', '.close-button', function(){
+          slideUp();
+        })
+      })
+</script>
+{{/section}}
+
+{{{_sections.jquery}}}
+</body>
+</html>
