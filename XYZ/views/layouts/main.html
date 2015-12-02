@@ -23,9 +23,9 @@
       <![endif]-->
     </head>
     <body>
-
-      <div class="general-header">
-        <a href="/"><h1 class="logo">XY/Z</h1></a>
+      <a href="javascript:;"><div class="fix-bars"><i class="fa fa-bars fa-3x"></i></div></a>
+      <div class="fix-nav">
+        <a href="/"><h3 class="logo">XY/Z</h1></a>
         <ul class="main-nav list-unstyled">
          <li><a href="/about">about</a></li>
          <li class="active"><a href="/portfolio">work</a></li>
@@ -35,56 +35,98 @@
          <li><a href="javascript:;">search</a></li>
        </ul>
      </div>
-     <div class="general-search">
-      <form action="/search" method="get">
-        <input type="text" name="q" id="q" placeholder="Type Your Word Here"></input>
-        <a class="close-button" href="javascript:;"><i class="fa fa-times"></i></a>
-      </form>
-    </div>
-    {{{body}}}
-    <footer class="footer">
-      <p>&copy; XYZ-ARCHITECTS . 2015 . Theme Design by <span class="brand">XYZ</span> . Developed by <span class="brand">ARKA CREATIVE</span></p>
-    </footer>
-    <script src="/scripts/dependencies/jQuery-2.1.4.min.js"></script>
-    <script src="/scripts/dependencies/bootstrap.min.js"></script>
-    <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
-    <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
-    {{#section 'jquery'}}
-    <script type="text/javascript">
-      $(document).ready(function(){
-        var slideDown = function(){
-          $('.general-search').slideDown(500 , function(){
-            $(this).css({
-              "display" : "block",
-            });
+     <div class="general-header">
+      <a href="/"><h1 class="logo">XY/Z</h1></a>
+      <ul class="main-nav list-unstyled">
+       <li><a href="/about">about</a></li>
+       <li class="active"><a href="/portfolio">work</a></li>
+       <li><a href="/blog">blog</a></li>
+       <li><a href="/contact">contact</a></li>
+       <li><a href="/request-intro">create project</a></li>
+       <li><a href="javascript:;">search</a></li>
+     </ul>
+   </div>
+   <div class="general-search">
+    <form action="/search" method="get">
+      <input type="text" name="q" id="q" placeholder="Type Your Word Here"></input>
+      <a class="close-button" href="javascript:;"><i class="fa fa-times"></i></a>
+    </form>
+  </div>
+  {{{body}}}
+  <footer class="footer">
+    <p>&copy; XYZ-ARCHITECTS . 2015 . Theme Design by <span class="brand">XYZ</span> . Developed by <span class="brand">ARKA CREATIVE</span></p>
+  </footer>
+  <script src="/scripts/dependencies/jQuery-2.1.4.min.js"></script>
+  <script src="/scripts/dependencies/bootstrap.min.js"></script>
+  <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
+  <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
+  {{#section 'jquery'}}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var screenHeight = $(window).height();
+      var imageBackground = $('.home-header');
+      var slideDown = function(selector, otherEffect){
+        selector.slideDown(500 , function(){
+          $(this).css({
+            "display" : "block",
           });
+        });
+        if(otherEffect){
           $('.general-header').animate({
             top : "+=66px"
           }, 500, function(){});
-        };
-        var slideUp = function(){
-          $('.general-search').slideUp(500 , function(){
-            $(this).css({
-              "display" : "none",
-            });
-            $('#q').val("");
+        }
+      };
+      var slideUp = function(selector, otherEffect){
+        selector.slideUp(500 , function(){
+          $(this).css({
+            "display" : "none",
           });
+          $('#q').val("");
+        });
+        if(otherEffect){
           $('.general-header').animate({
             top : "-=66px"
           }, 500, function(){});
-        };
-        $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function(){
-          var genSearch = $('.general-search').css('display');
-          if(genSearch == "none"){
-            slideDown()
-          } else {
-            slideUp()
+        }
+      };
+      $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function(){
+        var select = $('.general-search');
+        var genSearch = select.css('display');
+        if(genSearch == "none"){
+          slideDown(select, true)
+        } else {
+          slideUp(select, true)
+        }
+      });
+      $('body').on('click', '.close-button', function(){
+        slideUp(select, true);
+      });
+      if(imageBackground.length == 0){
+        $(".fix-bars").css('display', 'block')
+      } else {
+        $(".fix-bars").css('display', 'none')
+        $(window).scroll(function() {
+          if (parseInt($(this).scrollTop())>parseInt(screenHeight))
+          {
+            $('.fix-bars').fadeIn();
+          }
+          else
+          {
+            $('.fix-bars').fadeOut();
+            $('.fix-nav').fadeOut();
           }
         });
-        $('body').on('click', '.close-button', function(){
-          slideUp();
-        })
+      };
+      $('body').on('click', ".fix-bars", function(){
+        var select = $('.fix-nav');
+        if($('.fix-nav').css('display') == "none"){
+          slideDown(select, false);
+        } else {
+          slideUp(select, false);
+        };
       })
+    })
 </script>
 {{/section}}
 

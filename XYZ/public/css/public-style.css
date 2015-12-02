@@ -81,7 +81,6 @@ html,body {
 
 .main-nav > li > a:link{
 	text-decoration: none;
-
 }
 
 .general-search{
@@ -661,3 +660,48 @@ button.req-form-button:hover{
 	border-color: black;
 	color: white;
 }
+
+.fix-bars {
+	position: fixed;
+	background-color: #000000;
+	opacity: 0.9;
+	border: 1px solid #000000;
+	border-radius: 5px;
+	width: 60px;
+	height: 60px;
+	color: white;
+	right: 0px;
+	top: 290px;
+	z-index: 99;
+}
+
+.fix-bars > i {
+	padding: 5px 10px;
+}
+
+.fix-nav {
+	position: fixed;
+	background-color: #000000;
+	opacity: 0.9;
+	border: 1px solid #000000;
+	border-radius: 5px;
+	width: 190px;
+	height: 310px;
+	right: 80px;
+	top: 290px;
+	z-index: 99;
+	display: none;
+}
+
+.fix-nav > .main-nav > li > a {
+	color: white;
+}
+
+.fix-nav > .main-nav > li > a:hover {
+	color: #00bfa5;
+	text-decoration: none;
+}
+
+.fix-nav > .main-nav{
+	padding-left: 20px;
+} 

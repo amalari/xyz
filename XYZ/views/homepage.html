@@ -5,10 +5,9 @@
 <div class="container home">
 	<div class="row">
 		{{#each data}}
-		{{! I'm in a new block...and the context has changed }}
 		<div class="col-md-4">
 			<a href="/portfolio/{{id}}">
-				<img src="{{header_image}}" class="porto-thumb"></img>
+				<img src="{{header_image}}" class="porto-thumb" />
 				<h3 class="porto-title">{{title}}</h3>
 				<p class="porto-status">{{status}}</p>
 			</a>
