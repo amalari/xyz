@@ -37,8 +37,10 @@
 						<img src="{{image}}">
 					</a>
 					{{/each}}
+				</div>
+				<div  id="content">
+					{{{content}}}
 				</div>	
-				{{{content}}}
 			</article>
 			<ul class="social-media">
 				<li><a href="https://twitter.com/intent/tweet?text={{title}} {{fullUrl}}"><i class="fa fa-twitter"></i></a></li>
@@ -122,6 +124,13 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		$('.content img').each(function(i, element){
+			var captionImage = $(element).attr("alt");
+			$(element).wrap('<div class="image-wrapper"></div>')
+			$('.image-wrapper').append('<div class="caption-image"></div');
+			$('.caption-image').append('<hr align="left" />');
+			$('.caption-image').append('<p>' + captionImage + '</p>');
+		});
 		$('#parentId').val(null);
 		$('.reply').click(function(e){
 			$(".btn-back").css("display", "inline");

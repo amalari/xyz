@@ -5,7 +5,23 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h1>{{title}}</h1>
-			{{{content}}}
+			<div  class="content">
+				{{{content}}}	
+			</div>
 		</div>
 	</div>
 </div>
+
+{{#section 'jquery'}}
+<script type="text/javascript">
+	$(document).ready(function(){		
+		$('.content img').each(function(i, element){
+			var captionImage = $(element).attr("alt");
+			$(element).wrap('<div class="image-wrapper"></div>')
+			$('.image-wrapper').append('<div class="caption-image"></div');
+			$('.caption-image').append('<hr align="left" />');
+			$('.caption-image').append('<p>' + captionImage + '</p>');
+		});
+	})
+</script>
+{{/section}}
