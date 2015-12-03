@@ -4,6 +4,8 @@ var localStrategy = require('./local-strategy.js');
 var bcrypt = require('bcrypt-nodejs');
 var RedisStore = require('connect-redis')(session);
 var config = require('./../../config');
+console.log('==================================');
+console.log(config);
 
 function Authentication(){};
 

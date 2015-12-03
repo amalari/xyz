@@ -723,3 +723,8 @@ button.req-form-button:hover{
 	height: 163px;
 	padding-right: 17px;
 }
+
+.homepage-wrapper.row {
+	width: 1066px;
+	margin: 0 auto;
+}
