@@ -723,3 +723,39 @@ button.req-form-button:hover{
 	height: 163px;
 	padding-right: 17px;
 }
+
+.image-wrapper{
+	position: relative;
+}
+
+.image-wrapper > img {
+	width: 100%;
+	margin: 0;
+}
+
+.caption-image {
+	clear: both;
+	position: absolute;
+	display: block;
+	width: 200px;
+	top: 0px;
+	right: -215px;
+	color: #bdbdbd;
+}
+
+.caption-image > hr {
+	margin-top: 0;
+	margin-bottom: 15px;
+	width: 60px;
+	height: 2px;
+	display: block;
+    border: 0;
+    border-top: 1px solid #ccc;
+    padding: 0; 
+    border-color: #bdbdbd;
+}
+
+.caption-image > p {
+	font-family: Open Sans;
+	font-size: 14px;
+}

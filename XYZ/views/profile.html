@@ -31,7 +31,9 @@
 					</div>
 				</div>
 				<h2 class="profile-name">{{fullname}}</h2>
-				{{{description}}}
+				<div  class="content">
+					{{{description}}}	
+				</div>
 			</article>
 			<hr size="1px" width="700px" />
 			<div class="archive">
@@ -73,8 +75,14 @@
 		var totalPages = Math.floor(total / limit);
 		if(totalPages <= 1) {
 			totalPages = 1;
-		}
-		
+		};
+		$('.content img').each(function(i, element){
+			var captionImage = $(element).attr("alt");
+			$(element).wrap('<div class="image-wrapper"></div>')
+			$('.image-wrapper').append('<div class="caption-image"></div');
+			$('.caption-image').append('<hr align="left" />');
+			$('.caption-image').append('<p>' + captionImage + '</p>');
+		});
 		$('#pagination-demo').twbsPagination({
 			totalPages: totalPages,
 			visiblePages: 4,
