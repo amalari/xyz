@@ -31,13 +31,13 @@
 						<label>Architect:</label> {{architect}}
 					</li>
 				</ul>
-				<div class="row porto-thumbs-wrapper" >
-					{{#each portfolioImage}}
-					<div class="col-sm-3">
-						<img src="{{.}}" />
-					</div>
+				<div class="portfolio-image">
+					{{#each portfolioImages}}
+					<a href="javascript:;">
+						<img src="{{image}}">
+					</a>
 					{{/each}}
-				</div>
+				</div>	
 				{{{content}}}
 			</article>
 			<ul class="social-media">
@@ -194,6 +194,10 @@
 					$('.total-likers').text(result);
 				}
 			})
+		})
+		$('body').on('click', '.portfolio-image > a', function(){
+			var imgSrc = $(this).children('img').attr("src");
+			$('.post-thumb').attr('src', imgSrc);
 		})
 	})
 </script>

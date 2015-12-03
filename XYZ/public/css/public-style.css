@@ -32,6 +32,11 @@ html,body {
 		width: 1020px;		
 	}
 }
+@media (max-width: @screen-md-max){
+	.container {
+		width: 1366px;		
+	}
+}
 .container{
 	margin-bottom: 50px;
 	min-height: 500px;
@@ -705,3 +710,16 @@ button.req-form-button:hover{
 .fix-nav > .main-nav{
 	padding-left: 20px;
 } 
+
+.portfolio-image {
+	width: 720px;
+	height: 163px;
+	margin-bottom: 30px;
+	margin-top: 15px;
+}
+.portfolio-image > a > img {
+	display: inline-block;
+	width: 163px;
+	height: 163px;
+	padding-right: 17px;
+}

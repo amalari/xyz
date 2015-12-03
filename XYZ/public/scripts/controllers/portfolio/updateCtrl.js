@@ -7,16 +7,32 @@ angular.module('xyz.controllers')
 	Category.query(function(list){
 		$scope.categories = list.data
 	});
-	$scope.model= Portfolio.get({id:$stateParams.id}, function(model){
+	Portfolio.get({id:$stateParams.id}, function(model){
+		$scope.model = model;
 		var arr = model.header_image.split('/');
 		var i = arr.length-1;
-		$scope.model.nama_file_display =arr[i]; 
+		$scope.model.nama_file_display =arr[i];
+		var sumPortfolioImages = $scope.model.portfolioImages.length
+		var arrListNameFile = [];
+		model.portfolioImages.forEach(function(val, i){
+			arrListNameFile.push(val.image)
+		});
+		for(var i in arrListNameFile){
+			var name = arrListNameFile[i].split('/');
+			var a = name.length-1;
+			arrListNameFile.splice(i, 1, name[a])
+		};
+		$scope.model.nama_file_display_list = arrListNameFile.toString(); 
 		delete $scope.model.header_image;
+		delete $scope.model.portfolioImages;
 	});
 	$scope.clickSave = function(is_active){
 		$scope.model.is_active = is_active;
 	};
 	$scope.save = function(){
+		console.log($scope.model);
+		delete $scope.model.nama_file_display;
+		delete $scope.model.nama_file_display_list;
 		Portfolio.update($scope.model, function(){
 			$state.go('portfolio');
 		});

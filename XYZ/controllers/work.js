@@ -159,7 +159,7 @@ WorkController = {
 							})
 						}
 					});
-					req.session.accessLog.splice(i, 0, obj);
+					req.session.accessLog.splice(i, 1, obj);
 					return next()
 				} else {
 					req.session.accessLog.push({
@@ -197,6 +197,7 @@ WorkController = {
 				result.deleteComment = true;
 			};
 			result.fullUrl = req.protocol + "://" + req.subdomains + req.hostname + ":3000" + req.originalUrl;
+			console.log(result);
 			res.render('work', result);
 		})
 		.catch(function(err){

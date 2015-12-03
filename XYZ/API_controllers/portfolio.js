@@ -86,60 +86,68 @@ PortfolioController = {
 				res.send({success : false, message : err.message})
 			})
 		})
-},
-update : function(req, res){
-	portfolioMultipart.parseAndSaveFiles(req, function(data){
-		Portfolio.single(data.id)
-		.then(function(model){
-			var singleData = model.toJSON();
-			if(singleData.header_image && data.header != undefined){
-				portfolioFileManager.delete(singleData.header_image);
-			};
-			if(data.header != undefined){
-				data.header_image = portfolioFileManager.getUrl(data.header);
-			} else {
-				data.header_image = singleData.header_image;
-			};
-			var result = PortfolioViewModel.update(data);
-			return Portfolio.update(result);
-		})
-		.then(function(){
-			var queryBuilder = new qb();
-			queryBuilder.setup({
-				whereCondition : {portfolio_id : data.id}
-			});
-			return PortfolioImage.list(queryBuilder)
-		})
-		.then(function(listModel){
-			var arr = [];
-			if(listModel !== null){
-				var list_images = listModel.toJSON();
-				for(var i in list_images){
-					if(data.image != undefined){
-						portfolioFileManager.delete(list_images[i].image);
-					} else {
-						image_maping(list_images[i].image, data.id, arr);
-					}
-
+	},
+	update : function(req, res){
+		portfolioMultipart.parseAndSaveFiles(req, function(data){
+			Portfolio.single(data.id)
+			.then(function(model){
+				var singleData = model.toJSON();
+				if(singleData.header_image && data.header != undefined){
+					portfolioFileManager.delete(singleData.header_image);
 				};
-			};
-			for(var key in data){
-				if(key.indexOf("image") > -1){
-					if(data[key] != undefined){
-						var imageDir = portfolioFileManager.getUrl(data[key]);
-						image_maping(imageDir, data.id, arr);
-					}
+				if(data.header != undefined){
+					data.header_image = portfolioFileManager.getUrl(data.header);
+				} else {
+					data.header_image = singleData.header_image;
+				};
+				var result = PortfolioViewModel.update(data);
+				return Portfolio.update(result);
+			})
+			.then(function(){
+				console.log(data);
+				if(data.image != undefined || data.image_0 != undefined){
+					var queryBuilder = new qb();
+					queryBuilder.setup({
+						whereCondition : {portfolio_id : data.id}
+					});
+					return PortfolioImage.list(queryBuilder)
+				} else {
+					return res.send({success : true})
+				};
+			})
+			.then(function(listModel){
+				if(listModel !== null){
+					var list_images = listModel.toJSON();
+					for(var i in list_images){
+						portfolioFileManager.delete(list_images[i].image);	
+					} 
+					return PortfolioImage.delete(list_images)
+				} else {
+					return;
 				}
-			};
-			return PortfolioImage.save(arr);
+			})
+			.then(function(){
+				var arr = [];
+				for(var key in data){
+					if(key.indexOf("image") > -1){
+						console.log(data[key]);
+						if(key.indexOf("header") < 0){
+							if(data[key] != undefined){
+								var imageDir = portfolioFileManager.getUrl(data[key]);
+								image_maping(imageDir, data.id, arr);
+							}
+						}	
+					}
+				};
+				return PortfolioImage.save(arr);
+			})
+			.then(function(){
+				res.send({success : true})
+			})
+			.catch(function(err){
+				res.send({success : false, message : err.message})
+			})
 		})
-		.then(function(){
-			res.send({success : true})
-		})
-		.catch(function(err){
-			res.send({success : false, message : err.message})
-		})
-	})
 },
 delete : function(req, res){
 	Portfolio.single(req.params.id)
