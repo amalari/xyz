@@ -157,6 +157,7 @@ html,body {
 
 .pagination-wrapper {
 	text-align: center;
+	width: 100%;
 }
 .pagination>li{
 	/*padding:0 12.5px;*/
@@ -681,7 +682,7 @@ button.req-form-button:hover{
 }
 
 .fix-bars > i {
-	padding: 5px 10px;
+	padding: 8px 10px;
 }
 
 .fix-nav {
