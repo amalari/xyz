@@ -676,7 +676,7 @@ button.req-form-button:hover{
 	width: 60px;
 	height: 60px;
 	color: white;
-	right: 0px;
+	right: 25px;
 	top: 290px;
 	z-index: 99;
 }
