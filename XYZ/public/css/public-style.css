@@ -65,7 +65,8 @@ html,body {
 	margin-top:17px;
 }
 
-.home > .row > .col-md-4 {
+.home > .row > .col-md-4,
+.homepage-wrapper > .row > .col-md-4 {
 	padding-right: 23px;
 	padding-left: 23px;
 	padding-top: 23px;
@@ -73,7 +74,8 @@ html,body {
 	text-align: right;
 }
 
-.home > .row {
+.home > .row,
+.homepage-wrapper > .row {
 	margin-right: -23px;
 	margin-left: -23px;
 }
@@ -725,8 +727,8 @@ button.req-form-button:hover{
 	padding-right: 17px;
 }
 
-.homepage-wrapper.row {
-	width: 1066px;
+.homepage-wrapper {
+	width: 1020px;
 	margin: 0 auto;
 }
 
@@ -764,4 +766,9 @@ button.req-form-button:hover{
 .caption-image > p {
 	font-family: Open Sans;
 	font-size: 14px;
+}
+
+.body-wrapper {
+	width: 1349px;
+	margin: 0 auto;
 }

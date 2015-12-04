@@ -1,18 +1,21 @@
 {{#section 'head'}}
 <title>XYZ - Work</title>
 {{/section}}
+
 <div class="home-header"></div>
 <div class="container home">
-	<div class="row homepage-wrapper">
-		{{#each data}}
-		<div class="col-md-4">
-			<a href="/portfolio/{{id}}">
-				<img src="{{header_image}}" class="porto-thumb" />
-				<h3 class="porto-title">{{title}}</h3>
-				<p class="porto-status">{{category.name}}</p>
-			</a>
+	<div class="homepage-wrapper">
+		<div class="row">
+			{{#each data}}
+			<div class="col-md-4">
+				<a href="/portfolio/{{id}}">
+					<img src="{{header_image}}" class="porto-thumb" />
+					<h3 class="porto-title">{{title}}</h3>
+					<p class="porto-status">{{category.name}}</p>
+				</a>
+			</div>
+			{{/each}}
 		</div>
-		{{/each}}
 	</div>
 </div>
 <div class="pagination-wrapper">
