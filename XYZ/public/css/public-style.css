@@ -32,11 +32,7 @@ html,body {
 		width: 1020px;		
 	}
 }
-@media (max-width: @screen-md-max){
-	.container {
-		width: 1366px;		
-	}
-}
+
 .container{
 	margin-bottom: 50px;
 	min-height: 500px;
