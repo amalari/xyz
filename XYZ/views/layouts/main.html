@@ -1,157 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    {{{_sections.head}}}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/css/public-style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/jquery-confirm.min.css">
-
-
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+ {{{_sections.head}}}
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+ <!-- Bootstrap -->
+ <link rel="stylesheet" href="/css/bootstrap.min.css">
+ <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+ <link rel="stylesheet" href="/css/public-style.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="/css/jquery-confirm.min.css">
+ <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+ <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
-</head>
-
-<body style="position:relative;">
-    <div style="position:absolute;top:0;left:0;right:0;bottom:0;background-image:url(/css/images/header-bg.png);background-repeat:no-repeat;background-size:cover;background-repeat:no-repeat"></div>
-    <div style="height:100%;width:1349px;margin:0 auto;position:relative">
-        <div class="general-search">
-            <form action="/search" method="get">
-                <input type="text" name="q" id="q" placeholder="Type Your Word Here"></input>
-                <a class="close-button" href="javascript:;"><i class="fa fa-times"></i></a>
-            </form>
-        </div>
-        <div class="general-header">
-            <a href="/"><h1 class="logo">XY/Z</h1></a>
-            <ul class="main-nav list-unstyled">
-                <li><a href="/about">about</a>
-                </li>
-                <li class="active"><a href="/portfolio">work</a>
-                </li>
-                <li><a href="/blog">blog</a>
-                </li>
-                <li><a href="/contact">contact</a>
-                </li>
-                <li><a href="/request-intro">create project</a>
-                </li>
-                <li><a href="javascript:;">search</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="body-wrapper" style="position:relative">
-
-        <a href="javascript:;">
-            <div class="fix-bars"><i class="fa fa-bars fa-3x"></i>
-            </div>
-        </a>
+    </head>
+    <body>
+      <div class="body-wrapper">
+        <a href="javascript:;"><div class="fix-bars"><i class="fa fa-bars fa-3x"></i></div></a>
         <div class="fix-nav">
-            <a href="/"><h3 class="logo">XY/Z</h1></a>
-            <ul class="main-nav list-unstyled">
-                <li><a href="/about">about</a>
-                </li>
-                <li class="active"><a href="/portfolio">work</a>
-                </li>
-                <li><a href="/blog">blog</a>
-                </li>
-                <li><a href="/contact">contact</a>
-                </li>
-                <li><a href="/request-intro">create project</a>
-                </li>
-                <li><a href="javascript:;">search</a>
-                </li>
-            </ul>
-        </div>
-
-
-        {{{body}}}
-        <footer class="footer">
-            <p>&copy; XYZ-ARCHITECTS . 2015 . Theme Design by <span class="brand">XYZ</span> . Developed by <span class="brand">ARKA CREATIVE</span>
-            </p>
-        </footer>
-        <script src="/scripts/dependencies/jQuery-2.1.4.min.js"></script>
-        <script src="/scripts/dependencies/bootstrap.min.js"></script>
-        <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
-        <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var screenHeight = $(window).height();
-                var imageBackground = $('.home-header');
-                var slideDown = function(selector, otherEffect) {
-                    selector.slideDown(500, function() {
-                        $(this).css({
-                            "display": "block",
-                        });
-                    });
-                    if (otherEffect) {
-                        $('.general-header').animate({
-                            top: "+=66px"
-                        }, 500, function() {});
-                    }
-                };
-                var slideUp = function(selector, otherEffect) {
-                    selector.slideUp(500, function() {
-                        $(this).css({
-                            "display": "none",
-                        });
-                        $('#q').val("");
-                    });
-                    if (otherEffect) {
-                        $('.general-header').animate({
-                            top: "-=66px"
-                        }, 500, function() {});
-                    }
-                };
-                $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function() {
-                    var select = $('.general-search');
-                    var genSearch = select.css('display');
-                    if (genSearch == "none") {
-                        slideDown(select, true)
-                    } else {
-                        slideUp(select, true)
-                    }
-                });
-                $('body').on('click', '.close-button', function() {
-                    var select = $('.general-search');
-                    slideUp(select, true);
-                });
-                if (imageBackground.length == 0) {
-                    $(".fix-bars").css('display', 'block')
-                } else {
-                    $(".fix-bars").css('display', 'none')
-                    $(window).scroll(function() {
-                        if (parseInt($(this).scrollTop()) > parseInt(screenHeight)) {
-                            $('.fix-bars').fadeIn();
-                        } else {
-                            $('.fix-bars').fadeOut();
-                            $('.fix-nav').fadeOut();
-                        }
-                    });
-                };
-                $('body').on('click', ".fix-bars", function() {
-                    var select = $('.fix-nav');
-                    if ($('.fix-nav').css('display') == "none") {
-                        slideDown(select, false);
-                    } else {
-                        slideUp(select, false);
-                    };
-                })
-            })
-        </script>
-        {{{_sections.jquery}}}
+          <a href="/"><h3 class="logo">XY/Z</h1></a>
+          <ul class="main-nav list-unstyled">
+           <li><a href="/about">about</a></li>
+           <li class="active"><a href="/portfolio">work</a></li>
+           <li><a href="/blog">blog</a></li>
+           <li><a href="/contact">contact</a></li>
+           <li><a href="/request-intro">create project</a></li>
+           <li><a href="javascript:;">search</a></li>
+         </ul>
+       </div>
+       <div class="general-header">
+        <a href="/"><h1 class="logo">XY/Z</h1></a>
+        <ul class="main-nav list-unstyled">
+         <li><a href="/about">about</a></li>
+         <li class="active"><a href="/">work</a></li>
+         <li><a href="/blog">blog</a></li>
+         <li><a href="/contact">contact</a></li>
+         <li><a href="/request-intro">create project</a></li>
+         <li><a href="javascript:;">search</a></li>
+       </ul>
+     </div>
+     <div class="general-search">
+      <form action="/search" method="get">
+        <input type="text" name="q" id="q" placeholder="Type Your Word Here"></input>
+        <a class="close-button" href="javascript:;"><i class="fa fa-times"></i></a>
+      </form>
     </div>
+    {{{body}}}
+    <footer class="footer">
+      <p>&copy; XYZ-ARCHITECTS . 2015 . Theme Design by <span class="brand">XYZ</span> . Developed by <span class="brand">ARKA CREATIVE</span></p>
+    </footer>
+    <script src="/scripts/dependencies/jQuery-2.1.4.min.js"></script>
+    <script src="/scripts/dependencies/bootstrap.min.js"></script>
+    <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
+    <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".fix-bars").css("top", (parseInt($(window).height())/2)-30);
+        var screenHeight = $(window).height();
+        var imageBackground = $('.home-header');
+        var slideDown = function(selector, otherEffect){
+          selector.slideDown(500 , function(){
+            $(this).css({
+              "display" : "block",
+            });
+          });
+          if(otherEffect){
+            $('.general-header').animate({
+              top : "+=66px"
+            }, 500, function(){});
+          }
+        };
+        var slideUp = function(selector, otherEffect){
+          selector.slideUp(500 , function(){
+            $(this).css({
+              "display" : "none",
+            });
+            $('#q').val("");
+          });
+          if(otherEffect){
+            $('.general-header').animate({
+              top : "-=66px"
+            }, 500, function(){});
+          }
+        };
+        $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function(){
+          var select = $('.general-search');
+          var genSearch = select.css('display');
+          if(genSearch == "none"){
+            slideDown(select, true)
+          } else {
+            slideUp(select, true)
+          }
+        });
+        $('body').on('click', '.close-button', function(){
+          var select = $('.general-search');
+          slideUp(select, true);
+        });
+        if(imageBackground.length == 0){
+          $(".fix-bars").css('display', 'block')
+        } else {
+          $(".fix-bars").css('display', 'none')
+          $(window).scroll(function() {
+            if (parseInt($(this).scrollTop())>parseInt(screenHeight))
+            {
+              $('.fix-bars').fadeIn();
+            }
+            else
+            {
+              $('.fix-bars').fadeOut();
+              $('.fix-nav').fadeOut();
+            }
+          });
+        };
+        $('body').on('click', ".fix-bars", function(){
+          var select = $('.fix-nav');
+          if($('.fix-nav').css('display') == "none"){
+            slideDown(select, false);
+          } else {
+            slideUp(select, false);
+          };
+        })
+      })
+</script>
+{{{_sections.jquery}}}
+</div>
 </body>
-
 </html>

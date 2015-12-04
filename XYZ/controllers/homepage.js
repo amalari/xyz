@@ -30,7 +30,9 @@ HomepageController = {
 			{ 
 				page:currentPage, limit:9, totalRows: result.total
 			};
-			res.render('homepage', result);
+			res.render('homepage', {
+				layout: "_homepage",
+				data : result});
 		})
 		.catch(function(err){
 			res.send(err.message)

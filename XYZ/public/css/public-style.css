@@ -8,6 +8,29 @@ html,body {
 	line-height: 1.8;
 }
 
+.image-background {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-image:url(/css/images/header-bg.png);
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-repeat:no-repeat;
+}
+
+.nav-wrapper {
+	height:100%;
+	width:1349px;
+	margin:0 auto;
+	position:relative;
+}
+
+.home-body {
+	position:relative;
+}
+
 .home-header {
 	height: 100%;
 	width: 100%;
@@ -675,7 +698,6 @@ button.req-form-button:hover{
 	height: 60px;
 	color: white;
 	right: 25px;
-	top: 290px;
 	z-index: 99;
 }
 
@@ -753,10 +775,10 @@ button.req-form-button:hover{
 	width: 60px;
 	height: 2px;
 	display: block;
-    border: 0;
-    border-top: 1px solid #ccc;
-    padding: 0; 
-    border-color: #bdbdbd;
+	border: 0;
+	border-top: 1px solid #ccc;
+	padding: 0; 
+	border-color: #bdbdbd;
 }
 
 .caption-image > p {
@@ -767,4 +789,5 @@ button.req-form-button:hover{
 .body-wrapper {
 	width: 1349px;
 	margin: 0 auto;
+	position: relative;
 }

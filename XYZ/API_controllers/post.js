@@ -58,6 +58,7 @@ PostController = {
 		queryBuilder.setup({
 			limit : req.query.limit,
 			page : req.query.page,
+			orderBy : "DESC",
 			whereCondition : {is_active : req.query.is_active, type: req.query.type}
 		});
 		if(req.query.type == 2){

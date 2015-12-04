@@ -6,7 +6,7 @@
 <div class="container home">
 	<div class="homepage-wrapper">
 		<div class="row">
-			{{#each data}}
+			{{#each data.data}}
 			<div class="col-md-4">
 				<a href="/portfolio/{{id}}">
 					<img src="{{header_image}}" class="porto-thumb" />
@@ -21,7 +21,7 @@
 <div class="pagination-wrapper">
 	<nav>
 		<ul class="pagination">
-			{{{paginateHelper pagination}}}
+			{{{paginateHelper data.pagination}}}
 		</ul>
 	</nav>
 </div>
