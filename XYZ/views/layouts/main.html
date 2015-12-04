@@ -61,7 +61,7 @@
     <script type="text/javascript">
       $(document).ready(function(){
         $(".fix-bars").css("top", (parseInt($(window).height())/2)-30);
-        var screenHeight = $(window).height();
+        var screenHeight = parseInt($(".general-header").height()) + 40;
         var imageBackground = $('.home-header');
         var slideDown = function(selector, otherEffect){
           selector.slideDown(500 , function(){
@@ -101,22 +101,18 @@
           var select = $('.general-search');
           slideUp(select, true);
         });
-        if(imageBackground.length == 0){
-          $(".fix-bars").css('display', 'block')
-        } else {
-          $(".fix-bars").css('display', 'none')
-          $(window).scroll(function() {
-            if (parseInt($(this).scrollTop())>parseInt(screenHeight))
-            {
-              $('.fix-bars').fadeIn();
-            }
-            else
-            {
-              $('.fix-bars').fadeOut();
-              $('.fix-nav').fadeOut();
-            }
-          });
-        };
+        $(".fix-bars").css('display', 'none')
+        $(window).scroll(function() {
+          if (parseInt($(this).scrollTop()) > screenHeight)
+          {
+            $('.fix-bars').fadeIn();
+          }
+          else
+          {
+            $('.fix-bars').fadeOut();
+            $('.fix-nav').fadeOut();
+          }
+        });
         $('body').on('click', ".fix-bars", function(){
           var select = $('.fix-nav');
           if($('.fix-nav').css('display') == "none"){
