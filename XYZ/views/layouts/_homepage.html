@@ -83,65 +83,75 @@
         <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                $(".fix-bars").css("top", (parseInt($(window).height())/2)-30);
                 var screenHeight = $(window).height();
                 var imageBackground = $('.home-header');
-                var slideDown = function(selector, otherEffect) {
-                    selector.slideDown(500, function() {
-                        $(this).css({
-                            "display": "block",
-                        });
+                var fixBarRight = function(nav){
+                  var screenWidth = parseInt($(window).width());
+                  var bodyWidth = parseInt($(".body-wrapper").width());
+                  return (((screenWidth-bodyWidth)/2)+30+nav);
+              };
+              var slideDown = function(selector, otherEffect) {
+                selector.slideDown(500, function() {
+                    $(this).css({
+                        "display": "block",
                     });
-                    if (otherEffect) {
-                        $('.general-header').animate({
-                            top: "+=66px"
-                        }, 500, function() {});
-                    }
-                };
-                var slideUp = function(selector, otherEffect) {
-                    selector.slideUp(500, function() {
-                        $(this).css({
-                            "display": "none",
-                        });
-                        $('#q').val("");
+                });
+                if (otherEffect) {
+                    $('.general-header').animate({
+                        top: "+=66px"
+                    }, 500, function() {});
+                }
+            };
+            var slideUp = function(selector, otherEffect) {
+                selector.slideUp(500, function() {
+                    $(this).css({
+                        "display": "none",
                     });
-                    if (otherEffect) {
-                        $('.general-header').animate({
-                            top: "-=66px"
-                        }, 500, function() {});
-                    }
+                    $('#q').val("");
+                });
+                if (otherEffect) {
+                    $('.general-header').animate({
+                        top: "-=66px"
+                    }, 500, function() {});
+                }
+            };
+            $(".fix-bars").css("right", fixBarRight(0));
+            $(".fix-nav").css("right", fixBarRight(80));
+            $(window).resize(function(e){
+              $(".fix-bars").css("right", fixBarRight(0));
+              $(".fix-nav").css("right", fixBarRight(80));
+          });
+            $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function() {
+                var select = $('.general-search');
+                var genSearch = select.css('display');
+                if (genSearch == "none") {
+                    slideDown(select, true)
+                } else {
+                    slideUp(select, true)
+                }
+            });
+            $('body').on('click', '.close-button', function() {
+                var select = $('.general-search');
+                slideUp(select, true);
+            });
+            $(".fix-bars").css('display', 'none')
+            $(window).scroll(function() {
+                if (parseInt($(this).scrollTop()) > parseInt(screenHeight)) {
+                    $('.fix-bars').fadeIn();
+                } else {
+                    $('.fix-bars').fadeOut();
+                    $('.fix-nav').fadeOut();
+                }
+            });
+            $('body').on('click', ".fix-bars", function() {
+                var select = $('.fix-nav');
+                if ($('.fix-nav').css('display') == "none") {
+                    slideDown(select, false);
+                } else {
+                    slideUp(select, false);
                 };
-                $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function() {
-                    var select = $('.general-search');
-                    var genSearch = select.css('display');
-                    if (genSearch == "none") {
-                        slideDown(select, true)
-                    } else {
-                        slideUp(select, true)
-                    }
-                });
-                $('body').on('click', '.close-button', function() {
-                    var select = $('.general-search');
-                    slideUp(select, true);
-                });
-                $(".fix-bars").css('display', 'none')
-                $(window).scroll(function() {
-                    if (parseInt($(this).scrollTop()) > parseInt(screenHeight)) {
-                        $('.fix-bars').fadeIn();
-                    } else {
-                        $('.fix-bars').fadeOut();
-                        $('.fix-nav').fadeOut();
-                    }
-                });
-                $('body').on('click', ".fix-bars", function() {
-                    var select = $('.fix-nav');
-                    if ($('.fix-nav').css('display') == "none") {
-                        slideDown(select, false);
-                    } else {
-                        slideUp(select, false);
-                    };
-                })
             })
+        })
 </script>
 {{{_sections.jquery}}}
 </div>

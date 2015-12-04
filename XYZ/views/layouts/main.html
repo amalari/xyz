@@ -60,9 +60,13 @@
     <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-        $(".fix-bars").css("top", (parseInt($(window).height())/2)-30);
         var screenHeight = parseInt($(".general-header").height()) + 40;
         var imageBackground = $('.home-header');
+        var fixBarRight = function(nav){
+          var screenWidth = parseInt($(window).width());
+          var bodyWidth = parseInt($(".body-wrapper").width());
+          return (((screenWidth-bodyWidth)/2)+30+nav);
+        };
         var slideDown = function(selector, otherEffect){
           selector.slideDown(500 , function(){
             $(this).css({
@@ -88,6 +92,12 @@
             }, 500, function(){});
           }
         };
+        $(".fix-bars").css("right", fixBarRight(0));
+        $(".fix-nav").css("right", fixBarRight(80));
+        $(window).resize(function(e){
+          $(".fix-bars").css("right", fixBarRight(0));
+          $(".fix-nav").css("right", fixBarRight(80));
+        });
         $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function(){
           var select = $('.general-search');
           var genSearch = select.css('display');
