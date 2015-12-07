@@ -24,7 +24,7 @@ UserController = {
 		app.put('/api/user/:id', this.update);
 	},
 	save : function(req, res){
-		userMultipart.parseAndSaveFiles(req, function(data){
+		userMultipart.parseAndSaveFiles(req, null, function(data){
 			data.image = userFileManager.getUrl(data.image);
 			User.check(data.email).then(function(model){
 				if(model !== null){
@@ -66,7 +66,7 @@ UserController = {
 		})
 	},
 	update : function(req, res){
-		userMultipart.parseAndSaveFiles(req, function(data){
+		userMultipart.parseAndSaveFiles(req, null, function(data){
 			var message = {};
 			User.single(data.id).
 			then(function(model){

@@ -25,7 +25,7 @@ PostController = {
 		app.delete('/api/post/:id', this.delete);
 	},
 	save : function(req, res){
-		postMultipart.parseAndSaveFiles(req, function(data){
+		postMultipart.parseAndSaveFiles(req, null, function(data){
 			if(data.header_image != undefined){
 				data.header_image = postFileManager.getUrl(data.header_image);
 				var deleteExt = data.header_image.split('.');
@@ -83,7 +83,7 @@ PostController = {
 	update : function(req, res){
 		if(req.body.type != 2 || req.body.type != 3){
 		};
-		postMultipart.parseAndSaveFiles(req, function(data){
+		postMultipart.parseAndSaveFiles(req, null, function(data){
 			Post.single(data.id, req.body.type, req.xhr)
 			.then(function(model){
 				var posting = model.toJSON();

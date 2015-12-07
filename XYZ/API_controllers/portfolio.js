@@ -53,7 +53,7 @@ PortfolioController = {
 		})
 	},
 	save : function(req, res){
-		portfolioMultipart.parseAndSaveFiles(req, function(data){
+		portfolioMultipart.parseAndSaveFiles(req, null, function(data){
 			var newData = {};
 			var arr = [];
 			for(var key in data){
@@ -89,7 +89,7 @@ PortfolioController = {
 		})
 	},
 	update : function(req, res){
-		portfolioMultipart.parseAndSaveFiles(req, function(data){
+		portfolioMultipart.parseAndSaveFiles(req, null, function(data){
 			Portfolio.single(data.id)
 			.then(function(model){
 				var singleData = model.toJSON();

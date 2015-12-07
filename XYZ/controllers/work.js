@@ -7,40 +7,11 @@ var _ = require('lodash');
 
 WorkController = {
 	registerRoutes : function(app){
-		// app.get('/portfolio', this.list);
 		app.get('/portfolio/:id',this.checkVisitor(app), this.get);
 		app.get('/portfolio/like/:id', this.likePage(app));
 		app.post('/portfolio/:id', this.save);
 		app.delete('/portfolio/comment/:id', this.delete);
 	},
-	// list : function(req, res){
-	// 	var currentPage = 1;
-	// 	if(req.query.page){
-	// 		currentPage = req.query.page
-	// 	};
-	// 	var queryBuilder = new qb();
-	// 	queryBuilder.setup({
-	// 		limit : 9,
-	// 		page : req.query.page,
-	// 		whereCondition : {is_active : 1}
-	// 	});
-	// 	Portfolio.list(queryBuilder)
-	// 	.then(function(list){
-	// 		var result = {};
-	// 		result.data = PortfolioViewModel.list(list.data);
-	// 		result.total = list.total;
-	// 		result.pagination = 
-	// 		{ 
-	// 			page:currentPage, limit:9, totalRows: result.total
-	// 		};
-	// 		res.render('homepage', {
-	// 			layout: "_homepage",
-	// 			data : result});
-	// 	})
-	// 	.catch(function(err){
-	// 		res.send(err.message)
-	// 	})
-	// },
 	likePage : function(app){
 		app.use(session({ secret : 'v151t0r',
 			saveUninitialized: true,
@@ -199,7 +170,6 @@ WorkController = {
 				result.deleteComment = true;
 			};
 			result.fullUrl = req.protocol + "://" + req.subdomains + req.hostname + ":3000" + req.originalUrl;
-			console.log(result);
 			res.render('work', result);
 		})
 		.catch(function(err){
