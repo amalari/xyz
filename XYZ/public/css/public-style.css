@@ -690,6 +690,7 @@ button.req-form-button:hover{
 
 .fix-bars {
 	position: fixed;
+	display: none;
 	background-color: #000000;
 	opacity: 0.9;
 	border: 1px solid #000000;
