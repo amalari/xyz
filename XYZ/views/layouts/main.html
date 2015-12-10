@@ -114,7 +114,7 @@
         $(window).scroll(function() {
           if (parseInt($(this).scrollTop()) > screenHeight)
           {
-            $('.fix-bars').fadeIn();
+            $('.fix-bars').fadeIn(1500);
           }
           else
           {
@@ -129,7 +129,7 @@
           } else {
             slideUp(select, false);
           };
-        })
+        });
       })
 </script>
 {{{_sections.jquery}}}

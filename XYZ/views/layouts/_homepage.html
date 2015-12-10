@@ -136,7 +136,7 @@
             });
             $(window).scroll(function() {
                 if (parseInt($(this).scrollTop()) > parseInt(screenHeight)) {
-                    $('.fix-bars').fadeIn();
+                    $('.fix-bars').fadeIn(1500);
                 } else {
                     $('.fix-bars').fadeOut();
                     $('.fix-nav').fadeOut();
@@ -149,7 +149,7 @@
                 } else {
                     slideUp(select, false);
                 };
-            })
+            });
         })
 </script>
 {{{_sections.jquery}}}
