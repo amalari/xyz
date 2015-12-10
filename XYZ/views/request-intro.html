@@ -4,32 +4,11 @@
 <div class="req-intro container">
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="req-intro-title">CHOOSE YOUR LEANGUAGE</h2>
+			<h2 class="req-intro-title">CHOOSE YOUR LANGUAGE</h2>
 			<div class="req-intro-content">
-				<a class="req-intro-lang" value="ind">BAHASA INDONESIA</a>
-				<a class="req-intro-lang" value="eng">ENGLISH</a>
-				<a href="javascript:;" class="btn req-intro-button">Next</a>
+				<a href="/client-form?lang=ind" class="req-intro-lang" value="ind">BAHASA INDONESIA</a>
+				<a href="/client-form?lang=eng" class="req-intro-lang" value="eng">ENGLISH</a>
 			</div>
 		</div>
 	</div>
-
-	{{#section 'jquery'}}
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-			var url = "/client-form?lang=";
-			var lang = "";
-			$(".req-intro-lang[value=ind]").click(function(e){
-				$(".req-intro-lang[value=eng]").removeClass('active');
-				$(".req-intro-lang[value=ind]").addClass('active');
-				$('.req-intro-button').attr('href', url + 'ind');
-			});
-			$(".req-intro-lang[value=eng]").click(function(e){
-				$(".req-intro-lang[value=ind]").removeClass('active');
-				$(".req-intro-lang[value=eng]").addClass('active');
-				$('.req-intro-button').attr('href', url + 'eng');
-			});	
-		})
-	</script>
-
-	{{/section}}
+</div>

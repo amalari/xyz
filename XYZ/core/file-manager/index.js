@@ -42,4 +42,22 @@ FileManager.prototype.deleteFolder = function(){
 	}
 };
 
+FileManager.prototype.addCharBeforeExt = function(fileFullPath, char){
+	var arrImageName = fileFullPath.split("/");
+	var imageName = arrImageName[arrImageName.length-1];
+	var arrImageWithoutExt = imageName.split(".");
+	var ext = arrImageWithoutExt.splice(arrImageWithoutExt.length-1, 1);
+	for(var a in arrImageWithoutExt){
+		if(a > 0){
+			name_image = name_image + "." + arrImageWithoutExt[a];
+		} else {
+			var name_image = arrImageWithoutExt[a]
+		}
+	};
+	var newImageName = name_image + "_" + char + "." + ext;
+	arrImageName.splice(arrImageName.length-1, 1, newImageName); 
+	var dirNewImageName = arrImageName.toString().replace(/,/g , "/");
+	return dirNewImageName;
+};
+
 module.exports = FileManager;

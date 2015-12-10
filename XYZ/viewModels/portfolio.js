@@ -7,7 +7,7 @@ function portfolioViewModel(){
 	viewModels.call(this, viewModels);
 	this._allProperties = ["title", "architect", "location", "area", "status", "project_year", "content", "is_active", "header_image", "category_id"];
 	this._viewPropertiesLite = ["id", "title", "header_image", "status"];
-	this._viewPropertiesList = ["id", "title", "category", "created_date","header_image", "content", "updated_date", "author", "totalComment", "architect", "visitor", "liker"];
+	this._viewPropertiesList = ["id", "title", "category", "area" , "created_date","header_image", "content", "updated_date", "author", "totalComment", "architect", "visitor", "liker"];
 	this._viewProperties = ["id", "title", "architect", "location", "area", "status", "project_year", "content", "header_image", "portfolioImages", "category_id"];
 	this._viewPropertiesVisitor = ["id", "architect", "status", "totalComment", "area", "location", "title", "content", "project_year", "rootComments", "header_image", "portfolioImages", "category", "visitor", "liker"];
 };
@@ -49,6 +49,16 @@ portfolioViewModel.prototype.get = function(data, ajaxRequest){
 portfolioViewModel.prototype.list = function(listData){
 	var that = this;
 	listData = listData.map(function(data){
+		var newHeader = data.header_image.split(".");
+		var ext = newHeader.splice(newHeader.length-1, 1);
+		for(var a in newHeader){
+			if(a > 0){
+				name_image = name_image + "." + newHeader[a];
+			} else {
+				var name_image = newHeader[a]
+			}
+		};
+		data.header_image = name_image + "_400x400." + ext;
 		var arr = [];
 		for(var i in data.comments){
 			if(data.comments[i].is_active == 1){

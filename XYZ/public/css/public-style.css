@@ -50,6 +50,15 @@ html,body {
 	margin-bottom: 0;
 }
 
+.white-logo{
+	display:block;
+	width:100px;
+	height: 39px;
+	margin-top: 20px;
+	margin-bottom: 0;
+	margin-left: 20px;
+}
+
 @media (min-width: @screen-md-min){
 	.container {
 		width: 1020px;		
@@ -64,6 +73,7 @@ html,body {
 	width: 100%;
 }
 .porto-title{
+	transition: color 0.4s ease;
 	font-size: 22px;
 	font-family: Montserrat;
 	font-weight: 400;
@@ -72,7 +82,8 @@ html,body {
 	margin-bottom: 5px;
 	line-height: 1;
 }
-.porto-status{
+.porto-area{
+	transition: color 0.4s ease;
 	font-size: 16px;
 	font-family: Montserrat;
 	font-weight: 700;
@@ -154,7 +165,7 @@ html,body {
 	color: #000;
 	
 }
-.general-header a{
+a{
 	transition: color 0.4s ease;
 	color: #000;
 }
@@ -162,9 +173,13 @@ html,body {
 	font-weight: bold;
 }
 
-.general-header a:hover{
+a:hover, .porto-title:hover, .porto-area:hover, h3.post-title:hover{
 	color: #00bfa5;
 	text-decoration: none;
+}
+
+.post-title:hover:after{
+	background-color: #00bfa5;
 }
 
 .main-nav {
@@ -203,6 +218,10 @@ html,body {
 	padding-bottom: 40px;	
 	width: 100%;
 	margin: 0 auto;
+	width:100%;
+	position:absolute;
+	bottom: -100px;
+	height: 100px;
 }
 .footer .brand{
 	color:#212121;
@@ -275,12 +294,18 @@ button.req-form-button{
 	padding: 12px 12px;
 	margin-top: 102px;
 	margin-bottom: 100px;
-	background-color: #212121;
+	background-color: #212121 !important;
 	color:#fff !important;
 	width:136px;
 	height: 55px;
 	font-size: 22px;
 	font-family: Roboto;
+	background-image: -webkit-linear-gradient(top,#212121 0,#212121 100%); */
+}
+button.req-form-button:hover{
+	background-color: #212121 !important;
+	border-color: #212121;
+	text-decoration: none;
 }
 
 p img{
@@ -324,6 +349,7 @@ p img{
 	clear: both;
 }
 h3.post-title{
+	transition: color 0.4s ease;
 	font-size: 32px;
 	font-family: Open Sans;
 	margin-top: 10px;
@@ -335,6 +361,7 @@ h2.post-title{
 	margin-top: 20px;
 }
 .post-title:after{
+	transition: background-color 0.4s ease;
 	display: block;
 	content: '';
 	width: 75px;
@@ -378,6 +405,7 @@ h2.post-title:after{
 	text-transform: uppercase;
 	letter-spacing: 1.5px;
 	margin-bottom: 0;
+	text-decoration: none;
 }
 .author .prefix{
 	color:#bdbdbd;
@@ -550,6 +578,7 @@ button.req-form-button:hover{
 	margin-bottom: 20px;
 }
 .btn-file {
+	transition: background-color 0.4s ease;
 	position: relative;
 	overflow: hidden;
 	display: inline block;
@@ -565,6 +594,7 @@ button.req-form-button:hover{
 }
 .btn-file input[type=file],
 .btn-file input[type=radio] {
+	transition: background-color 0.4s ease;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -603,7 +633,6 @@ button.req-form-button:hover{
 }
 .archive .header{
 	margin-bottom:0;
-	border-bottom: 1px solid #bdbdbd;
 	text-align: center;
 }
 .archive .header h4{
@@ -790,6 +819,7 @@ button.req-form-button:hover{
 }
 
 .body-wrapper {
+	min-height:100%;
 	width: 1349px;
 	margin: 0 auto;
 	position: relative;

@@ -21,7 +21,7 @@ BlogController = {
 		var that = this;
 		var queryBuilder = new qb();
 		queryBuilder.setup({
-			limit : 2,
+			limit : 4,
 			page : req.query.page,
 			whereCondition : {is_active : 1, type : 1}
 		});
@@ -30,7 +30,7 @@ BlogController = {
 			var data = PostViewModel.getList(list, req.xhr);
 			data.pagination = 
 			{ 
-				page:currentPage, limit:2, totalRows: data.total
+				page:currentPage, limit:4, totalRows: data.total
 			};
 			res.render('blog', data);
 		})

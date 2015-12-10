@@ -109,10 +109,9 @@ Multipart.prototype.imageResizer = function(image, options, fieldname, callback)
 			newFilename = nameFile + "_" + thumbProperties.width.toString() +  "x" + thumbProperties.height.toString() + "." + ext;
 			if(options.synchronous == true){
 				array.push(function(){
-					console.log('xxxx')
 					return im.resizeAsync({
-						srcPath: _this._uploadDir + image,
-						dstPath: _this._uploadDir + newFilename,
+						srcPath: _this._uploadDir + "/" + image,
+						dstPath: _this._uploadDir + "/" + newFilename,
 						width:   thumbProperties.width,
 						height: thumbProperties.height,
 						quality: 1 || thumbProperties.quality,
@@ -121,8 +120,8 @@ Multipart.prototype.imageResizer = function(image, options, fieldname, callback)
 				})
 			} else {
 				im.resize({
-					srcPath: _this._uploadDir + image,
-					dstPath: _this._uploadDir + newFilename,
+					srcPath: _this._uploadDir + "/" + image,
+					dstPath: _this._uploadDir + "/" + newFilename,
 					width:   thumbProperties.width,
 					height: thumbProperties.height,
 					quality: 1 || thumbProperties.quality,

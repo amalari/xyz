@@ -13,14 +13,14 @@
         <div class="form-group">
           <label>Tanggal Lahir*</label>
           <div class="date-group">
-          <input type="number" name="date" class="form-control date" id="exampleInputPassword1" placeholder="DD" min="1" max="31" required> / 
-          <input type="number" name="month" class="form-control date" id="exampleInputPassword1" placeholder="MM" min="1" max="12" required> / 
-          <input type="number" name="year" class="form-control date year" id="exampleInputPassword1" placeholder="YYYY" required>
+            <input type="number" name="date" class="form-control date" id="exampleInputPassword1" placeholder="DD" min="1" max="31" required> / 
+            <input type="number" name="month" class="form-control date" id="exampleInputPassword1" placeholder="MM" min="1" max="12" required> / 
+            <input type="number" name="year" class="form-control date year" id="exampleInputPassword1" placeholder="YYYY" required>
           </div>
         </div>
         <div class="form-group">
           <label>Jenis Kelamin*</label><br />
-           <span class="btn btn-file btn-radio">
+          <span class="btn btn-file btn-radio">
             Perempuan  <input type="radio" name="gender" class="form-control" id="exampleInputEmail1" value="Perempuan">
           </span>
           <span class="btn btn-file btn-radio">
@@ -36,7 +36,7 @@
           <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Masukan Email" required>
         </div>
         <p class="button-wrapper">
-        <button type="submit" class="btn btn-primary req-form-button">Submit</button>
+          <button type="submit" class="btn btn-primary req-form-button">Submit</button>
         </p>
       </form>
     </div>
@@ -47,15 +47,15 @@
 
 <script type="text/javascript">
  $(document).ready(function(){
-    var date = new Date();
-    var year = date.getFullYear();
-    $('input[name=year]').attr("max", year-18);
-    $('input[name=year]').attr("min", year-100);
-    $('.form-group span input').on('click', function(){
-      $('.form-group span').removeClass('active');
-      $('input:checked').parent().addClass('active');
-    });
-  }) 
+  var date = new Date();
+  var year = date.getFullYear();
+  $('input[name=year]').attr("max", year-18);
+  $('input[name=year]').attr("min", year-100);
+  $('.form-group span input').on('click', function(){
+    $('.form-group span').removeClass('active');
+    $('input:checked').parent().addClass('active');
+  });
+}) 
 </script>
 
 {{/section}}
