@@ -2,6 +2,7 @@ var Portfolio = require('./../models/portfolio.js');
 var Comment = require('./../models/comment.js');
 var PortfolioViewModel = require('./../viewModels/portfolio.js');
 var qb = require('./../core/queryBuilder/index.js');
+var SearchQb = require('./../core/queryBuilder/search-query-builder.js');
 var session = require('express-session');
 var _ = require('lodash');
 
@@ -11,6 +12,7 @@ WorkController = {
 		app.get('/portfolio/like/:id', this.likePage(app));
 		app.post('/portfolio/:id', this.save);
 		app.delete('/portfolio/comment/:id', this.delete);
+		app.get('/portfolio/area/search', this.areasearch);
 	},
 	likePage : function(app){
 		app.use(session({ secret : 'v151t0r',
@@ -151,6 +153,32 @@ WorkController = {
 				}
 			}
 		}
+	},
+	areasearch : function(req, res){
+		var currentPage = req.query.page || 1;
+		var queryBuilder = new SearchQb();
+		var result = {};
+		queryBuilder.setup({
+			limit : 10,
+			page : currentPage,
+			whereCondition : {is_active : 1}
+		});
+		queryBuilder.search(['area', 'LIKE', '%' + req.query.q + '%']);
+		Portfolio.list(queryBuilder)
+		.then(function(data){
+			result.portfolio = {};
+			result.portfolio.data = PortfolioViewModel.list(data.data);
+			result.portfolio.total = data.total;
+			result.pagination = 
+			{ 
+				page:currentPage, limit:10, totalRows: result.portfolio.total
+			};
+			result.q = req.query.q;
+			res.render('archive2', result);
+		})
+		.catch(function(err){
+			res.send({success : false, message : err.message})
+		})
 	},
 	get : function(req, res){
 		Portfolio.single(req.params.id)

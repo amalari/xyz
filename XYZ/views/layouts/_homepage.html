@@ -21,14 +21,14 @@
   </head>
 
   <body class="home-body">
+      <div class="general-search">
+        <form action="/search" method="get">
+            <input type="text" name="q" id="q" placeholder="Type Your Word Here"></input>
+            <a class="close-button" href="javascript:;"><i class="fa fa-times"></i></a>
+        </form>
+    </div>
     <div class="image-background"></div>
     <div class="nav-wrapper">
-        <div class="general-search">
-            <form action="/search" method="get">
-                <input type="text" name="q" id="q" placeholder="Type Your Word Here"></input>
-                <a class="close-button" href="javascript:;"><i class="fa fa-times"></i></a>
-            </form>
-        </div>
         <div class="general-header">
             <a href="/"><h1 class="logo">XY/Z</h1></a>
             <ul class="main-nav list-unstyled">
@@ -48,7 +48,6 @@
         </div>
     </div>
     <div class="body-wrapper">
-
         <a href="javascript:;">
             <div class="fix-bars"><i class="fa fa-bars fa-3x"></i>
             </div>
@@ -70,8 +69,6 @@
                 </li>
             </ul>
         </div>
-
-
         {{{body}}}
         <footer class="footer">
             <p>&copy; XYZ-ARCHITECTS . 2015 . Theme Design by <span class="brand">XYZ</span> . Developed by <span class="brand">ARKA CREATIVE</span>
@@ -83,6 +80,27 @@
         <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
+                var slideDown = function(selector, otherEffect){
+                    selector.slideDown(500, function() {
+                    });
+                    if (otherEffect) {
+                        $('.image-background').animate({
+                            top: "+=66px"
+                        }, 500, function() {});
+                    }
+                };
+                var slideUp = function(selector, otherEffect) {
+                    selector.slideUp(500, function() {
+                    });
+                    if (otherEffect) {
+
+                        $('.image-background').animate({
+                            top: "-=66px"
+                        }, 500, function() {
+                            $('#q').val("");
+                        });
+                    }
+                };
                 var screenHeight = $(window).height();
                 var imageBackground = $('.home-header');
                 var fixBarRight = function(nav){
@@ -90,38 +108,14 @@
                   var bodyWidth = parseInt($(".body-wrapper").width());
                   return (((screenWidth-bodyWidth)/2)+30+nav);
               };
-              var slideDown = function(selector, otherEffect) {
-                selector.slideDown(500, function() {
-                    $(this).css({
-                        "display": "block",
-                    });
-                });
-                if (otherEffect) {
-                    $('.general-header').animate({
-                        top: "+=66px"
-                    }, 500, function() {});
-                }
-            };
-            var slideUp = function(selector, otherEffect) {
-                selector.slideUp(500, function() {
-                    $(this).css({
-                        "display": "none",
-                    });
-                    $('#q').val("");
-                });
-                if (otherEffect) {
-                    $('.general-header').animate({
-                        top: "-=66px"
-                    }, 500, function() {});
-                }
-            };
-            $(".fix-bars").css("right", fixBarRight(0));
-            $(".fix-nav").css("right", fixBarRight(80));
-            $(window).resize(function(e){
+
               $(".fix-bars").css("right", fixBarRight(0));
               $(".fix-nav").css("right", fixBarRight(80));
-          });
-            $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function() {
+              $(window).resize(function(e){
+                  $(".fix-bars").css("right", fixBarRight(0));
+                  $(".fix-nav").css("right", fixBarRight(80));
+              });
+              $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function() {
                 var select = $('.general-search');
                 var genSearch = select.css('display');
                 if (genSearch == "none") {
@@ -130,19 +124,19 @@
                     slideUp(select, true)
                 }
             });
-            $('body').on('click', '.close-button', function() {
+              $('body').on('click', '.close-button', function() {
                 var select = $('.general-search');
                 slideUp(select, true);
             });
-            $(window).scroll(function() {
+              $(window).scroll(function() {
                 if (parseInt($(this).scrollTop()) > parseInt(screenHeight)) {
                     $('.fix-bars').fadeIn(1500);
                 } else {
-                    $('.fix-bars').fadeOut();
-                    $('.fix-nav').fadeOut();
+                    $('.fix-bars').fadeOut(100);
+                    $('.fix-nav').fadeOut(100);
                 }
             });
-            $('body').on('click', ".fix-bars", function() {
+              $('body').on('click', ".fix-bars", function() {
                 var select = $('.fix-nav');
                 if ($('.fix-nav').css('display') == "none") {
                     slideDown(select, false);
@@ -150,7 +144,7 @@
                     slideUp(select, false);
                 };
             });
-        })
+          })
 </script>
 {{{_sections.jquery}}}
 </div>
