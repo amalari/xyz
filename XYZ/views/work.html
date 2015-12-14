@@ -152,6 +152,14 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.content img').each(function(i, element){
+			var imageSource = $(element).attr("src");
+			if(imageSource.substring(0,1) != "/"){
+				imageSource = "/" + imageSource;
+				var d = new Date();
+				 $(element).attr("src", imageSource + "?" + d.getTime());
+			};
+		});
+		$('.content img').each(function(i, element){
 			var captionImage = $(element).attr("alt");
 			$(element).wrap('<div class="image-wrapper"></div>');
 			$('.image-wrapper').append('<div class="caption-image"></div');

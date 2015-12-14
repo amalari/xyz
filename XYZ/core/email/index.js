@@ -4,18 +4,14 @@ var hbs = require('nodemailer-express-handlebars');
 
 function Email(){
 	this._transporter = nodemailer.createTransport(smtpTransport({
-		host: 'smtp.gmail.com',
-		port: 587,
-		service : 'Gmail',
+		service: "Gmail",
+		ignoreTLS: true,
 		auth:{
-			user: 'achmadjamaludin14@gmail.com',
-			pass: 'astafista'
-		},
-		rejectUnauthorized: true,
-		secure : false
-	}));
-
-}
+			user: 'xyz.cartel1@gmail.com',
+			pass: 'hagemaru'
+		}
+	}))
+};
 
 Email.prototype.setup = function(handlebars){
 	this._transporter.use('compile', hbs({
