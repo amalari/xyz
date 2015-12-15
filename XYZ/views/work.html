@@ -1,8 +1,7 @@
 {{#section 'head'}}
 <title>XYZ - Work</title>
 <meta property="og:image" content="{{fullUrl}}"/>
-<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-<link rel="stylesheet" href="/css/bootstrap-image-gallery.min.css">
+<link rel="stylesheet" href="/css/magnific-popup.css">
 {{/section}}
 <div class="single porto container">
 	<div class="row">
@@ -33,9 +32,9 @@
 						<label>Architect:</label> {{architect}}
 					</li>
 				</ul>
-				<div class="portfolio-image links">
+				<div class="portfolio-image gallery">
 					{{#each portfolioImages}}
-					<a href="{{image}}" data-gallery>
+					<a href="{{image}}">
 						<img src="{{image}}">
 					</a>
 					{{/each}}
@@ -122,41 +121,30 @@
 	</div>
 </div>
 
-<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
-<div id="blueimp-gallery" class="blueimp-gallery">
-	<!-- The container for the modal slides -->
-	<div class="slides"></div>
-	<!-- Controls for the borderless lightbox -->
-	<h3 class="title"></h3>
-	<a class="prev">‹</a>
-	<a class="next">›</a>
-	<a class="close">×</a>
-	<a class="play-pause"></a>
-	<ol class="indicator"></ol>
-	<!-- The modal dialog, which will be used to wrap the lightbox content -->
-	<div class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<button type="button" class="close" aria-hidden="true"><i class="fa fa-times"></i></button>
-				<button type="button" class="next" aria-hidden="true"><i class="fa fa-chevron-right"></i></button>
-				<button type="button" class="prev" aria-hidden="true"><i class="fa fa-chevron-left"></i></button>
-				<div class="modal-body next"></div>
-			</div>
-		</div>
-	</div>
-</div>
-
 {{#section 'jquery'}}
-<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-<script src="/scripts/dependencies/bootstrap-image-gallery.min.js"></script>
+<script src="/scripts/dependencies/jquery.magnific-popup.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$('.gallery').magnificPopup({
+			delegate: 'a',
+			type: 'image',
+			mainClass: 'mfp-with-zoom',
+			gallery:{enabled:true},
+			zoom: {
+				enabled: true,
+				duration: 200,
+				easing: 'ease-in-out',
+				opener: function(openerElement) {
+					return openerElement.is('img') ? openerElement : openerElement.find('img');
+				}
+			}
+		});
 		$('.content img').each(function(i, element){
 			var imageSource = $(element).attr("src");
 			if(imageSource.substring(0,1) != "/"){
 				imageSource = "/" + imageSource;
 				var d = new Date();
-				 $(element).attr("src", imageSource + "?" + d.getTime());
+				$(element).attr("src", imageSource + "?" + d.getTime());
 			};
 		});
 		$('.content img').each(function(i, element){

@@ -211,7 +211,7 @@ a:hover, .porto-title:hover, .porto-area:hover, h3.post-title:hover{
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
 	background-color: #212121;
 }
-.footer{
+#footer{
 	text-align: center;
 	font-family: Roboto;
 	font-size: 18px;
@@ -224,7 +224,7 @@ a:hover, .porto-title:hover, .porto-area:hover, h3.post-title:hover{
 	bottom: -100px;
 	height: 100px;
 }
-.footer .brand{
+#footer .brand{
 	color:#212121;
 }
 p{
@@ -824,55 +824,4 @@ button.req-form-button:hover{
 	width: 1349px;
 	margin: 0 auto;
 	position: relative;
-}
-
-.modal-content{
-	margin-top : 99.5px;
-	border-radius: 0;
-}
-
-.modal-content>button.close{
-	font-size: 40px; 
-	position:absolute; 
-	top:-55.5px; 
-	right:-275px; 
-	opacity:0.3; 
-	color:#ffffff;
-}
-
-.modal-content>button.close, .modal-content>button.next, .modal-content>button.prev{
-	font-size: 40px; 
-	position:absolute; 
-	opacity:0.3; 
-	color:#ffffff;
-}
-
-.modal-content>button.close{
-	top: -55.5px;
-	right:-275px; 
-	text-shadow: none;
-}
-
-.modal-content>button.next, .modal-content>button.prev{
-	top: 50%;
-	margin-top: -20px;
-	-webkit-appearance: none;
-	padding: 0;
-	cursor: pointer;
-	background: 0 0;
-	border: 0;
-}
-
-.modal-content>button.next{
-	right:-275px; 
-}
-
-.modal-content>button.prev{
-	left:-275px; 
-}
-
-.modal-content>button.close:hover, .modal-content>button.next:hover, .modal-content>button.prev:hover{
-	opacity: 1;
-	color:#ffffff;
-	text-decoration: none;
 }

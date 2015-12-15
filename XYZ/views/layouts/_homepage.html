@@ -70,84 +70,84 @@
             </ul>
         </div>
         {{{body}}}
-        <footer class="footer">
+        <footer id="footer">
             <p>&copy; XYZ-ARCHITECTS . 2015 . Theme Design by <span class="brand">XYZ</span> . Developed by <span class="brand">ARKA CREATIVE</span>
             </p>
         </footer>
-        <script src="/scripts/dependencies/jQuery-2.1.4.min.js"></script>
-        <script src="/scripts/dependencies/bootstrap.min.js"></script>
-        <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
-        <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var slideDown = function(selector, otherEffect){
-                    selector.slideDown(500, function() {
-                    });
-                    if (otherEffect) {
-                        $('.image-background').animate({
-                            top: "+=66px"
-                        }, 500, function() {});
-                    }
-                };
-                var slideUp = function(selector, otherEffect) {
-                    selector.slideUp(500, function() {
-                    });
-                    if (otherEffect) {
+    </div>
+    <script src="/scripts/dependencies/jQuery-2.1.4.min.js"></script>
+    <script src="/scripts/dependencies/bootstrap.min.js"></script>
+    <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
+    <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var slideDown = function(selector, otherEffect){
+                selector.slideDown(500, function() {
+                });
+                if (otherEffect) {
+                    $('.image-background').animate({
+                        top: "+=66px"
+                    }, 500, function() {});
+                }
+            };
+            var slideUp = function(selector, otherEffect) {
+                selector.slideUp(500, function() {
+                });
+                if (otherEffect) {
 
-                        $('.image-background').animate({
-                            top: "-=66px"
-                        }, 500, function() {
-                            $('#q').val("");
-                        });
-                    }
-                };
-                var screenHeight = $(window).height();
-                var imageBackground = $('.home-header');
-                var fixBarRight = function(nav){
-                  var screenWidth = parseInt($(window).width());
-                  var bodyWidth = parseInt($(".body-wrapper").width());
-                  return (((screenWidth-bodyWidth)/2)+30+nav);
-              };
+                    $('.image-background').animate({
+                        top: "-=66px"
+                    }, 500, function() {
+                        $('#q').val("");
+                    });
+                }
+            };
+            var screenHeight = $(window).height();
+            var imageBackground = $('.home-header');
+            var fixBarRight = function(nav){
+              var screenWidth = parseInt($(window).width());
+              var bodyWidth = parseInt($(".body-wrapper").width());
+              return (((screenWidth-bodyWidth)/2)+30+nav);
+          };
 
+          $(".fix-bars").css("right", fixBarRight(0));
+          $(".fix-nav").css("right", fixBarRight(80));
+          $(window).resize(function(e){
               $(".fix-bars").css("right", fixBarRight(0));
               $(".fix-nav").css("right", fixBarRight(80));
-              $(window).resize(function(e){
-                  $(".fix-bars").css("right", fixBarRight(0));
-                  $(".fix-nav").css("right", fixBarRight(80));
-              });
-              $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function() {
-                var select = $('.general-search');
-                var genSearch = select.css('display');
-                if (genSearch == "none") {
-                    slideDown(select, true)
-                } else {
-                    slideUp(select, true)
-                }
-            });
-              $('body').on('click', '.close-button', function() {
-                var select = $('.general-search');
-                slideUp(select, true);
-            });
-              $(window).scroll(function() {
-                if (parseInt($(this).scrollTop()) > parseInt(screenHeight)) {
-                    $('.fix-bars').fadeIn(1500);
-                } else {
-                    $('.fix-bars').fadeOut(100);
-                    $('.fix-nav').fadeOut(100);
-                }
-            });
-              $('body').on('click', ".fix-bars", function() {
-                var select = $('.fix-nav');
-                if ($('.fix-nav').css('display') == "none") {
-                    slideDown(select, false);
-                } else {
-                    slideUp(select, false);
-                };
-            });
-          })
+          });
+          $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function() {
+            var select = $('.general-search');
+            var genSearch = select.css('display');
+            if (genSearch == "none") {
+                slideDown(select, true)
+            } else {
+                slideUp(select, true)
+            }
+        });
+          $('body').on('click', '.close-button', function() {
+            var select = $('.general-search');
+            slideUp(select, true);
+        });
+          $(window).scroll(function() {
+            if (parseInt($(this).scrollTop()) > parseInt(screenHeight)) {
+                $('.fix-bars').fadeIn(1500);
+            } else {
+                $('.fix-bars').fadeOut(100);
+                $('.fix-nav').fadeOut(100);
+            }
+        });
+          $('body').on('click', ".fix-bars", function() {
+            var select = $('.fix-nav');
+            if ($('.fix-nav').css('display') == "none") {
+                slideDown(select, false);
+            } else {
+                slideUp(select, false);
+            };
+        });
+      })
 </script>
 {{{_sections.jquery}}}
-</div>
 </body>
 
 </html>
