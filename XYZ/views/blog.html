@@ -8,16 +8,15 @@
 			<article>
 				<img class="post-thumb" src="{{header_image}}" />
 				<ul class="post-meta">
-					<li><a href="/category/search?q={{category.name}}&type=post">{{category.name}}</a></li>
-					<li>{{visitor}} Reads</li>
-					<li>{{liker}} Likes</li>
-					<li>{{totalComment}} Comments</li>
+					<li><span><a href="/category/search?q={{category.name}}&type=post">{{category.name}}</a></span></li>
+					<li><span>{{visitor}} Reads</span></li>
+					<li><span>{{liker}} Likes</span></li>
+					<li><span>{{totalComment}} Comments</span></li>
 				</ul>
 				<a href="/blog/{{id}}"><h3 class="post-title">{{title}}</h3></a>
 				<summary locid="descriptionID">
 					{{{content}}}
 				</summary>
-				<br></br>
 				<p class="author"><span class="prefix">By </span><a href="/profile/{{authorId}}">&nbsp;{{author}}</a></p>
 			</article>
 			{{/each}}
