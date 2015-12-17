@@ -36,7 +36,6 @@ Multipart.prototype._saveFile = function(file, filename){
 }
 
 Multipart.prototype.parseAndSaveFiles = function(req, options, callback) {
-	console.log(options);
 	var _this = this;
 	_this._createDir(_this._uploadDir, function(){
 		var busboy = new Busboy({headers:req.headers});
@@ -130,7 +129,6 @@ Multipart.prototype.imageResizer = function(image, options, fieldname, callback)
 					format: ext
 				}, function(err, stdout, stderr){
   					if (err) throw err;
-  					callback(array);
   					console.log('resized')
 				})
 			}

@@ -15,8 +15,8 @@ TinyvisonController = {
 			files.forEach(function(val, i){
 				var obj = {};
 				var deleteExt = val.split('.');
-				deleteExt.splice(deleteExt.length-1, 1);
-				var newFilename = deleteExt.toString() + "_300x300.JPG";
+				var ext = deleteExt.splice(deleteExt.length-1, 1);
+				var newFilename = deleteExt.toString() + "_300x300." + ext;
 				obj.imageUrl = '/images/' + newFilename;
 				obj.name = val;
 				obj.value = '/images/' + val;
