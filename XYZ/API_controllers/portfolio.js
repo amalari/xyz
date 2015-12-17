@@ -7,7 +7,7 @@ var FileManager = require('./../core/file-manager/index.js');
 
 var portfolioMultipart = new Multipart({
 	uploadDir : __dirname + '/../public/uploads/portfolio',
-	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif' ]
+	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif', 'image/jpg' ]
 });
 
 var portfolioFileManager = new FileManager({

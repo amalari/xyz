@@ -1,6 +1,5 @@
 var Category = require('./../models/category.js');
 var qb = require('./../core/queryBuilder/index.js');
-// var testAccount = require('./../tests/account.js');
 
 
 CategoryController = {

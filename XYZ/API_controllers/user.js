@@ -7,7 +7,7 @@ var authentication = require('./../core/authentication/index.js');
 
 var userMultipart = new Multipart({
 	uploadDir : __dirname + '/../public/uploads/user',
-	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif' ]
+	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif', 'image/jpg' ]
 });
 
 var userFileManager = new FileManager({

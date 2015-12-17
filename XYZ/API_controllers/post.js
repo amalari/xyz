@@ -8,7 +8,7 @@ var im = require('imagemagick');
 
 var postMultipart = new Multipart({
 	uploadDir : __dirname + '/../public/uploads/posting',
-	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif' ]
+	allowedMimeTypes : ['image/jpeg', 'image/png', 'image/gif', 'image/jpg' ]
 });
 
 var postFileManager = new FileManager({
@@ -26,7 +26,7 @@ PostController = {
 	},
 	save : function(req, res){
 		postMultipart.parseAndSaveFiles(req, null, function(data){
-			if(data.header_image != undefined){
+			if(data.header_image != undefined || data.header_image != null){
 				data.header_image = postFileManager.getUrl(data.header_image);
 				var deleteExt = data.header_image.split('.');
 				deleteExt.splice(deleteExt.length - 1, 1);
