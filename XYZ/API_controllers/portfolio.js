@@ -53,8 +53,7 @@ PortfolioController = {
 		})
 	},
 	save : function(req, res){
-		portfolioMultipart.parseAndSaveFiles(req, 
-		{
+		portfolioMultipart.parseAndSaveFiles(req, {
 			synchronous : false,
 			thumbnails : {
 				fieldname : "header",
