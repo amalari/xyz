@@ -49,22 +49,24 @@ portfolioViewModel.prototype.get = function(data, ajaxRequest){
 portfolioViewModel.prototype.list = function(listData){
 	var that = this;
 	listData = listData.map(function(data){
-		var newHeader = data.header_image.split(".");
-		var ext = newHeader.splice(newHeader.length-1, 1);
-		for(var a in newHeader){
-			if(a > 0){
-				name_image = name_image + "." + newHeader[a];
-			} else {
-				var name_image = newHeader[a]
-			}
-		};
-		data.header_image = name_image + "_400x400." + ext;
-		var arr = [];
-		for(var i in data.comments){
-			if(data.comments[i].is_active == 1){
-				arr.push(data.comments[i]);
-			}
-		};
+		if(data.header_image != null || data.header_image != undefined){
+			var newHeader = data.header_image.split(".");
+			var ext = newHeader.splice(newHeader.length-1, 1);
+			for(var a in newHeader){
+				if(a > 0){
+					name_image = name_image + "." + newHeader[a];
+				} else {
+					var name_image = newHeader[a]
+				}
+			};
+			data.header_image = name_image + "_400x400." + ext;
+			var arr = [];
+			for(var i in data.comments){
+				if(data.comments[i].is_active == 1){
+					arr.push(data.comments[i]);
+				}
+			};
+		}
 		data.comments = arr;
 		data.totalComment = arr.length;
 		data.content = that.summary(data.content, '16px');
