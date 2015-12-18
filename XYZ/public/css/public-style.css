@@ -212,17 +212,17 @@ a:hover, .porto-title:hover, .porto-area:hover, h3.post-title:hover{
 	background-color: #212121;
 }
 #footer{
+	clear: both;
 	text-align: center;
 	font-family: Roboto;
 	font-size: 18px;
 	color:#9e9e9e;
 	padding-bottom: 40px;	
 	width: 100%;
-	margin: 0 auto;
-	width:100%;
-	position:absolute;
-	bottom: -100px;
-	height: 100px;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -40px;
 }
 #footer .brand{
 	color:#212121;

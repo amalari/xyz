@@ -99,6 +99,16 @@ CategoryPublic.registerRoutes(app);
 Contact.registerRoutes(app);
 Profile.registerRoutes(app);
 
+app.use(function(req, res, next){
+	res.status(404);
+	res.render('404');
+});
+
+app.use(function(err, req, res, next){
+	res.status(500);
+	res.render('500');
+});
+
 app.listen(config.port, function(){
 	console.log("Listening on %s, server_port %s", config.ipAddress, config.port);
 });

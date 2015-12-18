@@ -60,13 +60,13 @@ portfolioViewModel.prototype.list = function(listData){
 				}
 			};
 			data.header_image = name_image + "_400x400." + ext;
-			var arr = [];
-			for(var i in data.comments){
-				if(data.comments[i].is_active == 1){
-					arr.push(data.comments[i]);
-				}
-			};
-		}
+		};
+		var arr = [];
+		for(var i in data.comments){
+			if(data.comments[i].is_active == 1){
+				arr.push(data.comments[i]);
+			}
+		};
 		data.comments = arr;
 		data.totalComment = arr.length;
 		data.content = that.summary(data.content, '16px');
