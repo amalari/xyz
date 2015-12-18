@@ -54,7 +54,7 @@ Multipart.prototype.parseAndSaveFiles = function(req, options, callback) {
 			};
 			if (_this._validateFile(mimetype) && filename != null && filename != ""){
 				var newFilename = _this._saveFile(file, filename);
-				if(options != null || newFilename != null){
+				if(options != null && newFilename != null){
 					_this.imageResizer(newFilename, options, fieldname, function(array){
 						createThumb = array
 					})
