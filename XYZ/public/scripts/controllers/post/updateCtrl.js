@@ -5,6 +5,7 @@ angular.module('xyz.controllers')
 	$scope.pageTitle= 'Edit Posting';
 	$scope.formTitle= 'Form Edit Posting';
 	$scope.selectedCategory = false;
+	$scope.update = true;
 	$scope.model= Post.get({id:$stateParams.id}, function(model){
 		var arr = model.header_image.split('/');
 		var i = arr.length-1;

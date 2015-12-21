@@ -4,6 +4,7 @@ angular.module('xyz.controllers')
 .controller('PortfolioUpdateCtrl', ['$scope', '$state', '$stateParams', 'Portfolio', 'Category', 'Image', 'ENV', function($scope, $state, $stateParams, Portfolio, Category, Image, ENV){
 	$scope.pageTitle= 'Edit Portfolio';
 	$scope.formTitle= 'Form Edit Portfolio';
+	$scope.update = true;
 	Category.query(function(list){
 		$scope.categories = list.data
 	});

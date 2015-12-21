@@ -38,14 +38,14 @@
             </div>
             <div class="form-group">
               <label>Header Image</label>
-              <input type="file" ng-hide="model.nama_file_display" class="form-control" files-model="model.header" ng-model="model.header" required>
-              <input type="file" ng-show="model.nama_file_display" class="form-control" files-model="model.header" ng-model="model.header">
+              <input type="file" ng-if="create" class="form-control" files-model="model.header" ng-model="model.header" required>
+              <input type="file" ng-if="update" class="form-control" files-model="model.header" ng-model="model.header">
               <p class="help-block">{{model.nama_file_display}}</p>
             </div>
             <div class="form-group">
               <label>Project Images</label>
-              <input multiple type="file" ng-hide="model.nama_file_display_list" class="form-control" files-model="model.image" ng-model="model.image" required>
-              <input multiple type="file" ng-show="model.nama_file_display_list" class="form-control" files-model="model.image" ng-model="model.image">
+              <input multiple type="file" ng-if="create" class="form-control" files-model="model.image" ng-model="model.image" required>
+              <input multiple type="file" ng-if="update" class="form-control" files-model="model.image" ng-model="model.image">
               <p class="help-block">{{model.nama_file_display_list}}</p>
             </div>
             <div class="form-group">

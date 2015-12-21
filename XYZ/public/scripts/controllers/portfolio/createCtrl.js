@@ -7,6 +7,7 @@ angular.module('xyz.controllers')
 	$scope.model= {};
 	$scope.singleCategory={};
 	$scope.hiddenButton = false;
+	$scope.create = true;
 	Category.query(function(list){
 		$scope.categories = list.data
 	});
