@@ -16,6 +16,23 @@ UserViewModel = {
 		result.google_plus = user.google_plus;
 		return result;
 	},
+	update : function(user){
+		var result = {};		
+		if(user.password != null || user.password != undefined){
+			result.password = user.password;
+		};
+		result.id = user.id;
+		result.email = user.email;
+		result.fullname = user.fullname;
+		result.title = 'admin';
+		result.image = user.image;
+		result.description = user.description;
+		result.facebook = user.facebook;
+		result.tumblr = user.tumblr;
+		result.twitter = user.twitter;
+		result.google_plus = user.google_plus;
+		return result;
+	},
 	list : function(list){
 		var result = {};
 		result.data = list.data.map(function(data){

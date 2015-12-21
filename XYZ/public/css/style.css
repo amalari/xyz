@@ -13,3 +13,17 @@
 .pagination{
 	margin:0;
 }
+
+.loading{
+	 width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.loading>img {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    margin-top: -150px;
+}

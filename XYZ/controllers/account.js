@@ -13,8 +13,12 @@ AccountController = {
 		if(Array.isArray(message)){
 			message = message[0];
 		};
-		res.render('login', {layout: false,
+		if(req.user === undefined){
+			res.render('login', {layout: false,
 			message : message});
+		} else {
+			res.redirect('/dashboard')
+		}
 	},
 	login : passport.authenticate('local', {
 		successRedirect: '/dashboard',

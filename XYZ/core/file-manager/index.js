@@ -43,6 +43,8 @@ FileManager.prototype.deleteFolder = function(){
 };
 
 FileManager.prototype.addCharBeforeExt = function(fileFullPath, char){
+	console.log(fileFullPath);
+	console.log(char);
 	var arrImageName = fileFullPath.split("/");
 	var imageName = arrImageName[arrImageName.length-1];
 	var arrImageWithoutExt = imageName.split(".");

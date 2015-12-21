@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var Multipart = require('./../core/multipart/index.js');
 var FileManager = require('./../core/file-manager/index.js');
+var sequence = require('when/sequence');
 
 TinyvisonController = {
 	registerRoutes : function(app){
@@ -37,16 +38,25 @@ TinyvisonController = {
 			dir : __dirname + '/../public/images',
 			baseUrl : '/images'
 		});
-		formMultipart.parseAndSaveFiles(req, {
+		var thumbnails = {
 			synchronous : true,
-			thumbnails : {
-				height : 300,
-				width : 300,
-				quality : 1
-			}
-		}, function(data){
-			res.send({success:true});
-			
+			height : 300,
+			width : 300,
+			quality : 1
+		};
+		var createThumb = [];
+		formMultipart.parseAndSaveFiles(req, function(data){
+			if(thumbnails.synchronous){
+				formMultipart.imageResizer(data.files, thumbnails, function(array){
+					createThumb = array;
+				});
+			} else {
+				formMultipart.imageResizer(data.files, thumbnails)
+			};
+			sequence(createThumb)
+			.then(function(){
+				res.send({success:true});
+			})
 		})
 	}
 };

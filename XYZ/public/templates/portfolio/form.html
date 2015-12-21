@@ -15,6 +15,11 @@
         <!-- form start -->
         <form role="form" ng-submit="save()">
           <div class="box-body">
+            <div class="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-loading>
+              <div class="loading">
+                <img src="css/images/loading.gif" />
+              </div>
+            </div>
             <div class="form-group">
               <label for="exampleInputTitle1">Title</label>
               <input type="text" class="form-control" ng-model="model.title" placeholder="Enter Title" required>
@@ -33,56 +38,58 @@
             </div>
             <div class="form-group">
               <label>Header Image</label>
-              <input type="file" class="form-control" files-model="model.header" ng-model="model.header" required>
+              <input type="file" ng-hide="model.nama_file_display" class="form-control" files-model="model.header" ng-model="model.header" required>
+              <input type="file" ng-show="model.nama_file_display" class="form-control" files-model="model.header" ng-model="model.header">
               <p class="help-block">{{model.nama_file_display}}</p>
-              </div>
-              <div class="form-group">
-                <label>Project Images</label>
-                <input multiple type="file" class="form-control" files-model="model.image" ng-model="model.image" required>
-                <p class="help-block">{{model.nama_file_display_list}}</p>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputLocation1">Location</label>
-                <input type="text" class="form-control" ng-model="model.location" placeholder="Enter Location" required>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputArea1">Area</label>
-                <input type="text" class="form-control" ng-model="model.area" placeholder="Enter Area" required>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputStatus1">Status</label>
-                <input type="text" class="form-control" ng-model="model.status" placeholder="Enter Status" required>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputYear1">Project Year</label>
-                <input type="number" class="form-control" ng-model="model.project_year" placeholder="Enter Year" required>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputContent1">Content</label>
-                <textarea ui-tinymce="tinymceOptions" class= "form-control" ng-model="model.content"></textarea> 
-              </div>
-            </div><!-- /.box-body -->
-            <div class="box-footer">
-              <button type="submit" ng-click = "clickSave(1)" class="btn btn-primary">Save Page</button>
-              <button type="submit" ng-click = "clickSave(0)" class="btn btn-primary">Save as Draft</button>
             </div>
-          </form>
+            <div class="form-group">
+              <label>Project Images</label>
+              <input multiple type="file" ng-hide="model.nama_file_display_list" class="form-control" files-model="model.image" ng-model="model.image" required>
+              <input multiple type="file" ng-show="model.nama_file_display_list" class="form-control" files-model="model.image" ng-model="model.image">
+              <p class="help-block">{{model.nama_file_display_list}}</p>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputLocation1">Location</label>
+              <input type="text" class="form-control" ng-model="model.location" placeholder="Enter Location" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputArea1">Area</label>
+              <input type="text" class="form-control" ng-model="model.area" placeholder="Enter Area" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputStatus1">Status</label>
+              <input type="text" class="form-control" ng-model="model.status" placeholder="Enter Status" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputYear1">Project Year</label>
+              <input type="number" class="form-control" ng-model="model.project_year" placeholder="Enter Year" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputContent1">Content</label>
+              <textarea ui-tinymce="tinymceOptions" class= "form-control" ng-model="model.content"></textarea> 
+            </div>
+          </div><!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" ng-click = "clickSave(1)" class="btn btn-primary">Save Page</button>
+            <button type="submit" ng-click = "clickSave(0)" class="btn btn-primary">Save as Draft</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="box box-primary" style="
+      margin-left: -5px;
+      ">
+      <div class="box-header with-border">
+        <h3 class="box-title">Category</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
         </div>
       </div>
-
-      <div class="col-sm-3">
-        <div class="box box-primary" style="
-        margin-left: -5px;
-        ">
-        <div class="box-header with-border">
-          <h3 class="box-title">Category</h3>
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-          </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body" style="display: block;">
+      <!-- /.box-header -->
+      <div class="box-body" style="display: block;">
           <!-- <ul class="products-list product-list-in-box">
             <li ng-repeat= "category in model" class="item">
             <a href="javascript::;" class="category-title" style=" font-size : initial">{{category.name}}</a>

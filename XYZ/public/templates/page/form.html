@@ -15,6 +15,11 @@
         <!-- form start -->
         <form role="form" ng-submit="save()">
           <div class="box-body">
+            <div class="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-loading>
+              <div class="loading">
+                <img src="css/images/loading.gif" />
+              </div>
+            </div>
             <div class="form-group">
               <label for="exampleInputTitle1">Title</label>
               <input type="text" class="form-control" ng-model="model.title" placeholder="Enter Title" required>

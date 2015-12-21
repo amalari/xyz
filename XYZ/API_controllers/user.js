@@ -24,7 +24,7 @@ UserController = {
 		app.put('/api/user/:id', this.update);
 	},
 	save : function(req, res){
-		userMultipart.parseAndSaveFiles(req, null, function(data){
+		userMultipart.parseAndSaveFiles(req, function(data){
 			data.image = userFileManager.getUrl(data.image);
 			User.check(data.email).then(function(model){
 				if(model !== null){
@@ -66,7 +66,8 @@ UserController = {
 		})
 	},
 	update : function(req, res){
-		userMultipart.parseAndSaveFiles(req, null, function(data){
+		userMultipart.parseAndSaveFiles(req, function(data){
+			console.log(data);
 			var message = {};
 			User.single(data.id).
 			then(function(model){
@@ -79,14 +80,16 @@ UserController = {
 						user.password = authentication.authenticate(data.newPass)
 						message.status = true;
 						message.message = "Password has been changed, click following link to try your new password"
-						return User.update(user);
+						var result = UserViewModel.update(user)
+						return User.update(result);
 					}
 				} else {
 					if(data.image){
-						userFileManager.delete(user.image)
+						userFileManager.delete(user.image);
 						data.image = userFileManager.getUrl(data.image);
-					}
-					return User.update(data);
+					};
+					var result = UserViewModel.update(data);
+					return User.update(result);
 				}
 			})
 			.then(function(){
@@ -102,7 +105,13 @@ UserController = {
 	},
 	delete : function(req, res){
 		var data = UserViewModel.delete(req.params);
-		User.delete(data).then(function(){
+		User.single(req.params.id)
+		.then(function(model){
+			var user = model.toJSON();
+			userFileManager.delete(user.image);
+			return User.delete(data)
+		})
+		.then(function(){
 			res.send({success : true})
 		})
 		.catch(function(err){

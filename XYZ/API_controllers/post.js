@@ -25,23 +25,17 @@ PostController = {
 		app.delete('/api/post/:id', this.delete);
 	},
 	save : function(req, res){
-		postMultipart.parseAndSaveFiles(req, null, function(data){
+		var thumbnails = {
+			synchronous : false,
+			fieldname : "header_image",
+			height : 300,
+			width : 300,
+			quality : 1
+		};
+		postMultipart.parseAndSaveFiles(req, function(data){
 			if(data.header_image != undefined || data.header_image != null){
+				postMultipart.createImageResizer(data, thumbnails, function(){});
 				data.header_image = postFileManager.getUrl(data.header_image);
-				var deleteExt = data.header_image.split('.');
-				deleteExt.splice(deleteExt.length - 1, 1);
-				var newFilename = deleteExt.toString() + "_300x300.JPG";
-				im.resize({
-					srcPath: __dirname + '/../public' + data.header_image,
-					dstPath: __dirname + '/../public' + newFilename,
-					width:   300,
-					height: 300,
-					quality: 1,
-					format: 'jpg'
-				}, function(err, stdout, stderr){
-					if (err) throw err;
-					console.log('resized to fit within 300x300px');
-				});
 			};
 			var result = PostViewModel.save(data, req.user.id);
 			Post.save(result)
@@ -83,65 +77,57 @@ PostController = {
 	update : function(req, res){
 		if(req.body.type != 2 || req.body.type != 3){
 		};
-		postMultipart.parseAndSaveFiles(req, null, function(data){
+		var thumbnails = {
+			synchronous : false,
+			fieldname : "header_image",
+			height : 300,
+			width : 300,
+			quality : 1
+		};
+		postMultipart.parseAndSaveFiles(req, function(data){
 			Post.single(data.id, req.body.type, req.xhr)
 			.then(function(model){
 				var posting = model.toJSON();
-				if(posting.header_image && data.header_image){
-					var deleteExt = posting.header_image.split('.');
-					deleteExt.splice(deleteExt.length - 1, 1);
-					var newFilename = deleteExt.toString() + "_300x300.JPG";
-					postFileManager.delete(posting.header_image);
-					postFileManager.delete(newFilename);
-					data.header_image = postFileManager.getUrl(data.header_image);
-					var deleteExtNew = data.header_image.split('.');
-					deleteExtNew.splice(deleteExtNew.length - 1, 1);
-					var newFilenameWillSave = deleteExtNew.toString() + "_300x300.JPG";
-					im.resize({
-						srcPath: __dirname + '/../public' + data.header_image,
-						dstPath: __dirname + '/../public' + newFilenameWillSave,
-						width:   300,
-						height: 300,
-						quality: 1,
-						format: 'jpg'
-					}, function(err, stdout, stderr){
-						if (err) throw err;
-						console.log('resized to fit within 300x300px');
-					});
-				} else {
+				if(posting.header_image != null){
+					if(data.header_image != null || data.header_image != undefined){
+						var newFilename = postFileManager.addCharBeforeExt(posting.header_image, "300x300");
+						postFileManager.delete(posting.header_image);
+						postFileManager.delete(newFilename);
+						postMultipart.createImageResizer(data, thumbnails, function(){});
+						data.header_image = postFileManager.getUrl(data.header_image);
+					} else {
 					data.header_image = posting.header_image;
-				};
-				var result = PostViewModel.update(data);
-				return Post.update(result);
+				}
+			};
+			var result = PostViewModel.update(data);
+			return Post.update(result);
+		})
+			.then(function(){
+				res.send({success : true})
 			})
-.then(function(){
-	res.send({success : true})
-})
-.catch(function(err){
-	res.send({success : false, message : err.message})
-})
-})
-},
-delete : function(req, res){
-	Post.single(req.params.id, 1, req.xhr)
-	.then(function(model){
-		var posting = model.toJSON();
-		if(posting.header_image != null){
-			var deleteExt = posting.header_image.split('.');
-			deleteExt.splice(deleteExt.length - 1, 1);
-			var newFilename = deleteExt.toString() + "_300x300.JPG";
-			postFileManager.delete(posting.header_image);
-			postFileManager.delete(newFilename);
-		};
-		return Post.delete(req.params.id) 
-	})
-	.then(function(){
-		res.send({success : true})
-	})
-	.catch(function(err){
-		res.send({success : false, message : err.message})
-	})
-}
+			.catch(function(err){
+				res.send({success : false, message : err.message})
+			})
+		})
+	},
+	delete : function(req, res){
+		Post.single(req.params.id, 1, req.xhr)
+		.then(function(model){
+			var posting = model.toJSON();
+			if(posting.header_image != null){
+				var newFilename = postFileManager.addCharBeforeExt(posting.header_image, "300x300");
+				postFileManager.delete(posting.header_image);
+				postFileManager.delete(newFilename);
+			};
+			return Post.delete(req.params.id) 
+		})
+		.then(function(){
+			res.send({success : true})
+		})
+		.catch(function(err){
+			res.send({success : false, message : err.message})
+		})
+	}
 };
 
 module.exports = PostController;

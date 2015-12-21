@@ -35,14 +35,13 @@ Multipart.prototype._saveFile = function(file, filename){
 	return newFilename;
 }
 
-Multipart.prototype.parseAndSaveFiles = function(req, options, callback) {
+Multipart.prototype.parseAndSaveFiles = function(req, callback) {
 	var _this = this;
 	_this._createDir(_this._uploadDir, function(){
 		var busboy = new Busboy({headers:req.headers});
 		var result = {};
 		var arr =[];
 		var key = 1;
-		var createThumb = [];
 		busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
 			if(arr.indexOf(fieldname) > -1){
 				fieldname = fieldname + "_" + key;
@@ -54,11 +53,6 @@ Multipart.prototype.parseAndSaveFiles = function(req, options, callback) {
 			};
 			if (_this._validateFile(mimetype) && filename != null && filename != ""){
 				var newFilename = _this._saveFile(file, filename);
-				if(options != null && newFilename != null){
-					_this.imageResizer(newFilename, options, fieldname, function(array){
-						createThumb = array
-					})
-				};
 				file.on('end', function(){
 					result[fieldname] = newFilename;
 					
@@ -71,69 +65,97 @@ Multipart.prototype.parseAndSaveFiles = function(req, options, callback) {
 			result[fieldname] = val
 		});
 		busboy.on('finish', function() {
-			if(options != null){
-				if(options.synchronous == true){
-					sequence(createThumb)
-					.then(function(){
-						callback(result);
-					})
-				} else {
-					callback(result);
-				}
-			} else {
-				console.log(result);
 				callback(result);
-			}
 		});
 		req.pipe(busboy);
 	});
 };
 
-Multipart.prototype.imageResizer = function(image, options, fieldname, callback){
-	if(options.synchronous == true){
+Multipart.prototype.createImageResizer = function(data, thumbnails, callback){
+	var _this = this;
+	var createThumb = [];
+	for(key in data){
+		if(Array.isArray(thumbnails)){
+			thumbnails.forEach(function(optThumb){
+				if(key.indexOf(optThumb.fieldname) > -1){
+					if(optThumb.synchronous){
+						_this.imageResizer(data[key], optThumb, function(array){
+							createThumb = array;
+						})
+					} else {
+						_this.imageResizer(data[key], optThumb);
+					}
+				}
+			})
+		} else {
+			if(key.indexOf(thumbnails.fieldname) > -1){
+				console.log("aslknfadsklfnasklfas");
+				console.log(data);
+				console.log(thumbnails);
+				if(thumbnails.synchronous){
+					_this.imageResizer(data[key], thumbnails, function(array){
+						createThumb = array;
+					})
+				} else {
+					_this.imageResizer(data[key], thumbnails);
+				}
+			}
+		}
+	};
+	if(createThumb > 0){
+		sequence(createThumb)
+		.then(function(){
+			callback()
+		})
+	} else {
+		callback()
+	}
+};
+
+Multipart.prototype.imageResizer = function(image, options, callback){
+	if(options.synchronous){
 		im = Promise.promisifyAll(require('imagemagick'));
 		var array = [];
-	};
-	if(util.isArray(options.thumbnails) == false){
-		var arr = [];
-		arr.push(options.thumbnails);
-		options.thumbnails = arr;
 	};
 	var _this = this;
 	var arrNameFile = image.split('.');
 	var ext = arrNameFile[arrNameFile.length-1];
-	var nameFile = arrNameFile[0];
-	var newFilename = "" ;
-	options.thumbnails.forEach(function(thumbProperties, i){
-		if(thumbProperties.fieldname == fieldname || thumbProperties.fieldname == null || thumbProperties.fieldname == undefined){
-			newFilename = nameFile + "_" + thumbProperties.width.toString() +  "x" + thumbProperties.height.toString() + "." + ext;
-			if(options.synchronous == true){
-				array.push(function(){
-					return im.resizeAsync({
-						srcPath: _this._uploadDir + "/" + image,
-						dstPath: _this._uploadDir + "/" + newFilename,
-						width:   thumbProperties.width,
-						height: thumbProperties.height,
-						quality: 1 || thumbProperties.quality,
-						format: ext
-					})
-				})
-				callback(array);
-			} else {
-				im.resize({
-					srcPath: _this._uploadDir + "/" + image,
-					dstPath: _this._uploadDir + "/" + newFilename,
-					width:   thumbProperties.width,
-					height: thumbProperties.height,
-					quality: 1 || thumbProperties.quality,
-					format: ext
-				}, function(err, stdout, stderr){
-  					if (err) throw err;
-  					console.log('resized')
-				})
+	var nameFile = "";
+	if(arrNameFile.length > 2){
+		for(var i in arrNameFile){
+			if(i != arrNameFile.length-1){
+				nameFile = nameFile + "."
 			}
-		}
-	})
+		}	
+	} else {
+		nameFile = arrNameFile[0];
+	};
+	var newFilename = nameFile + "_" + options.width.toString() +  "x" + options.height.toString() + "." + ext ;
+	if(options.synchronous){
+		array.push(function(){
+			return im.resizeAsync({
+				srcPath: _this._uploadDir + "/" + image,
+				dstPath: _this._uploadDir + "/" + newFilename,
+				width:   options.width,
+				height: options.height,
+				quality: 1 || options.quality,
+				format: ext
+			})
+		})
+		callback(array);
+	} else {
+		im.resize({
+			srcPath: _this._uploadDir + "/" + image,
+			dstPath: _this._uploadDir + "/" + newFilename,
+			width:   options.width,
+			height: options.height,
+			quality: 1 || options.quality,
+			format: ext
+		}, function(err, stdout, stderr){
+			if (err) throw err;
+			console.log('resized')
+		})
+	}
 };
 
 module.exports = Multipart;
