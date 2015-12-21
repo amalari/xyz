@@ -21,9 +21,10 @@
 						<p>Coordinate : {{projectRequest.coordinate}}</p>
 						<h4>Request :</h4>
 						<p>{{projectRequest.content}}</p>
-						<img ng-src="{{projectRequest.google_earth_file}}" alt="Screenshot location">
+						<p>Google Screenshot :</p><img ng-src="{{projectRequest.google_earth_file}}" alt="Screenshot location" width="300px" height="300px">
+						<p>Design Reference</p>
 						<div ng-repeat="design_reference_file in projectRequest.design_reference_file">
-							<img ng-src="{{design_reference_file}}" alt="Refence Picture">
+							<img ng-src="{{design_reference_file}}" alt="Refence Picture"  width="300px" height="300px">
 						</div>
 					</div>
 				</div>

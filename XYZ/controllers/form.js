@@ -67,37 +67,45 @@ FormController = {
 			dir : __dirname + '/../public/uploads/projects/'+ req.query.code,
 			baseUrl : '/uploads/projects/'+ req.query.code
 		});
-		formMultipart.parseAndSaveFiles(req, function(data){
-			var newData = {};
-			newData.client_id = req.query.clientId;
-			for(var key in data){
-				if(key.indexOf("file") > -1){
-					newData[key] = formFileManager.getUrl(data[key])
-				} else {
-					newData[key] = data[key];
-				}
-			};
-			var result = ProjectRequestViewModel.save(newData);
-			ProjectRequest.save(result)
-			.then(function(){
-				var lang={};
-				if(req.session.language === "ind"){
-					lang.ind = true;
-				} else {
-					lang.eng = true;
-				}
-				delete req.session.language;
-				res.render("finish-form", {eng : lang.eng, ind : lang.ind})
-			})
-		})
-	},
-	update : function(req, res){
 		Client.get(req.query.code)
 		.then(function(model){
 			var client = model.toJSON();
 			client.is_active = 1;
 			return Client.update(client);
 		})
+		.then(function(){
+			formMultipart.parseAndSaveFiles(req, function(data){
+				var newData = {};
+				newData.client_id = req.query.clientId;
+				for(var key in data){
+					if(key.indexOf("file") > -1){
+						newData[key] = formFileManager.getUrl(data[key])
+					} else {
+						newData[key] = data[key];
+					}
+				};
+				var result = ProjectRequestViewModel.save(newData);
+				ProjectRequest.save(result)
+				.then(function(){
+					var lang={};
+					if(req.session.language === "ind"){
+						lang.ind = true;
+					} else {
+						lang.eng = true;
+					}
+					delete req.session.language;
+					res.render("finish-form", {eng : lang.eng, ind : lang.ind})
+				})
+			})
+		})
+	},
+	update : function(req, res){
+		Client.get(req.query.code)
+		// .then(function(model){
+		// 	var client = model.toJSON();
+		// 	client.is_active = 1;
+		// 	return Client.update(client);
+		// })
 		.then(function(model){
 			var client = model.toJSON();
 			if(req.session.language === "ind"){

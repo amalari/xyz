@@ -539,8 +539,9 @@ a:hover{
 	border: 2px solid #bdbdbd;
 	color:#bdbdbd;
 	padding: 10px 15px;
-	font-size: 14px;
+	font-size: 20px;
 	font-family: Roboto;
+	margin-right: 30px;
 }
 .req-form{
 	font-size: 16px;
@@ -780,7 +781,6 @@ button.req-form-button:hover{
 
 .portfolio-image {
 	width: 720px;
-	height: 163px;
 	margin-bottom: 30px;
 	margin-top: 15px;
 }
@@ -789,6 +789,7 @@ button.req-form-button:hover{
 	width: 163px;
 	height: 163px;
 	padding-right: 17px;
+	padding-bottom: 10px;
 }
 
 .homepage-wrapper {
@@ -855,4 +856,9 @@ summary>p {
 .porto-thumb:hover, .portfolio-image img:hover {
   filter: none;
   -webkit-filter: grayscale(0%);
+}
+
+.file-name, .file-names {
+	position: absolute;
+    top: 45px;
 }

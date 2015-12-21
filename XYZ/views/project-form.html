@@ -19,7 +19,7 @@
               <input type="number" name="width" class="form-control" id="exampleInputEmail1" required >
             </div>
             <div class="col-sm-3">
-              <label>Length*</label>
+              <label>Dept*</label>
               <input type="number" name="length" class="form-control" id="exampleInputEmail1" required>
             </div>
           </div>
@@ -43,14 +43,14 @@
           <span class="btn btn-file">
             upload  <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1">
           </span>
-
+           <span class="file-name"></span>
         </div>
         <div class="form-group">
           <label>Design Reference*</label><br />
           <span class="btn btn-file">
             upload   <input type="file" multiple name="design_reference_file" class="form-control" id="exampleInputEmail1">
           </span>
-
+          <span class="file-names"></span>
         </div>
         <div class="form-group">
           <label>Tell Us Your Will*</label>
@@ -79,7 +79,7 @@
               <input type="number" name="width" class="form-control" id="exampleInputEmail1" required >
             </div>
             <div class="col-sm-3">
-              <label>Panjang*</label>
+              <label>Kedalaman*</label>
               <input type="number" name="length" class="form-control" id="exampleInputEmail1" required>
             </div>
           </div>
@@ -101,6 +101,7 @@
           <span class="btn btn-file">
             upload  <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1">
           </span>
+          <span> user user</span>
         </div>
         <div class="form-group">
           <label>Desain Referensi*</label><br />
@@ -121,3 +122,28 @@
     </div>
   </div>
 </div>
+
+{{#section 'jquery'}}
+<script type="text/javascript">
+  var filename = function(selector){
+    return selector.val().split("\\").pop()
+  };
+  $(document).ready(function(){
+    $('.file-name').parent(".form-group").css("position", "relative");
+    $('.file-names').parent(".form-group").css("position", "relative");
+    $('body').on('change', 'input[name=google_earth_file]', function(){
+      var name = filename($('input[name=google_earth_file]'));
+      $('.file-name').html(name);
+    });
+    $('body').on('change', 'input[name=design_reference_file]', function(){
+      var files = $('input[name=design_reference_file]')[0].files;
+      var arr = [];
+      for (var i = 0; i < files.length; i++){
+        arr.push(files[i].name);
+      };
+      $('.file-names').html(arr.toString());
+    })
+  })
+</script>
+
+{{/section}}
