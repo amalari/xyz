@@ -35,6 +35,7 @@ Email.prototype.send = function(mail){
 		subject: mail.subject,
 		template: templateEmail, 
 		context : {
+			name: mail.name,
 			body : mail.html
 		}
 	}, function(err, info){
