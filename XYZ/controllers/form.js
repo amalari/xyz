@@ -9,10 +9,10 @@ var email = require('./../core/email/index.js');
 
 sendMail = function(client){
 	email.send({
-		form: 'achmadjamaludin14@gmail.com',
+		form: 'xyz.cartel1@gmail.com',
 		to: client.email,
-		subject: 'verification',
-		html: '<a href="http://localhost:3003/project-form?code=' + client.verify  + '&clientId=' + client.id + '">Click Here</a>',
+		subject: 'Verification',
+		html: '<a style="padding: 8px 12px;margin-top: 25px;margin-bottom: 25px;border-radius:6px;font-family:Serif;background-color: #212121 !important;color:#fff !important;width:136px;font-size: 18px;text-decoration: none;background-image: -webkit-linear-gradient(top,#212121 0,#212121 100%);" class="btn btn-primary req-form-button" href="http://xyz-cartel.rhcloud.com/project-form?code=' + client.verify  + '&clientId=' + client.id + '">verify</a>',
 		lang: client.lang
 	});
 };
@@ -101,11 +101,6 @@ FormController = {
 	},
 	update : function(req, res){
 		Client.get(req.query.code)
-		// .then(function(model){
-		// 	var client = model.toJSON();
-		// 	client.is_active = 1;
-		// 	return Client.update(client);
-		// })
 		.then(function(model){
 			var client = model.toJSON();
 			if(req.session.language === "ind"){

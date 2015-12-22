@@ -41,7 +41,7 @@
         <div class="form-group">
           <label>Google Earth Screenshot*</label><br />
           <span class="btn btn-file">
-            upload  <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1">
+            upload  <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1" multiple>
           </span>
            <span class="file-name"></span>
         </div>
@@ -99,15 +99,16 @@
         <div class="form-group">
           <label>Screenshot Google Earth*</label><br />
           <span class="btn btn-file">
-            upload  <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1">
+            upload  <input type="file" name="google_earth_file" class="form-control" id="exampleInputEmail1" multiple>
           </span>
-          <span> user user</span>
+          <span class="file-name"></span>
         </div>
         <div class="form-group">
           <label>Desain Referensi*</label><br />
           <span class="btn btn-file">
             upload   <input type="file" multiple name="design_reference_file" class="form-control" id="exampleInputEmail1">
           </span>
+          <span class="file-names"></span>
         </div>
         <div class="form-group">
           <label>Apa yang Anda Inginkan</label>
@@ -132,8 +133,12 @@
     $('.file-name').parent(".form-group").css("position", "relative");
     $('.file-names').parent(".form-group").css("position", "relative");
     $('body').on('change', 'input[name=google_earth_file]', function(){
-      var name = filename($('input[name=google_earth_file]'));
-      $('.file-name').html(name);
+      var files = $('input[name=google_earth_file]')[0].files;
+      var array = [];
+      for (var i = 0; i < files.length; i++){
+        array.push(files[i].name);
+      };
+      $('.file-name').html(array.toString());
     });
     $('body').on('change', 'input[name=design_reference_file]', function(){
       var files = $('input[name=design_reference_file]')[0].files;

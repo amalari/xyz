@@ -28,7 +28,9 @@ ProjectRequestController = {
 		ProjectRequest.single(req.params.id)
 		.then(function(model){
 			var data = model.toJSON();
+			var google_earth_file = data.google_earth_file.split(",");
 			var design_reference_file = data.design_reference_file.split(",");
+			data.google_earth_file = google_earth_file;
 			data.design_reference_file = design_reference_file;
 			res.send(data);
 		})

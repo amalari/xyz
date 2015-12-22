@@ -1,0 +1,26 @@
+.button-wrapper{
+	margin:0;
+	text-align: center;
+}
+
+.email-content{
+	margin: 0 auto;
+}
+
+a.req-form-button{
+	padding: 12px 12px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: #212121 !important;
+	color:#fff !important;
+	width:136px;
+	height: 55px;
+	font-size: 22px;
+	font-family: Roboto;
+	background-image: -webkit-linear-gradient(top,#212121 0,#212121 100%); */
+}
+
+p{
+	font-family: Roboto;
+	font-size: 14px
+}

@@ -22,7 +22,6 @@ projectViewModel.prototype.getList = function(listData){
 
 projectViewModel.prototype.save = function(data){
 	var multiple = {};
-	var result = {};
 	for(var key in data){
 		if(this._allProperties.indexOf(key) === -1){
 			multiple[key] = data[key];
@@ -30,17 +29,14 @@ projectViewModel.prototype.save = function(data){
 	};
 	var post = this.map(this._allProperties, data);
 	for(var i in post){
-		result[i] = post[i];
 		for(var x in multiple){
 			if(x.indexOf(i) > -1){
-				result[i] = post[i] + "," + multiple[x];
-			} else {
-				result[i] = post[i];
-			}
-		}
+				post[i] = post[i] + "," + multiple[x];
+			};
+		};
 	};
-	result.created_date = new Date();
-	return result;
+	post.created_date = new Date();
+	return post;
 };
 
 // postViewModel.prototype.get = function(data){
