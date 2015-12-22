@@ -27,3 +27,18 @@
     top: 50%;
     margin-top: -150px;
 }
+
+img.ng-thumb {
+	height: 100px !important
+}
+
+.content{
+	width:auto !important;
+	min-height: auto !important;
+	margin: 10px !important;
+
+}
+
+.ng-gallery-content > .ng-thumbnails-wrapper {
+	bottom: 0px !important
+}

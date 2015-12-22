@@ -22,12 +22,12 @@
 						<h4>Request :</h4>
 						<p>{{projectRequest.content}}</p>
 						<p>Google Screenshot :</p>
-						<div ng-repeat="google_earth_file in projectRequest.google_earth_file">
-							<img ng-src="{{google_earth_file}}" alt="Refence Picture"  width="300px" height="300px">
+						<div class="content">
+							<ng-gallery images="albumGoogleSS"></ng-gallery>
 						</div>
 						<p>Design Reference</p>
-						<div ng-repeat="design_reference_file in projectRequest.design_reference_file">
-							<img ng-src="{{design_reference_file}}" alt="Refence Picture"  width="300px" height="300px">
+						<div class="content">
+							<ng-gallery images="albumDesignRef"></ng-gallery>
 						</div>
 					</div>
 				</div>
