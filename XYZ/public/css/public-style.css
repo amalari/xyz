@@ -222,7 +222,7 @@ a:hover, .porto-title:hover, .porto-area:hover, h3.post-title:hover{
     position: relative;
     z-index: 10;
     height: 3em;
-    margin-top: 0px;
+    margin-top: -35px;
 }
 #footer .brand{
 	color:#212121;
