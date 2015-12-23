@@ -42,3 +42,8 @@ img.ng-thumb {
 .ng-gallery-content > .ng-thumbnails-wrapper {
 	bottom: 0px !important
 }
+
+.detail-project span{
+	position: absolute;
+	left: 250px;
+}

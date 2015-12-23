@@ -8,25 +8,26 @@
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Detail Project Request</h3>
-					<div class="box-body">
-						<p>Name : {{projectRequest.client.name}}</p>
-						<p>Email : {{projectRequest.client.email}}</p>
-						<p>Birth : {{projectRequest.client.birth | date: 'dd-MMMM-yyyy'}}</p>
-						<p>Gender : {{projectRequest.client.gender}}</p>
-						<p>Nationality : {{projectRequest.client.nationality}}</p>
-						<p>Request Date : {{projectRequest.created_date | date: 'dd-MMMM-yyyy HH:mm'}}</p>
-						<p>Site : {{projectRequest.site_address}}</p>
-						<p>Site Area : {{projectRequest.site_area}}, Width : {{projectRequest.width}}, Length : {{projectRequest.length}}</p>
-						<p>Site Address : {{projectRequest.site_address}}</p>
-						<p>Coordinate : {{projectRequest.coordinate}}</p>
-						<h4>Request :</h4>
-						<p>{{projectRequest.content}}</p>
-						<p>Google Screenshot :</p>
-						<div class="content">
+					<div class="box-body detail-project">
+						<p><strong>Name</strong> <span>:&nbsp; {{projectRequest.client.name}}</span></p>
+						<p><strong>Email</strong> <span>:&nbsp; {{projectRequest.client.email}}</span></p>
+						<p><strong>Birth</strong> <span>:&nbsp; {{projectRequest.client.birth | date: 'dd-MMMM-yyyy'}}</span></p>
+						<p><strong>Gender</strong> <span>:&nbsp; {{projectRequest.client.gender}}</span></p>
+						<p><strong>Nationality</strong> <span>:&nbsp; {{projectRequest.client.nationality}}</span></p>
+						<p><strong>Request Date</strong> <span>:&nbsp; {{projectRequest.created_date | date: 'dd-MMMM-yyyy HH:mm'}}</span></p>
+						<p><strong>Site</strong> <span>:&nbsp; {{projectRequest.site_address}}</span></p>
+						<p><strong>Site Area</strong> <span>:&nbsp; {{projectRequest.site_area}}</span></p>
+						<p><strong>Width</strong> <span>:&nbsp; {{projectRequest.width}}</span></p>
+						<p><strong>Length</strong> <span>:&nbsp; {{projectRequest.length}}</span></p>
+						<p><strong>Site Address</strong> <span>:&nbsp; {{projectRequest.site_address}}</span></p>
+						<p><strong>Coordinate</strong> <span>:&nbsp; {{projectRequest.coordinate}}</span></p>
+						<p><strong>Request</strong> <span>:&nbsp; {{projectRequest.content}}</span></p>
+						<p><strong>Google Screenshot</strong><span>:</span></p>
+						<div class="content" style="margin-left:225px !important">
 							<ng-gallery images="albumGoogleSS"></ng-gallery>
 						</div>
-						<p>Design Reference</p>
-						<div class="content">
+						<p><strong>Design Reference</strong><span>:</span></p>
+						<div class="content" style="margin-left:225px !important">
 							<ng-gallery images="albumDesignRef"></ng-gallery>
 						</div>
 					</div>
