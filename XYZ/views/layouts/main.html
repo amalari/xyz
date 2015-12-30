@@ -39,7 +39,7 @@
             </a>
             <ul class="main-nav list-unstyled">
                 <li><a href="/about">about</a></li>
-                <li class="active"><a href="/">work</a></li>
+                <li class="active"><a href="/#container-home" onclick="a()">work</a></li>
                 <li><a href="/blog">blog</a></li>
                 <li><a href="/contact">contact</a></li>
                 <li><a href="/request-intro">create project</a></li>
@@ -50,7 +50,7 @@
             <a href="/"><h1 class="logo">XY/Z</h1></a>
             <ul class="main-nav list-unstyled">
                 <li><a href="/about">about</a></li>
-                <li class="active"><a href="/">work</a></li>
+                <li class="active"><a href="/#container-home" onclick="a()">work</a></li>
                 <li><a href="/blog">blog</a></li>
                 <li><a href="/contact">contact</a></li>
                 <li><a href="/request-intro">create project</a></li>
@@ -66,8 +66,10 @@
     <script src="/scripts/dependencies/bootstrap.min.js"></script>
     <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
     <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
+    <script src="/scripts/dependencies/jquery.nicescroll.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $("html").niceScroll();
             var screenHeight = parseInt($(".general-header").height()) + 40;
             var imageBackground = $('.home-header');
             var fixBarRight = function(nav) {

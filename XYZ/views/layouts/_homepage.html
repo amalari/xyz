@@ -35,7 +35,7 @@
             <ul class="main-nav list-unstyled">
                 <li><a href="/about">about</a>
                 </li>
-                <li class="active"><a href="/">work</a>
+                <li class="active"><a href="#container-home">work</a>
                 </li>
                 <li><a href="/blog">blog</a>
                 </li>
@@ -60,7 +60,7 @@
             <ul class="main-nav list-unstyled">
                 <li><a href="/about">about</a>
                 </li>
-                <li class="active"><a href="/">work</a>
+                <li class="active"><a href="#container-home">work</a>
                 </li>
                 <li><a href="/blog">blog</a>
                 </li>
@@ -82,8 +82,27 @@
     <script src="/scripts/dependencies/bootstrap.min.js"></script>
     <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
     <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
+    <script src="/scripts/dependencies/jquery.smooth-scroll.js"></script>
+    <script src="/scripts/dependencies/jquery.nicescroll.min.js"></script>
     <script type="text/javascript">
+        var jump = function(e) {
+            if (e) {
+                e.preventDefault();
+                var target = $(this).attr("href");
+            } else {
+                var target = location.hash;
+            }
+
+            $('html,body').animate({
+                scrollTop: $(target).offset().top
+            }, 1500, function() {
+                location.hash = target;
+            });
+
+        };
+        $('html, body').hide();
         $(document).ready(function() {
+            $("html").niceScroll();
             var slideDown = function(selector, otherEffect) {
                 selector.slideDown(500, function() {});
                 if (otherEffect) {
@@ -110,7 +129,15 @@
                 var bodyWidth = parseInt($(".body-wrapper").width());
                 return (((screenWidth - bodyWidth) / 2) + 30 + nav);
             };
-
+            $('a[href^=#]').bind("click", jump);
+            if (location.hash) {
+                setTimeout(function() {
+                    $('html, body').scrollTop(0).show();
+                    jump();
+                }, 0);
+            } else {
+                $('html, body').show();
+            }
             $(".fix-bars").css("right", fixBarRight(0));
             $(".fix-nav").css("right", fixBarRight(80));
             $(window).resize(function(e) {
@@ -146,6 +173,7 @@
                     slideUp(select, false);
                 };
             });
+            $("a[href='#container-home']").smoothScroll({speed:1500});
         })
     </script>
     {{{_sections.jquery}}}
