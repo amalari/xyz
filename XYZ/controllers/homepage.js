@@ -28,7 +28,7 @@ HomepageController = {
 			result.total = list.total;
 			result.pagination = 
 			{ 
-				page:currentPage, limit:9, totalRows: result.total
+				page:currentPage, limit:9, totalRows: result.total, hash:"#container-home"
 			};
 			res.render('homepage', {
 				layout: "_homepage",

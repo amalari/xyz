@@ -5,7 +5,6 @@
     {{{_sections.head}}}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -21,7 +20,7 @@
       <![endif]-->
 </head>
 
-<body>
+<body id="home-body">
     <div class="general-search">
         <form action="/search" method="get">
             <input type="text" name="q" id="q" placeholder="Type Your Word Here"></input>
@@ -66,6 +65,7 @@
     <script src="/scripts/dependencies/bootstrap.min.js"></script>
     <script src="/scripts/dependencies/jquery-confirm.min.js"></script>
     <script src="/scripts/dependencies/jquery.twbsPagination.min.js"></script>
+    <script src="/scripts/dependencies/jquery.smooth-scroll.js"></script>
     <script src="/scripts/dependencies/jquery.nicescroll.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -107,6 +107,10 @@
             $(window).resize(function(e) {
                 $(".fix-bars").css("right", fixBarRight(0));
                 $(".fix-nav").css("right", fixBarRight(80));
+            });
+            $(".main-nav > li > a[href$='javascript:;']").smoothScroll({
+                speed: 1500,
+                scrollTarget: "#home-body"
             });
             $("body").on('click', ".main-nav > li > a[href$='javascript:;']", function() {
                 var select = $('.general-search');

@@ -12,7 +12,7 @@ sendMail = function(client){
 		form: 'xyz.cartel1@gmail.com',
 		to: client.email,
 		subject: 'Verification',
-		html: '<a style="padding: 8px 12px;margin-top: 25px;margin-bottom: 25px;border-radius:6px;font-family:Serif;background-color: #212121 !important;color:#fff !important;width:136px;font-size: 18px;text-decoration: none;background-image: -webkit-linear-gradient(top,#212121 0,#212121 100%);" class="btn btn-primary req-form-button" href="http://xyz-cartel.rhcloud.com/project-form?code=' + client.verify  + '&clientId=' + client.id + '">verify</a>',
+		html: '<a style="padding: 8px 12px;margin-top: 25px;margin-bottom: 25px;border-radius:6px;font-family:Serif;background-color: #212121 !important;color:#fff !important;width:136px;font-size: 18px;text-decoration: none;background-image: -webkit-linear-gradient(top,#212121 0,#212121 100%);" class="btn btn-primary req-form-button" href="http://www.xyzarchitect.com/project-form?code=' + client.verify  + '&clientId=' + client.id + '">verify</a>',
 		lang: client.lang,
 		name: client.name
 	});
